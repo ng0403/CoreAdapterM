@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+#giftCard_searchSpan{
+	width : 3%;
+	text-align : right;
+    font-weight: bold;
+    margin-right: 0.5%;
+}
+
+#giftCard_list_sch{
+	float:right;
+}
+
+#giftCard_listFootDiv{
+	margin-top: 1%;
+}
+
+#giftCard_pagingDiv{
+	text-align: center;
+	padding: 0.6% 0 1% 0;
+}

@@ -1,0 +1,272 @@
+/* 
+업 무 명 : menu 메뉴관리 화면
+작 성 자 : 정은지 (wjdmwi@coreplus.co.kr)
+작 성 일 : 2015/08/03
+수 정 자 : 정은지 (wjdmwi@coreplus.co.kr)
+수 정 일 : 2015/08/03
+내 용 : 메뉴 관리에 대한 디자인이다.
+*참고사항 :  
+*/
+
+@CHARSET "UTF-8";
+
+/* 메뉴 추가, 편집, 삭제 버튼 div  */
+#menu_am_btn_div {
+	margin-top: -2.5%; 
+	width: 100%;
+	float: left;
+}
+
+/* 메뉴 추가했을때 저장, 취소 버튼 div */
+#menu_add_btn_div {
+	margin-top: -2.5%;
+	display: none;
+	width: 100%;
+	float: left;
+}
+
+/* 리스트로 이동하는 버튼 div  */
+#menu_tab_btn_div {
+	margin-top: 0.2%;
+}
+
+/* 편집 눌렀을 때 저장, 취소 버튼 div */
+#menu_update_btn_div {
+	margin-top: -2.5%;
+	display: none;
+	width: 100%;
+	float: left;
+}
+
+/* 메뉴리스트 DIV */
+.menuList{
+	margin-bottom: 1%;
+	padding-bottom: 0.5%;
+}
+
+/* 메뉴리스트 검색 DIV */
+.searchDiv{
+	padding-bottom: 1%;
+}
+
+#menuListTable{
+	border-collapse: collapse;
+	width: 100%;
+	padding: 1.2%;
+}
+
+#menuListTable > thead > tr> th{
+	border: 0;
+	padding: 2.2%;
+}
+
+#menuTableDBDiv{
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 8.5px;
+	border-bottom: 2px solid #eaeaea;
+}
+
+#menuTableDBDiv{
+	overflow-y:scroll;
+	overflow-x:hidden;
+	height: 417px;
+}
+
+#menuTableDB > tbody > tr> td{
+	border: 1px solid #eaeaea;
+	padding: 2.2%;
+	text-align: center;
+}
+
+#menuListTable > tbody > tr> td{
+	border: 1px solid #eaeaea;
+	padding: 2.2%;
+	text-align: center;
+}
+
+#menuDownListTable{
+	border-collapse: collapse;
+	width: 100%;
+	padding: 2.2%;
+}
+
+#menuDownListTable > thead > tr> th{
+/* 	border: 1px solid #eaeaea; */
+	border: 0;
+	padding: 2.2%;
+	background: #f9ffff;
+	color: black;
+}
+
+#menuDownListTable > tbody > tr> td{
+	border: 1px solid #eaeaea;
+	padding: 2.2%;
+	text-align: center;
+}
+
+#menuDownTableDBDiv{
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 8.5px;
+	border-bottom: 2px solid #eaeaea;
+}
+
+#menuDownTableDBDiv{
+	overflow-y:scroll;
+	overflow-x:hidden;
+	height: 417px;
+}
+
+#menuDownTableDB > tbody > tr> td{
+	border: 1px solid #eaeaea;
+	padding: 2.2%;
+	text-align: center;
+}
+
+.menu_listFootDiv {
+	padding-top: 1.5%;
+	width: 12%;
+	float: left;
+}
+
+.menu_DetailFootDiv {
+	padding-top: 0.6%;
+	margin-top: 2%;
+	float: left;
+	padding-bottom: 1%;
+	border-bottom: 2px solid #a0a0a0;
+	width: 109%;
+}
+
+/* 메뉴 tree modal */
+.menu_treeModal_titleDIV {
+	width: 100%;
+	padding: 1% 0 1% 0; 
+	padding-right: 5%;
+}
+
+#menu_treeModal {
+	width: 100%;
+}
+
+#menu_treeModal_Div{
+	width: 90%;
+	padding: 1.5% 1% 1.5% 1%;
+	border-top: 2px solid #a0a0a0;
+	border-bottom: 2px solid #a0a0a0;
+}
+
+#menu_treeModal_Div table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#menu_treeModal_Div table tr th{
+	border: 1px solid #eaeaea;
+	padding: 0.5%;
+	background: #f9ffff;
+	color: black;
+	text-align: center;
+}
+
+#menu_treeModal_Div table tr td{
+	border: 1px solid #eaeaea;
+	padding: 0.5%;
+	color: black;
+	text-align: center;
+	cursor:pointer;
+}
+
+/* 메뉴 상세정보 div */
+#menuDetailDiv {
+	width: 100%;
+}
+
+/* 메뉴검색 text id  */
+#smenuSearch {
+	padding: 0.4%;
+	width: 11%;
+}
+
+/* 상위메뉴 검색 modal 창 제목 */
+.up_menu_srh_modal_titleDIV {
+	width: 100%;
+	padding: 1% 0 1% 0; 
+	padding-right: 5%;
+}
+
+/* 상위메뉴 검색 modal창 전체 div */
+#up_menu_srh_modal, #authmenu_srh_modal {
+	width: 100%;
+}
+
+/* 상위메뉴 검색 modal창 내용 div */
+#up_menu_srh_modal_Tbl_Div, #authmenu_srh_modal_Tbl_Div{
+	width: 90%;
+	padding: 1.5% 1% 1.5% 1%;
+	border-top: 2px solid #a0a0a0;
+	border-bottom: 2px solid #a0a0a0;
+}
+
+/* 상위메뉴 검색 modal창 내용 테이블 */
+#up_menu_srh_modal_Tbl_Div table, #authmenu_srh_modal_Tbl_Div table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#up_menu_srh_modal_Tbl_Div table tr th, #authmenu_srh_modal_Tbl_Div table tr th{
+	border: 1px solid #eaeaea;
+	padding: 0.5%;
+	background: #f9ffff;
+	color: black;
+	text-align: center;
+}
+
+#up_menu_srh_modal_Tbl_Div table tr td{
+	border: 1px solid #eaeaea;
+	padding: 0.5%;
+	color: black;
+	text-align: center;
+	cursor:pointer;
+}
+
+#authmenu_srh_modal_Tbl_Div table tr td{
+	border: 1px solid #eaeaea;
+	padding: 0.5%;
+	color: black;
+	text-align: center;
+	cursor: default;
+}
+
+#up_menu_srh_modal_Tbl_Div input[type=text], #authmenu_srh_modal_Tbl_Div input[type=text]{
+	width: 80%;
+	text-align: left;
+	padding-left: 2px;
+}
+
+#cod_cancel{
+	cursor:pointer;
+}
+
+#ModaldetailTableDBDiv , #amModalTableDBDiv{
+	overflow-y:scroll;
+	overflow-x:hidden;
+	height: 200px;
+}
+
+/* 트리속성 */
+#menuTreeForm{
+	border: 1px solid #eaeaea;
+	text-align: left;
+	margin-top: 3%;
+	width: 93%;
+	overflow-y:scroll;
+	overflow-x:hidden;
+	height: 500px;
+}
+
+.menutree_sub{
+	text-indent: 3em;
+}
+

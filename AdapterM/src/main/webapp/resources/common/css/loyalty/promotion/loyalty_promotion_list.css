@@ -1,0 +1,15 @@
+/**
+업 무 명 : 로열티프로모션
+작 성 자 : 이동근 (leedg5845@coreplus.co.kr)
+작 성 일 : 2015/09/24
+수 정 자 : 이동근 (leedg5845@coreplus.co.kr)
+수 정 일 : 2015/09/24
+내 용 : 로열티 프로모션 리스트 CSS
+*참고사항 : 
+ */
+
+@CHARSET "UTF-8";
+
+#loyalPmt_sch_tbl {
+	width: 100%;
+}

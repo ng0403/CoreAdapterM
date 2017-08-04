@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+#gift_searchSpan{
+	width : 3%;
+	text-align : right;
+    font-weight: bold;
+    margin-right: 0.5%;
+}
+
+#giftbon_list_sch{
+	float:right;
+}
+
+#gift_listFootDiv{
+	margin-top: 1%;
+}
+
+#gift_pagingDiv{
+	text-align: center;
+	padding: 0.6% 0 1% 0;
+}

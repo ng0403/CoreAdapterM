@@ -1,0 +1,402 @@
+/* 
+업 무 명 : auth 권한관리 화면
+작 성 자 : 정은지 (wjdmwi@coreplus.co.kr)
+작 성 일 : 2015/08/03
+수 정 자 : 정은지 (wjdmwi@coreplus.co.kr)
+수 정 일 : 2015/08/03
+내 용 : 권한 관리에 대한 디자인이다.
+*참고사항 :  
+*/
+
+@CHARSET "UTF-8";
+
+.authAddInput{
+	border-color: white; 
+	width:95%;
+	text-align: center;
+}
+
+/* 권한관리 목록 */
+.authlist_titleDIV{
+	width: 145%;
+	padding: 1% 0 3.3% 0; 
+	border-bottom: 2px solid #a0a0a0;
+	margin-bottom: 3.5%;
+	padding-right: 5%;
+	margin-top:2%;
+}
+
+/* 권한관리 상세정보 제목  */
+.authdetail_titleDIV{
+	width: 95%;
+	padding: 0% 0 2% 0; 
+	border-bottom: 2px solid #a0a0a0;
+	margin-bottom: 2%;
+	padding-right: 5%;
+	margin-top:2%;
+}
+
+/* 권한관리 리스트 div */
+#auth_list{
+	margin-bottom: 1%;
+	padding-bottom: 0.5%;
+	width: 150%;
+}
+
+/* 추가, 편집, 삭제 버튼 div  */
+#auth_am_btn_div {
+	margin-top: 1%;
+	width: 30%;
+	float: left;
+}
+
+/* 추가눌렀을 때 버튼 div */
+#Authsc_btn_div {
+	margin-top: 1%;
+	display: none;
+	width: 20%;
+	float: left;
+}
+
+/* 편집눌렀을 때 버튼 div */
+#Authupdate_btn_div {
+	margin-top: 1%;
+	display: none;
+	width: 20%;
+	float: left;
+}
+
+#Authtab_btn_div{
+	margin-top: 1%;
+}
+
+/* 권한관리 리스트 테이블  */
+#authTable{
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 8.5px;
+}
+
+#authTable > thead > tr> th{
+	border: 1px solid #eaeaea;
+	padding: 1.2%;
+	background: #f9ffff;
+	color: black;
+}
+
+#authTable > tbody > tr> td{
+	border: 1px solid #eaeaea;
+	padding: 1.2%;
+	text-align: center;
+}
+
+/* 권한관리 상세정보 div */
+#auth_detail {
+	width: 100%;
+}
+
+/* 권한관리 상세정보 테이블 */
+.auth_detailTable{
+	border-collapse: collapse;
+	width: 100%%;
+	height: 100%;
+}
+
+.auth_detailTable th{
+	border: 1px solid #eaeaea;
+	background: #f9ffff;
+	color: black;
+	width: 8%;
+	text-align: right;
+	padding-right: 1%;
+}
+
+.auth_detailTable td{
+	border: 1px solid #eaeaea;
+	padding: 0.5%;
+	width: 19%;
+}
+
+.auth_detailTable input[type=text]
+, .auth_detailTable input[type=number]
+, .auth_detailTable input[type=date] {
+	padding: 1.5%;
+}
+
+/* 메뉴권한, 사용자권한 제목 */
+.auth_titleDIV{
+	width: 83%;
+	padding: 1% 0 1% 0; 
+	border-bottom: 2px solid #a0a0a0;
+	margin-bottom: 1%;
+	padding-right: 5%;
+}
+
+/* 권한메뉴 전체 리스트 div */
+.authmenuList{
+	width: 111.4%;
+	margin-bottom: 1%;
+}
+
+#authmenu_listDiv{
+	width: 88%;
+	margin-bottom: 1%;
+}
+
+/* 권한메뉴 리스트 테이블  */
+#authmenuTableDB tbody tr{
+	background-color: white;
+	cursor: default;
+}
+.authmenu_commonList{
+	width: 98%;
+	margin-bottom: 1%;
+	padding-bottom: 3.5%;
+	border-bottom: 2px solid #a0a0a0;
+}
+
+#authmenuTable{
+	border-collapse: collapse;
+	width: 98.95%;
+} 
+#authmenuTableDB{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#authmenuTable > thead > tr> th{
+	border: 1px solid #eaeaea;
+	padding: 0.5%;
+	background: #f9ffff;
+	color: black;
+}
+
+#authmenuTableDBDiv{
+	overflow-y:scroll;
+	overflow-x:hidden;
+	height: 425px;
+}
+
+#authmenuTableDB > tbody > tr> td{
+	border: 1px solid #eaeaea;
+	padding: 0.5%;
+	text-align: center;
+}
+
+#authmenu_am_btn_div {
+	margin-top: 0.2%;
+}
+
+#authmenu_add_btn_div {
+	margin-top: 0.2%;
+}
+
+#authmenu_custtab_btn_div {
+	margin-top: 0.2%;
+	float: left;
+}
+
+.auth_menudetailFootDiv {
+	padding-top: 0.6%;
+	width: 100%;
+	padding-bottom: 3.5%;
+	border-bottom: 2px solid #a0a0a0;
+}
+
+.authmenu_listFootDiv {
+	padding-top: 1%;
+	width: 100%;
+	float: left;
+}
+
+/* 사용자권한 리스트 div  */
+.authuserList{
+	width: 111.4%;
+	margin-bottom: 1%;
+}
+
+#authuser_listDiv{
+	width: 88%;
+	margin-bottom: 1%;
+}
+
+/* 사용자권한 리스트 테이블  */
+#authuserTable{
+	border-collapse: collapse;
+	width: 99%;
+}
+#authuserTableDB{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#authuserTable > thead > tr> th{
+	border: 1px solid #eaeaea;
+	padding: 0.5%;
+	background: #f9ffff;
+	color: black;
+}
+
+#authuserTableDB > tbody > tr> td{
+	border: 1px solid #eaeaea;
+	padding: 0.5%;
+	text-align: center;
+}
+
+#authuserTableDBDiv{
+	overflow-y:scroll;
+	overflow-x:hidden;
+	height: 344px;
+}
+
+#authuser_am_btn_div {
+	margin-top: 0.2%;
+	width: 8%;
+	float: left;
+}
+
+#authuser_custtab_btn_div {
+	margin-top: 0.2%;
+	float: left;
+}
+
+.auth_userdetailFootDiv {
+	padding-top: 0.6%;
+	width: 100%;
+	padding-bottom: 3%;
+	border-bottom: 2px solid #a0a0a0;
+	
+}
+
+/* 메뉴권한 추가 modal 창 제목 */
+.authmenu_add_titleDIV {
+	width: 100%;
+	padding: 1% 0 1% 0; 
+	padding-right: 5%;
+}
+
+/* 메뉴권한 추가 modal창 전체 div */
+#authmenu_add {
+	width: 100%;
+}
+
+/* 메뉴권한 추가 modal창 내용 div */
+#authmenu_add_Tbl_Div{
+	width: 90%;
+	padding: 1.5% 1% 1.5% 1%;
+	border-top: 2px solid #a0a0a0;
+	border-bottom: 2px solid #a0a0a0;
+}
+
+/* 메뉴권한 추가 modal창 내용 테이블 */
+#authmenu_add_Tbl_Div table {
+	height: 153px;
+}
+
+#authmenu_add_Tbl_Div table tr th, #authmenu_add_Tbl_Div table tr td{
+	padding: 2%;
+}
+
+#authmenu_add_Tbl_Div input[type=text], #authmenu_add_Tbl_Div input[type=date]{
+	width: 63%;
+	text-align: left;
+	padding-left: 2px;
+}
+
+/* 메뉴권한 추가 modal > menu_id 검색 modal */
+#M_menu_id_srh_pop {
+	width: 100%;
+}
+
+/* 메뉴 검색 modal 창 제목 */
+.M_menu_srh_modal_titleDIV {
+	width: 100%;
+	padding: 1% 0 1% 0; 
+	padding-right: 5%;
+}
+
+/* 메뉴 검색 modal창 내용 div */
+#M_menu_srh_modal {
+	width: 100%;
+}
+
+/* 메뉴 검색 modal창 내용 테이블 */
+#M_menu_srh_modal_Tbl_Div{
+	width: 90%;
+	padding: 1.5% 0% 1.5% 1%;
+	border-top: 1px solid #a0a0a0;
+}
+
+#M_menu_srh_modal_Tbl_DivDB{
+	width: 100%;
+	border-bottom: 2px solid #a0a0a0;
+	padding-bottom: 1.5%;
+	
+	overflow-y:scroll;
+	overflow-x:hidden;
+	height: 200px;
+}
+
+#M_menu_srh_modal_Tbl_Div table,  #M_menu_srh_modal_Tbl_DivDB table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#M_menu_srh_modal_Tbl_Div table tr th, #M_menu_srh_modal_Tbl_DivDB table tr th{
+	border: 1px solid #eaeaea;
+	padding: 0.5%;
+	background: #f9ffff;
+	color: black;
+	text-align: center;
+	width: 17%;
+}
+
+#M_menu_srh_modal_Tbl_Div table tr td, #M_menu_srh_modal_Tbl_DivDB table tr td{
+	border: 1px solid #eaeaea;
+	padding: 0.5%;
+	color: black;
+	text-align: center;
+	cursor:pointer;
+	width: 25.78%;
+}
+
+#M_menu_srh_modal_Tbl_Div input[type=text], #M_menu_srh_modal_Tbl_Div input[type=date],
+#M_menu_srh_modal_Tbl_DivDB input[type=text], #M_menu_srh_modal_Tbl_DivDB input[type=date]{
+	width: 80%;
+	text-align: left;
+	padding-left: 2px;
+}
+
+/* modal창 추가 닫기 부분 div */
+.Modal_FootDiv {
+	width: 100%;
+	padding: 1% 0 0.4% 0; 
+}
+
+.Modal_FootDiv > input[type=button] {
+	padding: 0.2%;
+}
+
+#modalSelect{
+	width: 25%;
+}
+
+.lnClick:link {
+	text-decoration: none;
+}
+
+.lnClick:visited {
+	text-decoration: none;
+}
+
+.lnClick:hover {
+	text-decoration: underline;
+}
+
+.lnClick:active {
+	text-decoration: none;
+}
+
+#authuserTable thead tr th{
+	border : 0;
+}

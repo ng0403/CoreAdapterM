@@ -1,0 +1,18 @@
+/* 
+업 무 명 : 전문 관리 상세 화면
+작 성 자 : 이동근 (leedg5845@coreplus.co.kr)
+작 성 일 : 2015/07/30
+수 정 자 : 이동근 (leedg5845@coreplus.co.kr)
+수 정 일 : 2015/07/30
+내 용 : 전문 관리 상세에 대한 디자인이다.
+*참고사항 :  
+*/
+@CHARSET "UTF-8";
+
+#tel_asc_btn_div, #tel_msc_btn_div {
+	display: none;
+}
+
+#telegram_form_tbl input {
+	text-align: left;
+}

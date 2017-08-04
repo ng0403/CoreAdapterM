@@ -1,0 +1,74 @@
+/* 
+업 무 명 : 포인트수기적립 화면
+작 성 자 : 이상민 (tkdals8401@coreplus.co.kr)
+작 성 일 : 2015/09/24
+수 정 자 : 이상민 (tkdals8401@coreplus.co.kr)
+수 정 일 : 2015/09/24
+내 용 : 포인트수기적립 화면에 대한 디자인이다.
+*참고사항 :  
+*/
+@CHARSET "UTF-8";
+
+#workPageInput{
+	width: 20px;
+    text-align: center;
+    padding: 0.3%;
+}
+
+#scroll_div{
+	width: 101%;
+	height: 132px;
+	overflow-y: auto;
+}
+
+#css_tabs {
+    font-family:'nanumgothic', '나눔고딕', 'malgun gothic', '맑은 고딕', 'dotum', '돋움', sans-serif
+}
+
+/* 탭 선택 시 표시할 요소(div) 정의(1번 탭 선택 시 첫 번째 div 요소 표시) */
+#css_tabs #tab1:nth-of-type(1), #css_tabs #tab1:nth-of-type(1) ~ #tabDiv1:nth-of-type(1),
+#css_tabs #tab2:nth-of-type(2), #css_tabs #tab2:nth-of-type(2) ~ #tabDiv2:nth-of-type(2){
+    display:none;
+}
+#css_tabs #tab1:nth-of-type(1):checked ~ #tabDiv1:nth-of-type(1),
+#css_tabs #tab2:nth-of-type(2):checked ~ #tabDiv2:nth-of-type(2){
+    display:block;
+}
+
+/* 라벨 기본 스타일 지정 */
+#css_tabs > label {
+    display:inline-block;
+    font-size:.9em;
+    padding:5px;
+    text-align:center;
+    width:100px;
+    line-height:1.8em;
+    font-weight:700;
+    border-radius:8px 8px 0 0; 
+    box-shadow:-2px 0 2px rgba(0, 0, 0, 0.1);
+    background:#eee;
+    color:#777;
+    border:1px solid #ccc;
+    border-width:1px 1px 0;
+    margin-bottom:-1px;
+}
+#css_tabs > label:hover {
+    cursor:pointer; /*마우스 올렸을 때 손 모양*/
+}
+
+/* 선택된 라벨, 커서를 올린 라벨 스타일 지정 */
+#css_tabs input:nth-of-type(1):checked ~ label:nth-of-type(1), #css_tabs > label[for=tab1]:hover {
+    background:#818181;
+    color:#fff
+}
+#css_tabs input:nth-of-type(2):checked ~ label:nth-of-type(2), #css_tabs > label[for=tab2]:hover {
+    background:#818181;
+    color:#fff;
+}
+
+/*  실제 내용이 담긴 div 요소 스타일 지정 */
+#css_tabs .tab1_content, #css_tabs .tab2_content {
+    border:1px solid #ddd;
+    height:200%;
+ 
+}

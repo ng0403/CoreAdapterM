@@ -1,0 +1,32 @@
+/* 
+업 무 명 : 응답 전문 변환 규칙
+작 성 자 : 이동근 (leedg5845@coreplus.co.kr)
+작 성 일 : 2015/07/30
+수 정 자 : 이동근 (leedg5845@coreplus.co.kr)
+수 정 일 : 2015/07/30
+내 용 : 응답 전문 변환 규칙에 대한 디자인이다.
+*참고사항 :  
+*/
+@CHARSET "UTF-8";
+
+#tcRspnSrcTable > thead > tr > th{
+	height : 15px;
+}
+
+#tcRspnSrcTable > tbody > tr > td{
+	height : 30px;
+}
+
+#tcRspnSrcTable > tbody > tr{
+	background-color: white;
+	cursor: default;
+}
+
+#telegramChangeRspn{
+	height: 500px;
+}
+#telegramChangeRspnScroll {
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}

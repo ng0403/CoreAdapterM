@@ -1,0 +1,128 @@
+@charset "utf-8";
+
+/* reset */
+html,body,form,div,p,h1,h2,h3,h4,h5,h6,dl,dt,dd,ul,ol,li,fieldset,th,td,button{margin:0;padding:0;border:0;font-size:100%; font:inherit; font-weight:normal;}
+
+html, body {
+	height: 100%;
+	font-family: 'Nanum Gothic', Dotum, "돋움", Gulim, "굴림", Verdana, Arial, "Trebuchet MS";
+	}
+body{-webkit-text-size-adjust: none;}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {display: block;}
+
+input, textarea, select, button{font:inherit;vertical-align:middle;}
+button{background:none; border: none; margin: 0; padding: 0;width: auto; overflow: visible; cursor: pointer;}
+
+input[type="button"], input[type="text"], input[type="password"], input[type="image"], #loginBtn, textarea {-webkit-appearance:none; border-radius:0;}
+input[type="checkbox"]{-webkit-appearance:checkbox;margin:0;}
+input[type="radio"] {-webkit-appearance:radio;padding:0;margin:0;vertical-align:middle;}
+
+#loginBtn {
+	width:100px; 
+	height:80px;
+	border:1px solid #8C8C8C;
+	border-radius:5px 5px 5px 5px;
+	cursor: pointer;
+	font-family: 'Nanum Gothic', Dotum, "돋움", Gulim, "굴림", Verdana, Arial, "Trebuchet MS";
+	font-weight: bold;
+	}
+	
+textarea {resize:none;}
+select {margin:0;}
+input[type="text"], input[type="password"] {padding:0 0 0 12px;}
+
+table{width:100%;border-collapse:collapse;border-spacing:0;}
+table caption, legend {position:absolute;left:-9999em;text-indent:-9999em;font-size:0;line-height:0;visibility:hidden;}
+ol, ul{list-style:none;}
+img, fieldset, iframe{border:none; vertical-align:middle;}
+address, cite, code, dfn, em, var, th, strong{font-style:normal; font-weight:normal;}
+
+button,
+a {color: #707070; text-decoration:none;}
+button:hover,
+a:link,a:visited {color:#666;text-decoration:none;}
+a:hover {color:#666;text-decoration:none;}
+a:active {color:#666;text-decoration:none;}
+button:focus,a:focus, input:focus, textarea:focus, button:focus {outline:1px dotted #4b4b4b;}
+
+
+.clearfix:after{content:""; display:block; clear:both;}
+* html .clearfix{ zoom: 1; } /* IE6 */
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */
+
+hr {display: none;}
+
+body, input, textarea, button, select, table {font:12px '돋움',Dotum,sans-serif;color:#666;}
+
+.hide {position: absolute; left: -9999em; text-indent:-9999em;font-size:0;line-height:0;z-index:-1;}
+
+/*로그인*/
+body {background:white;}
+#wrap {position:absolute;left:50%;top:50%;width:1054px;height:644px;margin:-322px 0 0 -527px;background:#fff; }
+.loginWrap {padding:0 0 60px 0;}
+.h1Logo {
+   width:100%;
+   height:470px;
+}
+.h1Ttx {padding:0 0 0 12px;height:128px;color:#8fa8cc;line-height:19px;}
+
+.loginWrap input[type="text"], .loginWrap input[type="password"] {
+	width:262px;
+	height:37px;
+	background:white;
+	line-height:37px;
+	border:1px solid #8C8C8C;
+	border-radius:5px 5px 5px 5px;
+	font-family: 'Nanum Gothic', Dotum, "돋움", Gulim, "굴림", Verdana, Arial, "Trebuchet MS";
+	}
+	
+#loginText{
+	padding:0px 330px;
+}	
+
+.loginWrap input:focus {background:url("../images/bg_input_on.gif") no-repeat;}
+.loginWrap fieldset {overflow:hidden; padding:5px 0 70px 75px;}
+.loginWrap fieldset div {float:left;}
+.loginWrap fieldset p {position:relative;padding:0 12px 6px 0;}
+.loginWrap fieldset label {display:block;position:absolute;left:16px;top:9px;width:107px;height:22px;}
+.loginWrap fieldset label.on {left:-9999px;}
+/*
+.loginWrap .user {background:url("../images/txt_user.gif") no-repeat;}
+.loginWrap .pass {background:url("../images/txt_pw.gif") no-repeat;}
+.loginWrap fieldset button {float:left;display:block;width:92px;height:81px;background:url("../images/btn_login.gif") no-repeat;}
+.loginWrap label {display:inline-block;width:39px;height:10px;margin:0px 5px 0 5px;padding:0px 0px 2px 0px;background:url("../images/txt_save.gif") no-repeat;}
+*/
+.loginChk {padding:16px 0 2px 2px;}
+.loginChk * {vertical-align:middle;}
+.loginChk label {display:inline-block;width:39px;height:10px;margin:0 5px 0 5px;background:url("../images/txt_save.gif") no-repeat;}
+.loginChk .selectBox {display:inline-block;position:relative;zoom:1;*display:inline;margin-top:2px;}
+.loginBtn {padding:1px 0 5px 270px;}
+.loginBtn * {vertical-align:middle;text-align:right;}
+.selectBox button {display:inline-block;width:91px;padding-left:10px;height:25px;background:url('../images/btn_language_s.gif') no-repeat;color:#737781;text-align:left;font-weight:bold;}
+.selectBox ul {display:none;position:absolute;left:0;top:25px;width:89px;background:#fff;border:1px solid #c4c8d0;}
+.selectBox ul.show {display:block;}
+.selectBox ul li a {display:block;height:22px;padding-left:9px;line-height:22px;border-top:1px solid #c4c8d0;}
+.selectBox ul li a:hover, .selectBox ul li a:focus {background:#f9fafb;}
+.selectBox ul li:first-child a {border-top:0;}
+.loginWrap .info {padding:0 0 0 7px;background:url('../images/bl_info.gif') no-repeat left 2px;}
+
+#footer {position:relative; text-align: center;  margin-top: -640px;}
+.footerLogo {position:relative;left:0px;top:20px;}
+.footMenu {position:relative;
+           top: 600px;
+           padding: 21px 0px 100px 14px;
+           border-top: 1px solid #5D5D5D;
+           margin : 0 auto;}
+.footMenu .list {overflow:hidden;font-size:11px;}
+.footMenu .list li {padding:0 8px 0 9px;background:white;}
+.footMenu .list li:first-child {padding-left:0;background:none;}
+.footMenu .list a:hover {color:#000;}
+.footMenu .address {padding:13px 0 6px;}
+#center{width: 100px;}
+#main_footer{
+	padding: 1%;
+	border-top: 1px solid #5D5D5D;
+	color: #5D5D5D;
+	text-align: center;
+}

@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+
+#cupnSendSearchTable{
+	margin: 0.5%;
+}
+
+#cupnSendSearchTable td {
+	text-align: left;
+	padding-left: 10px;
+}
+
+#cupnSendSearchTable th {
+	text-align: right;
+	
+}
+
+#cupnCustModalContent{
+	padding:0 1% 0 1%;
+}
+
+#cupnCusteodalList{
+	text-align:center;
+	width:100%;
+}
+
+tr.on td {background-color:#eaeaea;}
+
+#cupnSendStatTbl th {
+	padding-right: 3%;
+}
+
+#sendableCountTable th {
+	padding-right: 3%;
+}
+
+#conditionTable td {
+	width: 0;
+}

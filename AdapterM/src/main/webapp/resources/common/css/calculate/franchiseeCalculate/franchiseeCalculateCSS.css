@@ -1,0 +1,72 @@
+@CHARSET "UTF-8";
+
+#teleSearchTable select {
+	width: 65%;
+}
+
+#teleSearchTable td {
+	text-align: left;
+	padding-left: 10px;
+	border: 0;
+}
+
+#teleSearchTable th {
+	text-align: right;
+}
+
+#teleSearchTable tr:hover{
+	background-color: white;
+	cursor: default;
+}
+
+#transactionInfoSearchTable select {
+	width: 65%;
+}
+
+#transactionInfoSearchTable td {
+	text-align: left;
+	padding-left: 10px;
+	border: 0;
+}
+
+#transactionInfoSearchTable th {
+	text-align: right;
+}
+
+#tiListTbl tbody tr:hover{
+	background-color: white;
+	cursor: default;
+}
+
+#mcsSearchListTable tbody tr:hover{
+	background-color: white;
+	cursor: default;
+}
+#dcsSearchListTable tbody tr:hover{
+	background-color: white;
+	cursor: default;
+}
+#transactionInfoSearchListTable tbody tr:hover{
+	background-color: white;
+	cursor: default;
+}
+#tiListTbl tbody tr:hover{
+	background-color: white;
+	cursor: default;
+}
+
+#dayCalculateStoreSearchTable {
+	width: 100%;
+}
+#dayCalculateStoreSearchTable th {
+	text-align: right;
+	padding-right: 2%;
+}
+
+#monthCalculateStoreSearchTable {
+	width: 100%;
+}
+#monthCalculateStoreSearchTable th {
+	text-align: right;
+	padding-right: 2%;
+}

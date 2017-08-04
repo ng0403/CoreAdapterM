@@ -1,0 +1,55 @@
+/* 
+업 무 명 : org 부서관리 화면
+작 성 자 : 송성호 (0302333@coreplus.co.kr)
+작 성 일 : 2015/08/12
+수 정 자 : 송성호 (0302333@coreplus.co.kr)
+수 정 일 : 2015/08/12
+내 용 : 부서 관리에 대한 디자인이다.
+*참고사항 :  
+*/
+@CHARSET "UTF-8";
+
+/* 부서관리 서치 인풋 */
+#infoSearchInput{
+	width : 10%;
+}
+.sch_btn:hover{
+	padding : 6px 12px;
+}
+.orgdetails,
+#upInsert{
+	float : left;
+}
+.orgdetails #user_nm{
+	width : 92%;
+}
+#org_ph2,#org_ph3,
+#fax_no2,#fax_no3{
+	width : 23%;	
+}
+#rep_emp_nm{
+	width : 80%;
+}
+
+#repOrgUserList{
+	display: none;
+	cursor: default;
+	width: 100%;
+	height: 100%;
+}
+
+.commonTable tbody tr td #org_id{
+	cursor : pointer;
+}
+.cds_Tbl_Div {
+	width: 98%;
+	padding-top: 1.5%;
+	padding-bottom: 0.5%;
+	border-top: 2px solid #a0a0a0;
+	border-bottom: 2px solid #a0a0a0;
+}
+
+
+
+
+

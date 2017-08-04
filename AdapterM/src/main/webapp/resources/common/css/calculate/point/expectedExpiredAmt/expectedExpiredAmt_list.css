@@ -1,0 +1,34 @@
+/**
+업 무 명 : 포인트 소멸예정금액
+작 성 자 : 정은지 (wjdmwi@coreplus.co.kr)
+작 성 일 : 2015/09/21
+수 정 자 : 정은지 (wjdmwi@coreplus.co.kr)
+수 정 일 : 2015/09/21
+내 용 : 포인트 소멸예정금액 폼 CSS
+*참고사항 : 
+ */
+
+@CHARSET "UTF-8";
+
+#expected_sch_tbl {
+	width: 100%;
+}
+
+/* 리스트 테이블 */
+.commonTable_ex{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.commonTable_ex > thead > tr> th{
+	border: 1px solid #eaeaea;
+	padding: 5px;
+	background: #f9ffff;
+	color: black;
+}
+
+.commonTable_ex > tbody > tr> td{
+	border: 1px solid #eaeaea;
+	padding: 5px;
+	text-align: center;
+}

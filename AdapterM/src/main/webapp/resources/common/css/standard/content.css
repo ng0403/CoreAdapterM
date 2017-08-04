@@ -1,0 +1,159 @@
+@CHARSET "UTF-8";
+
+/* <!-- --------------------------------------본문-------------------------------------- --> */
+
+#content {/* Section 본문 내용 전체 DIV */
+    background: white;
+    border-left: 1px solid black;
+	min-height: 100%;
+	width: 99.5%;
+	height: 100%;
+	padding-left: 0.8%;
+	overflow-x: hidden;
+	overflow-y: auto; 
+}
+pagingDiv
+.titleDIV{/* TITLE */
+	width: 98%;
+	padding: 1% 0 1% 0; 
+	border-bottom: 2px solid #a0a0a0;
+	margin-bottom: 1%;
+	float: left;
+}
+
+/* 페이징 관련 공통 CSS 시작 */
+/* 버튼 */
+.listFootDiv {
+	padding-top: 0.6%;
+	width: 20%;
+	float: left;
+}
+/* 페이징 전체 */
+.pagingDiv {
+	width: 75%;
+	text-align: center;
+	padding: 0.6% 0 1% 0;
+}
+#franchisePagingDiv {
+	text-align: center;
+	padding: 0.6% 0 1% 0;
+}
+#camPagingDiv {
+	text-align: center;
+	padding: 0.6% 0 1% 0;
+}
+#camPagingDiv1 {
+	text-align: center;
+	padding: 0.6% 0 1% 0;
+}
+#offerPagingDiv {
+	text-align: center;
+	padding: 0.6% 0 1% 0;
+}
+/* 페이지번호 */
+#pageInput {
+	width: 20px;
+	text-align: center;
+	padding: 0.3%;
+}
+/* 페이징 관련 공통 CSS 끝*/
+
+.titleText {
+	font-weight: bold;
+}
+
+#page{
+	margin-left: 33%;
+}
+
+/* 검색 Div */
+.detailFootDiv {
+	width: 100%;
+	padding: 0.4% 0 0.4% 0; 
+}
+
+.pageNum {
+	height: 1.5%;
+	padding: 0.1%;
+	margin: 0;
+	text-align: center;
+}
+
+#am_btn_div {
+	margin-top: 0.2%;
+	width: 20%;
+	float: left;
+}
+
+#sc_btn_div {
+	margin-top: 0.2%;
+	display: none;
+	width: 20%;
+	float: left;
+}
+
+.func_btn {
+	text-align: center;
+	background-color: #ffffff;
+}
+
+.func_btn:hover {
+	cursor: pointer;
+	text-align: center;
+	background-color: #f7f7f7;
+}
+
+.tr_btn {
+	text-align: center;
+	background-color: #414141;
+	color: white;
+}
+
+.tr_btn:hover {
+	cursor: pointer;
+	text-align: center;
+	background-color: #454545;
+	color: white;
+}
+
+.sch_btn {
+	padding: 0 5px 0 5px;
+	text-align: center;
+	background-color: #ffffff;
+}
+
+.sch_btn:hover {
+	padding: 0 5px 0 5px;
+	cursor: pointer;
+	text-align: center;
+	background-color: #f7f7f7;
+}
+
+.sch_btn user{
+	padding : 7px;
+}
+
+.back_btn {
+	text-align: center;
+	background-color: #9b9b9b;
+}
+
+.back_btn:hover {
+	cursor: pointer;
+	text-align: center;
+	background-color: #acacac;
+}
+
+/* 가맹점 모달 CSS */
+#franchiseeModalList {
+	text-align: center;
+	width: 100%;
+}
+
+#franPagingDiv {
+	margin-top: 1%;
+}
+
+#franModalContent {
+	padding: 0 1% 0 1%;
+}

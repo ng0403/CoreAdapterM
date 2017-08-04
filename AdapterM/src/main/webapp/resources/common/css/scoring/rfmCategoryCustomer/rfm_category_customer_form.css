@@ -1,0 +1,16 @@
+/**
+업 무 명 : RFM 분류별 고객 상세
+작 성 자 : 
+작 성 일 : 2015/10/26
+수 정 자 : 
+수 정 일 : 2015/10/26
+내 용 : RFM 분류별 고객 상세
+*참고사항 : 
+ */
+
+@CHARSET "UTF-8";
+
+.searchText {
+	text-align: right;
+	padding-right: 1%;
+}

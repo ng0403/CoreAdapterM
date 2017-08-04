@@ -1,0 +1,24 @@
+/* 
+업 무 명 : 고객 통합 리스트 화면
+작 성 자 : 정은지 (wjdmwi@coreplus.co.kr)
+작 성 일 : 2015/09/24
+수 정 자 : 정은지 (wjdmwi@coreplus.co.kr)
+수 정 일 : 2015/09/24
+내 용 : 고객 통합 리스트 화면에 대한 디자인이다.
+*참고사항 :  
+*/
+
+@CHARSET "UTF-8";
+
+#custmanager_sch_tbl {
+	width: 100%;
+}
+
+#custmanager_sch_tbl th {
+	text-align: right;
+	padding-right: 2%;
+}
+
+#custmanager_sch_tbl input[type=text] {
+	width: 90%;
+}

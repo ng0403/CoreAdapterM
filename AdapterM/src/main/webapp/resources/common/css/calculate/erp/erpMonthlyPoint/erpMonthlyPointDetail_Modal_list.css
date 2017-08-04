@@ -1,0 +1,60 @@
+/**
+업 무 명 : ERP 가맹점별 월포인트 정산 리스트 상세보기 모달화면 디자인
+작 성 자 : 정은지 (wjdmwi@coreplus.co.kr)
+작 성 일 : 2015/09/14
+수 정 자 : 정은지 (wjdmwi@coreplus.co.kr)
+수 정 일 : 2015/09/14
+내 용 : ERP 가맹점별 월포인트 정산 리스트 상세보기 모달창에 대한 디자인이다.
+*참고사항 : 
+*/
+
+@CHARSET "UTF-8";
+
+/* ERP 가맹점별 월포인트 정산 리스트 상세정보 모달창  */
+.erpPointDetail_titleDIV {
+	width: 100%;
+	padding: 0 0 1% 0; 
+	padding-right: 5%;
+}
+
+#erpPointDetail{
+	width: 100%;
+}
+
+#erpPointDetail_Div{
+	padding: 1.5% 2% 1.5% 0;
+	border-top: 2px solid #a0a0a0;
+	border-bottom: 1px solid #a0a0a0;
+	text-align: left;
+}
+
+#erpPointDetail_Div table{
+	border: 1px solid #eaeaea;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#erpPointDetail_Div table tr th{
+	border: 0px solid #eaeaea;
+	padding: 0.5%;
+	background: #f9ffff;
+	color: black;
+	text-align: center;
+}
+
+#erpPointDetail_Div table tr td{
+	border: 1px solid #eaeaea;
+	padding: 0.5%;
+	color: black;
+	text-align: center;
+}
+
+#cod_cancel{
+	cursor:pointer;
+}
+
+#erpPointDetail_TableDBDiv{
+	overflow-y:scroll;
+	overflow-x:hidden;
+	height: 200px;
+}

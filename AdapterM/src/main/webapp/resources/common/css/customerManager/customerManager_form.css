@@ -1,0 +1,169 @@
+/* 
+업 무 명 : 고객 통합 상세정보 화면
+작 성 자 : 정은지 (wjdmwi@coreplus.co.kr)
+작 성 일 : 2015/09/24
+수 정 자 : 정은지 (wjdmwi@coreplus.co.kr)
+수 정 일 : 2015/09/24
+내 용 : 고객 통합 상세정보 화면에 대한 디자인이다.
+*참고사항 :  
+*/
+
+@CHARSET "UTF-8";
+
+/* 상세 DIV */
+.commonDetail_custManager {
+	width: 98%;
+	margin-bottom: 1%;
+	padding-bottom: 1%;
+}
+
+#tabs {
+    font-family:'nanumgothic', '나눔고딕', 'malgun gothic', '맑은 고딕', 'dotum', '돋움', sans-serif
+}
+
+/* 탭 선택 시 표시할 요소(div) 정의(1번 탭 선택 시 첫 번째 div 요소 표시) */
+#tabs #tab1:nth-of-type(1), #tabs #tab1:nth-of-type(1) ~ #tabDiv1:nth-of-type(1),
+#tabs #tab2:nth-of-type(2), #tabs #tab2:nth-of-type(2) ~ #tabDiv2:nth-of-type(2),
+#tabs #tab3:nth-of-type(3), #tabs #tab3:nth-of-type(3) ~ #tabDiv3:nth-of-type(3),
+#tabs #tab4:nth-of-type(4), #tabs #tab4:nth-of-type(4) ~ #tabDiv4:nth-of-type(4),
+#tabs #tab5:nth-of-type(5), #tabs #tab5:nth-of-type(5) ~ #tabDiv5:nth-of-type(5),
+#tabs #tab6:nth-of-type(6), #tabs #tab6:nth-of-type(6) ~ #tabDiv6:nth-of-type(6){
+    display:none;
+}
+#tabs #tab1:nth-of-type(1):checked ~ #tabDiv1:nth-of-type(1),
+#tabs #tab2:nth-of-type(2):checked ~ #tabDiv2:nth-of-type(2),
+#tabs #tab3:nth-of-type(3):checked ~ #tabDiv3:nth-of-type(3),
+#tabs #tab4:nth-of-type(4):checked ~ #tabDiv4:nth-of-type(4),
+#tabs #tab5:nth-of-type(5):checked ~ #tabDiv5:nth-of-type(5),
+#tabs #tab6:nth-of-type(6):checked ~ #tabDiv6:nth-of-type(6){
+    display:block;
+}
+
+
+/* 라벨 기본 스타일 지정 */
+#tabs > label {
+    display:inline-block;
+    font-size:.9em;
+    padding:5px;
+    text-align:center;
+    width:100px;
+    line-height:1.8em;
+    font-weight:700;
+    border-radius:8px 8px 0 0; 
+    box-shadow:-2px 0 2px rgba(0, 0, 0, 0.1);
+    background:#eee;
+    color:#777;
+    border:1px solid #ccc;
+    border-width:1px 1px 0;
+    margin-bottom:-1px;
+}
+#tabs > label:hover {
+    cursor:pointer; /*마우스 올렸을 때 손 모양*/
+}
+
+/* 선택된 라벨, 커서를 올린 라벨 스타일 지정 */
+#tabs input:nth-of-type(1):checked ~ label:nth-of-type(1), #tabs > label[for=tab1]:hover {
+    background:#818181;
+    color:#fff
+}
+#tabs input:nth-of-type(2):checked ~ label:nth-of-type(2), #tabs > label[for=tab2]:hover {
+    background:#818181;
+    color:#fff;
+}
+#tabs input:nth-of-type(3):checked ~ label:nth-of-type(3), #tabs > label[for=tab3]:hover {
+    background:#818181;
+    color:#fff;
+}
+#tabs input:nth-of-type(4):checked ~ label:nth-of-type(4), #tabs > label[for=tab4]:hover {
+    background:#818181;
+    color:#fff;
+}
+#tabs input:nth-of-type(5):checked ~ label:nth-of-type(5), #tabs > label[for=tab5]:hover {
+    background:#818181;
+    color:#fff;
+}
+#tabs input:nth-of-type(6):checked ~ label:nth-of-type(6), #tabs > label[for=tab6]:hover {
+    background:#818181;
+    color:#fff;
+}
+
+/*  실제 내용이 담긴 div 요소 스타일 지정 */
+#tabs .tab1_content, #tabs .tab2_content, 
+#tabs .tab3_content, #tabs .tab4_content, 
+#tabs .tab5_content, #tabs .tab6_content {
+    border:1px solid #ddd;
+    height:200%;
+}
+
+/* 리스트 테이블 (스크롤) */
+.commonTable_cm{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.commonTable_cm > thead > tr> th{
+	border: 1px solid #eaeaea;
+	padding: 5px;
+	background: #f9ffff;
+	color: black;
+}
+
+.commonTable_cm > tbody > tr> td{
+	border: 1px solid #eaeaea;
+	padding: 5px;
+	text-align: center;
+}
+
+/* 고객등급이력 */
+#custManagerClassDiv{
+	overflow-y:scroll;
+	overflow-x:hidden;
+	height: 224px;
+}
+
+#custManagerClassTbody tbody tr td{
+	width: 25%;
+}
+
+/* 카드발급내역  */
+#custManagerCardDiv{
+	overflow-y:scroll;
+	overflow-x:hidden;
+	height: 203px;
+}
+
+#custManagerCardTbody tbody tr td{
+	width: 10%;
+}
+
+/* 포인트내역  */
+#custManagerPointDiv{
+	overflow-y:scroll;
+	overflow-x:hidden;
+	height: 223px;
+}
+
+#custManagerPointTbody tbody tr td{
+	width: 25%;
+}
+
+/* 쿠폰내역  */
+#custManagerCouponDiv{
+	overflow-y:scroll;
+	overflow-x:hidden;
+	height: 223px;
+}
+#custManagerCouponTbody tbody tr td{
+	width: 25%;
+}
+
+/* 상품권내역  */
+#custManagerGiftDiv{
+	overflow-y:scroll;
+	overflow-x:hidden;
+	height: 223px;
+}
+
+#custManagerGiftTbody tbody tr td{
+	width: 25%;
+}

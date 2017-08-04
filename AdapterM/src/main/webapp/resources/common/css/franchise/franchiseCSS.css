@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+
+#ContractSearchForm tbody tr th{
+	width : 7%;
+}
+#ContractSearchForm tbody tr td{
+	width : 15%;
+}
+#input1{
+	width : 35%;
+}

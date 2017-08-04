@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<!-- 중앙바디 + 어사이드 구조 -->
+	<definition name="onebodyLayout" template="/WEB-INF/views/layout/onebody_layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/common/menu.jsp" />
+		<put-attribute name="subMenu" value="/WEB-INF/views/common/subMenu.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+
+    <!-- 고객 통합 정보 -->
+	<definition name="customerManager" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/customerManager/customerManager_list.jsp"></put-attribute>
+	</definition>
+	
+    <!-- 고객 통합 상세정보 -->
+	<definition name="customerManagerDetail" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/customerManager/customerManager_form.jsp"></put-attribute>
+	</definition>
+	
+	<!--  법인 고객 관리  -->
+	<definition name="customerCompany" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/customerManager/customerCompany/customerCompany_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 법인 고객 상세정보 -->
+	<definition name="customerCompanyForm" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/customerManager/customerCompany/customerCompany_form.jsp"></put-attribute>
+	</definition>
+	
+    <!-- 채번관리 -->
+	<definition name="numManager" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/numManager/numManager_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 번호발급 -->
+	<definition name="numIssue" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/numManager/numIssue.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 번호발급 엑셀출력 -->
+	<definition name="numIssueExcel" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/numManager/numIssueExcel.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 번호조회 -->
+	<definition name="numInquiry" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/numManager/numInquiry.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 상품권 비용 정산 -->
+	<definition name="giftCalculate" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/giftCalculate/giftCalculate_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 상품권 비용 정산 엑셀 -->
+	<definition name="giftCalculateExcel" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/giftCalculate/giftCalculate_excel.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 기프트카드 월 정산 -->
+	<definition name="giftCardMonthlyCal" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/giftCardMonthlyCal/giftCardMonthlyCal_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 기프트카드 월 정산 엑셀 -->
+	<definition name="giftCardMonthlyCalExcel" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/giftCardMonthlyCal/giftCardMonthlyCal_list_excel.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 미수금 조회 -->
+	<definition name="billStore" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/billStore/billStore_list.jsp"></put-attribute>
+	</definition>
+	
+    <!-- 가맹점 정산-전문조회 -->
+	<definition name="telegramList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/franchiseeCalculate/telegramInqr/telegram_inqr.jsp"></put-attribute>
+	</definition>
+    <!-- 가맹점 정산-거래내역 -->
+	<definition name="transactionInfo" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/franchiseeCalculate/transactionInfo/transaction_info.jsp"></put-attribute>
+	</definition>
+    <!-- 가맹점 정산-가맹점별 일 정산내역 -->
+	<definition name="dayCalculateStore" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/franchiseeCalculate/DailyfranchiseeCalculate/dailyFranchiseeCalculate.jsp"></put-attribute>
+	</definition>
+
+	<!-- 가맹점 정산-가맹점별 월 정산내역 -->
+	<definition name="monthCalculateStore" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/franchiseeCalculate/monthFranchiseeCalculate/monthFranchiseeCalculate.jsp"></put-attribute>
+	</definition>
+	
+	<!-- ERP 가맹점별 월포인트 정산 -->
+	<definition name="erpPoint" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/erp/erpMonthlyPoint/erpMonthlyPoint_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- ERP 가맹점별 월수수료 정산 -->
+	<definition name="erpBill" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/erp/erpMonthlyBill/erpMonthlyBill_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- ERP 부서별 월상품권 정산 -->
+	<definition name="erpGift" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/erp/erpMonthlyGift/erpMonthlyGift_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 소멸예정금액 조회 -->
+	<definition name="expectedAmt" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/point/expectedExpiredAmt/expectedExpiredAmt_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 소멸확정금액 조회 -->
+	<definition name="confirmedAmt" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/point/confirmedExpiredAmt/confirmedExpiredAmt_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 다수적립사용내역 조회 -->
+	<definition name="custPointInfo" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/point/custPointInfo/custPointInfo_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 포인트수기적립 -->
+	<definition name="trnsProc" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/point/trnsProcInitInfo/trnsProc.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 쿠폰관리 리스트 -->
+	<definition name="couponList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/coupon/couponManager/couponManager_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 쿠폰관리 상세 -->
+	<definition name="couponForm" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/coupon/couponManager/couponManager_form.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 쿠폰발송 -->
+	<definition name="couponSendMain" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/coupon/couponSendMain/couponSendMain.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 쿠폰관리 발행내역 -->
+	<definition name="cupnSendInfoList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/coupon/couponSendInfo/couponSendInfo_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 쿠폰관리 쿠폰회수내역 -->
+	<definition name="couponUsedInfo" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/coupon/couponUsedInfo/couponUsedInfo_list.jsp"></put-attribute>
+	</definition>
+	
+	
+	<!-- 상품권 관리 리스트 -->
+	<definition name="giftbonManagerList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/giftbon/giftbonManager/giftbonManager_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 상품권 관리 상세 -->
+	<definition name="giftbonForm" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/giftbon/giftbonManager/giftbonManager_form.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 상품권 발행 내역조회 -->
+	<definition name="giftbonSendInfoList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/giftbon/giftbonSendInfo/giftbonSendInfo_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 기프트카드 관리 리스트 -->
+	<definition name="giftCardManagerList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/giftCard/giftCardManager/giftCardManager_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 기프트카드 발급내역 리스트 -->
+	<definition name="giftCardSendInfoList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/giftCard/giftCardSendInfo/giftCardSendInfo_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 기프트카드 변경내역 리스트 -->
+	<definition name="giftCardChangeInfoList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/giftCard/giftCardChangeInfo/giftCardChangeInfo_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 기프트카드 거래조회 리스트 -->
+	<definition name="giftCardTrnsInfoList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/giftCard/giftCardTrnsInfo/giftCardTrnsInfo_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 기프트카드 수기처리 폼이동-->
+	<definition name="giftCardManualProc" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/giftCard/giftCardManualProc/giftCardManualProc_form.jsp"></put-attribute>
+	</definition>
+			
+    <!-- 가맹점 계약 관리 리스트 -->
+	<definition name="contractList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/franchise/contract/contract_list.jsp"></put-attribute>
+	</definition>
+	
+	
+    <!-- 가맹점 조회 리스트 -->
+	<definition name="franchiseList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/franchise/contract/franchise_list.jsp"></put-attribute>
+	</definition>
+	
+    <!-- 전문관리 리스트 -->
+	<definition name="telegramMng" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/telegram/telegram_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 전문관리 form-->
+	<definition name="telegramForm" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/telegram/telegram_form.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 전문관리상세-->
+	<definition name="telegramItem" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/telegram/telegram_item.jsp"></put-attribute>
+	</definition>
+	
+    <!-- 전문변환관리 리스트 -->
+	<definition name="telegramMapList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/telegramChange/telegramChange_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 전문변환관리 form -->
+	<definition name="telegramChangeForm" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/telegramChange/telegramChange_form.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 전문변환관리 요청 -->
+	<definition name="telegramChangeRequest" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/telegramChange/telegramChange_rqst.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 전문변환관리 응답 -->
+	<definition name="telegramChangeResponse" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/telegramChange/telegramChange_rspn.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 가맹점 폐점 및 양도양수 --> <!-- 04/10 -->
+	<definition name="shutdownStore" extends="onebodyLayout">
+	    <put-attribute name="body" value="/WEB-INF/views/franchise/shutdownStore/shutdownStore_list.jsp"></put-attribute>
+	</definition>	
+	
+	<definition name="viewStoreNotPaied" extends="onebodyLayout">
+	    <put-attribute name="body" value="/WEB-INF/views/franchise/viewStoreNotPaied/viewStoreNotPaied_list.jsp"></put-attribute>
+	</definition>
+	
+		<!-- 가맹점 계약 폐점 및 양도양수 현황 -->  <!-- 04/10 -->
+	<definition name="viewShutdownStore" extends="onebodyLayout">
+	    <put-attribute name="body" value="/WEB-INF/views/franchise/viewShutdownStore/viewShutdownStore.jsp"></put-attribute>
+	</definition>
+	
+	  <!-- 가맹점 계약 폐점 및 양도양수 현황 상세정보 -->  <!-- 04/10 -->
+	<definition name="viewShutdownStoreDetail" extends="onebodyLayout">
+	    <put-attribute name="body" value="/WEB-INF/views/franchise/viewShutdownStore/viewShutdownStore_detail.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 가맹점 계약 관리 상세 -->
+	<definition name="contractDetail" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/franchise/contract/contract_detail.jsp"></put-attribute>
+	</definition>	
+	
+	<!-- 가맹점 계약 관리 추가 -->
+	<definition name="contractInsertForm" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/franchise/contract/contract_detail.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 가맹점 계약 관리 추가 -->
+	<definition name="specialCont" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/franchise/contract/special_cont.jsp"></put-attribute>
+	</definition>
+
+	<!-- 로열티 프로그램 리스트 -->
+	<definition name="loyaltyProgramList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/loyalty/program/loyalty_program_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 로열티 프로그램 폼 -->
+	<definition name="loyaltyProgramForm" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/loyalty/program/loyalty_program_form.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 로열티 프로모션 리스트 -->
+	<definition name="loyaltyPromotionList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/loyalty/promotion/loyalty_promotion_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 로열티 프로모션 폼 -->
+	<definition name="loyaltyPromotionForm" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/loyalty/promotion/loyalty_promotion_form.jsp"></put-attribute>
+	</definition>
+	
+	<!-- VAN 수수료 확정내역 리스트 -->
+	<definition name="vanCommissionList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/calculate/point/vanCommission/vanCommission_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- RFM 기준 리스트-->
+	<definition name="rfmStandard" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/rfmStandard/rfm_standard_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- RFM 기준 상세 -->
+	<definition name="rfmStandardForm" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/rfmStandard/rfm_standard_form.jsp"></put-attribute>
+	</definition>
+	
+	<!-- RFM 분류별 가중치 -->
+	<definition name="rfmCategoryWeight" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/rfmStandard/rfm_weight.jsp"></put-attribute>
+	</definition>
+
+	<!-- RFM 점수 작업 이력 -->
+	<definition name="rfmWorkHistory" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/rfmStandard/rfm_work_history.jsp"></put-attribute>
+	</definition>
+	
+	<!-- RFM 고객 등급 리스트 -->
+	<definition name="rfmCustomerGrade" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/rfmCustomerGrade/rfm_customer_grade_list.jsp"></put-attribute>
+	</definition>
+
+	<!-- RFM 고객 등급 상세 -->
+	<definition name="rfmCustomerGradeForm" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/rfmCustomerGrade/rfm_customer_grade_form.jsp"></put-attribute>
+	</definition>
+	
+	<!-- RFM 분류별 고객 리스트 -->
+	<definition name="rfmCategoryCustomer" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/rfmCategoryCustomer/rfm_category_customer_list.jsp"></put-attribute>
+	</definition>
+
+	<!-- RFM 분류별 고객 상세 -->
+	<definition name="rfmCategoryCustomerForm" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/rfmCategoryCustomer/rfm_category_customer_form.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 고객 등급 기준 -->
+	<definition name="customerGradeManager" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/customerGradeManager/customer_grade_manager.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 고객 등급 기준 등록/편집 -->
+	<definition name="customerGradeManagerForm" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/customerGradeManager/customer_grade_manager_form.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 고객 등급 관리 -->
+	<definition name="grdCustomerList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/customerGradeManager/customer_grade_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 고객 등급 상세 -->
+	<definition name="grdCustomerDetailList" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/customerGradeManager/customer_grade_form.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 고객 등급 작업 내역 -->
+	<definition name="customerGradeWorkHistory" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/customerGradeManager/customer_grade_history.jsp"></put-attribute>
+	</definition>
+	
+	<!-- LTV 기준 리스트-->
+	<definition name="ltvStandard" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/ltvStandard/ltv_standard_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- LTV 기준 상세 -->
+	<definition name="ltvStandardForm" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/ltvStandard/ltv_standard_form.jsp"></put-attribute>
+	</definition>
+	
+	<!-- LTV 고객 점수 관리 -->
+	<definition name="ltvCustomerScore" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/ltvCustomerScore/ltv_customer_score_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- LTV 점수 작업 이력 -->
+	<definition name="ltvWorkHistory" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/scoring/ltvStandard/ltv_work_history.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 캠페인 관리 -->
+	<definition name="camManager" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/campaign/camManager/campaignManager_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 캠페인 상세정보 -->
+	<definition name="camManagerDetail" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/campaign/camManager/campaignManager_form.jsp"></put-attribute>
+	</definition>
+	<!-- 캠페인 오퍼상세정보 -->
+	<definition name="camManagerOffer" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/campaign/camManager/campaignManager_offer.jsp"></put-attribute>
+	</definition>
+	<!-- 캠페인 대상고객상세정보 -->
+	<definition name="camManagerTgt" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/campaign/camManager/campaignManager_tgt.jsp"></put-attribute>
+	</definition>
+	<!-- 캠페인 채널상세정보 -->
+	<definition name="camManagerChannel" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/campaign/camManager/campaignManager_chn.jsp"></put-attribute>
+	</definition>
+	<!-- 캠페인 일정상세정보 -->
+	<definition name="camManagerSch" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/campaign/camManager/campaignManager_sch.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 오퍼 관리 -->
+	<definition name="offerManager" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/campaign/offerManager/offerManager_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 오퍼 상세정보 -->
+	<definition name="offerManagerDetail" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/campaign/offerManager/offerManager_form.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 오퍼 포인트 정책 정보 -->
+	<definition name="offerManagerAttr" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/campaign/offerManager/offerManager_attr.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 오퍼 적용브랜드 정보 -->
+	<definition name="offerManagerTgtBrnd" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/campaign/offerManager/offerManager_brnd.jsp"></put-attribute>
+	</definition>
+	<!-- 오퍼 적용매장 정보 -->
+	<definition name="offerManagerTgtSto" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/campaign/offerManager/offerManager_sto.jsp"></put-attribute>
+	</definition>
+	<!-- 오퍼 적용상품 정보 -->
+	<definition name="offerManagerTgtProd" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/campaign/offerManager/offerManager_prod.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 캠페인 포인트 거래내역 -->
+	<definition name="camPointManager" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/campaign/camPointManager/camPointManager_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 메뉴관리 리스트  -->
+	<definition name="menu" extends="onebodyLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/info/menu/menu_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 메뉴관리 상세정보  -->
+	<definition name="menuDetail" extends="onebodyLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/info/menu/menu_detail.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 권한관리 리스트  -->
+	<definition name="auth" extends="onebodyLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/info/auth/auth_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 권한관리 상세정보 > 권한메뉴  -->
+	<definition name="authmenu" extends="onebodyLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/info/auth/authmenu_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 권한관리 상세정보 > 권한메뉴 > 권한메뉴 상세정보  -->
+	<definition name="authmenuDetail" extends="onebodyLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/info/auth/authmenu_detail.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 권한관리 상세정보 > 사용자권한  -->
+	<definition name="authuser" extends="onebodyLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/info/auth/authuser_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 권한관리 상세정보 > 사용자권한 > 사용자권한 상세정보  -->
+	<definition name="authuserDetail" extends="onebodyLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/info/auth/authuser_detail.jsp"></put-attribute>
+	</definition>
+	
+	<!-- 부서 관리 -->
+	<definition name="orglist" extends="onebodyLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/info/org/org_list.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="orgdetail" extends="onebodyLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/info/org/org_detail.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="orgduser" extends="onebodyLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/info/org/org_dele_user_addList.jsp"></put-attribute>
+	</definition>	
+	<!-- 부서 관리 -->
+	
+	<!-- 사용자 관리 -->
+	<definition name="userlist" extends="onebodyLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/info/user/user_list.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="userdetail" extends="onebodyLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/info/user/user_detail.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="userorg" extends="onebodyLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/info/user/userorg_list.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="userauth" extends="onebodyLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/info/user/userauth_list.jsp"></put-attribute>
+	</definition>	
+	
+	<!-- 거래 내역 -->
+	<definition name="searchTrns" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/transaction/trans_list.jsp"></put-attribute>
+	</definition>
+</tiles-definitions>

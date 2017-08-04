@@ -1,0 +1,29 @@
+/*  
+업 무 명 : numManager_list 채번관리
+작 성 자 : 이상민 (tkdals8401@coreplus.co.kr)
+작 성 일 : 2015/09/16
+수 정 자 : 이상민 (tkdals8401@coreplus.co.kr)
+수 정 일 : 2015/09/16
+내 용 : 채번관리 css
+참고사항 : 
+ */
+@CHARSET "UTF-8";
+
+#searchText {
+	margin: 10px;
+}
+
+#nmSearchDiv {
+	padding: 0 0 2% 0;
+	width: 100%;
+}
+
+#nMSchTbl {
+	width: 100%;
+	margin-bottom: 1%;
+}
+
+#nMSchTbl th {
+	text-align: right;
+	padding-right: 2%;
+}

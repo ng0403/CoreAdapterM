@@ -1,0 +1,58 @@
+/* 
+업 무 명 : 전문 관리 상세 화면
+작 성 자 : 이동근 (leedg5845@coreplus.co.kr)
+작 성 일 : 2015/07/30
+수 정 자 : 이동근 (leedg5845@coreplus.co.kr)
+수 정 일 : 2015/07/30
+내 용 : 전문 관리 상세에 대한 디자인이다.
+*참고사항 :  
+*/
+@CHARSET "UTF-8";
+
+#telegram_item_casc {
+	display: none;
+}
+
+.tf_input {
+	border-color: white;
+}
+
+.tf_input_num {
+	border-color: white;
+	text-align: right;
+}
+
+.tf_item_list_div {
+	width: 100%;
+	height: 220px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#tf_list_tbl_thead thead > tr {
+	border-top: 1px solid #eaeaea;	
+	border-left: 1px solid #eaeaea;	
+	border-right: 1px solid #eaeaea;	
+}
+
+#tf_list_tbl_thead thead > tr > th {
+	border: 0px;
+}
+
+#tf_list_tbl_tbody {
+	width: 100%;
+	height: auto;
+}
+
+#tf_list_tbl_tbody tr:hover{
+	background-color: white;
+	cursor: default;
+}
+
+#tf_list_tbl_tbody > tbody > tr > td {
+	padding: 0.5% 0.5% 0.5% 0.5%;
+}
+
+#tf_list_tbl_tbody > tbody > tr > td > input[type=text] {
+	width: 90%;
+}

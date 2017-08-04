@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+
+#giftSearchTable{
+	width:98%;
+	margin-bottom: 1%;
+}
+
+#giftSearchTable td {
+	text-align: left;
+	padding-left: 10px;
+	border: 0;
+}
+
+#giftSearchTable th {
+	text-align: right;
+	
+}
+
+/* .titleMoDIV{ */
+/* 	padding: 1% 0 1% 0;  */
+/* 	border-bottom: 2px solid #a0a0a0; */
+/* 	margin-bottom: 1%; */
+/* 	margin-top: 1%; */
+/* 	padding-right: 5%; */
+/* } */
+
+#smsMotitleText{
+	font-size: 1em;
+	font-weight: bold;
+	margin-right: 61%;
+}

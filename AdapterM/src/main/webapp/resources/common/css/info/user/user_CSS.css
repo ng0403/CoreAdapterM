@@ -1,0 +1,102 @@
+/* 
+업 무 명 : menu 메뉴관리 화면
+작 성 자 : 정은지 (wjdmwi@coreplus.co.kr)
+작 성 일 : 2015/08/03
+수 정 자 : 정은지 (wjdmwi@coreplus.co.kr)
+수 정 일 : 2015/08/03
+내 용 : 메뉴 관리에 대한 디자인이다.
+*참고사항 :  
+*/
+
+@CHARSET "UTF-8";
+
+/* 메뉴관리 제목 */
+.menutitleDIV{
+	width: 83%;
+	padding: 1% 0 1% 0; 
+	border-bottom: 2px solid #a0a0a0;
+	margin-bottom: 1%;
+	padding-right: 5%;
+}
+
+/* 메뉴리스트 div  */
+#menu_list{
+	width: 88%;
+	margin-bottom: 1%;
+	padding-bottom: 0.5%;
+	border-bottom: 2px solid #a0a0a0;
+}
+
+/* 메뉴리스트 테이블 */
+#menuTable{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#menuTable > thead > tr> th{
+	border: 1px solid #eaeaea;
+	padding: 0.5%;
+	background: #f9ffff;
+	color: black;
+}
+
+#menuTable > tbody > tr> td{
+	border: 1px solid #eaeaea;
+	padding: 0.5%;
+	text-align: center;
+}
+
+/* 메뉴 상세정보 div */
+#menuDetail {
+	width: 100%;
+}
+
+/* 메뉴검색 text id  */
+#smenuSearch {
+	padding: 0.4%;
+	width: 11%;
+}
+#repUserOrgList,
+#userAuthList{
+	display: none;
+	cursor: default;
+	width: 100%;
+	height: 100%;
+}
+.userAuthDetailList{
+	width : 23%;	
+}
+#custtab_btn_div{
+	float : left;
+	width : 30%;
+}
+.cancels{
+	cursor : pointer;
+}
+.modAuth_id,
+.modAuth_nm{
+	border : 1px solid white;
+}
+#allAuthList #modAuthList tbody{
+	overflow-y : auto;
+	max-height : 240px;
+	display : block;
+}
+#userOrgList #modOrgList tbody{	
+	overflow-y : auto;
+	max-height : 240px;
+	display : block;
+}
+.commonTable tbody tr td #user_id{
+	cursor : pointer;
+}
+.searchText{
+	margin-left : 30px;
+	margin-right : 10px;
+}
+
+
+
+
+
+

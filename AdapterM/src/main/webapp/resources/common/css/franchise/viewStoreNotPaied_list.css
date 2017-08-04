@@ -1,0 +1,51 @@
+.searchText{
+	width:10%;
+}
+.commonList{
+	vertical-align: middle;
+	
+}
+
+#erp_id{
+	margin-top:5px;
+	width:97.5%;
+}
+
+#user_chk_list{
+	margin-top:10px;
+}
+
+.viewStoreNotPaiedPagingDiv{
+	text-align: center;
+	padding : 0.6% 0 1% 0;
+	width: 100%;
+}
+
+#viewStoreNotPaiedTable{
+	width: 98%;
+	border : 1px solid #eaeaea;
+	border-collapse: collapse;
+}
+
+#viewStoreNotPaiedTable tr{
+	border : 1px solid #eaeaea;
+}
+
+#viewStoreNotPaiedTable tr:hover{
+	border: 1px solid #eaeaea;
+	background-color: #eaeaea;
+	cursor: pointer;
+}
+
+#viewStoreNotPaiedTable th{
+	border : 1px solid #eaeaea;
+	background: #f9ffff;
+	padding: 0.5%;
+}
+
+#viewStoreNotPaiedTable td{
+	border : 1px solid #eaeaea;
+	text-align: center;
+}
+
+

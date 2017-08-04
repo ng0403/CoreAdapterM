@@ -1,0 +1,20 @@
+/**
+업 무 명 : ERP 가맹점별 월포인트 정산
+작 성 자 : 정은지 (wjdmwi@coreplus.co.kr)
+작 성 일 : 2015/09/21
+수 정 자 : 정은지 (wjdmwi@coreplus.co.kr)
+수 정 일 : 2015/09/21
+내 용 : ERP 가맹점별 월포인트 정산 폼 CSS
+*참고사항 : 
+ */
+
+@CHARSET "UTF-8";
+
+#erpmonthly_sch_tbl {
+	width: 100%;
+}
+
+#array {
+	text-align: right;
+	padding-right: 1%;
+}

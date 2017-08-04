@@ -1,0 +1,55 @@
+@CHARSET "UTF-8";
+
+/* <!-- --------------------------------------서브메뉴-------------------------------------- --> */
+/* 서브메뉴 */
+#subDIV > ul > li > a {
+    display: block;
+    height:40px; 
+    line-height: 40px;
+    padding-left: 5%;
+
+    border-top: 1px solid #96D6F6;
+    border-bottom: 1px solid #6298B2;
+    color: white;
+    font-weight: bold;
+}
+
+#subDIV > ul > li > a:hover {
+    display: block;
+    height:40px; 
+    line-height: 40px;
+    padding-left: 5%;
+	
+    border-top: 1px solid #96D6F6;
+    border-bottom: 1px solid #6298B2;
+    color: white;
+    font-weight: bold;
+    /* 커서가 위에 있을때 색 */
+    background-color: #98bccd;
+}
+
+#subTabDIV > a {
+    display: block;
+    height:40px; 
+    line-height: 40px;
+    padding-left: 5%;
+
+    border-top: 1px solid #96D6F6;
+    border-bottom: 1px solid #6298B2;
+    color: white;
+    font-weight: bold;
+}
+
+#subTabDIV > a:hover {
+    display: block;
+    height:40px; 
+    line-height: 40px;
+    padding-left: 5%;
+	
+    border-top: 1px solid #96D6F6;
+    border-bottom: 1px solid #6298B2;
+    color: white;
+    font-weight: bold;
+    /* 커서가 위에 있을때 색 */
+    background-color: #98bccd;
+}

@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+#cupn_searchSpan{
+	width : 3%;
+	text-align : right;
+    font-weight: bold;
+    margin-right: 0.5%;
+}
+
+#coupon_list_sch{
+	float:right;
+}
+
+#cupn_listFootDiv{
+	margin-top: 1%;
+}
+
+#cupn_pagingDiv{
+	text-align: center;
+	padding: 0.6% 0 1% 0;
+}

@@ -1,0 +1,25 @@
+/*  
+업 무 명 : giftCalculateList 상품권비용정산 화면
+작 성 자 : 이상민 (tkdals8401@coreplus.co.kr)
+작 성 일 : 2015/09/16
+수 정 자 : 이상민 (tkdals8401@coreplus.co.kr)
+수 정 일 : 2015/09/16
+내 용 : 상품권비용정산에 대한 화면을 보여준다.
+참고사항 : 
+ */
+@CHARSET "UTF-8";
+
+.giftPagingDiv {
+    width: 85%;
+    text-align: center;
+    padding: 0.6% 0 1% 0;
+}
+
+#giftCalculateListTbl {
+	width: 100%;
+	margin-bottom: 1%;
+}
+#giftCalculateListTbl th {
+	text-align: right;
+	padding-right: 2%;
+}
