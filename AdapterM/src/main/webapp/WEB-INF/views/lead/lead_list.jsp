@@ -34,41 +34,53 @@
 		 	<div id="searchDiv">
 	        	<table id="cupnSearchTable" class="commonTable">
 					<tr style="background-color: white; cursor:default; border:0;">
-						 <th style="width:5%;">쿠폰명</th>
+						 <th style="width:5%;">리드번호</th>
 						 <td style="width:15%;">
-						    <input type="text" id="cupn_name_srch" name="cupn_name_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="lead_no_srch" name="lead_no_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td>
-						 <th style="width:5%;">유효기간</th>
-						 <td style="width:25%;">
-							<input type="text" name="exp_start_dt_srch" id="exp_start_dt_srch" value="" class="expt_fin_d" placeholder="시작일자"
-							 readonly="readonly" style="width : 35%; text-align: center; cursor: pointer;">
-							-
-							<input type="text" name="exp_end_dt_srch" id="exp_end_dt_srch" value="" class="expt_fin_d" placeholder="종료일자"
-							 readonly="readonly" style="width : 35%; text-align: center; cursor: pointer;">
+						  <th style="width:5%;">리드명</th>
+						 <td style="width:15%;">
+						    <input type="text" id="lead_name_srch" name="lead_name_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td>
-						 <th style="width:5%;">브랜드</th>
+						 <th style="width:5%;">고객번호</th>
+						 <td style="width:15%;">
+						    <input type="text" id="cust_no" name="cust_no" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						 </td>
+ 						 
+					 
+<!-- 						 <th style="width:5%;">브랜드</th>
 						 <td style="width:15%;">
 							<select id="brand_wid" name="brand_wid" style="margin-left: 0; width: 70%;font-size: 10.5px;padding: 0.3em 0.3em 0.3em 0.3em;">
 								<option value="">선택해 주십시오</option>
-<%-- 								<c:forEach items="${brandList}" var="brand"> --%>
+ --><%-- 								<c:forEach items="${brandList}" var="brand"> --%>
 <%-- 									<option value="${brand.brand_wid}" --%>
 <%-- 										<c:if test="${brand.brand_wid == cupnListMap.brand_wid}">selected="selected"</c:if> --%>
 <%-- 									>${brand.brand_name}</option> --%>
 <%-- 								</c:forEach> --%>
-							</select>
-						 </td>
-						 <th style="width:5%;">사용여부</th>
-						 <td style="width:15%;">
-							<select id="active_flg_srch" name="active_flg_srch" style="margin-left: 0; width: 70%;text-align:center;font-size: 10.5px;
-								padding: 0.3em 0.3em;">
-								<option value="">선택해 주십시오</option>
-<%-- 								<option value="Y"<c:if test="${cupnListMap.active_flg_srch == 'Y'}">selected="selected"</c:if>>Y</option> --%>
-<%-- 				   				<option value="N"<c:if test="${cupnListMap.active_flg_srch == 'N'}">selected="selected"</c:if>>N</option> --%>
-							</select>
-						 </td>
-		                 <td style="width: 12%;">
+<!-- 							</select>
+						 </td>-->	
+ 		                 <td style="width: 12%;">
 		                 	<input type="button" value="조회" id="coupon_list_sch" onclick="cupn_manager_sch(1);" class="tr_btn" style="margin-left: 0;">
 		                 </td>
+					</tr>
+					<tr>
+					 			 
+						 <th style="width:5%;">담당자번호</th>
+						 <td style="width:15%;">
+						    <input type="text" id="emp_no" name="emp_no" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						 </td>
+					
+						 <th style="width:5%;">접촉할 일자</th>
+						 <td style="width:25%;">
+							<input type="text" name="contact_day_srch" id="contact_day_srch" value="" class="expt_fin_d" placeholder="접촉일자"
+							 readonly="readonly" style="width : 35%; text-align: center; cursor: pointer;">
+ 						 </td>
+						 
+						  <th style="width:5%;">순위</th>
+						 <td style="width:15%;">
+						    <input type="text" id="rank_cd" name="emp_no" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						 </td>
+					
 					</tr>
 				</table>
 			</div>
@@ -76,15 +88,16 @@
 	 	 <table class="commonTable" id="cupnManagerTabl">
 	 	 	<thead>
 	 	 		<tr>
-	 	 			<th style="width: 100%;">이름</th>
-<!-- 	 	 			<th style="width: 8%;">쿠폰번호</th> -->
-<!-- 	 	 			<th style="width: 28%;">쿠폰명</th> -->
-<!-- 	 	 			<th style="width: 22%;">파일명</th> -->
-<!-- 	 	 			<th style="width: 8%;">할인</th> -->
-<!-- 	 	 			<th style="width: 15%;">유효기간</th> -->
-<!-- 	 	 			<th style="width: 13%;">등록일</th> -->
-<!-- 	 	 			<th style="width: 6%;">사용여부</th> -->
-	 	 		</tr>
+	 	 			<th style="width: 10%;">리드번호</th>
+ 	 	 			<th style="width: 10%;">리드명</th>
+ 	 	 			<th style="width: 10%;">고객번호</th> 
+	 	 			<th style="width: 10%;">고객명</th> 
+	 	 			<th style="width: 10%;">전화번호</th>
+	 	 			<th style="width: 10%;">담당자명</th>
+	 	 			<th style="width: 15%;">접촉할일자</th>
+	 	 			<th style="width: 10%;">순위</th>
+	 	 			<th style="width: 15%;">등록일시</th> 
+ 	 	 		</tr>
 	 	 	</thead>
 	 	 	<tbody>
 	 	 		<c:forEach items="${lead_list}" var="list">
@@ -118,8 +131,8 @@
 	 	 </table>
    	
 		<div class="listFootDiv">
-		 	 <input type="button" class="func_btn" id="coupon_list_add" value="추가">
-		 	 <input type="button" class="func_btn" id="coupon_send" value="쿠폰발송">
+ 		 	 <input type="button" class="func_btn" id="lead_add" value="단건등록">
+		 	 <input type="button" class="func_btn" id="lead_add_multi" value="다건등록">
 		</div>
 <!-- 	 	<div class="pagingDiv"> -->
 <%-- 			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/> --%>
