@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.core.plus.test.dao.TestDao;
 import com.core.plus.test.vo.TestVO;
 
-@Service
+@Service("TestService")
 public class TestServiceImpl implements TestService{
 	@Resource
 	TestDao testDao;

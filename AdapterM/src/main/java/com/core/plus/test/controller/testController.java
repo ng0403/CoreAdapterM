@@ -12,6 +12,7 @@ import com.core.plus.test.vo.TestVO;
 
 @Controller
 public class testController {
+	
 	@Autowired
 	TestService testService;
 	
