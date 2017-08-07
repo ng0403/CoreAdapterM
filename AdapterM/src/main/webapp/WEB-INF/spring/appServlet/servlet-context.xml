@@ -36,6 +36,14 @@
 		<beans:property name="maxUploadSize" value="100000000" />
 	</beans:bean>
 	
+	<!-- tilesView -->
+	<beans:bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver"> 
+		<beans:property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles2.TilesView"></beans:property>
+		<beans:property name="order" value="1" />
+	</beans:bean>
+
 	<beans:bean id="tileConfigurer"
 		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
 		<beans:property name="definitions">
