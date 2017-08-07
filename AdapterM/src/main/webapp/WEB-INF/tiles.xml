@@ -14,6 +14,10 @@
 		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
 	</definition>
 
+	<!-- test -->
+	<definition name="test" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/test/testpage.jsp"></put-attribute>
+	</definition>
     <!-- 고객 통합 정보 -->
 	<definition name="customerManager" extends="onebodyLayout">
 		<put-attribute name="body" value="/WEB-INF/views/customerManager/customerManager_list.jsp"></put-attribute>

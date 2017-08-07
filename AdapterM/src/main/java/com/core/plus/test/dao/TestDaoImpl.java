@@ -17,7 +17,9 @@ public class TestDaoImpl implements TestDao{
 	@Override
 	public List<TestVO> testList() {
 		// TODO Auto-generated method stub
-		return null;
+		List<TestVO> tlist = null;
+		tlist = sqlSession.selectList("test.testList");
+		return tlist;
 	}
 
 }

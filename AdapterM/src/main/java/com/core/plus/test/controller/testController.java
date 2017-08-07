@@ -21,7 +21,7 @@ public class testController {
 		List<TestVO> tlist = testService.testList();
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("test");
-		mav.addObject("name", tlist);
+		mav.addObject("tlist", tlist);
 		
 		return mav;
 	}
