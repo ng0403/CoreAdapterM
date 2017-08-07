@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="menu">
+     
+	<!-- 상위메뉴 리스트  -->
+	<select id="menuList" parameterType="java.util.Map" resultType="com.core.plus.info.menu.vo.MenuVo">
+		select distinct m.menu_id
+     		 , m.menu_nm
+     		 , COALESCE(m1.menu_nm, '-') as up_menu_id
+     		 , m.menu_url
+     		 , m.seq_no
+ 		  from mid.tm_com_menu m left outer join mid.tm_com_menu m1 on m.up_menu_id = m1.menu_id
+         where m.act_yn = 'Y'
+           and m.menu_lev = '0001'
+ 	     order by m.seq_no
+	</select>
+	
+	<!-- 상위메뉴, 하위메뉴 편집 저장 -->
+	<update id="menuUpdateSave" parameterType="java.util.Map">
+		update mid.tm_com_menu
+		   set seq_no = #{seq_no}
+		 where menu_id = #{menu_id}
+	</update>
+	
+	<!-- 하위메뉴 리스트  -->
+	<select id="menuDownList" parameterType="java.util.Map" resultType="com.core.plus.info.menu.vo.MenuVo">
+		select distinct m.menu_id
+     		 , m.menu_nm
+     		 , COALESCE(m1.menu_nm, '-') as up_menu_id
+     		 , m.menu_url
+     		 , m.seq_no
+ 		  from <!-- mid.tm_com_menu m left outer join mid.tm_com_menu m1 on m.up_menu_id = m1.menu_id -->
+              mid.tm_com_menu m , mid.tm_com_menu m1 <!-- 수정한 부분 03.30 -->
+         where m.act_yn = 'Y'
+           and m.menu_lev = '0002'
+           and m1.seq_no = #{seq_no}
+           and m.up_menu_id = m1.menu_id <!-- 수정한 부분 03.30 -->
+ 	     order by m.seq_no
+	</select>
+	
+	<!-- 메뉴 상세정보  -->
+	<select id="menuDetail" parameterType="String" resultType="com.core.plus.info.menu.vo.MenuVo">
+		select a.menu_id
+			 , a.menu_nm
+			 , a.menu_lev
+		     , (select c.val from mid.tc_code_mast c where c.type = 'Menu Level Code' and c.name = a.menu_lev) menu_lev_cd_nm
+             , a.menu_url
+             , a.up_menu_id
+             , a.act_yn
+    	  from mid.tm_com_menu a
+    	 where a.menu_id = #{menu_id}
+	           order by a.menu_id
+	</select>
+	
+	<!-- 메뉴레벨코드 리스트 -->
+	<select id="menuLevCode" resultType="com.core.plus.info.menu.vo.MenuVo">
+		select val menu_lev_cd_nm
+		     , name menu_lev
+  	      from mid.tc_code_mast 
+         where type = 'Menu Level Code'
+	</select>
+	
+	<!-- 메뉴 추가 (메뉴)  -->
+	<insert id="menuInsert" parameterType="com.core.plus.info.menu.vo.MenuVo">
+		insert into mid.tm_com_menu (menu_nm
+		                      ,  menu_url
+		                      ,  menu_lev
+		                      ,  up_menu_id
+		                      ,  act_yn
+		                      ,  crt_id
+		                      ,  crt_dt
+		                      ,  mdfy_id
+		                      ,  mdfy_dt
+		                      ,  seq_no)
+		               values( #{menu_nm}
+		                     , #{menu_url}
+		                     , #{menu_lev}
+		                     , #{up_menu_id}
+		                     , #{act_yn}
+		                     , #{crt_id}
+		                     , to_char(now(), 'YYYYMMDDHH24MISS'::text)
+		                     , #{mdfy_id}
+		                     , to_char(now(), 'YYYYMMDDHH24MISS'::text)
+		                     , #{seq_no})	
+	</insert>
+	
+	<!-- 메뉴권한 추가를 위한 menu_id 가져오기  -->
+	<select id="Select_menu_id" resultType="String">
+		select menu_id
+  		  from mid.tm_com_menu 
+               order by crt_dt desc LIMIT 1
+	</select>
+	
+	<!-- 메뉴 추가를 위한 auth_id 가져오기  -->
+	<select id="Select_auth_id" resultType="String">
+		select auth_id
+  		  from mid.tm_com_auth
+               order by crt_dt LIMIT 1
+	</select>
+	
+	<!-- 기준정보 메뉴추가에서 상위메뉴 검색 버튼 -->
+	<select id="upMenuList" parameterType="java.util.Map" resultType="com.core.plus.info.menu.vo.MenuVo">
+		select menu_id, menu_nm, menu_url
+		  from mid.tm_com_menu
+         where menu_lev = '0001'
+ 		      order by menu_id desc
+	</select>
+	
+	<!-- 메뉴 삭제 -->
+	<delete id="menuDelete" parameterType="com.core.plus.info.menu.vo.MenuVo">
+		delete from mid.tm_com_menu
+			  where menu_id=#{mi}
+	</delete>
+	<delete id="menuDelete1" parameterType="com.core.plus.info.menu.vo.MenuVo">
+		delete from mid.tm_com_auth_menu
+			  where menu_id=#{menu_id}
+	</delete>
+	
+	<!-- 메뉴 체크 삭제 (여러개 삭제) -->
+	<delete id="menuChkDelete" parameterType="String">
+		delete from mid.tm_com_menu
+			  where menu_id=#{menu_id}
+	</delete>
+	<delete id="menuChkDelete1" parameterType="String">
+		delete from mid.tm_com_auth_menu
+			  where menu_id=#{menu_id}
+	</delete>
+	
+	<!-- 메뉴권한 체크 삭제 (여러개 삭제) -->
+	<delete id="authmenuChkDelete1" parameterType="String">
+		delete from mid.tm_com_auth_menu
+			  where menu_id=#{menu_id}
+			    and auth_id=#{auth_id}
+	</delete>
+	
+	<!-- 메뉴수정을 위한 menu_id, seq_no 가져오기  -->
+	<select id="SelectMenuId" resultType="String">
+		select up_menu_id
+  		  from mid.tm_com_menu 
+         where menu_id = #{menu_id}
+	</select>
+	<select id="SelectSeqNo" resultType="String">
+		select seq_no
+  		  from mid.tm_com_menu 
+         where menu_id = #{menu_id}
+	</select>
+	<update id="menuSeqUpdate" parameterType="java.util.Map">
+		update mid.tm_com_menu
+		   set seq_no = seq_no-1
+		 where up_menu_id = #{menu_id} and seq_no > #{seq_no}::INTEGER
+	</update>
+	<!-- 메뉴상세정보 수정 -->
+	<update id="menuUpdate" parameterType="com.core.plus.info.menu.vo.MenuVo">
+		update mid.tm_com_menu
+		   set menu_id = #{menu_id}
+		     , menu_nm = #{menu_nm}
+		     , menu_url = #{menu_url}
+		     , menu_lev = #{menu_lev}
+		     , up_menu_id = #{up_menu_id}
+		     , act_yn = #{act_yn}
+		     , crt_id = #{crt_id}
+		     , crt_dt = to_char(now(), 'YYYYMMDDHH24MISS'::text) 
+		     , mdfy_id = #{mdfy_id}
+		     , mdfy_dt = to_char(now(), 'YYYYMMDDHH24MISS'::text)
+		     , seq_no = (select max(seq_no)+1 from mid.tm_com_menu where up_menu_id=#{up_menu_id})
+		 where menu_id = #{menu_id}
+	</update>
+	<update id="menuUpdate1" parameterType="com.core.plus.info.menu.vo.MenuVo">
+		update mid.tm_com_menu
+		   set seq_no = #{seq_no}
+		 where menu_id = #{menu_id}
+	</update>
+	
+	<!-- 메뉴권한 리스트  -->
+	<select id="authmenuList" parameterType="java.util.Map" resultType="com.core.plus.info.menu.vo.MenuVo">
+		select distinct ma.auth_id
+		     , m.menu_id
+	         , m.menu_nm
+	         , COALESCE(m1.menu_nm, '-') as up_menu_id
+	         , ma.crt_yn
+	         , ma.mdfy_yn
+	         , ma.del_yn
+	         , ma.rtrv_yn
+         from  mid.tm_com_auth_menu ma
+	         , mid.tm_com_menu m left outer join mid.tm_com_menu m1 on m.up_menu_id = m1.menu_id
+         where m.menu_id = ma.menu_id
+           and ma.auth_id = #{auth_id}
+               order by m.menu_id desc
+	</select>
+	
+	<!-- 메뉴 모달 리스트  -->
+	<select id="menuModalList" parameterType="java.util.Map" resultType="com.core.plus.info.menu.vo.MenuVo">
+<!-- 		select distinct m.menu_id -->
+<!--      		 , m.menu_nm -->
+<!--      		 , COALESCE(m1.menu_nm, '-') as up_menu_id -->
+<!--      		 , m.menu_url  -->
+<!--      	  from mid.tm_com_menu m left outer join mid.tm_com_menu m1 on m.up_menu_id = m1.menu_id -->
+<!--  		 where m.menu_id  -->
+<!--         NOT IN (select a.menu_id from mid.tm_com_menu a, mid.tm_com_auth_menu b where a.menu_id = b.menu_id) -->
+
+        select distinct m.menu_id
+     		 , m.menu_nm
+     		 , COALESCE(m1.menu_nm, '-') as up_menu_id
+     		 , m.menu_url
+     		 , m.seq_no
+ 		  from mid.tm_com_menu m left outer join mid.tm_com_menu m1 on m.up_menu_id = m1.menu_id
+         where m.act_yn = 'Y'
+ 	     order by m.seq_no
+	</select>
+	
+    <!-- 메뉴권한 추가  -->
+	<insert id="authmenuInsert1" parameterType="Map">
+		insert into mid.tm_com_auth_menu (menu_id
+							  	   ,  auth_id
+							  	   ,  crt_yn
+							  	   ,  mdfy_yn
+							  	   ,  del_yn
+							  	   ,  rtrv_yn 
+							  	   ,  crt_id
+								   ,  crt_dt
+								   ,  mdfy_id
+								   ,  mdfy_dt)
+		                      values (#{menu_id}
+		                           ,  #{auth_id}
+		                           ,  #{crt_yn}
+		                           ,  #{mdfy_yn}
+		                           ,  #{del_yn}
+		                           ,  #{rtrv_yn} 
+		                           ,  #{crt_id}
+								   ,  to_char(now(), 'YYYYMMDDHH24MISS'::text)
+								   ,  #{mdfy_id}
+								   ,  to_char(now(), 'YYYYMMDDHH24MISS'::text))
+	</insert>
+	
+	<!--트리구조 -->
+	<select id="menuTree" parameterType="java.util.Map" resultType="com.core.plus.info.menu.vo.MenuVo">
+		select distinct *
+ 		 from  mid.tm_com_menu m
+ 		       order by menu_id
+<!-- 		 select distinct * -->
+<!--            from tm_com_menu a, tm_com_auth_menu b,tm_com_user_com_user_auth c -->
+<!--  		  where act_yn = 'Y' -->
+<!-- 		    and a.menu_id = b.menu_id -->
+<!-- 		    and b.auth_id = c.auth_id -->
+<!-- 		    and c.user_id in (select user_id from tm_com_user WHERE user_id = #{user_id}) -->
+<!-- 		  order by a.menu_id -->
+	</select>
+
+	<!-- 메인메뉴 그리기 -->
+	<select id="selectMainMenuList" parameterType="String" resultType="com.core.plus.info.menu.vo.MenuVo">
+		 select menu_id
+		     , menu_nm
+		     , menu_url
+		     , seq_no
+		  from tb_menu
+		 where menu_lev = '001'
+		   and act_yn = 'Y'
+		 order by seq_no
+	</select>
+<!-- 	<select id="selectMainMenuList" parameterType="String" resultType="ibs.mid.bon.manager.info.menu.vo.MenuVo"> -->
+<!-- 		 select a.menu_id -->
+<!-- 		     , a.menu_nm -->
+<!-- 		     , a.menu_url -->
+<!-- 		     , a.seq_no -->
+<!-- 		  from mid.tm_com_menu a, mid.tm_com_auth_menu b, mid.tm_com_user_auth c -->
+<!-- 		 where menu_lev = '0001' -->
+<!-- 		   and act_yn = 'Y' -->
+<!-- 		   and a.menu_id = b.menu_id -->
+<!-- 		   and b.auth_id = c.auth_id -->
+<!-- 		   and c.user_id in (select user_id from mid.tm_com_user WHERE user_id = #{user_id}) -->
+<!-- 		 order by a.seq_no -->
+<!-- 	</select> -->
+	
+	<!-- 서브메뉴 그리기 -->
+	<select id="selectSubMenuList" parameterType="java.util.Map" resultType="com.core.plus.info.menu.vo.MenuVo">
+		 select a.menu_id
+		     , a.menu_nm
+		     , a.menu_url
+		     , a.up_menu_id
+		     , a.seq_no
+		  from tb_menu
+		 where menu_lev = '002'
+		   and act_yn = 'Y'
+		   and up_menu_id = #{menu_id}
+		 order by a.seq_no
+	</select>
+<!-- 	<select id="selectSubMenuList" parameterType="java.util.Map" resultType="ibs.mid.bon.manager.info.menu.vo.MenuVo"> -->
+<!-- 		 select a.menu_id -->
+<!-- 		     , a.menu_nm -->
+<!-- 		     , a.menu_url -->
+<!-- 		     , a.up_menu_id -->
+<!-- 		     , a.seq_no -->
+<!-- 		  from mid.tm_com_menu a, mid.tm_com_auth_menu b, mid.tm_com_user_auth c -->
+<!-- 		 where menu_lev = '0002' -->
+<!-- 		   and act_yn = 'Y' -->
+<!-- 		   and a.menu_id = b.menu_id -->
+<!-- 		   and b.auth_id = c.auth_id -->
+<!-- 		   and up_menu_id = #{menu_id} -->
+<!-- 		   and c.user_id in (select user_id from mid.tm_com_user WHERE user_id = #{user_id}) -->
+<!-- 		 order by a.seq_no -->
+<!-- 	</select> -->
+	
+	<!-- 메뉴 주소 가져올 메뉴 아이디 가져오기 -->
+	<select id="getMenuUrlID" parameterType="String" resultType="String">
+		select distinct 
+		       case
+		       when menu_lev = '001' then menu_id
+		       when menu_lev = '002' then up_menu_id
+		       else menu_id
+		       end menu_id
+		  from tb_menu
+		 where menu_url = #{url}
+	</select>
+	
+</mapper>

@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.core.plus.test.service.TestService;
 import com.core.plus.test.vo.TestVO;
+import com.core.plus.info.menu.controller.*;
 
 @Controller
 public class testController {
@@ -23,6 +24,8 @@ public class testController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("test");
 		mav.addObject("tlist", tlist);
+		
+		menuImport(mav,"test");
 		
 		return mav;
 	}
