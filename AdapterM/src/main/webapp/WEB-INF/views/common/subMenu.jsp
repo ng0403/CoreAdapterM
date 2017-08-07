@@ -6,7 +6,7 @@
 <input type="hidden" id="ctx" value="${ctx}">
 <div id="subDIV">
 	<ul>
-		<c:forEach var="submenu" items="${subMenuList}">
+		<%-- <c:forEach var="submenu" items="${subMenuList}">
 			<li
 				<c:if test="${submenu.menu_url == sub_menu_url}">
 					style="background-color: #98bccd;"
@@ -22,6 +22,6 @@
 			<li>
 				<span>&nbsp;</span>
 			</li>
-		</c:if>
+		</c:if> --%>
 	</ul>
 </div>
