@@ -36,7 +36,7 @@
 	
 	<!-- Oppty Detail -->
 	<definition name="oppty_detail" extends="onebodyLayout">
-		<put-attribute name="body" value="/WEB-INF/views/lead/oppty_detail.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/oppty/oppty_detail.jsp"></put-attribute>
 	</definition>
 	
 	<!-- test -->
