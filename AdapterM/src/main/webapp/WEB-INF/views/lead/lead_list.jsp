@@ -7,10 +7,10 @@
 <script type="text/javascript" src="/resources/common/js/lead/lead.js"></script> 
 
 <script type="text/javascript">
-// $(document).ready(function(){
-// 	$('#exp_start_dt_srch').datepicker();
-// 	$('#exp_end_dt_srch').datepicker();
-// });
+ $(document).ready(function(){
+	$('#contact_day_srch').datepicker();
+
+ });
 </script>
 
 <input type="hidden" id="ctx" value="${ctx}">
@@ -47,40 +47,28 @@
 						 <th style="width:5%;">고객번호</th>
 						 <td style="width:15%;">
 						    <input type="text" id="cust_no" name="cust_no" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
-						 </td>
- 						 
-					 
-<!-- 						 <th style="width:5%;">브랜드</th>
-						 <td style="width:15%;">
-							<select id="brand_wid" name="brand_wid" style="margin-left: 0; width: 70%;font-size: 10.5px;padding: 0.3em 0.3em 0.3em 0.3em;">
-								<option value="">선택해 주십시오</option>
- --><%-- 								<c:forEach items="${brandList}" var="brand"> --%>
-<%-- 									<option value="${brand.brand_wid}" --%>
-<%-- 										<c:if test="${brand.brand_wid == cupnListMap.brand_wid}">selected="selected"</c:if> --%>
-<%-- 									>${brand.brand_name}</option> --%>
-<%-- 								</c:forEach> --%>
-<!-- 							</select>
-						 </td>-->	
+						 </td> 
+					  
  		                 <td style="width: 12%;">
-		                 	<input type="button" value="조회" id="coupon_list_sch" onclick="cupn_manager_sch(1);" class="tr_btn" style="margin-left: 0;">
+		                 	<input type="button" value="조회" id="lead_list_srch" onclick="searchKeyword();" class="tr_btn" style="margin-left: 0;">
 		                 </td>
 					</tr>
 					<tr>
 					 			 
 						 <th style="width:5%;">담당자번호</th>
 						 <td style="width:15%;">
-						    <input type="text" id="emp_no" name="emp_	no" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="emp_no" name="emp_no" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td>
 					
 						 <th style="width:5%;">접촉할 일자</th>
 						 <td style="width:25%;">
-							<input type="text" name="contact_day_srch" id="contact_day_srch" value="" class="expt_fin_d" placeholder="접촉일자"
+							<input type="text" name="contact_day_srch" id="contact_day_srch" value="" class="expt_fin_d" 
 							 readonly="readonly" style="width : 35%; text-align: center; cursor: pointer;">
  						 </td>
 						 
 						  <th style="width:5%;">순위</th>
 						 <td style="width:15%;">
-						    <input type="text" id="rank_cd" name="emp_no" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="rank_cd" name="rank_cd" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td>
 					
 					</tr>
@@ -101,8 +89,9 @@
 	 	 			<th style="width: 15%;">등록일시</th> 
  	 	 		</tr>
 	 	 	</thead>
-	 	 	<tbody>
+	 	 	<tbody id="lead_list_tbody"> 
 	 	 		<c:forEach items="${lead_list}" var="list">
+	 	 		<tr>
 	 	 			<td style="text-align: left;" >${list.lead_no}</td>
 	 	 			<td style="text-align: left;" >
 	 	 			<a href="#" onclick="leadDetail('${list.lead_no}');" id="${list.lead_no}">${list.lead_name}</a>
@@ -114,7 +103,9 @@
 	 	 			<td style="text-align: left;" >${list.contact_day}</td>
 	 	 			<td style="text-align: left;" >${list.rank_cd}</td>
 	 	 			<td style="text-align: left;" >${list.create_date}</td>
+	 	 			</tr>
 	 	 		</c:forEach>
+	 	 	
 <%-- 	 	 		<c:forEach items="${couponList}" var="couponList"> --%>
 <%-- 	 	 		<input type="hidden" id="img_src" value="${couponList.img_src}"> --%>
 <!-- 	 	 		<tr> -->
@@ -143,7 +134,7 @@
 	 	 </table>
    	
 		<div class="listFootDiv">
- 		 	 <input type="button" class="func_btn" id="lead_add" value="단건등록" onclick="lead_single_add();">
+ 		 	 <input type="button" class="func_btn" id="lead_add" value="단건등록" onclick="lead_add();">
 		 	 <input type="button" class="func_btn" id="lead_add_multi" value="다건등록">
 		</div>
 <!-- 	 	<div class="pagingDiv"> -->

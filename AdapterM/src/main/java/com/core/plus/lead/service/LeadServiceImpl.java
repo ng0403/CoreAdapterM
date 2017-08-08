@@ -1,6 +1,7 @@
 package com.core.plus.lead.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -41,6 +42,20 @@ public class LeadServiceImpl implements LeadService {
 		
 		return leadDao.lead_detail(lead_no);
 		
+	}
+
+	@Override
+	public void lead_delete(String lead_no) {
+		
+		leadDao.lead_delete(lead_no);
+		
+	}
+
+	@Override
+	public List<LeadVO> leadSearch(Map<String, Object> leadMap) {
+	 
+ 	  return leadDao.leadSearch(leadMap);
+	 
 	}
 
 }

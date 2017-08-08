@@ -12,8 +12,8 @@ public class LeadVO {
 	private String rank_cd;
 	private String reason_cd;
 	private String remark_cn;
-	private Date create_date;
-	private Date update_date;
+	private String create_date;
+	private String update_date;
 	
 	private String cust_name;
 	private String phone_no;
@@ -86,20 +86,20 @@ public class LeadVO {
 	public void setRemark_cn(String remark_cn) {
 		this.remark_cn = remark_cn;
 	}
-	public Date getCreate_date() {
+ 
+	
+	public String getCreate_date() {
 		return create_date;
 	}
-	public void setCreate_date(Date create_date) {
+	public void setCreate_date(String create_date) {
 		this.create_date = create_date;
 	}
-	public Date getUpdate_date() {
+	public String getUpdate_date() {
 		return update_date;
 	}
-	public void setUpdate_date(Date update_date) {
+	public void setUpdate_date(String update_date) {
 		this.update_date = update_date;
 	}
-	
-	
 	@Override
 	public String toString() {
 		return "LeadVO [lead_no=" + lead_no + ", lead_name=" + lead_name + ", cust_no=" + cust_no + ", emp_no=" + emp_no

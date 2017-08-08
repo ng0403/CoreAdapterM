@@ -13,9 +13,39 @@
 		p.phone_no,
 		l.contact_day,
 		l.rank_cd,
-		l.create_date
+		date_format(l.create_date, '%Y-%m-%d %H:%i') as create_date
 		from tb_lead l, tb_cust c, tb_cust_phone p
-		where l.cust_no = c.cust_no and c.cust_no = p.cust_no and l.cust_no = p.cust_no
+		where l.cust_no = c.cust_no and c.cust_no = p.cust_no and l.cust_no = p.cust_no and l.del_yn='N'
+	   <choose>
+	   <when test="lead_no_srch !=null and lead_no_srch !=''">
+			and(lead_no like concat('%', #{lead_no_srch}, '%') )
+		</when> 
+	 </choose>
+	 <choose>
+	  <when test="lead_name_srch !=null and lead_name_srch !=''">
+			and(lead_name like concat('%', #{lead_name_srch}, '%') )
+		</when> 
+	 </choose> 
+	 <choose>
+	 <when test="cust_no !=null and cust_no !=''">
+			and(cust_no like concat('%', #{cust_no}, '%') )
+		</when> 
+	 </choose>
+	 <choose>
+	 <when test="emp_no !=null and emp_no !=''">
+			and(emp_no like concat('%', #{emp_no}, '%') )
+		</when> 
+	 </choose>
+	  <choose>
+	   <when test="contact_day !=null and contact_day !=''">
+			and(contact_day like concat('%', #{contact_day}, '%') )
+		</when> 
+	  </choose>
+	  <choose>
+	   <when test="rank_cd !=null and rank_cd !=''">
+			and(rank_cd like concat('%', #{rank_cd}, '%') )
+		</when> 
+	  </choose>
 	</select>
 	
 	<insert id="lead_single_add" parameterType="com.core.plus.lead.vo.LeadVO">
@@ -23,11 +53,27 @@
 	insert into tb_lead
 	(lead_no, create_date, update_date, lead_name, cust_no, emp_no, contact_day, rank_cd, reason_cd, remark_cn)
 	values
-	(#{lead_no}, now(), now(), #{lead_name}, #{cust_no}, #{emp_no}, #{contact_day}, #{rank_cd}, #{reason_cd}, #{remark_cn})
+	(#{lead_no}, now(), now(), #{lead_name}, #{cust_no}, #{emp_no}, date_format(#{contact_day}, '%Y%m%d'), #{rank_cd}, #{reason_cd}, #{remark_cn})
 	
 	</insert>
 	
+	<update id="lead_update" parameterType="com.core.plus.lead.vo.LeadVO">
 	
+	update tb_lead
+	set lead_name=#{lead_name}, cust_no =#{cust_no}, emp_no =#{emp_no},
+	contact_day=#{contact_day}, rank_cd = #{rank_cd}, reason_cd = #{reason_cd},
+	remark_cn = #{remark_cn}, update_date = now()
+	where lead_no = #{lead_no}	
+	
+	</update>
+	
+	<update id="lead_delete" parameterType="String">
+	
+	update tb_lead
+	set del_yn="Y"
+	where lead_no = #{lead_no}
+	
+	</update>
 	
 	<select id="lead_detail" resultType="com.core.plus.lead.vo.LeadVO">
 	

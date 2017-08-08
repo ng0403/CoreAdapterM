@@ -1,6 +1,7 @@
 package com.core.plus.lead.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,20 @@ public class LeadDaoImpl implements LeadDao {
 	public LeadVO lead_detail(String lead_no) {
 		 
 		return sqlSession.selectOne("lead_detail", lead_no);
+	}
+
+	@Override
+	public void lead_delete(String lead_no) {
+		
+		sqlSession.update("lead_delete", lead_no);
+		
+	}
+
+	@Override
+	public List<LeadVO> leadSearch(Map<String, Object> leadMap) {
+		
+		List<LeadVO> obj = sqlSession.selectList("leadList", leadMap);
+		return obj;
 	}
 
 	
