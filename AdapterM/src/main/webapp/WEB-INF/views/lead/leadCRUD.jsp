@@ -6,53 +6,8 @@
 <script type="text/javascript" src="/resources/common/js/lead/lead.js"></script> 
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script type="text/javascript">
-//쿠폰이미지 미리보기
-function previewCoupon() {
-	// 비동기로 form 데이타 전송
-	if( !file_Check($("#file").val()) ){
-		return;
-	}
-	var options = {
-	 	type:"POST",
-	 	cache: false,
-		url:"previewCoupon",
-        success: function(data, status, xhr) {
-           if(status == 'success'){
-	       	// 이미지를 동일한파일에 임시 저장하므로 캐쉬때문에 이미지 갱신되지 않는 현상으로 인해 난수(현재시간)와 같이 지정
-	       	$('#previewId').html("<img src='data:image/jpeg;base64,"+data+"' id='preview' height='100%;'>");
-           }
-        },
-	beforeSend: function(){
-    	viewLoadingShow();			
-    },
-    complete:function(){
-    	viewLoadingHide();	
-    }
-    };
-	$("#couponDetailForm").ajaxSubmit(options);
-}
-
-//이미지파일체크
-function file_Check(file){
-	banArray = new Array(".jpg", ".bmp", ".gif", ".png", ".pcx");    // 걸러낼 확장자를 등록
-	banFile = false;
-	while (file.indexOf("\\") != -1){
-		file = file.slice(file.indexOf("\\") + 1);
-		ban = file.substring(file.lastIndexOf('.'),file.length).toLowerCase();    
-		for (var i = 0; i < banArray.length; i++) {
-			if (banArray[i] == ban) {
-				banFile = true;
-			}
-		}
-		if (banFile == false) {
-			alert(ban + " 파일은 첨부할 수 없는 파일입니다.");
-			cupn_clearFileInputField();
-			break;
-		}
-	}
-	return banFile;
-}
  
+  
  $(document).ready(function() {
 
 /* 	 if('${cupnDetail.count}' > 0){
@@ -120,68 +75,60 @@ function file_Check(file){
 		</span>
 	</div>
 	<div style="height:10px;"></div>
-	<form name="couponDetailForm" id="couponDetailForm" method="post" action="${ctx}/couponForm" enctype="multipart/form-data">	
+	<form role="form" name="lead_single_add" id="lead_single_add" method="post" action="${ctx}/lead_single_add" >	
 	<div class="commonDetail">
 	<table id="coupon_form_tbl" class="commonDetailTable">
 		<tr>
- 			<th id="impTh" style="text-align:right;">리드번호</th>
+ 			<th id="impTh" style="text-align:right; readonly:true">리드번호</th>
 			<td>
-			<input type="text" id="lead_no" value="${detail.lead_no}">
+			<input type="text" id="lead_no" name="lead_no" value="">
  			</td>
 			<th id="impTh" style="text-align:right;">*리드명</th>
 			<td>
- 			 <input type="text" id="lead_name" value="${detail.lead_name}">
+ 			 <input type="text" id="lead_name" name="lead_name" >
   			</td>
 		</tr>
 		
 		<tr>
 			<th id="impTh" style="text-align:right;">고객</th>
 			<td>
-			<input type="text" id="cust_name" value="${detail.cust_no}">
+			<input type="text" id="cust_name" name="cust_name" >
  			</td>
 			<th style="text-align:right;">담당자</th>
 			<td> 
-	       <input type="text" id="emp_name" value="${detail.emp_no}"> 
+	       <input type="text" id="emp_name" name="emp_name" value="${detail.emp_no}"> 
  			</td>
 		</tr>
 		<tr>
 			<th id="impTh" class="discount_cost" style="text-align:right;">접촉할일자
 			</th>
 			<td id="td_disc_type">	
-				<input name="disc_type" id="disc_type" type="text" value=" " readonly="readonly" style="text-align: right; padding-right: 1.5%;">
+				<input name="contact_day" id="contact_day" type="text" value="" style="text-align: right; padding-right: 1.5%;">
 			</td>
 			<th style="text-align:right;">순위</th>
 			<td>
-		  <input type="text" id="rank_cd" value="${detail.rank_cd}">
+		  <input type="text" id="rank_cd" name="rank_cd" value="${detail.rank_cd}">
  			</td>
 		</tr>
 		<tr>
 			<th style="text-align:right;">포기사유</th>
 			<td colspan="3">	
-			<input type="text" id="reason_cd" value="${detail.reason_cd}">
+			<input type="text" id="reason_cd" name="reason_cd" value="${detail.reason_cd}">
  			</td>
  		</tr>
 		<tr>
 			<th  style="text-align:right;">특이 사항</th>
 			<td colspan="3">
-			<input type="text" id="remark_cn" value="${detail.remark_cn}">
+			<input type="text" id="remark_cn" name="remark_cn" value="${detail.remark_cn}">
  			</td>
  		</tr>
  	</table>
-	<div class="listFootDiv" style="float: none;">
+	<div class="listFootDiv">
 	 	 <div id="coupon_detail_btn_div">
-	 	 	<input type="button" class="func_btn" id="coupon_detail_add" value="추가">
-	 	 	<input type="button" class="func_btn" id="coupon_detail_mdfy" value="편집">
+	 	 	<input type="button" class="func_btn" id="lead_single_add" value="추가" onclick="lead_single_save();">
+	 	 	<input type="button" class="func_btn" id="lead_single_cancel" value="취소" onclick="lead_cancel();">
 	 	 </div>
-		 <div id="coupon_insert_btn_div">
-			<input type="button" class="tr_btn" id="coupon_addsave" value="저장">
-			<input type="button" class="func_btn" id="coupon_acancel" value="취소">
-		 </div>
-		 <div id="coupon_mdfy_btn_div">
-			<input type="button" class="tr_btn" id="coupon_mdfysave" value="저장" onclick="modCoupon();">
-			<input type="button" class="func_btn" id="coupon_mcancel" value="취소">
-		 </div>
-   </div>
+    </div>
 	</div>
   </form>
 </div>	

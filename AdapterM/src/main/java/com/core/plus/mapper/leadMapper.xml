@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lead">
 
-
 	<select id="leadList" resultType="com.core.plus.lead.vo.LeadVO">
 	  select
 		l.lead_no,
@@ -18,6 +17,17 @@
 		from tb_lead l, tb_cust c, tb_cust_phone p
 		where l.cust_no = c.cust_no and c.cust_no = p.cust_no and l.cust_no = p.cust_no
 	</select>
+	
+	<insert id="lead_single_add" parameterType="com.core.plus.lead.vo.LeadVO">
+	
+	insert into tb_lead
+	(lead_no, create_date, update_date, lead_name, cust_no, emp_no, contact_day, rank_cd, reason_cd, remark_cn)
+	values
+	(#{lead_no}, now(), now(), #{lead_name}, #{cust_no}, #{emp_no}, #{contact_day}, #{rank_cd}, #{reason_cd}, #{remark_cn})
+	
+	</insert>
+	
+	
 	
 	<select id="lead_detail" resultType="com.core.plus.lead.vo.LeadVO">
 	

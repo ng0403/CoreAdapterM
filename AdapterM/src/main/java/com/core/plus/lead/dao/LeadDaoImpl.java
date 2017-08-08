@@ -24,7 +24,7 @@ public class LeadDaoImpl implements LeadDao {
 	@Override
 	public void lead_insert(LeadVO vo) {
 		
-		sqlSession.insert("lead_insert", vo);
+		sqlSession.insert("lead_single_add", vo);
 		
 	}
 

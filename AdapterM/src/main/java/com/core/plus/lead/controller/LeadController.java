@@ -42,21 +42,48 @@ public class LeadController {
 		
 		return mov;
 	}
-	 
-	//가망 고객 추가.
-	@RequestMapping(value="lead_single_add" , method={RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView lead_insert(LeadVO vo) {
+	
+	//가망 고객 추가 get.
+	@RequestMapping(value="lead_single_add" , method=RequestMethod.GET)
+	public ModelAndView lead_single_add_get(LeadVO vo) {
 		System.out.println("single enter");
 
-		ModelAndView mov = new ModelAndView();
-		leadService.lead_insert(vo);
-
+		ModelAndView mov = new ModelAndView("leadCRUD");
+ 
 		return mov;
 	}
+	 
+	//가망 고객 추가 post.
+	@RequestMapping(value="lead_single_add" , method=RequestMethod.POST)
+	public String lead_single_add_post(LeadVO vo) {
+		
+		System.out.println("add single ? " + vo.toString());
+ 		String cust_no = null;
+ 		
+		if(cust_no == null)
+		{
+			vo.setCust_no(" ");
+		}
+		
+		leadService.lead_insert(vo);
+ 		
+ 		System.out.println("lead add success");
+ 		
+		return "redirect:/lead";
+	}
 	
-	//가망 고객 수정.
-	@RequestMapping(value="lead_update" , method={RequestMethod.GET,RequestMethod.POST})
-	public void lead_update(LeadVO vo){
+	//가망 고객 수정 get.
+		@RequestMapping(value="lead_update" , method=RequestMethod.POST)
+		public ModelAndView lead_update_get(){
+			 
+			ModelAndView mov = new ModelAndView();
+			
+			return mov;
+		}
+	
+	//가망 고객 수정 post.
+	@RequestMapping(value="lead_update" , method=RequestMethod.POST)
+	public void lead_update_post(LeadVO vo){
 		
 		leadService.lead_update(vo);
 	}

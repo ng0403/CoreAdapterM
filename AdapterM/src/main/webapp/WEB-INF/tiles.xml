@@ -26,7 +26,7 @@
 	
 	<!-- lead single add -->
 		<definition name="lead_single_add" extends="onebodyLayout">
-		<put-attribute name="body" value="/WEB-INF/views/lead/lead_single_add.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/lead/leadCRUD.jsp"></put-attribute>
 	</definition>
 	
 	<!-- test -->
