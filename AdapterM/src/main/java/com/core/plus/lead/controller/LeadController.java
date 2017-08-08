@@ -43,6 +43,7 @@ public class LeadController {
 	 
 		ModelAndView mov = new ModelAndView("leadCRUD");
 		mov.addObject("detail", leadService.lead_detail(lead_no));
+		mov.addObject("nal","2017-08-09");
 		mov.addObject("flg", "0");
 		System.out.println(mov.toString());
 		return mov;

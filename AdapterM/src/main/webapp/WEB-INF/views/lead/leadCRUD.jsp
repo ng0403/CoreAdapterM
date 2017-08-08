@@ -75,7 +75,7 @@ $(document).ready(function(){
 			<th id="impTh" class="discount_cost" style="text-align:right;">접촉할일자
 			</th>
 			<td id="td_disc_type">	
-				<input name="contact_day" id="contact_day" type="text" value="" class="expt_fin_d" 
+				<input name="contact_day" id="contact_day" type="text" value="${detail.contact_day}" class="expt_fin_d" 
 							 readonly="readonly" style="text-align: center; cursor: pointer;">
 			</td>
 			<th style="text-align:right;">순위</th>
