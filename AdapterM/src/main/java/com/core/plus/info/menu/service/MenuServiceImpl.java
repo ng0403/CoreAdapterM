@@ -127,6 +127,13 @@ public class MenuServiceImpl implements MenuService {
 		return getMainMenuList;
 	}
 	
+	//메인메뉴 그리기
+	@Override
+	public List<MenuVo> getMainMenuList() {
+		List<MenuVo> getMainMenuList = dao.getMainMenuList();
+		return getMainMenuList;
+	}
+	
 	//서브메뉴 그리기
 	@Override
 	public List<MenuVo> getSubMenuList(Map<String, String> menuAuthMap) {
@@ -154,4 +161,5 @@ public class MenuServiceImpl implements MenuService {
 		int menudownUpdateSave = dao.getMenudownUpdateSave(map);
 		return menudownUpdateSave;
 	}
+
 }

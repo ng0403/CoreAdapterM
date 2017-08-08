@@ -55,6 +55,8 @@ public interface MenuDao {
 	//메인메뉴 그리기
 	List<MenuVo> getMainMenuList(String user_id);
 	
+	List<MenuVo> getMainMenuList();
+	
 	//서브메뉴 그리기
 	List<MenuVo> getSubMenuList(Map<String, String> menuAuthMap);
 
@@ -66,5 +68,7 @@ public interface MenuDao {
 
 	//하위메뉴 편집 저장
 	int getMenudownUpdateSave(Map<String, Object> map);
+
+	
 
 }

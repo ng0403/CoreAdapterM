@@ -261,6 +261,18 @@ public class MenuDaoImpl implements MenuDao {
 		return getMainMenuList;
 	}
 	
+	//메인메뉴 그리기
+	@Override
+	public List<MenuVo> getMainMenuList() {
+		List<MenuVo> getMainMenuList = null;
+		try{
+			getMainMenuList = sqlSession.selectList("selectMainMenuList");
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return getMainMenuList;
+	}
+	
 	//서브메뉴 그리기
 	@Override
 	public List<MenuVo> getSubMenuList(Map<String, String> menuAuthMap) {

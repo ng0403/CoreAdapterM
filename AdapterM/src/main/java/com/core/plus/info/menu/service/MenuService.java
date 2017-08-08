@@ -55,6 +55,8 @@ public interface MenuService {
 	//메인메뉴 그리기
 	List<MenuVo> getMainMenuList(String user_id);
 	
+	List<MenuVo> getMainMenuList();
+	
 	//서브메뉴 그리기
 	List<MenuVo> getSubMenuList(Map<String, String> menuAuthMap);
 
