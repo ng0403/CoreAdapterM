@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="oppty">
+
+	<select id="opptyList" resultType="com.core.plus.oppty.vo.OpptyVO">
+		SELECT 
+			oppty_no, oppty_name, c.cust_no, c.cust_name
+		FROM 
+			tb_oppty o, tb_cust c
+		WHERE
+			o.cust_no = c.cust_no
+	</select>
+	
+</mapper>

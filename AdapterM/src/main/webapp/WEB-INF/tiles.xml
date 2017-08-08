@@ -29,6 +29,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/lead/leadCRUD.jsp"></put-attribute>
 	</definition>
 	
+	<!-- Oppty List -->
+	<definition name="oppty_list" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/oppty/oppty_list.jsp"></put-attribute>
+	</definition>
+	
 	<!-- test -->
 	<definition name="test" extends="onebodyLayout">
 		<put-attribute name="body" value="/WEB-INF/views/test/testpage.jsp"></put-attribute>

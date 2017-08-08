@@ -1,0 +1,96 @@
+package com.core.plus.oppty.vo;
+
+public class OpptyItemVO {
+
+	private String oppty_no; 		// 기회번호
+	private String main_cate_cd; 	// 제품대분류코드
+	private String mid_cate_cd; 	// 제품중분류코드
+	private String small_cate_cd; 	// 제품소분류코드
+	private String create_date; 	// 등록일시
+	private String update_date; 	// 수정일시
+	private String payment_day;		// 결재일자
+	private int qty; 				// 수량
+	private int list_price; 		// 단가
+	private int dc_price; 			// 할인금액
+
+	public String getOppty_no() {
+		return oppty_no;
+	}
+
+	public void setOppty_no(String oppty_no) {
+		this.oppty_no = oppty_no;
+	}
+
+	public String getMain_cate_cd() {
+		return main_cate_cd;
+	}
+
+	public void setMain_cate_cd(String main_cate_cd) {
+		this.main_cate_cd = main_cate_cd;
+	}
+
+	public String getMid_cate_cd() {
+		return mid_cate_cd;
+	}
+
+	public void setMid_cate_cd(String mid_cate_cd) {
+		this.mid_cate_cd = mid_cate_cd;
+	}
+
+	public String getSmall_cate_cd() {
+		return small_cate_cd;
+	}
+
+	public void setSmall_cate_cd(String small_cate_cd) {
+		this.small_cate_cd = small_cate_cd;
+	}
+
+	public String getCreate_date() {
+		return create_date;
+	}
+
+	public void setCreate_date(String create_date) {
+		this.create_date = create_date;
+	}
+
+	public String getUpdate_date() {
+		return update_date;
+	}
+
+	public void setUpdate_date(String update_date) {
+		this.update_date = update_date;
+	}
+
+	public String getPayment_day() {
+		return payment_day;
+	}
+
+	public void setPayment_day(String payment_day) {
+		this.payment_day = payment_day;
+	}
+
+	public int getQty() {
+		return qty;
+	}
+
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+
+	public int getList_price() {
+		return list_price;
+	}
+
+	public void setList_price(int list_price) {
+		this.list_price = list_price;
+	}
+
+	public int getDc_price() {
+		return dc_price;
+	}
+
+	public void setDc_price(int dc_price) {
+		this.dc_price = dc_price;
+	}
+
+}
