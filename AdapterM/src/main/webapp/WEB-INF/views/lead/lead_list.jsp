@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
+<script type="text/javascript" src="/resources/common/js/lead/lead.js"></script> 
+
 <script type="text/javascript">
 // $(document).ready(function(){
 // 	$('#exp_start_dt_srch').datepicker();
@@ -141,7 +143,7 @@
 	 	 </table>
    	
 		<div class="listFootDiv">
- 		 	 <input type="button" class="func_btn" id="lead_add" value="단건등록">
+ 		 	 <input type="button" class="func_btn" id="lead_add" value="단건등록" onclick="lead_single_add();">
 		 	 <input type="button" class="func_btn" id="lead_add_multi" value="다건등록">
 		</div>
 <!-- 	 	<div class="pagingDiv"> -->

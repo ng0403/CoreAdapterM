@@ -24,6 +24,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/lead/lead_detail.jsp"></put-attribute>
 	</definition>
 	
+	<!-- lead single add -->
+		<definition name="lead_single_add" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/lead/lead_single_add.jsp"></put-attribute>
+	</definition>
+	
 	<!-- test -->
 	<definition name="test" extends="onebodyLayout">
 		<put-attribute name="body" value="/WEB-INF/views/test/testpage.jsp"></put-attribute>

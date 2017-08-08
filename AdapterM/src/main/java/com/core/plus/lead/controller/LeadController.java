@@ -44,11 +44,14 @@ public class LeadController {
 	}
 	 
 	//가망 고객 추가.
-	@RequestMapping(value="lead_insert" , method={RequestMethod.GET,RequestMethod.POST})
-	public void lead_insert(LeadVO vo) {
-		
+	@RequestMapping(value="lead_single_add" , method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView lead_insert(LeadVO vo) {
+		System.out.println("single enter");
+
+		ModelAndView mov = new ModelAndView();
 		leadService.lead_insert(vo);
-		
+
+		return mov;
 	}
 	
 	//가망 고객 수정.
