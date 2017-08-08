@@ -22,4 +22,25 @@ public class LeadServiceImpl implements LeadService {
 		return vo;
 	}
 
+	@Override
+	public void lead_insert(LeadVO vo) {
+		
+		leadDao.lead_insert(vo);
+		
+	}
+
+	@Override
+	public void lead_update(LeadVO vo) {
+		
+		leadDao.lead_update(vo);
+		
+	}
+
+	@Override
+	public LeadVO lead_detail(String lead_no) {
+		
+		return leadDao.lead_detail(lead_no);
+		
+	}
+
 }

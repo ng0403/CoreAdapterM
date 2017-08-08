@@ -67,7 +67,7 @@
 					 			 
 						 <th style="width:5%;">담당자번호</th>
 						 <td style="width:15%;">
-						    <input type="text" id="emp_no" name="emp_no" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="emp_no" name="emp_	no" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td>
 					
 						 <th style="width:5%;">접촉할 일자</th>

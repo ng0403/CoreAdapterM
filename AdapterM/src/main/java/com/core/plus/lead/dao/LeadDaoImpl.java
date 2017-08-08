@@ -21,4 +21,25 @@ public class LeadDaoImpl implements LeadDao {
 		return vo;
 	}
 
+	@Override
+	public void lead_insert(LeadVO vo) {
+		
+		sqlSession.insert("lead_insert", vo);
+		
+	}
+
+	@Override
+	public void lead_update(LeadVO vo) {
+		
+		sqlSession.update("lead_update", vo);
+		
+	}
+
+	@Override
+	public LeadVO lead_detail(String lead_no) {
+		 
+		return sqlSession.selectOne("lead_detail", lead_no);
+	}
+
+	
 }
