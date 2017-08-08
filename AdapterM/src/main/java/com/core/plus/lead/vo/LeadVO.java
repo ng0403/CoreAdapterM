@@ -14,6 +14,30 @@ public class LeadVO {
 	private String remark_cn;
 	private Date create_date;
 	private Date update_date;
+	
+	private String cust_name;
+	private String phone_no;
+	private String emp_name;
+	
+	
+	public String getEmp_name() {
+		return emp_name;
+	}
+	public void setEmp_name(String emp_name) {
+		this.emp_name = emp_name;
+	}
+	public String getCust_name() {
+		return cust_name;
+	}
+	public void setCust_name(String cust_name) {
+		this.cust_name = cust_name;
+	}
+	public String getPhone_no() {
+		return phone_no;
+	}
+	public void setPhone_no(String phone_no) {
+		this.phone_no = phone_no;
+	}
 	public String getLead_no() {
 		return lead_no;
 	}
@@ -80,7 +104,8 @@ public class LeadVO {
 	public String toString() {
 		return "LeadVO [lead_no=" + lead_no + ", lead_name=" + lead_name + ", cust_no=" + cust_no + ", emp_no=" + emp_no
 				+ ", contact_day=" + contact_day + ", rank_cd=" + rank_cd + ", reason_cd=" + reason_cd + ", remark_cn="
-				+ remark_cn + ", create_date=" + create_date + ", update_date=" + update_date + "]";
+				+ remark_cn + ", create_date=" + create_date + ", update_date=" + update_date + ", cust_name="
+				+ cust_name + ", phone_no=" + phone_no + ", emp_name=" + emp_name + "]";
 	}
 	
 	

@@ -4,8 +4,36 @@
 
 
 	<select id="leadList" resultType="com.core.plus.lead.vo.LeadVO">
-		select name
-		from dept
+	  select
+		l.lead_no,
+		l.lead_name,
+		l.cust_no,
+		 case when (emp_no) is null then ' '
+		   	   else (emp_no) end as emp_no ,
+		c.cust_name,
+		p.phone_no,
+		l.contact_day,
+		l.rank_cd,
+		l.create_date
+		from tb_lead l, tb_cust c, tb_cust_phone p
+		where l.cust_no = c.cust_no and c.cust_no = p.cust_no and l.cust_no = p.cust_no
+	</select>
+	
+	<select id="lead_detail" resultType="com.core.plus.lead.vo.LeadVO">
+	
+	select
+	 lead_no,
+	 create_date,
+	 lead_name,
+	 cust_no, 
+	  case when (emp_no) is null then ' '
+		   	   else (emp_no) end as emp_no ,
+	 contact_day, 
+     rank_cd, 
+  	 reason_cd, 
+	 remark_cn
+	from tb_lead
+	where lead_no= #{lead_no}
 	</select>
 	
 </mapper>

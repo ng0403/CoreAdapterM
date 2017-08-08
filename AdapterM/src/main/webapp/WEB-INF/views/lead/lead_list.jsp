@@ -101,7 +101,17 @@
 	 	 	</thead>
 	 	 	<tbody>
 	 	 		<c:forEach items="${lead_list}" var="list">
-	 	 			<td style="text-align: left;" >${list.name }</td>
+	 	 			<td style="text-align: left;" >${list.lead_no}</td>
+	 	 			<td style="text-align: left;" >
+	 	 			<a href="#" onclick="leadDetail('${list.lead_no}');" id="${list.lead_no}">${list.lead_name}</a>
+	 	 			</td>
+	 	 			<td style="text-align: left;" >${list.cust_no}</td>
+	 	 			<td style="text-align: left;" >${list.cust_name}</td>
+	 	 			<td style="text-align: left;" >${list.phone_no}</td>
+	 	 			<td style="text-align: left;" >${list.emp_name}</td>
+	 	 			<td style="text-align: left;" >${list.contact_day}</td>
+	 	 			<td style="text-align: left;" >${list.rank_cd}</td>
+	 	 			<td style="text-align: left;" >${list.create_date}</td>
 	 	 		</c:forEach>
 <%-- 	 	 		<c:forEach items="${couponList}" var="couponList"> --%>
 <%-- 	 	 		<input type="hidden" id="img_src" value="${couponList.img_src}"> --%>

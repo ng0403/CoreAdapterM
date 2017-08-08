@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,21 +34,17 @@ public class LeadController {
 	}
 	
 	//가망 고객 상세정보
-	@RequestMapping(value="lead_detail")
-	public ModelAndView lead_detail(@RequestParam("lead_no") String lead_no){
-		
-		
-		leadService.lead_detail(lead_no);
-		
+	@RequestMapping(value="lead_detail", method={RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView lead_detail(@RequestParam("lead_no") String lead_no){ 
+	 
 		ModelAndView mov = new ModelAndView("lead_detail");
-		
+		mov.addObject("detail", leadService.lead_detail(lead_no));
 		
 		return mov;
 	}
-	
-	
+	 
 	//가망 고객 추가.
-	@RequestMapping(value="lead_insert")
+	@RequestMapping(value="lead_insert" , method={RequestMethod.GET,RequestMethod.POST})
 	public void lead_insert(LeadVO vo) {
 		
 		leadService.lead_insert(vo);
@@ -55,7 +52,7 @@ public class LeadController {
 	}
 	
 	//가망 고객 수정.
-	@RequestMapping(value="lead_update")
+	@RequestMapping(value="lead_update" , method={RequestMethod.GET,RequestMethod.POST})
 	public void lead_update(LeadVO vo){
 		
 		leadService.lead_update(vo);
