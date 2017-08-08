@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="commonCode">
+	<select id="vititCdList" resultType="com.core.plus.contect.cust.vo.CommonCodeVO">
+		select
+			code
+			,code_name
+			,seq
+			,par_code_no
+		from tb_code
+		where
+			code_no = '1001'
+		order by code
+	</select>
+	
+	<select id="vititDtlCdList" resultType="com.core.plus.contect.cust.vo.CommonCodeVO">
+		select
+			code
+			,code_name
+			,seq
+			,par_code_no
+		from tb_code
+		where
+			code_no = '1002'
+		order by code
+	</select>
+	
+	<select id="phoneTypeCdList" resultType="com.core.plus.contect.cust.vo.CommonCodeVO">
+		select
+			code
+			,code_name
+			,seq
+			,par_code_no
+		from tb_code
+		where
+			code_no = '1003'
+		order by code
+	</select>
+	
+	<select id="phoneCountryCdList" resultType="com.core.plus.contect.cust.vo.CommonCodeVO">
+		select
+			code
+			,code_name
+			,seq
+			,par_code_no
+		from tb_code
+		where
+			code_no = '1004'
+		order by code
+	</select>
+	
+	<select id="addrTypeCdList" resultType="com.core.plus.contect.cust.vo.CommonCodeVO">
+		select
+			code
+			,code_name
+			,seq
+			,par_code_no
+		from tb_code
+		where
+			code_no = '1005'
+		order by code
+	</select>
+</mapper>

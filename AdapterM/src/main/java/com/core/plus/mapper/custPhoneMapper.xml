@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="custPhone">
+	<select id="custPhDetailList" resultType="com.core.plus.contect.cust.vo.CustVO" parameterType="String">
+		select
+			b.phone_type_cd
+			,b.phone_country_cd
+			,b.phone_area_no
+			,b.phone_no
+			,b.primary_yn
+		from tb_cust_phone b
+		where
+			b.cust_no = #{cust_no}
+		order by b.primary_yn desc
+	</select>
+	
+	<insert id="custPhInsert" parameterType="com.core.plus.contect.cust.vo.CustVO">
+		insert into tb_cust_phone (
+								cust_no
+								,phone_type_cd
+								,phone_country_cd
+								,phone_area_no
+								,phone_no
+<!-- 								,primary_yn -->
+		)
+		values(
+			#{cust_no}
+           	,#{phone_type_cd}
+           	,#{phone_country_cd}
+           	,#{phone_area_no}
+           	,#{phone_no}
+<!--            	,#{primary_yn} -->
+		)
+	</insert>
+	
+	<update id="custPhDelete" parameterType="String">
+		delete
+		from tb_cust_phone
+		where cust_no = #{cust_no}
+	</update>
+	
+</mapper>
