@@ -17,16 +17,52 @@ public class OpptyServiceImlp implements OpptyService {
 	OpptyDao opptyDao;
 	
 	@Override
-	public List<OpptyVO> oppty_list() {
+	public List<OpptyVO> opptyList() {
 		// TODO Auto-generated method stub
-		
-		return opptyDao.oppty_list();
+		return opptyDao.opptyList();
 	}
 
 	@Override
-	public List<OpptyItemVO> opptyItem_list() {
+	public List<OpptyItemVO> opptyItemList() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	/* code */
+	@Override
+	public List<OpptyVO> opptyStatusCD() {
+		// TODO Auto-generated method stub
+		return opptyDao.opptyStatusCD();
+	}
+
+	@Override
+	public List<OpptyVO> opptyStageCD() {
+		// TODO Auto-generated method stub
+		return opptyDao.opptyStageCD();
+	}
+
+	@Override
+	public List<OpptyVO> opptyDtypeCD() {
+		// TODO Auto-generated method stub
+		return opptyDao.opptyDtypeCD();
+	}
+
+	@Override
+	public List<OpptyVO> opptyPerchaseType() {
+		// TODO Auto-generated method stub
+		return opptyDao.opptyPerchaseType();
+	}
+
+	@Override
+	public List<OpptyVO> opptyPaymentCD() {
+		// TODO Auto-generated method stub
+		return opptyDao.opptyPaymentCD();
+	}
+
+	@Override
+	public List<OpptyVO> opptyRecPerCD() {
+		// TODO Auto-generated method stub
+		return opptyDao.opptyRecPerCD();
 	}
 
 }

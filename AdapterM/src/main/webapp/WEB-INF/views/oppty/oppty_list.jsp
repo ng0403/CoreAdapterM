@@ -1,9 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
+
+<script type="text/javascript" src="${ctx}/resources/common/js/opty/oppty.js"></script> 
+
 <script type="text/javascript">
 // $(document).ready(function(){
 // 	$('#exp_start_dt_srch').datepicker();
@@ -11,7 +15,9 @@
 // });
 </script>
 
+
 <input type="hidden" id="ctx" value="${ctx}">
+
 <!-- 매출관리 : 매출기회조회 -->
 
 <div id="cupnManager">
@@ -35,41 +41,84 @@
 		 	<div id="searchDiv">
 	        	<table id="cupnSearchTable" class="commonTable">
 					<tr style="background-color: white; cursor:default; border:0;">
-						 <th style="width:5%;">쿠폰명</th>
+						 <th style="width:5%;">기회번호</th>
 						 <td style="width:15%;">
-						    <input type="text" id="cupn_name_srch" name="cupn_name_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="oppty_no_srch" name="oppty_no_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td>
-						 <th style="width:5%;">유효기간</th>
-						 <td style="width:25%;">
-							<input type="text" name="exp_start_dt_srch" id="exp_start_dt_srch" value="" class="expt_fin_d" placeholder="시작일자"
-							 readonly="readonly" style="width : 35%; text-align: center; cursor: pointer;">
-							-
+						 
+						 <th style="width:5%;">기회명</th>
+						 <td style="width:15%;">
+						    <input type="text" id="oppty_name_srch" name="oppty_name_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						 </td>
+						 
+						 <th style="width:5%;">고객명</th>
+						 <td style="width:15%;">
+						    <input type="text" id="oppty_name_srch" name="oppty_name_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						 </td>
+					</tr>
+					<tr>
+						<th style="width:5%;">담당자명</th>
+						<td style="width:15%;">
+						    <input type="text" id="oppty_name_srch" name="oppty_name_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						</td >
+						
+						<th style="width:5%;">기회상태</th>
+						<td>
+							<select id="oppty_status_cd_srch" name="oppty_status_cd_srch" 
+									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
+								<option value="">선택해 주십시오</option>
+								<c:forEach var="status" items="${ oppty_status_cd }">
+									<option value="${ status.code }">${ status.code_name }</option>
+								</c:forEach>
+							</select>
+						</td>
+						
+						<th style="width:5%;">기회단계</th>
+						<td>
+							<select id="oppty_stage_cd_srch" name="oppty_stage_cd_srch" 
+									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
+								<option value="">선택해 주십시오</option>
+								<c:forEach var="stage" items="${ oppty_stage_cd }">
+									<option value="${ stage.code }">${ stage.code_name }</option>
+								</c:forEach>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th style="width: 5%;">예상종료일자</th>
+						<td style="width:25%;">
 							<input type="text" name="exp_end_dt_srch" id="exp_end_dt_srch" value="" class="expt_fin_d" placeholder="종료일자"
-							 readonly="readonly" style="width : 35%; text-align: center; cursor: pointer;">
+							 	   readonly="readonly" style="width : 35%; text-align: center; cursor: pointer;">
 						 </td>
-						 <th style="width:5%;">브랜드</th>
-						 <td style="width:15%;">
-							<select id="brand_wid" name="brand_wid" style="margin-left: 0; width: 70%;font-size: 10.5px;padding: 0.3em 0.3em 0.3em 0.3em;">
+						 
+						<th style="width: 5%;">분류</th>
+						<td style="width: 15%;">
+							<select id="oppty_stage_cd_srch" name="oppty_stage_cd_srch" 
+									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
 								<option value="">선택해 주십시오</option>
-<%-- 								<c:forEach items="${brandList}" var="brand"> --%>
-<%-- 									<option value="${brand.brand_wid}" --%>
-<%-- 										<c:if test="${brand.brand_wid == cupnListMap.brand_wid}">selected="selected"</c:if> --%>
-<%-- 									>${brand.brand_name}</option> --%>
-<%-- 								</c:forEach> --%>
+								<c:forEach var="dtype" items="${ dtype_cd }">
+									<option value="${ dtype.code }">${ dtype.code_name }</option>
+								</c:forEach>
 							</select>
-						 </td>
-						 <th style="width:5%;">사용여부</th>
-						 <td style="width:15%;">
-							<select id="active_flg_srch" name="active_flg_srch" style="margin-left: 0; width: 70%;text-align:center;font-size: 10.5px;
-								padding: 0.3em 0.3em;">
+						</td>
+						
+						<th style="width: 5%;">구매형태</th>
+						<td style="width: 15%;">
+							<select id="oppty_stage_cd_srch" name="oppty_stage_cd_srch" 
+									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
 								<option value="">선택해 주십시오</option>
-<%-- 								<option value="Y"<c:if test="${cupnListMap.active_flg_srch == 'Y'}">selected="selected"</c:if>>Y</option> --%>
-<%-- 				   				<option value="N"<c:if test="${cupnListMap.active_flg_srch == 'N'}">selected="selected"</c:if>>N</option> --%>
+								<c:forEach var="purchase_type" items="${ purchase_type }">
+									<option value="${ purchase_type.code }">${ purchase_type.code_name }</option>
+								</c:forEach>
 							</select>
-						 </td>
-		                 <td style="width: 12%;">
-		                 	<input type="button" value="조회" id="coupon_list_sch" onclick="cupn_manager_sch(1);" class="tr_btn" style="margin-left: 0;">
-		                 </td>
+						</td>
+						
+						<td style="width: 12%;"><input type="button" value="조회"
+							id="coupon_list_sch" onclick="cupn_manager_sch(1);"
+							class="tr_btn" style="margin-left: 0;">
+						</td>
+
+						
 					</tr>
 				</table>
 			</div>
@@ -77,25 +126,40 @@
 	 	 <table class="commonTable" id="cupnManagerTabl">
 	 	 	<thead>
 	 	 		<tr>
-	 	 			<th style="width: 100%;">기회번호</th>
-	 	 			<th style="width: 8%;">기회명</th>
-	 	 			<th style="width: 28%;">고객번호</th>
-	 	 			<th style="width: 22%;">고객명</th>
-	 	 			<th style="width: 8%;">전화번호</th>
-	 	 			<th style="width: 15%;">담당자명</th>
-	 	 			<th style="width: 13%;">기회상태</th>
-	 	 			<th style="width: 6%;">기회단계</th>
-	 	 			<th style="width: 6%;">예상종류일자</th>
-	 	 			<th style="width: 6%;">분류</th>
-	 	 			<th style="width: 6%;">구매</th>
-	 	 			<th style="width: 6%;">소개자</th>
-	 	 			<th style="width: 6%;">등록일시</th>
+	 	 			<th >기회번호</th>
+	 	 			<th >기회명</th>
+	 	 			<th >고객번호</th>
+	 	 			<th >고객명</th>
+	 	 			<th >전화번호</th>
+	 	 			<th >담당자명</th>
+	 	 			<th >기회상태</th>
+	 	 			<th >기회단계</th>
+	 	 			<th >예상종류일자</th>
+	 	 			<th >분류</th>
+	 	 			<th >구매</th>
+	 	 			<th >소개자</th>
+	 	 			<th >등록일시</th>
 	 	 		</tr>
 	 	 	</thead>
 	 	 	<tbody>
-	 	 		<c:forEach items="${tlist }" var="list">
-	 	 			<td style="text-align: left;" >${list.name }</td>
+	 	 		<c:forEach items="${ oppty_list }" var="list">
+	 	 			<td style="text-align: left;" >${ list.oppty_no }</td>
+	 	 			<td style="text-align: left;" >
+	 	 				<a onclick="opptyDetail('${ list.oppty_no }');" id="${ list.oppty_no }">${ list.oppty_name }</a>
+	 	 			</td>
+	 	 			<td style="text-align: left;" >${ list.cust_no }</td>
+	 	 			<td style="text-align: left;" >${ list.cust_name }</td>
+	 	 			<td style="text-align: left;" ><!-- 전화번호 --></td>
+	 	 			<td style="text-align: left;" >${ list.emp_name }</td>
+	 	 			<td style="text-align: left;" >${ list.oppty_status_cd }</td>
+	 	 			<td style="text-align: left;" >${ list.oppty_stage_cd }</td>
+	 	 			<td style="text-align: left;" >${ list.exp_close_day }</td>
+	 	 			<td style="text-align: left;" >${ list.dtype_cd }</td>
+	 	 			<td style="text-align: left;" >${ list.purchase_type }</td>
+	 	 			<td style="text-align: left;" >${ list.rec_per_cd }</td>
+	 	 			<td style="text-align: left;" >${ list.create_date }</td>
 	 	 		</c:forEach>
+	 	 		
 <%-- 	 	 		<c:forEach items="${couponList}" var="couponList"> --%>
 <%-- 	 	 		<input type="hidden" id="img_src" value="${couponList.img_src}"> --%>
 <!-- 	 	 		<tr> -->

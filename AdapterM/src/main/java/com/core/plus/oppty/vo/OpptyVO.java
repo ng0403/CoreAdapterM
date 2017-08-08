@@ -7,7 +7,9 @@ public class OpptyVO {
 	private String update_date; 	// 수정일시
 	private String oppty_name; 		// 기회명
 	private String cust_no; 		// 고객번호
+	private String cust_name;		// 고객이름
 	private String emp_no; 			// 담당자번호
+	private String emp_name;		// 담당자이름
 	private String oppty_status_cd; // 기회상태구분
 	private String oppty_stage_cd; 	// 기회단계구분
 	private String exp_close_day; 	// 예상종료일자
@@ -19,7 +21,11 @@ public class OpptyVO {
 	private String remark_cn; 		// 특이사항
 	private int score; 				// 점수
 
-	
+	// 공통코드에서 불러오기 위한 변수
+	private String code_no;
+	private String code;
+	private String code_name;
+
 	public String getOppty_no() {
 		return oppty_no;
 	}
@@ -60,12 +66,28 @@ public class OpptyVO {
 		this.cust_no = cust_no;
 	}
 
+	public String getCust_name() {
+		return cust_name;
+	}
+
+	public void setCust_name(String cust_name) {
+		this.cust_name = cust_name;
+	}
+
 	public String getEmp_no() {
 		return emp_no;
 	}
 
 	public void setEmp_no(String emp_no) {
 		this.emp_no = emp_no;
+	}
+	
+	public String getEmp_name() {
+		return emp_name;
+	}
+
+	public void setEmp_name(String emp_name) {
+		this.emp_name = emp_name;
 	}
 
 	public String getOppty_status_cd() {
@@ -147,5 +169,41 @@ public class OpptyVO {
 	public void setScore(int score) {
 		this.score = score;
 	}
+	
+	
+	public String getCode_no() {
+		return code_no;
+	}
 
+	public void setCode_no(String code_no) {
+		this.code_no = code_no;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getCode_name() {
+		return code_name;
+	}
+
+	public void setCode_name(String code_name) {
+		this.code_name = code_name;
+	}
+
+	@Override
+	public String toString() {
+		return "OpptyVO [oppty_no=" + oppty_no + ", create_date=" + create_date + ", update_date=" + update_date
+				+ ", oppty_name=" + oppty_name + ", cust_no=" + cust_no + ", cust_name=" + cust_name + ", emp_no="
+				+ emp_no + ", emp_name=" + emp_name + ", oppty_status_cd=" + oppty_status_cd + ", oppty_stage_cd="
+				+ oppty_stage_cd + ", exp_close_day=" + exp_close_day + ", dtype_cd=" + dtype_cd + ", sur_plan_cn="
+				+ sur_plan_cn + ", purchase_type=" + purchase_type + ", payment_cd=" + payment_cd + ", rec_per_cd="
+				+ rec_per_cd + ", remark_cn=" + remark_cn + ", score=" + score + ", code_no=" + code_no + ", code="
+				+ code + ", code_name=" + code_name + "]";
+	}
+	
 }

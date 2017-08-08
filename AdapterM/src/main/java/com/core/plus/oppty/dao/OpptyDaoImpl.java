@@ -16,7 +16,7 @@ public class OpptyDaoImpl implements OpptyDao {
 	SqlSession sqlSession;
 
 	@Override
-	public List<OpptyVO> oppty_list() {
+	public List<OpptyVO> opptyList() {
 		// TODO Auto-generated method stub
 		List<OpptyVO> vo = sqlSession.selectList("oppty.opptyList");
 		
@@ -24,9 +24,58 @@ public class OpptyDaoImpl implements OpptyDao {
 	}
 
 	@Override
-	public List<OpptyItemVO> opptyItem_list() {
+	public List<OpptyItemVO> opptyItemList() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	/* Code */
+	@Override
+	public List<OpptyVO> opptyStatusCD() {
+		// TODO Auto-generated method stub
+		List<OpptyVO> code = sqlSession.selectList("oppty.opptyStatusCode");
+		
+		return code;
+	}
+
+	@Override
+	public List<OpptyVO> opptyStageCD() {
+		// TODO Auto-generated method stub
+		List<OpptyVO> code = sqlSession.selectList("oppty.opptyStageCode");
+		
+		return code;
+	}
+
+	@Override
+	public List<OpptyVO> opptyDtypeCD() {
+		// TODO Auto-generated method stub
+		List<OpptyVO> code = sqlSession.selectList("oppty.opptyDtypeCode");
+		
+		return code;
+	}
+
+	@Override
+	public List<OpptyVO> opptyPerchaseType() {
+		// TODO Auto-generated method stub
+		List<OpptyVO> code = sqlSession.selectList("oppty.opptyPurchaseType");
+		
+		return code;
+	}
+
+	@Override
+	public List<OpptyVO> opptyPaymentCD() {
+		// TODO Auto-generated method stub
+		List<OpptyVO> code = sqlSession.selectList("oppty.opptyPaymentCode");
+		
+		return code;
+	}
+
+	@Override
+	public List<OpptyVO> opptyRecPerCD() {
+		// TODO Auto-generated method stub
+		List<OpptyVO> code = sqlSession.selectList("oppty.opptyRecPerCode");
+		
+		return code;
 	}
 
 }
