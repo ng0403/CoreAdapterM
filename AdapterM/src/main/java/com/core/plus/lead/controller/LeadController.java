@@ -73,10 +73,10 @@ public class LeadController {
 	}
 	
 	//가망 고객 수정 get.
-		@RequestMapping(value="lead_update" , method=RequestMethod.POST)
+		@RequestMapping(value="lead_update" , method=RequestMethod.GET)
 		public ModelAndView lead_update_get(){
 			 
-			ModelAndView mov = new ModelAndView();
+			ModelAndView mov = new ModelAndView("leadCRUD");
 			
 			return mov;
 		}
