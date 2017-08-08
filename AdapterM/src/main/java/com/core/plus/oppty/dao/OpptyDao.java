@@ -10,6 +10,8 @@ public interface OpptyDao {
 	List<OpptyVO> opptyList();
 	List<OpptyItemVO> opptyItemList();
 	
+	OpptyVO opptyDetail(String oppty_no);
+	
 	// Code 값 불러오는 Method
 	List<OpptyVO> opptyStatusCD();
 	List<OpptyVO> opptyStageCD();

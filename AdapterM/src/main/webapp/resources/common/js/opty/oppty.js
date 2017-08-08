@@ -4,9 +4,17 @@
  * 
  */
 
-function opptyDetail(oppty_no)
+function opptyDetail(oppty_no, flg)
 {
-	alert(oppty_no);
+	var ctx = $("#ctx").val();
 	
-	//location.href = "/oppty_detail?oppty_no=" + oppty_no;
+	location.href = ctx + "/oppty_detail?oppty_no=" + oppty_no;
+}
+
+// 단건 등록
+function opptySingleAdd()
+{
+	var ctx = $("#ctx").val();
+	
+	location.href = ctx + "/oppty_detail";
 }

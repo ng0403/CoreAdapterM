@@ -20,6 +20,31 @@
 			tb_oppty opty
 	</select>
 	
+	<!-- Detail -->
+	<select id="opptyDetail" resultType="com.core.plus.oppty.vo.OpptyVO" parameterType="com.core.plus.oppty.vo.OpptyVO">
+		SELECT 
+			oppty_no,
+			oppty_name,
+			cust_no,
+			(select cust_name from tb_cust cust where cust.cust_no = opty.cust_no) cust_name,
+			emp_no,
+			(select emp_name  from tb_emp  emp  where emp.emp_no = opty.emp_no) emp_name,
+			(select code_name from tb_code where code_no = '1010' and code = oppty_status_cd) oppty_status_cd,
+			(select code_name from tb_code where code_no = '1011' and code = oppty_stage_cd)  oppty_stage_cd,
+			score,
+			exp_close_day,
+			sur_plan_cn,
+			(select code_name from tb_code where code_no = '1008' and code = dtype_cd) dtype_cd,
+			(select code_name from tb_code where code_no = '1012' and code = purchase_type) purchase_type,
+			(select code_name from tb_code where code_no = '1013' and code = payment_cd) payment_cd,
+			(select code_name from tb_code where code_no = '1014' and code = rec_per_cd) rec_per_cd,
+			remark_cn
+		FROM
+			tb_oppty opty
+		WHERE
+			oppty_no = #{ oppty_no }
+	</select>
+	
 	<!-- code 값 불러오는 쿼리 -->
 	<select id="opptyStatusCode" resultType="com.core.plus.oppty.vo.OpptyVO">
 		SELECT code_name, code FROM tb_code WHERE code_no = '1010'

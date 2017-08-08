@@ -27,6 +27,12 @@ public class OpptyServiceImlp implements OpptyService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public OpptyVO opptyDetail(String oppty_no) {
+		// TODO Auto-generated method stub
+		return opptyDao.opptyDetail(oppty_no);
+	}
 
 	/* code */
 	@Override

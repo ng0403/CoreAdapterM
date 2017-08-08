@@ -32,23 +32,61 @@ public class OpptyController {
 		
 		ModelAndView mov = new ModelAndView("oppty_list");
 		
-		mov.addObject("oppty_list", vo);
-		mov.addObject("oppty_status_cd", status);
-		mov.addObject("oppty_stage_cd", stage);
-		mov.addObject("dtype_cd", dtype);
-		mov.addObject("purchase_type", purchase);
+		mov.addObject("opptyList", vo);
+		mov.addObject("opptyStatusCd", status);
+		mov.addObject("opptyStageCd", stage);
+		mov.addObject("dtypeCd", dtype);
+		mov.addObject("purchaseType", purchase);
 		
 		return mov;
 	}
 	
 	@RequestMapping(value="oppty_detail")
-	public ModelAndView opptyDetail(@RequestParam("oppty_no") String oppty_no)
+	public ModelAndView opptyDetail(String oppty_no, String flg)
 	{
-		System.out.println("detail : " + oppty_no);
+		System.out.println(oppty_no);
 		
-		ModelAndView mov = new ModelAndView("oppty_detail");
-		
-		return mov;
+		if(oppty_no == null || oppty_no == "")
+		{
+			List<OpptyVO> status = opptyService.opptyStatusCD();
+			List<OpptyVO> stage = opptyService.opptyStageCD();
+			List<OpptyVO> dtype = opptyService.opptyDtypeCD();
+			List<OpptyVO> purchase = opptyService.opptyPerchaseType();
+			List<OpptyVO> payment = opptyService.opptyPaymentCD();
+			List<OpptyVO> recper = opptyService.opptyRecPerCD();
+			
+			ModelAndView mov = new ModelAndView("oppty_detail");
+
+			mov.addObject("opptyStatusCd", status);
+			mov.addObject("opptyStageCd", stage);
+			mov.addObject("dtypeCd", dtype);
+			mov.addObject("purchaseType", purchase);
+			mov.addObject("paymentCd", payment);
+			mov.addObject("recperCd", recper);
+			
+			return mov;
+		}
+		else
+		{
+			List<OpptyVO> status = opptyService.opptyStatusCD();
+			List<OpptyVO> stage = opptyService.opptyStageCD();
+			List<OpptyVO> dtype = opptyService.opptyDtypeCD();
+			List<OpptyVO> purchase = opptyService.opptyPerchaseType();
+			List<OpptyVO> payment = opptyService.opptyPaymentCD();
+			List<OpptyVO> recper = opptyService.opptyRecPerCD();
+			
+			ModelAndView mov = new ModelAndView("oppty_detail");
+
+			mov.addObject("opptyDetail",  opptyService.opptyDetail(oppty_no));
+			mov.addObject("opptyStatusCd", status);
+			mov.addObject("opptyStageCd", stage);
+			mov.addObject("dtypeCd", dtype);
+			mov.addObject("purchaseType", purchase);
+			mov.addObject("paymentCd", payment);
+			mov.addObject("recperCd", recper);
+			
+			return mov;
+		}
 	}
 
 }

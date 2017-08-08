@@ -67,7 +67,7 @@
 							<select id="oppty_status_cd_srch" name="oppty_status_cd_srch" 
 									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
 								<option value="">선택해 주십시오</option>
-								<c:forEach var="status" items="${ oppty_status_cd }">
+								<c:forEach var="status" items="${ opptyStatusCd }">
 									<option value="${ status.code }">${ status.code_name }</option>
 								</c:forEach>
 							</select>
@@ -78,7 +78,7 @@
 							<select id="oppty_stage_cd_srch" name="oppty_stage_cd_srch" 
 									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
 								<option value="">선택해 주십시오</option>
-								<c:forEach var="stage" items="${ oppty_stage_cd }">
+								<c:forEach var="stage" items="${ opptyStageCd }">
 									<option value="${ stage.code }">${ stage.code_name }</option>
 								</c:forEach>
 							</select>
@@ -93,10 +93,10 @@
 						 
 						<th style="width: 5%;">분류</th>
 						<td style="width: 15%;">
-							<select id="oppty_stage_cd_srch" name="oppty_stage_cd_srch" 
+							<select id="dtype_cd_srch" name="dtype_cd_srch" 
 									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
 								<option value="">선택해 주십시오</option>
-								<c:forEach var="dtype" items="${ dtype_cd }">
+								<c:forEach var="dtype" items="${ dtypeCd }">
 									<option value="${ dtype.code }">${ dtype.code_name }</option>
 								</c:forEach>
 							</select>
@@ -104,10 +104,10 @@
 						
 						<th style="width: 5%;">구매형태</th>
 						<td style="width: 15%;">
-							<select id="oppty_stage_cd_srch" name="oppty_stage_cd_srch" 
+							<select id="purchase_type_srch" name="purchase_type_srch" 
 									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
 								<option value="">선택해 주십시오</option>
-								<c:forEach var="purchase_type" items="${ purchase_type }">
+								<c:forEach var="purchase_type" items="${ purchaseType }">
 									<option value="${ purchase_type.code }">${ purchase_type.code_name }</option>
 								</c:forEach>
 							</select>
@@ -142,10 +142,10 @@
 	 	 		</tr>
 	 	 	</thead>
 	 	 	<tbody>
-	 	 		<c:forEach items="${ oppty_list }" var="list">
+	 	 		<c:forEach items="${ opptyList }" var="list">
 	 	 			<td style="text-align: left;" >${ list.oppty_no }</td>
 	 	 			<td style="text-align: left;" >
-	 	 				<a onclick="opptyDetail('${ list.oppty_no }');" id="${ list.oppty_no }">${ list.oppty_name }</a>
+	 	 				<a onclick="opptyDetail('${ list.oppty_no }', '1');" id="${ list.oppty_no }">${ list.oppty_name }</a>
 	 	 			</td>
 	 	 			<td style="text-align: left;" >${ list.cust_no }</td>
 	 	 			<td style="text-align: left;" >${ list.cust_name }</td>
@@ -188,8 +188,8 @@
 	 	 </table>
    	
 		<div class="listFootDiv">
-		 	 <input type="button" class="func_btn" id="coupon_list_add" value="추가">
-		 	 <input type="button" class="func_btn" id="coupon_send" value="쿠폰발송">
+		 	 <input type="button" class="func_btn" id="oppty_single_add" value="단건등록" onclick="opptySingleAdd();">
+		 	 <input type="button" class="func_btn" id="oppty_multi_add" value="다건등록">
 		</div>
 <!-- 	 	<div class="pagingDiv"> -->
 <%-- 			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/> --%>
