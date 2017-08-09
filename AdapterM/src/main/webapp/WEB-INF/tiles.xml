@@ -39,6 +39,17 @@
 		<put-attribute name="body" value="/WEB-INF/views/oppty/oppty_detail.jsp"></put-attribute>
 	</definition>
 	
+	<!-- cust -->
+	<definition name="cust_list" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/cust/cust_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- cust detail -->
+		<definition name="cust_detail" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/cust/cust_detail.jsp"></put-attribute>
+	</definition>
+	
+	
 	<!-- test -->
 	<definition name="test" extends="onebodyLayout">
 		<put-attribute name="body" value="/WEB-INF/views/test/testpage.jsp"></put-attribute>

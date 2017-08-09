@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="custPhone">
-	<select id="custPhDetailList" resultType="com.core.plus.contect.cust.vo.CustVO" parameterType="String">
+	<select id="custPhDetailList" resultType="com.core.plus.contact.cust.vo.CustVO" parameterType="String">
 		select
 			b.phone_type_cd
 			,b.phone_country_cd
@@ -15,7 +15,7 @@
 		order by b.primary_yn desc
 	</select>
 	
-	<insert id="custPhInsert" parameterType="com.core.plus.contect.cust.vo.CustVO">
+	<insert id="custPhInsert" parameterType="com.core.plus.contact.cust.vo.CustVO">
 		insert into tb_cust_phone (
 								cust_no
 								,phone_type_cd

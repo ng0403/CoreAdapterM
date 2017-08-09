@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="custAddr">
-	<select id="custAdDetailList" resultType="com.core.plus.contect.cust.vo.CustVO" parameterType="String">
+	<select id="custAdDetailList" resultType="com.core.plus.contact.cust.vo.CustVO" parameterType="String">
 		select
 			c.addr_type_cd
 			,c.road_yn
@@ -15,7 +15,7 @@
 		order by c.primary_yn desc
 	</select>
 	
-	<insert id="custAdInsert" parameterType="com.core.plus.contect.cust.vo.CustVO">
+	<insert id="custAdInsert" parameterType="com.core.plus.contact.cust.vo.CustVO">
 		insert into tb_cust_addr (
 								cust_no
 								,addr_type_cd

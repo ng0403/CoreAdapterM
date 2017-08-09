@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cust">
-	<select id="custList" resultType="com.core.plus.contect.cust.vo.CustVO">
+	<select id="custList" resultType="com.core.plus.contact.cust.vo.CustVO">
 		select
 			a.cust_no
 			,a.create_date
@@ -32,7 +32,7 @@
 		order by a.update_date desc
 	</select>
 	
-	<select id="custDetailList" resultType="com.core.plus.contect.cust.vo.CustVO" parameterType="String">
+	<select id="custDetailList" resultType="com.core.plus.contact.cust.vo.CustVO" parameterType="String">
 		select
 			a.cust_no
 			,a.create_date
@@ -50,7 +50,7 @@
 			a.cust_no = #{cust_no}
 	</select>
 	
-	<insert id="custInsert" parameterType="com.core.plus.contect.cust.vo.CustVO">
+	<insert id="custInsert" parameterType="com.core.plus.contact.cust.vo.CustVO">
 		<selectKey keyProperty="cust_no" resultType="String" order="BEFORE">
 			SELECT 
                   IF(SUBSTR(MAX(cust_no), 1, 10) = DATE_FORMAT(now(), '%Y%m%d%H')
@@ -82,14 +82,14 @@
            	,#{rec_per}
            	,#{remark_cn}
 		)
-		<selectKey keyProperty="cust_key" resultType="String" order="AFTER">
-			SELECT 
-                  MAX(cust_no)
-            FROM tb_cust USE INDEX(PRIMARY)
-		</selectKey>
+<!-- 		<selectKey keyProperty="cust_key" resultType="String" order="AFTER"> -->
+<!-- 			SELECT  -->
+<!--                   MAX(cust_no) -->
+<!--             FROM tb_cust USE INDEX(PRIMARY) -->
+<!-- 		</selectKey> -->
 	</insert>
 	
-	<update id="custUpdate" parameterType="com.core.plus.contect.cust.vo.CustVO">
+	<update id="custUpdate" parameterType="com.core.plus.contact.cust.vo.CustVO">
 		update tb_cust
 		set
 			cust_id = #{cust_id}
@@ -101,7 +101,7 @@
 		where cust_no = #{cust_no}
 	</update>
 	
-	<update id="custDelete" parameterType="com.core.plus.contect.cust.vo.CustVO">
+	<update id="custDelete" parameterType="com.core.plus.contact.cust.vo.CustVO">
 		update tb_cust
 		set
 			del_yn = 'N'
