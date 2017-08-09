@@ -89,8 +89,10 @@ public class CustController {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		mav.setViewName("cust_detail");
+		
 		if(cust_no == null || cust_no == "" ){
-			mav.setViewName("cust_detail");
+			
 			mav.addObject("flg", "1");
 			
 		}else if(cust_no != null){
@@ -99,7 +101,6 @@ public class CustController {
 			List<CustVO> custPList = custPhoneService.custPhoneDetailList(cust_no);
 			List<CustVO> custAList = custAddrService.custAddrDetailList(cust_no);
 			
-			mav.setViewName("cust_detail");
 			mav.addObject("flg", "2");
 			
 			mav.addObject("custDlist", custDlist);
@@ -122,9 +123,9 @@ public class CustController {
 //			@RequestParam(value="cust_list[]",required=false) List<String> cust_list
 			CustVO cvoS, String cust_no){
 		int result;
-		int flg;
-		System.out.println("cvoS" + cvoS);
-		System.out.println("cust_no"+cust_no);
+//		int flg;
+//		System.out.println("cvoS" + cvoS);
+//		System.out.println("cust_no"+cust_no);
 //		CustVO cvo = new CustVO();
 //		if(cust_list != null){
 //			for(int i=0; i < cust_list.size(); i++){
@@ -143,11 +144,11 @@ public class CustController {
 		if(cust_no == null){
 			result = custService.custAdd(cvoS);
 			if(result == 1){
-				String custNo = cvoS.getCust_key();
+				String custNo = cvoS.getCust_no();
 				custVO = custService.custDetailList(custNo);
 			}
 		}else if(cust_no != null){
-			flg=1;
+//			flg=1;
 			cvoS.setCust_no(cust_no);
 			result = custService.custMdfy(cvoS);
 			if(result == 1){
