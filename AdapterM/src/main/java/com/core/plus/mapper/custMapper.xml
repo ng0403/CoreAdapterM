@@ -5,30 +5,19 @@
 	<select id="custList" resultType="com.core.plus.contact.cust.vo.CustVO">
 		select
 			a.cust_no
-			,a.create_date
+      		, date_format(a.create_date, '%Y-%m-%d %H:%i') as create_date
 			,a.cust_name
-<!-- 			,a.resident_no -->
 			,a.chart_no
 			,a.cust_id
 			,a.visit_cd
 			,a.visit_dtl_cd
 			,a.visit_cn
-<!-- 			,a.rec_per -->
-<!-- 			,b.phone_country_cd -->
-			,b.phone_area_no
-			,b.phone_no
-<!-- 			,b.primary_yn -->
-<!-- 			,c.road_yn -->
-			,c.zip_no
-			,c.address
-<!-- 			,c.primary_yn -->
-		from tb_cust a, tb_cust_phone b, tb_cust_addr c
-		where
-			a.cust_no = b.cust_no
-			and a.cust_no = c.cust_no
-			and b.primary_yn = 'Y'
-			and c.primary_yn = 'Y'
-			and a.del_yn = 'N'
+			,(select phone_area_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) as phone_area_no
+      		,(select phone_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) as phone_no
+      		,(select zip_no from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) as zip_no
+      		,(select address from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) as address
+		from tb_cust a
+		where a.del_yn = 'N'
 		order by a.update_date desc
 	</select>
 	

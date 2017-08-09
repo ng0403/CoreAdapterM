@@ -170,5 +170,16 @@ public class CustVO {
 	public void setDel_yn(String del_yn) {
 		this.del_yn = del_yn;
 	}
+	@Override
+	public String toString() {
+		return "CustVO [cust_no=" + cust_no + ", create_date=" + create_date + ", update_date=" + update_date
+				+ ", cust_name=" + cust_name + ", resident_no=" + resident_no + ", chart_no=" + chart_no + ", cust_id="
+				+ cust_id + ", visit_cd=" + visit_cd + ", visit_dtl_cd=" + visit_dtl_cd + ", visit_cn=" + visit_cn
+				+ ", rec_per=" + rec_per + ", remark_cn=" + remark_cn + ", del_yn=" + del_yn + ", phone_type_cd="
+				+ phone_type_cd + ", phone_country_cd=" + phone_country_cd + ", phone_area_no=" + phone_area_no
+				+ ", phone_no=" + phone_no + ", primary_yn=" + primary_yn + ", addr_type_cd=" + addr_type_cd
+				+ ", road_yn=" + road_yn + ", zip_no=" + zip_no + ", address=" + address + ", cust_key=" + cust_key
+				+ "]";
+	}
 	
 }

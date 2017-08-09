@@ -14,6 +14,7 @@ $(document).ready(function(){
 
 <input type="hidden" id="ctx" value="${ctx}">
 <input type="hidden" id="flg" value="${flg}">
+<input type="hidden" id="cust_no" value="${custDlist.cust_no}">
 <!-- 고객 -->
 <div id="cust_detail">
 	<div style="height:10px;"></div>
@@ -72,7 +73,7 @@ $(document).ready(function(){
 		<tr>
 			<th id="impTh" class="discount_cost" style="text-align:right;">* 내원경로</th>
 			<td id="td_disc_type">	
-				<select id=visit_cd" name="visit_cd" 
+				<select id="visit_cd" name="visit_cd" 
 							style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
 					<option value="">선택해 주십시오</option>
 					<c:forEach var="vititCdList" items="${ vititCdList }">
@@ -88,7 +89,7 @@ $(document).ready(function(){
 			</td>
 			<th id="impTh"  style="text-align:right;">* 내원경로상세</th>
 			<td>
-		 		 <select id=cust_vititDtlCdList_sel" name="cust_vititDtlCdList_srch" 
+		 		 <select id="visit_dtl_cd" name="visit_dtl_cd" 
 							style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
 					<option value="">선택해 주십시오</option>
 					<c:forEach var="vititDtlCdList" items="${ vititDtlCdList }">
@@ -134,7 +135,7 @@ $(document).ready(function(){
 	 </c:if>
 	 <c:if test="${flg == 2 }">	 
 	 	  <div id="cust_update_div">
-	 	 	<input type="button" class="func_btn" id="cust_single_modify" value="수정" onclick="cust_modify_save(${custDlist.cust_no});">
+	 	 	<input type="button" class="func_btn" id="cust_single_modify" value="수정" onclick="cust_modify_save();">
 	 	 	<input type="button" class="func_btn" id="cust_single_cancel" value="취소" onclick="cust_cancel();">
 	 	 </div> 
 	 </c:if>
@@ -142,29 +143,28 @@ $(document).ready(function(){
     
     
     <div id="cust_phone">
-    	<table id="cust_form_tbl" class="commonDetailTable">
-			<tr>
-	 			<th id="impTh" style="text-align:right; readonly:true">* 고객명</th>
-				<td>
-					<input type="text" id="cust_name" name="cust_name" value="${custDlist.cust_name}">
-	 			</td>
-				<th  style="text-align:right;">주민번호</th>
-				<td>
-	 			 <input type="text" id="resident_no" name="resident_no" value="${custDlist.resident_no }" >
-	  			</td>
-			</tr>
-			
-			<tr>
-				<th style="text-align:right;">차트번호</th>
-				<td>
-					<input type="text" id="chart_no" name="chart_no" value="${custDlist.chart_no}" >
-	 			</td>
-				<th style="text-align:right;">전능고객ID</th>
-				<td> 
-		       		<input type="text" id="cust_id" name="cust_id" value="${custDlist.cust_id}"> 
-	 			</td>
-			</tr>	
-    	</table>
+<!--     	<table id="cust_form_tbl" class="commonDetailTable"> -->
+<!-- 			<tr> -->
+<!-- 	 			<th id="impTh" style="text-align:right; readonly:true">* 고객명</th> -->
+<!-- 				<td> -->
+<%-- 					<input type="text" id="cust_name" name="cust_name" value="${custDlist.cust_name}"> --%>
+<!-- 	 			</td> -->
+<!-- 				<th  style="text-align:right;">주민번호</th> -->
+<!-- 				<td> -->
+<%-- 	 			 <input type="text" id="resident_no" name="resident_no" value="${custDlist.resident_no }" > --%>
+<!-- 	  			</td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<th style="text-align:right;">차트번호</th> -->
+<!-- 				<td> -->
+<%-- 					<input type="text" id="chart_no" name="chart_no" value="${custDlist.chart_no}" > --%>
+<!-- 	 			</td> -->
+<!-- 				<th style="text-align:right;">전능고객ID</th> -->
+<!-- 				<td>  -->
+<%-- 		       		<input type="text" id="cust_id" name="cust_id" value="${custDlist.cust_id}">  --%>
+<!-- 	 			</td> -->
+<!-- 			</tr>	 -->
+<!--     	</table> -->
     </div>
     
     

@@ -116,38 +116,40 @@ public class CustController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/custSave" , method={RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="/custSave", method={RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public CustVO custSave(
-			@RequestParam(value="cust_list[]",required=false) List<String> cust_list
-			,CustVO cvoS, String cust_no){
+//			@RequestParam(value="cust_list[]",required=false) List<String> cust_list
+			CustVO cvoS, String cust_no){
 		int result;
 		int flg;
-		CustVO cvo = new CustVO();
-		if(cust_list != null){
-			for(int i=0; i < cust_list.size(); i++){
-				cvo.setCust_name(cust_list.get(i));
-				cvo.setResident_no(cust_list.get(++i));
-				cvo.setChart_no(cust_list.get(++i));
-				cvo.setCust_id(cust_list.get(++i));
-				cvo.setVisit_cd(cust_list.get(++i));
-				cvo.setVisit_dtl_cd(cust_list.get(++i));
-				cvo.setVisit_cn(cust_list.get(++i));
-				cvo.setRec_per(cust_list.get(++i));
-				cvo.setRemark_cn(cust_list.get(++i));
-			}
-		}
+		System.out.println("cvoS" + cvoS);
+		System.out.println("cust_no"+cust_no);
+//		CustVO cvo = new CustVO();
+//		if(cust_list != null){
+//			for(int i=0; i < cust_list.size(); i++){
+//				cvo.setCust_name(cust_list.get(i));
+//				cvo.setResident_no(cust_list.get(++i));                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+//				cvo.setChart_no(cust_list.get(++i));
+//				cvo.setCust_id(cust_list.get(++i));
+//				cvo.setVisit_cd(cust_list.get(++i));
+//				cvo.setVisit_dtl_cd(cust_list.get(++i));
+//				cvo.setVisit_cn(cust_list.get(++i));
+//				cvo.setRec_per(cust_list.get(++i));
+//				cvo.setRemark_cn(cust_list.get(++i));
+//			}
+//		}
 		CustVO custVO = null;
 		if(cust_no == null){
-			result = custService.custAdd(cvo);
+			result = custService.custAdd(cvoS);
 			if(result == 1){
 				String custNo = cvoS.getCust_key();
 				custVO = custService.custDetailList(custNo);
 			}
 		}else if(cust_no != null){
 			flg=1;
-			cvo.setCust_no(cust_no);
-			result = custService.custMdfy(cvo);
+			cvoS.setCust_no(cust_no);
+			result = custService.custMdfy(cvoS);
 			if(result == 1){
 				custVO = custService.custDetailList(cust_no);
 			}

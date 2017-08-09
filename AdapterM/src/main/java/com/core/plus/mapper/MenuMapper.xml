@@ -274,16 +274,16 @@
 	
 	<!-- 서브메뉴 그리기 -->
 	<select id="selectSubMenuList" parameterType="java.util.Map" resultType="com.core.plus.info.menu.vo.MenuVo">
-		 select a.menu_id
-		     , a.menu_nm
-		     , a.menu_url
-		     , a.up_menu_id
-		     , a.seq_no
+		 select menu_id
+		     , menu_nm
+		     , menu_url
+		     , up_menu_id
+		     , seq_no
 		  from tb_menu
 		 where menu_lev = '002'
 		   and act_yn = 'Y'
 		   and up_menu_id = #{menu_id}
-		 order by a.seq_no
+		 order by seq_no
 	</select>
 <!-- 	<select id="selectSubMenuList" parameterType="java.util.Map" resultType="ibs.mid.bon.manager.info.menu.vo.MenuVo"> -->
 <!-- 		 select a.menu_id -->
