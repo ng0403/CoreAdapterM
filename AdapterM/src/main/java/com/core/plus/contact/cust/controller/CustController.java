@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,10 +48,14 @@ public class CustController {
 		List<CommonCodeVO> vititDtlCdList = commonCode.vititDtlCdList();
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("cust");
+		mav.setViewName("cust_list");
 		mav.addObject("custList", custList);
 		mav.addObject("vititCdList", vititCdList);
 		mav.addObject("vititDtlCdList", vititDtlCdList);
+		
+		System.out.println("custList" + custList);
+		System.out.println("vititCdList" + vititCdList);
+		
 		
 		menuImport(mav, "cust");
 		
@@ -74,7 +79,7 @@ public class CustController {
 	}
 	
 	@RequestMapping(value="/custForm")
-	public ModelAndView custForm(String cust_no){
+	public ModelAndView custForm(@RequestParam("cust_no") String cust_no){
 		
 		List<CommonCodeVO> vititCdList = commonCode.vititCdList();
 		List<CommonCodeVO> vititDtlCdList = commonCode.vititDtlCdList();
@@ -83,14 +88,19 @@ public class CustController {
 		List<CommonCodeVO> addrTypeCdList = commonCode.addrTypeCdList();
 		
 		ModelAndView mav = new ModelAndView();
-		if(cust_no == null){
-			mav.setViewName("custForm");
+		
+		if(cust_no == null || cust_no == "" ){
+			mav.setViewName("cust_detail");
+			mav.addObject("flg", "1");
+			
 		}else if(cust_no != null){
+			
 			CustVO custDlist = custService.custDetailList(cust_no);
 			List<CustVO> custPList = custPhoneService.custPhoneDetailList(cust_no);
 			List<CustVO> custAList = custAddrService.custAddrDetailList(cust_no);
 			
-			mav.setViewName("custForm");
+			mav.setViewName("cust_detail");
+			mav.addObject("flg", "2");
 			
 			mav.addObject("custDlist", custDlist);
 			mav.addObject("custPList", custPList);
@@ -106,12 +116,13 @@ public class CustController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/custSave")
+	@RequestMapping(value="/custSave" , method={RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public CustVO custSave(
 			@RequestParam(value="cust_list[]",required=false) List<String> cust_list
 			,CustVO cvoS, String cust_no){
 		int result;
+		int flg;
 		CustVO cvo = new CustVO();
 		if(cust_list != null){
 			for(int i=0; i < cust_list.size(); i++){
@@ -134,6 +145,7 @@ public class CustController {
 				custVO = custService.custDetailList(custNo);
 			}
 		}else if(cust_no != null){
+			flg=1;
 			cvo.setCust_no(cust_no);
 			result = custService.custMdfy(cvo);
 			if(result == 1){
