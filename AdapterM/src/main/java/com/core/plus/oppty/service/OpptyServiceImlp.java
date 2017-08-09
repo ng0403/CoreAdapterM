@@ -1,6 +1,7 @@
 package com.core.plus.oppty.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -21,11 +22,17 @@ public class OpptyServiceImlp implements OpptyService {
 		// TODO Auto-generated method stub
 		return opptyDao.opptyList();
 	}
+	
+	@Override
+	public List<OpptyVO> opptySchList(Map<String, Object> kwMap) {
+		// TODO Auto-generated method stub
+		return opptyDao.opptySchList(kwMap);
+	}
 
 	@Override
-	public List<OpptyItemVO> opptyItemList() {
+	public List<OpptyItemVO> opptyItemList(String oppty_no) {
 		// TODO Auto-generated method stub
-		return null;
+		return opptyDao.opptyItemList(oppty_no);
 	}
 	
 	@Override
@@ -33,7 +40,33 @@ public class OpptyServiceImlp implements OpptyService {
 		// TODO Auto-generated method stub
 		return opptyDao.opptyDetail(oppty_no);
 	}
+	
+	/* CUD */
+	@Override
+	public int opptyInsert(OpptyVO opptyVo) {
+		// TODO Auto-generated method stub
+		return opptyDao.opptyInsert(opptyVo);
+	}
+	
+	@Override
+	public int opptyEdit(OpptyVO opptyVo) {
+		// TODO Auto-generated method stub
+		return opptyDao.opptyEdit(opptyVo);
+	}
+	
+	@Override
+	public int opptyDelete(OpptyVO opptyVo) {
+		// TODO Auto-generated method stub
+		return opptyDao.opptyDelete(opptyVo);
+	}
 
+	/* Index */
+	@Override
+	public OpptyVO opptyNoIndex() {
+		// TODO Auto-generated method stub
+		return opptyDao.opptyNoIndex();
+	}
+	
 	/* code */
 	@Override
 	public List<OpptyVO> opptyStatusCD() {

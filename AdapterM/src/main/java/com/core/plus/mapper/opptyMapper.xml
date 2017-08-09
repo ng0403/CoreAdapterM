@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="oppty">
 
-	<select id="opptyList" resultType="com.core.plus.oppty.vo.OpptyVO">
+	<!-- List -->
+	<select id="opptyList" resultType="com.core.plus.oppty.vo.OpptyVO" parameterType="java.util.Map">
 		SELECT 
 			oppty_no,
 			oppty_name,
@@ -18,6 +19,55 @@
 			create_date
 		FROM
 			tb_oppty opty
+		WHERE
+			del_yn = 'N'
+			<if test="oppty_no_srch != null and oppty_no_srch != ''">
+				AND (oppty_no like concat('%', #{oppty_no_srch}, '%'))
+			</if>
+			<if test="oppty_name_srch != null and oppty_name_srch != ''">
+				AND (oppty_name like concat('%', #{oppty_name_srch}, '%'))
+			</if>
+			<if test="cust_name_srch != null and cust_name_srch != ''">
+				AND (cust_no in ( select cust_no from tb_cust where cust_name like concat('%', #{cust_name_srch}, '%')))
+			</if>
+			<if test="emp_name_srch != null and emp_name_srch != ''">
+				AND (emp_no like ( select emp_no from tb_emp where emp_name like concat('%', #{emp_name_srch}, '%')))
+			</if>
+			<if test="oppty_status_cd_srch != null and oppty_status_cd_srch != ''">
+				AND (oppty_status_cd like concat('%', #{oppty_status_cd_srch}, '%'))
+			</if>
+			<if test="oppty_stage_cd_srch != null and oppty_stage_cd_srch != ''">
+				AND (oppty_stage_cd like concat('%', #{oppty_stage_cd_srch}, '%'))
+			</if>
+			<if test="exp_close_dt_srch != null and exp_close_dt_srch != ''">
+				AND (exp_close_day like concat('%', #{exp_close_dt_srch}, '%'))
+			</if>
+			<if test="dtype_cd_srch != null and dtype_cd_srch != ''">
+				AND (dtype_cd like concat('%', #{dtype_cd_srch}, '%'))
+			</if>
+			<if test="purchase_type_srch != null and purchase_type_srch != ''">
+				AND (purchase_type like concat('%', #{purchase_type_srch}, '%'))
+			</if>
+	</select>
+	
+	<!-- OpptyItem List -->
+	<select id="opptyItemList" resultType="com.core.plus.oppty.vo.OpptyItemVO">
+		SELECT
+			oppty_no,
+			main_cate_cd,
+			(select code_name from tb_code where code_no = '1015' and code = main_cate_cd) main_cate_name,
+			mid_cate_cd,
+			(select code_name from tb_code where code_no = '1016' and code = mid_cate_cd) mid_cate_name,
+			small_cate_cd,
+			(select code_name from tb_code where code_no = '1017' and code = small_cate_cd) small_cate_name,
+			qty,
+			list_price,
+			dc_price,
+			payment_day
+		FROM
+			tb_oppty_item
+		WHERE
+			oppty_no = #{oppty_no}
 	</select>
 	
 	<!-- Detail -->
@@ -29,15 +79,21 @@
 			(select cust_name from tb_cust cust where cust.cust_no = opty.cust_no) cust_name,
 			emp_no,
 			(select emp_name  from tb_emp  emp  where emp.emp_no = opty.emp_no) emp_name,
-			(select code_name from tb_code where code_no = '1010' and code = oppty_status_cd) oppty_status_cd,
-			(select code_name from tb_code where code_no = '1011' and code = oppty_stage_cd)  oppty_stage_cd,
+			oppty_status_cd,
+			(select code_name from tb_code where code_no = '1010' and code = oppty_status_cd) oppty_status_name,
+			oppty_stage_cd,
+			(select code_name from tb_code where code_no = '1011' and code = oppty_stage_cd)  oppty_stage_name,
 			score,
-			exp_close_day,
+			DATE_FORMAT(exp_close_day, '%Y-%m-%d') exp_close_day,
 			sur_plan_cn,
-			(select code_name from tb_code where code_no = '1008' and code = dtype_cd) dtype_cd,
-			(select code_name from tb_code where code_no = '1012' and code = purchase_type) purchase_type,
-			(select code_name from tb_code where code_no = '1013' and code = payment_cd) payment_cd,
-			(select code_name from tb_code where code_no = '1014' and code = rec_per_cd) rec_per_cd,
+			dtype_cd,
+			(select code_name from tb_code where code_no = '1008' and code = dtype_cd) dtype_name,
+			purchase_type,
+			(select code_name from tb_code where code_no = '1012' and code = purchase_type) purchase_type_name,
+			payment_cd,
+			(select code_name from tb_code where code_no = '1013' and code = payment_cd) payment_cd_name,
+			rec_per_cd,
+			(select code_name from tb_code where code_no = '1014' and code = rec_per_cd) rec_per_cd_name,
 			remark_cn
 		FROM
 			tb_oppty opty
@@ -64,5 +120,57 @@
 	<select id="opptyRecPerCode" resultType="com.core.plus.oppty.vo.OpptyVO">
 		SELECT code_name, code FROM tb_code WHERE code_no = '1014'
 	</select>
+	
+	<!-- Index 채번 -->
+	<select id="opptyNoIndex" resultType="com.core.plus.oppty.vo.OpptyVO">
+		SELECT 
+			IF(SUBSTR(MAX(oppty_no), 1, 10) = DATE_FORMAT(now(), '%Y%m%d%H'), 
+			MAX(oppty_no)+1, concat(DATE_FORMAT(now(), '%Y%m%d%H'),'00001')) oppty_no 
+		FROM tb_oppty USE INDEX(PRIMARY)
+	</select>
+	
+	<!-- CUD -->
+	<insert id="oppty_single_insert" parameterType="com.core.plus.oppty.vo.OpptyVO">
+		<selectKey keyProperty="oppty_no" resultType="String" order="BEFORE">
+			SELECT IF(SUBSTR(MAX(oppty_no), 1, 10) = DATE_FORMAT(now(), '%Y%m%d%H'), MAX(oppty_no)+1, concat(DATE_FORMAT(now(), '%Y%m%d%H'),'00001')) oppty_no 
+			FROM tb_oppty USE INDEX(PRIMARY)
+		</selectKey>
+		INSERT INTO tb_oppty
+			(oppty_no, oppty_name, cust_no, emp_no, oppty_status_cd, oppty_stage_cd, score, 
+			 exp_close_day, dtype_cd, sur_plan_cn, purchase_type, payment_cd, rec_per_cd, remark_cn)
+		VALUES
+			(
+			 #{oppty_no},
+			 #{oppty_name}, #{cust_no}, #{emp_no}, #{oppty_status_cd}, #{oppty_stage_cd}, #{score}, DATE_FORMAT(#{exp_close_day}, '%Y%m%d'), #{dtype_cd}, 
+			 #{sur_plan_cn}, #{purchase_type},#{payment_cd}, #{rec_per_cd}, #{remark_cn}
+            )
+	</insert>
+	
+	<update id="opptyEdit" parameterType="com.core.plus.oppty.vo.OpptyVO">
+		UPDATE tb_oppty
+		SET
+			oppty_name=#{oppty_name}, cust_no=#{cust_no}, emp_no=#{emp_no}, oppty_status_cd=#{oppty_status_cd},
+			oppty_stage_cd=#{oppty_stage_cd}, score=#{score}, exp_close_day=DATE_FORMAT(#{exp_close_day}, '%Y%m%d'), dtype_cd=#{dtype_cd},
+			sur_plan_cn=#{sur_plan_cn}, purchase_type=#{purchase_type}, payment_cd=#{payment_cd}, rec_per_cd=#{rec_per_cd},
+			remark_cn=#{remark_cn}
+		WHERE
+			oppty_no=#{oppty_no}
+	</update>
+	
+	<update id="opptyDelete" parameterType="com.core.plus.oppty.vo.OpptyVO">
+		UPDATE tb_oppty
+		SET
+			del_yn = 'Y'
+		WHERE
+			oppty_no=#{oppty_no}
+	</update>
+	
+	<!-- OpptyItem -->
+<!-- 	<insert id="opptyItemInsert" parameterType="com.core.plus.oppty.vo.OpptyItemVO"> -->
+<!-- 		INSERT INTO tb_oppty_item -->
+<!-- 			() -->
+<!-- 		VALUES -->
+<!-- 			() -->
+<!-- 	</insert> -->
 	
 </mapper>

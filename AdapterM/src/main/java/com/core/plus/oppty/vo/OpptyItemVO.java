@@ -12,6 +12,10 @@ public class OpptyItemVO {
 	private int qty; 				// 수량
 	private int list_price; 		// 단가
 	private int dc_price; 			// 할인금액
+	
+	private String main_cate_name;
+	private String mid_cate_name;
+	private String small_cate_name;
 
 	public String getOppty_no() {
 		return oppty_no;
@@ -93,4 +97,28 @@ public class OpptyItemVO {
 		this.dc_price = dc_price;
 	}
 
+	public String getMain_cate_name() {
+		return main_cate_name;
+	}
+
+	public void setMain_cate_name(String main_cate_name) {
+		this.main_cate_name = main_cate_name;
+	}
+
+	public String getMid_cate_name() {
+		return mid_cate_name;
+	}
+
+	public void setMid_cate_name(String mid_cate_name) {
+		this.mid_cate_name = mid_cate_name;
+	}
+
+	public String getSmall_cate_name() {
+		return small_cate_name;
+	}
+
+	public void setSmall_cate_name(String small_cate_name) {
+		this.small_cate_name = small_cate_name;
+	}
+	
 }

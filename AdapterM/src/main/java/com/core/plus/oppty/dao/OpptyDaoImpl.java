@@ -1,6 +1,7 @@
 package com.core.plus.oppty.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,23 @@ public class OpptyDaoImpl implements OpptyDao {
 		
 		return vo;
 	}
+	
+	@Override
+	public List<OpptyVO> opptySchList(Map<String, Object> kwMap) {
+		// TODO Auto-generated method stub
+		List<OpptyVO> vo = sqlSession.selectList("oppty.opptyList", kwMap);
+		
+		System.out.println("vo : " + vo);
+		
+		return vo;
+	}
 
 	@Override
-	public List<OpptyItemVO> opptyItemList() {
+	public List<OpptyItemVO> opptyItemList(String oppty_no) {
 		// TODO Auto-generated method stub
-		return null;
+		List<OpptyItemVO> vo = sqlSession.selectList("oppty.opptyItemList", oppty_no);
+		
+		return vo;
 	}
 	
 	@Override
@@ -36,7 +49,41 @@ public class OpptyDaoImpl implements OpptyDao {
 		
 		OpptyVO detail = sqlSession.selectOne("oppty.opptyDetail", oppty_no);
 		
+		System.out.println("detail : " + detail);
+		
 		return detail;
+	}
+	
+	/* CUD */
+	@Override
+	public int opptyInsert(OpptyVO opptyVo) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.insert("oppty.oppty_single_insert", opptyVo);
+		
+		return result;
+	}
+	
+	@Override
+	public int opptyEdit(OpptyVO opptyVo) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.update("oppty.opptyEdit", opptyVo);
+		
+		return result;
+	}
+	
+	@Override
+	public int opptyDelete(OpptyVO opptyVo) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.delete("oppty.opptyDelete", opptyVo);
+		
+		return result;
+	}
+	
+	/* Index */
+	@Override
+	public OpptyVO opptyNoIndex() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("oppty.opptyNoIndex");
 	}
 
 	/* Code */

@@ -9,10 +9,10 @@
 <script type="text/javascript" src="${ctx}/resources/common/js/opty/oppty.js"></script> 
 
 <script type="text/javascript">
-// $(document).ready(function(){
-// 	$('#exp_start_dt_srch').datepicker();
-// 	$('#exp_end_dt_srch').datepicker();
-// });
+ $(document).ready(function(){
+	$('#exp_end_dt_srch').datepicker();
+
+ });
 </script>
 
 
@@ -53,13 +53,13 @@
 						 
 						 <th style="width:5%;">고객명</th>
 						 <td style="width:15%;">
-						    <input type="text" id="oppty_name_srch" name="oppty_name_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="cust_name_srch" name="cust_name_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td>
 					</tr>
 					<tr>
 						<th style="width:5%;">담당자명</th>
 						<td style="width:15%;">
-						    <input type="text" id="oppty_name_srch" name="oppty_name_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="emp_name_srch" name="emp_name_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						</td >
 						
 						<th style="width:5%;">기회상태</th>
@@ -85,9 +85,9 @@
 						</td>
 					</tr>
 					<tr>
-						<th style="width: 5%;">예상종료일자</th>
+						<th style="width: 10%;">예상종료일자</th>
 						<td style="width:25%;">
-							<input type="text" name="exp_end_dt_srch" id="exp_end_dt_srch" value="" class="expt_fin_d" placeholder="종료일자"
+							<input type="text" name="exp_close_dt_srch" id="exp_close_dt_srch" value="" class="expt_fin_d" placeholder="예상종료일자"
 							 	   readonly="readonly" style="width : 35%; text-align: center; cursor: pointer;">
 						 </td>
 						 
@@ -113,9 +113,8 @@
 							</select>
 						</td>
 						
-						<td style="width: 12%;"><input type="button" value="조회"
-							id="coupon_list_sch" onclick="cupn_manager_sch(1);"
-							class="tr_btn" style="margin-left: 0;">
+						<td style="width: 12%;"><input type="button" value="조회" id="oppty_list_sch" 
+							onclick="opptySchList();"	class="tr_btn" style="margin-left: 0;"> <!-- pageing 시 매개변수 1을 전달한다. -->
 						</td>
 
 						
@@ -141,23 +140,25 @@
 	 	 			<th >등록일시</th>
 	 	 		</tr>
 	 	 	</thead>
-	 	 	<tbody>
+	 	 	<tbody id="oppty_list_tbody">
 	 	 		<c:forEach items="${ opptyList }" var="list">
-	 	 			<td style="text-align: left;" >${ list.oppty_no }</td>
-	 	 			<td style="text-align: left;" >
-	 	 				<a onclick="opptyDetail('${ list.oppty_no }', '1');" id="${ list.oppty_no }">${ list.oppty_name }</a>
-	 	 			</td>
-	 	 			<td style="text-align: left;" >${ list.cust_no }</td>
-	 	 			<td style="text-align: left;" >${ list.cust_name }</td>
-	 	 			<td style="text-align: left;" ><!-- 전화번호 --></td>
-	 	 			<td style="text-align: left;" >${ list.emp_name }</td>
-	 	 			<td style="text-align: left;" >${ list.oppty_status_cd }</td>
-	 	 			<td style="text-align: left;" >${ list.oppty_stage_cd }</td>
-	 	 			<td style="text-align: left;" >${ list.exp_close_day }</td>
-	 	 			<td style="text-align: left;" >${ list.dtype_cd }</td>
-	 	 			<td style="text-align: left;" >${ list.purchase_type }</td>
-	 	 			<td style="text-align: left;" >${ list.rec_per_cd }</td>
-	 	 			<td style="text-align: left;" >${ list.create_date }</td>
+	 	 			<tr>
+	 		 			<td style="text-align: left;" >${ list.oppty_no }</td>
+	 		 			<td style="text-align: left;" >
+	 		 				<a onclick="opptyDetail('${ list.oppty_no }');" id="${ list.oppty_no }">${ list.oppty_name }</a>
+	 		 			</td>
+		 	 			<td style="text-align: left;" >${ list.cust_no }</td>
+	 		 			<td style="text-align: left;" >${ list.cust_name }</td>
+	 		 			<td style="text-align: left;" ><!-- 전화번호 --></td>
+	 		 			<td style="text-align: left;" >${ list.emp_name }</td>
+	 		 			<td style="text-align: left;" >${ list.oppty_status_cd }</td>
+	 		 			<td style="text-align: left;" >${ list.oppty_stage_cd }</td>
+	 		 			<td style="text-align: left;" >${ list.exp_close_day }</td>
+	 	 				<td style="text-align: left;" >${ list.dtype_cd }</td>
+	 	 				<td style="text-align: left;" >${ list.purchase_type }</td>
+	 	 				<td style="text-align: left;" >${ list.rec_per_cd }</td>
+	 	 				<td style="text-align: left;" >${ list.create_date }</td>
+	 	 			</tr>
 	 	 		</c:forEach>
 	 	 		
 <%-- 	 	 		<c:forEach items="${couponList}" var="couponList"> --%>
@@ -188,7 +189,7 @@
 	 	 </table>
    	
 		<div class="listFootDiv">
-		 	 <input type="button" class="func_btn" id="oppty_single_add" value="단건등록" onclick="opptySingleAdd();">
+		 	 <input type="button" class="func_btn" id="oppty_single_add" value="단건등록" onclick="opptySingleAddForm();">
 		 	 <input type="button" class="func_btn" id="oppty_multi_add" value="다건등록">
 		</div>
 <!-- 	 	<div class="pagingDiv"> -->

@@ -25,6 +25,12 @@ public class OpptyVO {
 	private String code_no;
 	private String code;
 	private String code_name;
+	private String oppty_status_name;
+	private String oppty_stage_name;
+	private String dtype_name;
+	private String purchase_type_name;
+	private String payment_name;
+	private String rec_per_name;
 
 	public String getOppty_no() {
 		return oppty_no;
@@ -194,6 +200,54 @@ public class OpptyVO {
 	public void setCode_name(String code_name) {
 		this.code_name = code_name;
 	}
+	
+	public String getOppty_status_name() {
+		return oppty_status_name;
+	}
+
+	public void setOppty_status_name(String oppty_status_name) {
+		this.oppty_status_name = oppty_status_name;
+	}
+
+	public String getOppty_stage_name() {
+		return oppty_stage_name;
+	}
+
+	public void setOppty_stage_name(String oppty_stage_name) {
+		this.oppty_stage_name = oppty_stage_name;
+	}
+
+	public String getDtype_name() {
+		return dtype_name;
+	}
+
+	public void setDtype_name(String dtype_name) {
+		this.dtype_name = dtype_name;
+	}
+
+	public String getPurchase_type_name() {
+		return purchase_type_name;
+	}
+
+	public void setPurchase_type_name(String purchase_type_name) {
+		this.purchase_type_name = purchase_type_name;
+	}
+
+	public String getPayment_name() {
+		return payment_name;
+	}
+
+	public void setPayment_name(String payment_name) {
+		this.payment_name = payment_name;
+	}
+
+	public String getRec_per_name() {
+		return rec_per_name;
+	}
+
+	public void setRec_per_name(String rec_per_name) {
+		this.rec_per_name = rec_per_name;
+	}
 
 	@Override
 	public String toString() {
@@ -203,7 +257,22 @@ public class OpptyVO {
 				+ oppty_stage_cd + ", exp_close_day=" + exp_close_day + ", dtype_cd=" + dtype_cd + ", sur_plan_cn="
 				+ sur_plan_cn + ", purchase_type=" + purchase_type + ", payment_cd=" + payment_cd + ", rec_per_cd="
 				+ rec_per_cd + ", remark_cn=" + remark_cn + ", score=" + score + ", code_no=" + code_no + ", code="
-				+ code + ", code_name=" + code_name + "]";
+				+ code + ", code_name=" + code_name + ", oppty_status_name=" + oppty_status_name + ", oppty_stage_name="
+				+ oppty_stage_name + ", dtype_name=" + dtype_name + ", purchase_type_name=" + purchase_type_name
+				+ ", payment_name=" + payment_name + ", rec_per_name=" + rec_per_name + ", getOppty_no()="
+				+ getOppty_no() + ", getCreate_date()=" + getCreate_date() + ", getUpdate_date()=" + getUpdate_date()
+				+ ", getOppty_name()=" + getOppty_name() + ", getCust_no()=" + getCust_no() + ", getCust_name()="
+				+ getCust_name() + ", getEmp_no()=" + getEmp_no() + ", getEmp_name()=" + getEmp_name()
+				+ ", getOppty_status_cd()=" + getOppty_status_cd() + ", getOppty_stage_cd()=" + getOppty_stage_cd()
+				+ ", getExp_close_day()=" + getExp_close_day() + ", getDtype_cd()=" + getDtype_cd()
+				+ ", getSur_plan_cn()=" + getSur_plan_cn() + ", getPurchase_type()=" + getPurchase_type()
+				+ ", getPayment_cd()=" + getPayment_cd() + ", getRec_per_cd()=" + getRec_per_cd() + ", getRemark_cn()="
+				+ getRemark_cn() + ", getScore()=" + getScore() + ", getCode_no()=" + getCode_no() + ", getCode()="
+				+ getCode() + ", getCode_name()=" + getCode_name() + ", getOppty_status_name()="
+				+ getOppty_status_name() + ", getOppty_stage_name()=" + getOppty_stage_name() + ", getDtype_name()="
+				+ getDtype_name() + ", getPurchase_type_name()=" + getPurchase_type_name() + ", getPayment_name()="
+				+ getPayment_name() + ", getRec_per_name()=" + getRec_per_name() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
-	
+
 }
