@@ -27,9 +27,11 @@ public class CustVO {
 	private String addr_type_cd;
 	private String road_yn;
 	private String zip_no;
-	private String address;
+	private String main_address;
+	private String detail_address;
 	
-//	selectKsy
+	
+	//	selectKsy
 	private String cust_key;
 	
 	public String getCust_no() {
@@ -152,11 +154,17 @@ public class CustVO {
 	public void setZip_no(String zip_no) {
 		this.zip_no = zip_no;
 	}
-	public String getAddress() {
-		return address;
+	public String getMain_address() {
+		return main_address;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setMain_address(String main_address) {
+		this.main_address = main_address;
+	}
+	public String getDetail_address() {
+		return detail_address;
+	}
+	public void setDetail_address(String detail_address) {
+		this.detail_address = detail_address;
 	}
 	public String getCust_key() {
 		return cust_key;
@@ -178,8 +186,9 @@ public class CustVO {
 				+ ", rec_per=" + rec_per + ", remark_cn=" + remark_cn + ", del_yn=" + del_yn + ", phone_type_cd="
 				+ phone_type_cd + ", phone_country_cd=" + phone_country_cd + ", phone_area_no=" + phone_area_no
 				+ ", phone_no=" + phone_no + ", primary_yn=" + primary_yn + ", addr_type_cd=" + addr_type_cd
-				+ ", road_yn=" + road_yn + ", zip_no=" + zip_no + ", address=" + address + ", cust_key=" + cust_key
-				+ "]";
+				+ ", road_yn=" + road_yn + ", zip_no=" + zip_no + ", main_address=" + main_address + ", detail_address="
+				+ detail_address + ", cust_key=" + cust_key + "]";
 	}
+	
 	
 }

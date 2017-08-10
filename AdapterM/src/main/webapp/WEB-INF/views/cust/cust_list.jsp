@@ -79,13 +79,13 @@
 	 	 	<thead>
 	 	 		<tr>
  	 	 			<th style="width: 10%;">고객번호</th> 
-	 	 			<th style="width: 10%;">고객명</th>
+	 	 			<th style="width: 8%;">고객명</th>
  	 	 			<th style="width: 10%;">차트번호</th>
 	 	 			<th style="width: 10%;">내원경로</th> 
 	 	 			<th style="width: 10%;">내원경로상세</th>
 	 	 			<th style="width: 10%;">소개자</th>
 	 	 			<th style="width: 10%;">전화번호</th>
-	 	 			<th style="width: 15%;">주소</th>
+	 	 			<th style="width: 17%;">주소</th>
 	 	 			<th style="width: 10%;">등록일시</th> 
  	 	 		</tr>
 	 	 	</thead>
@@ -109,7 +109,7 @@
 	 	 			</td>
 	 	 			<td style="text-align: left;" >${list.rec_per}</td>
 	 	 			<td style="text-align: left;" >${list.phone_no}</td>
-	 	 			<td style="text-align: left;" >${list.address}</td>
+	 	 			<td style="text-align: left;" >${list.main_address}</td>
 	 	 			<td style="text-align: left;" >${list.create_date}</td>
 	 	 			</tr>
 	 	 		</c:forEach>

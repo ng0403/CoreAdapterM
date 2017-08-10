@@ -39,18 +39,21 @@ $(document).ready(function() {
  
 // 고객 수정 저장
  function cust_modify_save() {
+	 
 	 alert($("#cust_no").val());
 	 alert($("#visit_cd").find(":selected").val());
 	 alert($("#visit_dtl_cd ").val());
 	 
 	 $(document).ready(function() {
 
+		 var cust_no = $("#cust_no").val();
+			 
 			$.ajax({
 				type : 'POST',
 				url : ctx + '/custSave',
 				data : {
 					
-					cust_no 		: $("#cust_no").val(),
+					cust_no 		: cust_no,
 					cust_name 		: $("#cust_name").val(),
 					resident_no		: $("#resident_no").val(),
 					chart_no		: $("#chart_no").val(),
@@ -62,6 +65,14 @@ $(document).ready(function() {
 				},
 				dataType : "json",
 				success : function(data) {
+					
+//					if (cust_no == null || cust_no == "") {
+//						
+//						
+//					} else {
+//						
+//					}
+					
 					
 					var ynChk = confirm("해당 고객을 수정하시겠습니까?");
 					if(ynChk){

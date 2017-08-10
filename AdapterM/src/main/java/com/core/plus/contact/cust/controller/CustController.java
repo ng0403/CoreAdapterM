@@ -53,8 +53,8 @@ public class CustController {
 		mav.addObject("vititCdList", vititCdList);
 		mav.addObject("vititDtlCdList", vititDtlCdList);
 		
-		System.out.println("custList" + custList);
-		System.out.println("vititCdList" + vititCdList);
+//		System.out.println("custList" + custList);
+//		System.out.println("vititCdList" + vititCdList);
 		
 		
 		menuImport(mav, "cust");
@@ -82,10 +82,10 @@ public class CustController {
 	public ModelAndView custForm(@RequestParam("cust_no") String cust_no){
 		
 		List<CommonCodeVO> vititCdList = commonCode.vititCdList();
-		List<CommonCodeVO> vititDtlCdList = commonCode.vititDtlCdList();
-		List<CommonCodeVO> phoneTypeCdList = commonCode.phoneTypeCdList();
-		List<CommonCodeVO> phoneCountryCdList = commonCode.phoneCountryCdList();
-		List<CommonCodeVO> addrTypeCdList = commonCode.addrTypeCdList();
+		List<CommonCodeVO> vititDtlCdList = commonCode.vititDtlCdList();			
+		List<CommonCodeVO> phoneTypeCdList = commonCode.phoneTypeCdList(); 			//전화번호구분
+		List<CommonCodeVO> phoneCountryCdList = commonCode.phoneCountryCdList(); 	//국가번호
+		List<CommonCodeVO> addrTypeCdList = commonCode.addrTypeCdList();			//주소구분
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -95,7 +95,7 @@ public class CustController {
 			
 			mav.addObject("flg", "1");
 			
-		}else if(cust_no != null){
+		}else if(cust_no != null || cust_no != ""){
 			
 			CustVO custDlist = custService.custDetailList(cust_no);
 			List<CustVO> custPList = custPhoneService.custPhoneDetailList(cust_no);
@@ -106,6 +106,7 @@ public class CustController {
 			mav.addObject("custDlist", custDlist);
 			mav.addObject("custPList", custPList);
 			mav.addObject("custAList", custAList);
+			
 		}
 		
 		mav.addObject("vititCdList", vititCdList);
@@ -113,6 +114,7 @@ public class CustController {
 		mav.addObject("phoneTypeCdList", phoneTypeCdList);
 		mav.addObject("phoneCountryCdList", phoneCountryCdList);
 		mav.addObject("addrTypeCdList", addrTypeCdList);
+		
 		
 		return mav;
 	}
@@ -141,13 +143,17 @@ public class CustController {
 //			}
 //		}
 		CustVO custVO = null;
-		if(cust_no == null){
+		if(cust_no == null || cust_no == ""){
 			result = custService.custAdd(cvoS);
+			System.out.println("result"+result);
+			
 			if(result == 1){
 				String custNo = cvoS.getCust_no();
 				custVO = custService.custDetailList(custNo);
+				System.out.println("if문 안 custVO : "+custVO);
+				
 			}
-		}else if(cust_no != null){
+		}else if(cust_no != null || cust_no != ""){
 //			flg=1;
 			cvoS.setCust_no(cust_no);
 			result = custService.custMdfy(cvoS);
@@ -155,6 +161,8 @@ public class CustController {
 				custVO = custService.custDetailList(cust_no);
 			}
 		}
+		
+		
 		return custVO;
 	}
 	
@@ -205,7 +213,8 @@ public class CustController {
 				cvo.setAddr_type_cd(custA_list.get(++i));
 				cvo.setRoad_yn(custA_list.get(++i));
 				cvo.setZip_no(custA_list.get(++i));
-				cvo.setAddress(custA_list.get(++i));
+				cvo.setMain_address(custA_list.get(++i));
+				cvo.setDetail_address(custA_list.get(++i));
 				cvo.setPrimary_yn(custA_list.get(++i));
 				custAD_list.add(cvo);
 			}

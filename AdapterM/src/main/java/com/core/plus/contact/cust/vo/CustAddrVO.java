@@ -7,8 +7,9 @@ public class CustAddrVO {
 	private String road_yn;
 	private String zip_no;
 	private String address;
+	private String main_address;
+	private String detail_address;
 	private String primary_yn;
-	
 	public String getCust_no() {
 		return cust_no;
 	}
@@ -45,12 +46,28 @@ public class CustAddrVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public String getMain_address() {
+		return main_address;
+	}
+	public void setMain_address(String main_address) {
+		this.main_address = main_address;
+	}
+	public String getDetail_address() {
+		return detail_address;
+	}
+	public void setDetail_address(String detail_address) {
+		this.detail_address = detail_address;
+	}
 	public String getPrimary_yn() {
 		return primary_yn;
 	}
 	public void setPrimary_yn(String primary_yn) {
 		this.primary_yn = primary_yn;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "CustAddrVO [cust_no=" + cust_no + ", addr_type_cd=" + addr_type_cd + ", create_date=" + create_date
+				+ ", road_yn=" + road_yn + ", zip_no=" + zip_no + ", address=" + address + ", main_address="
+				+ main_address + ", detail_address=" + detail_address + ", primary_yn=" + primary_yn + "]";
+	}
 }
