@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.core.plus.contact.cust.vo.CustVO;
+import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.oppty.vo.OpptyItemVO;
 import com.core.plus.oppty.vo.OpptyVO;
 
@@ -133,6 +135,39 @@ public class OpptyDaoImpl implements OpptyDao {
 		List<OpptyVO> code = sqlSession.selectList("oppty.opptyRecPerCode");
 		
 		return code;
+	}
+
+	/* Popup */
+	@Override
+	public List<CustVO> custPopupList() {
+		// TODO Auto-generated method stub
+		List<CustVO> custPopList = sqlSession.selectList("oppty.custPopupList");
+		
+		return custPopList;
+	}
+
+	@Override
+	public List<CustVO> custPopupList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<CustVO> custPopList = sqlSession.selectList("oppty.custPopupList", map);
+		
+		return custPopList;
+	}
+
+	@Override
+	public List<EmpVO> empPopupList() {
+		// TODO Auto-generated method stub
+		List<EmpVO> empPopList = sqlSession.selectList("oppty.empPopupList");
+		
+		return empPopList;
+	}
+
+	@Override
+	public List<EmpVO> empPopupList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<EmpVO> empPopList = sqlSession.selectList("oppty.empPopupList", map);
+		
+		return empPopList;
 	}
 
 }

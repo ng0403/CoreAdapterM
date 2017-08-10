@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.core.plus.contact.cust.vo.CustVO;
+import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.oppty.service.OpptyService;
 import com.core.plus.oppty.vo.OpptyItemVO;
 import com.core.plus.oppty.vo.OpptyVO;
@@ -165,6 +167,56 @@ public class OpptyController {
 		result = opptyService.opptyDelete(opptyVo);
 		
 		return result;
+	}
+	
+	
+	/* Popup*/
+	@RequestMapping(value="custListAjax", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> custListPopup(String s_cust_name)
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		// 고객리스트 불러오는 서비스/다오/맵퍼 작성
+		if(s_cust_name == null || s_cust_name == "")
+		{
+			List<CustVO> custPopupList = opptyService.custPopupList();
+			map.put("custPopupList", custPopupList);
+			
+			return map;
+		}
+		else
+		{
+			map.put("s_cust_name", s_cust_name);
+			List<CustVO> schCustPopupList = opptyService.custPopupList(map);
+			map.put("custPopupList", schCustPopupList);
+			
+			return map;
+		}
+		
+	}
+	
+	@RequestMapping(value="empListAjax", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> empListPopup(String s_emp_name)
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		// 담당자리스트 불러오는 서비스/다오/맵퍼 작성
+		if(s_emp_name == null || s_emp_name == "")
+		{
+			List<EmpVO> empPopupList = opptyService.empPopupList();
+			map.put("empPopupList", empPopupList);
+			
+			return map;
+		}
+		else
+		{
+			map.put("s_emp_name", s_emp_name);
+			List<EmpVO> schEmpPopupList = opptyService.empPopupList(map);
+			map.put("empPopupList", schEmpPopupList);
+			
+			return map;
+		}
+		
 	}
 
 }

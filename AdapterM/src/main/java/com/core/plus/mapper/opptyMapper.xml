@@ -173,4 +173,32 @@
 <!-- 			() -->
 <!-- 	</insert> -->
 	
+	
+	<!-- Popup -->
+	<select id="custPopupList" resultType="com.core.plus.contact.cust.vo.CustVO" parameterType="java.util.Map">
+		SELECT
+			cust_no,
+			cust_name
+		FROM
+			tb_cust
+		WHERE
+			del_yn = 'N'
+		<if test="s_cust_name != null and s_cust_name != ''">
+			AND (cust_name like concat('%', #{s_cust_name}, '%'))
+		</if>
+	</select>
+	
+	<select id="empPopupList" resultType="com.core.plus.emp.vo.EmpVO" parameterType="java.util.Map">
+		SELECT
+			emp_no,
+			emp_name
+		FROM
+			tb_emp
+		WHERE
+			del_yn = 'N'
+		<if test="s_emp_name != null and s_emp_name != ''">
+			AND (emp_name like concat('%', #{s_emp_name}, '%'))
+		</if>
+	</select>
+	
 </mapper>

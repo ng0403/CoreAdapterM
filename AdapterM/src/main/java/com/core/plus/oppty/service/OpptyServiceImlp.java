@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.core.plus.contact.cust.vo.CustVO;
+import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.oppty.dao.OpptyDao;
 import com.core.plus.oppty.vo.OpptyItemVO;
 import com.core.plus.oppty.vo.OpptyVO;
@@ -102,6 +104,31 @@ public class OpptyServiceImlp implements OpptyService {
 	public List<OpptyVO> opptyRecPerCD() {
 		// TODO Auto-generated method stub
 		return opptyDao.opptyRecPerCD();
+	}
+
+	/* Popup */
+	@Override
+	public List<CustVO> custPopupList() {
+		// TODO Auto-generated method stub
+		return opptyDao.custPopupList();
+	}
+
+	@Override
+	public List<CustVO> custPopupList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return opptyDao.custPopupList(map);
+	}
+
+	@Override
+	public List<EmpVO> empPopupList() {
+		// TODO Auto-generated method stub
+		return opptyDao.empPopupList();
+	}
+
+	@Override
+	public List<EmpVO> empPopupList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return opptyDao.empPopupList(map);
 	}
 
 }

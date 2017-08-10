@@ -3,6 +3,8 @@ package com.core.plus.oppty.service;
 import java.util.List;
 import java.util.Map;
 
+import com.core.plus.contact.cust.vo.CustVO;
+import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.oppty.vo.OpptyItemVO;
 import com.core.plus.oppty.vo.OpptyVO;
 
@@ -31,5 +33,11 @@ public interface OpptyService {
 	List<OpptyVO> opptyPerchaseType();
 	List<OpptyVO> opptyPaymentCD();
 	List<OpptyVO> opptyRecPerCD();
+	
+	// Popup
+	List<CustVO> custPopupList();
+	List<CustVO> custPopupList(Map<String, Object> map);
+	List<EmpVO> empPopupList();
+	List<EmpVO> empPopupList(Map<String, Object> map);
 
 }
