@@ -148,51 +148,54 @@ $(document).ready(function(){
 	</div> 
     <div id="cust_phone">
     	<table id="cust_form_tbl" class="commonDetailTable">
-			<tr>
-	 			<th style="text-align:center;">구분</th>
-				<th style="text-align:center;">국가코드</th>
-				<th style="text-align:center;">국번호</th>
-				<th style="text-align:center;">고유번호</th>
-			</tr>
-			
-			<c:forEach items="${custPList}" var="custPList" >
-			<tr>
-				<td>
-					<select id="phone_type_cd" name="phone_type_cd" 
-							style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
-						<option value="">선택</option>
-						<c:forEach var="phoneTypeCdList" items="${ phoneTypeCdList }">
-							<c:if test= "${ phoneTypeCdList.code eq custPList.phone_type_cd }">
-								<option value="${ phoneTypeCdList.code }" selected="selected">${ phoneTypeCdList.code_name }</option>
-							</c:if>
-							<c:if test= "${ phoneTypeCdList.code ne custPList.phone_type_cd }">
-								<option value="${ phoneTypeCdList.code }">${ phoneTypeCdList.code_name }</option>
-							</c:if>
-						</c:forEach>
-					</select>
-	 			</td>
-				<td>
-		 			 <select id="phone_country_cd" name="phone_country_cd" 
+	    	<thead>
+				<tr>
+		 			<th style="text-align:center;">구분</th>
+					<th style="text-align:center;">국가코드</th>
+					<th style="text-align:center;">국번호</th>
+					<th style="text-align:center;">고유번호</th>
+				</tr>
+			</thead>
+			<tbody id="table_tbody">
+				<c:forEach items="${custPList}" var="custPList" >
+				<tr>
+					<td>
+						<select id="phone_type_cd" name="phone_type_cd" 
 								style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
 							<option value="">선택</option>
-							<c:forEach var="phoneCountryCdList" items="${ phoneCountryCdList }">
-								<c:if test= "${ phoneCountryCdList.code eq custPList.phone_country_cd }">
-									<option value="${ phoneCountryCdList.code }" selected="selected">${ phoneCountryCdList.code_name }</option>
+							<c:forEach var="phoneTypeCdList" items="${ phoneTypeCdList }">
+								<c:if test= "${ phoneTypeCdList.code eq custPList.phone_type_cd }">
+									<option value="${ phoneTypeCdList.code }" selected="selected">${ phoneTypeCdList.code_name }</option>
 								</c:if>
-								<c:if test= "${ phoneCountryCdList.code ne custPList.phone_country_cd }">
-									<option value="${ phoneCountryCdList.code }">${ phoneCountryCdList.code_name }</option>
+								<c:if test= "${ phoneTypeCdList.code ne custPList.phone_type_cd }">
+									<option value="${ phoneTypeCdList.code }">${ phoneTypeCdList.code_name }</option>
 								</c:if>
 							</c:forEach>
 						</select>
-	  			</td>
-				<td>
-					<input type="text" id="phone_area_no" name="phone_area_no" value="${custPList.phone_area_no}" >
-	 			</td>
-				<td> 
-		       		<input type="text" id="phone_no" name="phone_no" value="${custPList.phone_no}"> 
-	 			</td>
-			</tr>	
-			</c:forEach>
+		 			</td>
+					<td>
+			 			 <select id="phone_country_cd" name="phone_country_cd" 
+									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
+								<option value="">선택</option>
+								<c:forEach var="phoneCountryCdList" items="${ phoneCountryCdList }">
+									<c:if test= "${ phoneCountryCdList.code eq custPList.phone_country_cd }">
+										<option value="${ phoneCountryCdList.code }" selected="selected">${ phoneCountryCdList.code_name }</option>
+									</c:if>
+									<c:if test= "${ phoneCountryCdList.code ne custPList.phone_country_cd }">
+										<option value="${ phoneCountryCdList.code }">${ phoneCountryCdList.code_name }</option>
+									</c:if>
+								</c:forEach>
+							</select>
+		  			</td>
+					<td>
+						<input type="text" id="phone_area_no" name="phone_area_no" value="${custPList.phone_area_no}" >
+		 			</td>
+					<td> 
+			       		<input type="text" id="phone_no" name="phone_no" value="${custPList.phone_no}"> 
+		 			</td>
+				</tr>	
+				</c:forEach>
+			</tbody>
     	</table>
     </div>
         

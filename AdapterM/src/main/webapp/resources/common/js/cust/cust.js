@@ -91,3 +91,70 @@ var ctx = $("#ctx").val();
 	 location.href="/cust"
  } 
  
+
+ // 테이블 행 추가
+function cust_phone_add(cust_no) {
+	var cust_no = cust_no;
+	var phoneTypeCdList = "<c:out value='${phoneTypeCdList}'/>";
+	var phone_type_cd = '<c:out value="${custPList.phone_type_cd}"/>';
+	
+	console.log(phoneTypeCdList);
+	console.log(phone_type_cd);
+	
+    var tbody = $('#table_tbody');
+	var tbodyContent = "";
+	
+	// 새로 그려준다.
+	tbody.append(
+		"<tr>"+
+			"<td>" +
+				"<select id='phone_type_cd' name='phone_type_cd'" +
+					"style='margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;'>" +
+				"<option value=''>선택</option>"+
+				"<c:forEach var='phoneTypeCdList' items='"+ phoneTypeCdList +"'>" +
+					"<c:if test= '${ phoneTypeCdList.code eq "+phone_type_cd+" }'>" +
+						"<option value='${ phoneTypeCdList.code }' selected='selected'>${ phoneTypeCdList.code_name}</option>" +
+						"</c:if>" +
+						"<c:if test= '${ phoneTypeCdList.code ne custPList.phone_type_cd }'>"+
+							"<option value='${ phoneTypeCdList.code }'>${ phoneTypeCdList.code_name }</option>"+
+						"</c:if>"+
+					"</c:forEach>"+
+				"</select>"+
+			"</td>"+
+			"<td>"+
+				"<select id='phone_country_cd' name='phone_country_cd' " + 
+						"style='margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;'>" +
+				"<option value=''>선택</option>" +
+				"<c:forEach var='phoneCountryCdList' items='${ phoneCountryCdList }'> " +
+						"<c:if test= '${ phoneCountryCdList.code eq custPList.phone_country_cd }'>" +
+							"<option value='${ phoneCountryCdList.code }' selected='selected'>${ phoneCountryCdList.code_name }</option>" +
+						"</c:if>" +
+						"<c:if test= '${ phoneCountryCdList.code ne custPList.phone_country_cd }'> " +
+							"<option value='${ phoneCountryCdList.code }'>${ phoneCountryCdList.code_name }</option>" +
+						"</c:if>" +
+					"</c:forEach>"+
+				"</select> " +
+			"</td>"+
+			
+			"<td>"+
+				"<input type='text' id='phone_area_no' name='phone_area_no'> " +
+			"</td>" +
+			"<td>"+
+				"<input type='text' id='phone_no' name='phone_no'> " + 
+			"</td>" +
+		"</tr>"
+	);
+    
+}
+
+
+// 테이블 행 삭제
+function cust_remove() {
+	
+	var table_tbody = document.getElementById('table_tbody');
+    if (table_tbody.rows.length < 1) return;
+    // my_tbody.deleteRow(0); // 상단부터 삭제
+    table_tbody.deleteRow( table_tbody.rows.length-1 ); // 하단부터 삭제
+	
+}
+
