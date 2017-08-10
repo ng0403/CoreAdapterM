@@ -7,7 +7,8 @@
 			c.addr_type_cd
 			,c.road_yn
 			,c.zip_no
-			,c.address
+			,c.main_address
+			,c.detail_address
 			,c.primary_yn
 		from tb_cust_addr c
 		where
@@ -21,7 +22,8 @@
 								,addr_type_cd
 								,road_yn
 								,zip_no
-								,address
+								,main_address
+								,detail_address
 <!-- 								,primary_yn -->
 		)
 		values(
@@ -29,7 +31,8 @@
            	,#{addr_type_cd}
            	,#{road_yn}
            	,#{zip_no}
-           	,#{address}
+           	,#{main_address}
+           	,#{detail_address}
 <!--            	,#{primary_yn} -->
 		)
 	</insert>

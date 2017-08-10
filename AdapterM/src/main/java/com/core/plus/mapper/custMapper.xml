@@ -15,7 +15,7 @@
 			,(select phone_area_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) as phone_area_no
       		,(select phone_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) as phone_no
       		,(select zip_no from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) as zip_no
-      		,(select address from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) as address
+      		,(select main_address from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) as main_address
 		from tb_cust a
 		where a.del_yn = 'N'
 		order by a.update_date desc
