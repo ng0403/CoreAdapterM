@@ -128,7 +128,7 @@ $(document).ready(function(){
 	
 	<c:if test="${flg == 1 }">
 	 	 <div id="cust_single_add_div">
-	 	 	<input type="button" class="func_btn" id="cust_single_add" value="저장" onclick="cust_modify_save();">
+	 	 	<input type="button" class="func_btn" id="cust_single_add" value="저장" onclick="cust_add_save();">
 	 	 	<input type="button" class="func_btn" id="cust_single_cancel" value="취소" onclick="cust_cancel();">
 	 	 </div> 
 	 </c:if>
