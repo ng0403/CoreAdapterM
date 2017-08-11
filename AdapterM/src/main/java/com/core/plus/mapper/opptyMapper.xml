@@ -166,12 +166,21 @@
 	</update>
 	
 	<!-- OpptyItem -->
-<!-- 	<insert id="opptyItemInsert" parameterType="com.core.plus.oppty.vo.OpptyItemVO"> -->
-<!-- 		INSERT INTO tb_oppty_item -->
-<!-- 			() -->
-<!-- 		VALUES -->
-<!-- 			() -->
-<!-- 	</insert> -->
+	<insert id="opptyItemInsert" parameterType="com.core.plus.oppty.vo.OpptyItemVO">
+		INSERT INTO tb_oppty_item
+			(oppty_no, main_cate_cd, mid_cate_cd, small_cate_cd, qty, list_price, dc_price, payment_day)
+		VALUES
+			(
+				#{oppty_no}, #{main_cate_cd}, #{mid_cate_cd}, #{small_cate_cd}, #{qty}, #{list_price}, #{dc_price}, DATE_FORMAT(#{payment_day}, '%Y%m%d')
+			)
+	</insert>
+
+	<delete id="opptyItemDelete" parameterType="String">
+		DELETE FROM 
+			tb_oppty_item
+		WHERE
+			oppty_no = #{oppty_no}
+	</delete>
 	
 	
 	<!-- Popup -->
@@ -198,6 +207,51 @@
 			del_yn = 'N'
 		<if test="s_emp_name != null and s_emp_name != ''">
 			AND (emp_name like concat('%', #{s_emp_name}, '%'))
+		</if>
+	</select>
+	
+	<select id="mainCatePopupList" resultType="com.core.plus.oppty.vo.OpptyItemVO">
+		SELECT
+			code AS main_cate_cd,
+			code_name AS main_cate_name
+		FROM
+			tb_code
+		WHERE
+			code_no='1015'
+		<if test="s_main_cate_name != null and s_main_cate_name != ''">
+			AND (code_name like concat('%', #{s_main_cate_name}, '%'))
+		</if>
+	</select>
+	
+	<select id="midCatePopupList" resultType="com.core.plus.oppty.vo.OpptyItemVO">
+		SELECT
+			DISTINCT a.code AS mid_cate_cd,
+			a.code_name AS mid_cate_name
+		FROM
+			tb_code a, tb_price_book b
+		WHERE
+			a.code=b.mid_cate_cd
+			AND a.code_no='1016'
+			AND b.main_cate_cd=#{main_cate_cd}
+		<if test="s_main_cate_name != null and s_main_cate_name != ''">
+			AND (a.code_name like concat('%', #{s_mid_cate_name}, '%'))
+		</if>
+	</select>
+	
+	<select id="smallCatePopupList" resultType="com.core.plus.oppty.vo.OpptyItemVO">
+		SELECT
+			DISTINCT a.code AS small_cate_cd,
+			a.code_name AS small_cate_name,
+			b.list_price
+		FROM
+			tb_code a, tb_price_book b
+		WHERE
+			a.code = b.small_cate_cd
+			AND b.main_cate_cd = #{main_cate_cd}
+			AND b.mid_cate_cd  = #{mid_cate_cd}
+			AND a.code_no='1017'
+		<if test="s_small_cate_name != null and s_small_cate_name != ''">
+			AND (a.code_name like concat('%', #{s_small_cate_name}, '%'))
 		</if>
 	</select>
 	

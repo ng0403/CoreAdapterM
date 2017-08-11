@@ -61,6 +61,19 @@ public class OpptyServiceImlp implements OpptyService {
 		// TODO Auto-generated method stub
 		return opptyDao.opptyDelete(opptyVo);
 	}
+	
+	/* OpptyItem */
+	@Override
+	public int opptyItemInsert(List<OpptyItemVO> opptyVo) {
+		// TODO Auto-generated method stub
+		return opptyDao.opptyItemInsert(opptyVo);
+	}
+	
+	@Override
+	public int opptyItemDelete(String oppty_no) {
+		// TODO Auto-generated method stub
+		return opptyDao.opptyItemDelete(oppty_no);
+	}
 
 	/* Index */
 	@Override
@@ -129,6 +142,42 @@ public class OpptyServiceImlp implements OpptyService {
 	public List<EmpVO> empPopupList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return opptyDao.empPopupList(map);
+	}
+
+	@Override
+	public List<OpptyItemVO> mainCatPopupList() {
+		// TODO Auto-generated method stub
+		return opptyDao.mainCatPopupList();
+	}
+
+	@Override
+	public List<OpptyItemVO> mainCatPopupList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return opptyDao.mainCatPopupList(map);
+	}
+
+	@Override
+	public List<OpptyItemVO> midCatPopupList() {
+		// TODO Auto-generated method stub
+		return opptyDao.midCatPopupList();
+	}
+
+	@Override
+	public List<OpptyItemVO> midCatPopupList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return opptyDao.midCatPopupList(map);
+	}
+
+	@Override
+	public List<OpptyItemVO> smallCatPopupList() {
+		// TODO Auto-generated method stub
+		return opptyDao.smallCatPopupList();
+	}
+
+	@Override
+	public List<OpptyItemVO> smallCatPopupList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return opptyDao.smallCatPopupList(map);
 	}
 
 }

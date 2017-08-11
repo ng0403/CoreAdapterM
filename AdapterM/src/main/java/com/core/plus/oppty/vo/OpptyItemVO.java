@@ -120,5 +120,15 @@ public class OpptyItemVO {
 	public void setSmall_cate_name(String small_cate_name) {
 		this.small_cate_name = small_cate_name;
 	}
+
+	@Override
+	public String toString() {
+		return "OpptyItemVO [oppty_no=" + oppty_no + ", main_cate_cd=" + main_cate_cd + ", mid_cate_cd=" + mid_cate_cd
+				+ ", small_cate_cd=" + small_cate_cd + ", create_date=" + create_date + ", update_date=" + update_date
+				+ ", payment_day=" + payment_day + ", qty=" + qty + ", list_price=" + list_price + ", dc_price="
+				+ dc_price + ", main_cate_name=" + main_cate_name + ", mid_cate_name=" + mid_cate_name
+				+ ", small_cate_name=" + small_cate_name + "]";
+	}
+	
 	
 }

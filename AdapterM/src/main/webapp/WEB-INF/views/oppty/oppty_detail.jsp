@@ -17,6 +17,7 @@
 $(document).ready(function(){
 	$('#exp_close_day').datepicker();
 });
+
  
 </script>
 
@@ -241,13 +242,13 @@ $(document).ready(function(){
 					</td>
 				</tr>
 				<tr>
-					<th id="impTh" style="text-align:right;">시/수술계획</th>
+					<th style="text-align:right;">시/수술계획</th>
 					<td colspan="3">
 						<textarea cols="70" rows="5"  name="sur_plan_cn" id="sur_plan_cn" maxlength="500" style="resize: none;">${opptyDetail.sur_plan_cn}</textarea>
 					</td>
 				</tr>
 				<tr>
-					<th id="impTh" style="text-align:right;">특이사항</th>
+					<th style="text-align:right;">특이사항</th>
 					<td colspan="3">
 						<textarea cols="70" rows="5"  name="description" id="description" maxlength="500" id="description" style="resize: none;">${opptyDetail.remark_cn}</textarea>
 					</td>
@@ -286,7 +287,7 @@ $(document).ready(function(){
 			<input type="button" class="tr_btn" id="opptyItem_save" onclick="opptyItemDelte();" value="삭제" >
 		</div>		
 		<div style="height:10px;"></div>
-	
+		
 		<table class="commonTable" id="cupnManagerTabl">
 			<thead>
 	 	 		<tr>
@@ -301,38 +302,39 @@ $(document).ready(function(){
 	 	 			<th >결제일자</th>
 	 	 		</tr>
 	 	 	</thead>
+	 	 	
 	 	 	<tbody id="oppty_item_list_tbody">
 	 	 		<c:forEach items="${ itemList }" var="itemList">
-	 	 			<tr>
+	 	 			<tr class="oppty_item_list_tr">
 		 	 			<td style="text-align: left;" >
-		 	 				<input type="hidden" id="main_cat_cd" name="main_cat_cd" value="">
-		 	 				<input type="text" id="main_cat_name" name="main_cat_name" value="${ itemList.main_cate_name }">
+		 	 				<input type="hidden" class="main_cate_cd" name="main_cate_cd" value="">
+		 	 				<input type="text"  class="main_cate_name" name="main_cate_name" value="${ itemList.main_cate_name }" readonly="readonly">
 		 	 			</td>
 	 		 			<td style="text-align: left;" >
-	 		 				<input type="hidden" id="mid_cat_cd" name="mid_cat_cd" value="">
-	 		 				<input type="text" id="mid_cat_name" name="mid_cat_name" value="${ itemList.mid_cate_name }">
+	 		 				<input type="hidden" class="mid_cate_cd" id="mid_cate_cd" name="mid_cate_cd" value="">
+	 		 				<input type="text" class="mid_cate_name" id="mid_cate_name" name="mid_cate_name" value="${ itemList.mid_cate_name }" readonly="readonly" onclick="midCatPopup();">
 	 		 			</td>
 	 		 			<td style="text-align: left;" >
-							<input type="hidden" id="small_cat_cd" name="small_cat_cd" value="">	 		 			
-	 		 				<input type="text" id="small_cat_name" name="small_cat_name" value="${ itemList.small_cate_name }">
+							<input type="hidden" class="small_cate_cd" name="small_cate_cd" value="">	 		 			
+	 		 				<input type="text" class="small_cate_name" name="small_cate_name" value="${ itemList.small_cate_name }" readonly="readonly" onclick="smallCatPopup();">
 	 		 			</td>
 	 		 			<td style="text-align: left;" >
-	 		 				<input type="text" id="qty" name="qty" value="${ itemList.qty }">
+	 		 				<input type="text" class="qty" name="qty" value="${ itemList.qty }">
 	 		 			</td>
 	 		 			<td style="text-align: left;" >
-	 		 				<input type="text" id="list_price" name="list_price" value="${ itemList.list_price }">
+	 		 				<input type="text" class="list_price" name="list_price" value="${ itemList.list_price }">
 	 		 			</td>
 	 		 			<td style="text-align: left;" >
-	 		 				<input type="text" id="total_price" name="total_price" value=""> <!-- 총금액 -->
+	 		 				<input type="text" class="total_price" name="total_price" value=""> <!-- 총금액 -->
 	 		 			</td>
 	 		 			<td style="text-align: left;" >
-	 		 				<input type="text" id="dc_price" name="dc_price" value="${ itemList.dc_price }">
+	 		 				<input type="text" class="dc_price" name="dc_price" value="${ itemList.dc_price }">
 	 		 			</td>
 	 		 			<td style="text-align: left;" >
-	 		 				<input type="text" id="offer_price" name="offer_price" value=""> <!-- 제안금액 -->
+	 		 				<input type="text" class="offer_price" name="offer_price" value=""> <!-- 제안금액 -->
 	 		 			</td>
 	 		 			<td style="text-align: left;" >
-	 		 				<input type="text" id="patment_day" name="payment_day" value="${ itemList.payment_day }">
+	 		 				<input type="text" class="patment_day" id="payment_day" name="payment_day" value="${ itemList.payment_day }">
 	 		 			</td>
 	 	 			</tr>
 	 	 		</c:forEach>
@@ -393,7 +395,7 @@ $(document).ready(function(){
 	<form method='post' name='custListPopup' id='custListPopup'>
 	<div id="empListModalContent" style="margin: 0 1.5% 0 1.5%;">
 		<div class="titleDIV" style="text-align: left; width: 100%;">
-			<span class="titleText">■ 고객 리스트</span>
+			<span class="titleText">■ 담당자 리스트</span>
 		</div>
 		<div id="empModalList" class="commonList">
 			 	<table id="empListModalTables" style="width: 100%;">
@@ -401,7 +403,7 @@ $(document).ready(function(){
 			 	 		<tr id="empListTableHeader">
 			 	 			<th style="width: 20%; text-align: right; padding-right: 1%;">고객명 : </th>
 			 	 			<td style="width: 40%;">
-			 	 			    <input type="text" id="s_cust_name" name="s_cust_name" style="width: 70%;" maxlength="100"/>&nbsp;&nbsp;
+			 	 			    <input type="text" id="s_emp_name" name="s_emp_name" style="width: 70%;" maxlength="100"/>&nbsp;&nbsp;
 							</td>
 							<td style="width: 40%; text-align: right;">
 								<input type="button" value="검색" class="back_btn" style="float: right;" onclick="viewEmpList();"/> <!-- onclick="viewProdMenuList(1); -->
@@ -413,11 +415,137 @@ $(document).ready(function(){
 			 	<table class="commonTable">
 			 		<thead>
 			 			<tr id="empListTableHeader">
-						  <th width="45%">고객번호</th>
-						  <th width="45%">고객명</th>
+						  <th width="45%">직원번호</th>
+						  <th width="45%">직원명</th>
 						</tr>	
 			 		</thead>
 			 	 	<tbody id="empListTbody"></tbody>
+				</table>
+			<!-- 페이징 DIV -->
+			<div class="pagingDiv" id="prodMenuPagingDiv" style="width: 100%; text-align: center;"></div>
+		</div>	
+	</div>
+	</form>
+	<input type="hidden" id="h_nm_menu">
+</div>
+
+<!-- 대분류 모달창 시작 -->
+<div id="mainCateListModalDiv" style="display: none;">
+    <div style="width: 100%; height:7%; background-color: #ececec;" align="right">
+ 		<input type="button" value="X" id="popupBoxClose" onclick="popupClose();" >
+ 	</div>
+	<form method='post' name='custListPopup' id='custListPopup'>
+	<div id="mainCateListModalContent" style="margin: 0 1.5% 0 1.5%;">
+		<div class="titleDIV" style="text-align: left; width: 100%;">
+			<span class="titleText">■ 대분류 리스트</span>
+		</div>
+		<div id="mainCateModalList" class="commonList">
+			 	<table id="mainCateListModalTables" style="width: 100%;">
+			 	 	<thead>
+			 	 		<tr id="mainCateListTableHeader">
+			 	 			<th style="width: 20%; text-align: right; padding-right: 1%;">대분류명 : </th>
+			 	 			<td style="width: 40%;">
+			 	 			    <input type="text" id="s_main_cate_name" name="s_main_cate_name" style="width: 70%;" maxlength="100"/>&nbsp;&nbsp;
+							</td>
+							<td style="width: 40%; text-align: right;">
+								<input type="button" value="검색" class="back_btn" style="float: right;" onclick="viewEmpList();"/> <!-- onclick="viewProdMenuList(1); -->
+							</td>			
+			 	 		</tr>
+			 	 	</thead>
+			 	</table>
+			 	<br>
+			 	<table class="commonTable">
+			 		<thead>
+			 			<tr id="mainCateListTableHeader">
+						  <th width="45%">대분류코드</th>
+						  <th width="45%">대분류명</th>
+						</tr>	
+			 		</thead>
+			 	 	<tbody id="mainCateListTbody"></tbody>
+				</table>
+			<!-- 페이징 DIV -->
+			<div class="pagingDiv" id="prodMenuPagingDiv" style="width: 100%; text-align: center;"></div>
+		</div>	
+	</div>
+	</form>
+	<input type="hidden" id="h_nm_menu">
+</div>
+
+<!-- 중분류 모달창 시작 -->
+<div id="midCateListModalDiv" style="display: none;">
+    <div style="width: 100%; height:7%; background-color: #ececec;" align="right">
+ 		<input type="button" value="X" id="popupBoxClose" onclick="popupClose();" >
+ 	</div>
+	<form method='post' name='custListPopup' id='custListPopup'>
+	<div id="midCateListModalContent" style="margin: 0 1.5% 0 1.5%;">
+		<div class="titleDIV" style="text-align: left; width: 100%;">
+			<span class="titleText">■ 중분류 리스트</span>
+		</div>
+		<div id="midCateModalList" class="commonList">
+			 	<table id="midCateListModalTables" style="width: 100%;">
+			 	 	<thead>
+			 	 		<tr id="midCateListTableHeader">
+			 	 			<th style="width: 20%; text-align: right; padding-right: 1%;">중분류명 : </th>
+			 	 			<td style="width: 40%;">
+			 	 			    <input type="text" id="s_mid_cate_name" name="s_mid_cate_name" style="width: 70%;" maxlength="100"/>&nbsp;&nbsp;
+							</td>
+							<td style="width: 40%; text-align: right;">
+								<input type="button" value="검색" class="back_btn" style="float: right;" onclick="viewEmpList();"/> <!-- onclick="viewProdMenuList(1); -->
+							</td>			
+			 	 		</tr>
+			 	 	</thead>
+			 	</table>
+			 	<br>
+			 	<table class="commonTable">
+			 		<thead>
+			 			<tr id="midCateListTableHeader">
+						  <th width="45%">중분류코드</th>
+						  <th width="45%">중분류명</th>
+						</tr>	
+			 		</thead>
+			 	 	<tbody id="midCateListTbody"></tbody>
+				</table>
+			<!-- 페이징 DIV -->
+			<div class="pagingDiv" id="prodMenuPagingDiv" style="width: 100%; text-align: center;"></div>
+		</div>	
+	</div>
+	</form>
+	<input type="hidden" id="h_nm_menu">
+</div>
+
+<!-- 소분류 모달창 시작 -->
+<div id="smallCateListModalDiv" style="display: none;">
+    <div style="width: 100%; height:7%; background-color: #ececec;" align="right">
+ 		<input type="button" value="X" id="popupBoxClose" onclick="popupClose();" >
+ 	</div>
+	<form method='post' name='custListPopup' id='custListPopup'>
+	<div id="smallCateListModalContent" style="margin: 0 1.5% 0 1.5%;">
+		<div class="titleDIV" style="text-align: left; width: 100%;">
+			<span class="titleText">■ 소분류 리스트</span>
+		</div>
+		<div id="smallCateModalList" class="commonList">
+			 	<table id="smallCateListModalTables" style="width: 100%;">
+			 	 	<thead>
+			 	 		<tr id="smallCateListTableHeader">
+			 	 			<th style="width: 20%; text-align: right; padding-right: 1%;">소분류명 : </th>
+			 	 			<td style="width: 40%;">
+			 	 			    <input type="text" id="s_small_cate_name" name="s_small_cate_name" style="width: 70%;" maxlength="100"/>&nbsp;&nbsp;
+							</td>
+							<td style="width: 40%; text-align: right;">
+								<input type="button" value="검색" class="back_btn" style="float: right;" onclick="viewEmpList();"/> <!-- onclick="viewProdMenuList(1); -->
+							</td>			
+			 	 		</tr>
+			 	 	</thead>
+			 	</table>
+			 	<br>
+			 	<table class="commonTable">
+			 		<thead>
+			 			<tr id="smallCateListTableHeader">
+						  <th width="45%">소분류코드</th>
+						  <th width="45%">소분류명</th>
+						</tr>	
+			 		</thead>
+			 	 	<tbody id="smallCateListTbody"></tbody>
 				</table>
 			<!-- 페이징 DIV -->
 			<div class="pagingDiv" id="prodMenuPagingDiv" style="width: 100%; text-align: center;"></div>

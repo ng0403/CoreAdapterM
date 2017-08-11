@@ -21,6 +21,9 @@ public interface OpptyDao {
 	int opptyEdit(OpptyVO opptyVo);
 	int opptyDelete(OpptyVO opptyVo);
 	
+	int opptyItemInsert(List<OpptyItemVO> opptyVo);
+	int opptyItemDelete(String oppty_no);
+	
 	// Index
 	OpptyVO opptyNoIndex();
 	
@@ -37,5 +40,11 @@ public interface OpptyDao {
 	List<CustVO> custPopupList(Map<String, Object> s_cust_name);
 	List<EmpVO> empPopupList();
 	List<EmpVO> empPopupList(Map<String, Object> map);
+	List<OpptyItemVO> mainCatPopupList();
+	List<OpptyItemVO> mainCatPopupList(Map<String, Object> map);
+	List<OpptyItemVO> midCatPopupList();
+	List<OpptyItemVO> midCatPopupList(Map<String, Object> map);
+	List<OpptyItemVO> smallCatPopupList();
+	List<OpptyItemVO> smallCatPopupList(Map<String, Object> map);
 
 }

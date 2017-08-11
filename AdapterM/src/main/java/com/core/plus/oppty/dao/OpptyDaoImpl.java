@@ -81,6 +81,28 @@ public class OpptyDaoImpl implements OpptyDao {
 		return result;
 	}
 	
+	/* OpptyItem */
+	@Override
+	public int opptyItemInsert(List<OpptyItemVO> itemList) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		System.out.println("DAO : " + itemList);
+		for(int i=0; i<itemList.size(); i++)
+		{
+			result = sqlSession.insert("oppty.opptyItemInsert", itemList.get(i));
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public int opptyItemDelete(String oppty_no) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.delete("oppty.opptyItemDelete", oppty_no);
+		
+		return result;
+	}
+	
 	/* Index */
 	@Override
 	public OpptyVO opptyNoIndex() {
@@ -168,6 +190,54 @@ public class OpptyDaoImpl implements OpptyDao {
 		List<EmpVO> empPopList = sqlSession.selectList("oppty.empPopupList", map);
 		
 		return empPopList;
+	}
+
+	@Override
+	public List<OpptyItemVO> mainCatPopupList() {
+		// TODO Auto-generated method stub
+		List<OpptyItemVO> mainCatePopList = sqlSession.selectList("oppty.mainCatePopupList");
+		
+		return mainCatePopList;
+	}
+
+	@Override
+	public List<OpptyItemVO> mainCatPopupList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<OpptyItemVO> mainCatePopList = sqlSession.selectList("oppty.mainCatePopupList", map);
+		
+		return mainCatePopList;
+	}
+
+	@Override
+	public List<OpptyItemVO> midCatPopupList() {
+		// TODO Auto-generated method stub
+		List<OpptyItemVO> midCatePopList = sqlSession.selectList("oppty.midCatePopupList");
+		
+		return midCatePopList;
+	}
+
+	@Override
+	public List<OpptyItemVO> midCatPopupList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<OpptyItemVO> midCatePopList = sqlSession.selectList("oppty.midCatePopupList", map);
+		
+		return midCatePopList;
+	}
+
+	@Override
+	public List<OpptyItemVO> smallCatPopupList() {
+		// TODO Auto-generated method stub
+		List<OpptyItemVO> smallCatePopupList = sqlSession.selectList("oppty.smallCatePopupList");
+		
+		return smallCatePopupList;
+	}
+
+	@Override
+	public List<OpptyItemVO> smallCatPopupList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<OpptyItemVO> smallCatePopupList = sqlSession.selectList("oppty.smallCatePopupList", map);
+		
+		return smallCatePopupList;
 	}
 
 }

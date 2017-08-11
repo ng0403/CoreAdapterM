@@ -1,5 +1,6 @@
 package com.core.plus.oppty.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -169,6 +170,53 @@ public class OpptyController {
 		return result;
 	}
 	
+	/* Item CUD */
+	@RequestMapping(value="opptyItemInsert", method=RequestMethod.POST)
+	public @ResponseBody List<OpptyItemVO> opptItemInsert(@RequestParam(value="opptyItemList[]", required=false) List<String> opptyItemList, String oppty_no)
+	{
+		System.out.println("Item Insert : " + opptyItemList);
+		System.out.println("Item Insert : " + oppty_no);
+		
+		List<OpptyItemVO> itemList = new ArrayList<OpptyItemVO>();
+		List<OpptyItemVO> ditemList = opptyService.opptyItemList(oppty_no);
+		
+		if(ditemList == null)
+		{
+			System.out.println("list 없음.");
+		}
+		else
+		{
+			System.out.println("list");
+			int result = opptyService.opptyItemDelete(oppty_no);
+		}
+		
+		if(opptyItemList != null)
+		{
+			for(int i=0; i<opptyItemList.size(); i++)
+			{
+				OpptyItemVO ovo = new OpptyItemVO();
+				
+				ovo.setOppty_no(oppty_no);
+				ovo.setMain_cate_cd(opptyItemList.get(i));
+				ovo.setMid_cate_cd(opptyItemList.get(++i));
+				ovo.setSmall_cate_cd(opptyItemList.get(++i));
+				ovo.setQty(Integer.parseInt(opptyItemList.get(++i)));
+				ovo.setList_price(Integer.parseInt(opptyItemList.get(++i)));
+				ovo.setDc_price(Integer.parseInt(opptyItemList.get(++i)));
+				ovo.setPayment_day(opptyItemList.get(++i));
+				itemList.add(ovo);
+			}
+			System.out.println("itemList : " + itemList);
+			// opptyItem Insert
+			int oResult = opptyService.opptyItemInsert(itemList);
+		}
+		
+		// 바로 detail 화면으로 뿌려준다.
+//		List<OpptyVO> optyItemList = opptyService.opptyDetail(oppty_no);
+		List<OpptyItemVO> optyItemList 	= opptyService.opptyItemList(oppty_no);
+		
+		return optyItemList;
+	}
 	
 	/* Popup*/
 	@RequestMapping(value="custListAjax", method=RequestMethod.POST)
@@ -192,7 +240,6 @@ public class OpptyController {
 			
 			return map;
 		}
-		
 	}
 	
 	@RequestMapping(value="empListAjax", method=RequestMethod.POST)
@@ -216,7 +263,82 @@ public class OpptyController {
 			
 			return map;
 		}
+	}
+	
+	@RequestMapping(value="mainCateListAjax", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> mainCatList(String s_main_cat_name)
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
 		
+		if(s_main_cat_name == null || s_main_cat_name == "")
+		{
+			List<OpptyItemVO> mainCatePopupList = opptyService.mainCatPopupList();
+			map.put("mainCatePopupList", mainCatePopupList);
+
+			return map;
+		}
+		else
+		{
+			map.put("s_main_cat_name", s_main_cat_name);
+			
+			List<OpptyItemVO> schMainCatePopupList = opptyService.mainCatPopupList(map);
+			map.put("mainCatePopupList", schMainCatePopupList);
+
+			return map;
+		}
+	}
+	
+	@RequestMapping(value="midCateListAjax", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> midCatList(String main_cate_cd, String s_mid_cate_name)
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(s_mid_cate_name == null || s_mid_cate_name == "")
+		{
+			map.put("main_cate_cd", main_cate_cd);
+			
+			List<OpptyItemVO> midCatePopupList = opptyService.midCatPopupList(map);
+			map.put("midCatePopupList", midCatePopupList);
+			System.out.println("midCatePopupList : " + midCatePopupList);
+			
+			return map;
+		}
+		else
+		{
+			map.put("s_mid_cate_name", s_mid_cate_name);
+			
+			List<OpptyItemVO> schMidCatePopupList = opptyService.midCatPopupList(map);
+			map.put("midCatePopupList", schMidCatePopupList);
+
+			return map;
+		}
+	}
+	
+	@RequestMapping(value="smallCateListAjax", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> smallCatList(String main_cate_cd, String mid_cate_cd, String s_small_cate_name)
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(s_small_cate_name == null || s_small_cate_name == "")
+		{
+			map.put("main_cate_cd", main_cate_cd);
+			map.put("mid_cate_cd", mid_cate_cd);
+			
+			List<OpptyItemVO> smallCatPopupList = opptyService.smallCatPopupList(map);
+			map.put("smallCatePopupList", smallCatPopupList);
+			System.out.println("smallCatPopupList : " + smallCatPopupList);
+			
+			return map;
+		}
+		else
+		{
+			map.put("s_small_cate_name", s_small_cate_name);
+			
+			List<OpptyItemVO> schSmallCatPopupList = opptyService.smallCatPopupList(map);
+			map.put("smallCatePopupList", schSmallCatPopupList);
+			
+			return map;
+		}
 	}
 
 }

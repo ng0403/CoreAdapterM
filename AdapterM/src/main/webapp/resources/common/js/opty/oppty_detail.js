@@ -7,16 +7,14 @@
  * 
  * custSchPopupOpen()
  * empSchPopupOpen()
+ * viewCustList()
+ * enterSearch(event)
+ * popupClose()
  * 
  */
 var ctx = $("#ctx").val();
 
 
-/**
- * 
- * 
- * 
- * */
 function opptyList()
 {
 	location.href = ctx + "/oppty";
@@ -66,7 +64,8 @@ function empSchPopupOpen()
 
 /* 팝업창 고객목록 표시 */
 //function viewCustList(prodMenuPageNum) {
-function viewCustList() {
+function viewCustList() 
+{
 	var ctx = $("#ctx").val();
 	
 	var s_cust_name = $("#s_cust_name").val();
@@ -206,9 +205,12 @@ function opptySingleAdd()
 {
 	$(document).ready(function() {
 		
-		// popup 만들면 없앨 부분
-		$("#cust_no").val("201708081100001");
-		$("#emp_no").val("201708081300001");
+		console.log($("#sorce").val());
+		
+		if($("#score").val() == 0 || $("#score").val() == null || $("#score").val() == "")
+		{
+			$("#score").val(0);
+		}
 		
 		var ynChk = confirm("해당 기회를 추가하시겠습니까?");
 		if(ynChk)
