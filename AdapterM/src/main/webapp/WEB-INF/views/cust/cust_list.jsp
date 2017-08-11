@@ -48,8 +48,6 @@
 						    <input type="text" id="chart_no" name="chart_no" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td>
 					  
-					  
-					  
  		                 <td style="width: 12%;">
 		                 	<input type="button" value="조회" id="lead_list_srch" onclick="searchKeyword();" class="tr_btn" style="margin-left: 0;">
 		                 </td>
@@ -58,7 +56,19 @@
 					<tr>
 						 <th style="width:5%;">내원경로</th>
 						 <td style="width:15%;">
-						    <input type="text" id="visit_cd" name="visit_cd" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+<!-- 						    <input type="text" id="visit_cd" name="visit_cd" value="" style="width:80%" onkeypress="cupnEnterSearch(event);"> -->
+						 	<select id="visit_cd" name="visit_cd" 
+										style="margin-left: 0; width: 83%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
+								<option value="">선택해 주십시오</option>
+								<c:forEach var="vititCdList" items="${ vititCdList }">
+									<c:if test= "${ vititCdList.code eq custDlist.visit_cd }">
+										<option value="${ vititCdList.code }">${ vititCdList.code_name }</option>
+									</c:if>
+									<c:if test= "${ vititCdList.code ne custDlist.visit_cd }">
+										<option value="${ vititCdList.code }">${ vititCdList.code_name }</option>
+									</c:if>
+								</c:forEach>
+							</select>
 						 </td>
 					
 						 <th style="width:5%;">소개자</th>

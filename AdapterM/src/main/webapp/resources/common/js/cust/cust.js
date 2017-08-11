@@ -1,13 +1,76 @@
 /**
 * 함수 목록
+* searchKeyword()                       : 고객 조회
 * cust_add() 							: 고객 단건 추가
 * custDetail(a)							: 고객 상세정보
 * cust_add_save()						: 고객 저장
 * cust_modify_save()					: 고객 수정 
 * cust_cancel()							: 고객 취소버튼(리스트로 이동)
+* cust_phone_add(cust_no)				: 테이블 행 추가
+* cust_remove() 						: 테이블 행 삭제
 * 
 */
 var ctx = $("#ctx").val();
+
+// 고객 조회
+function searchKeyword(){
+	
+	var cust_no = $("#cust_no").val();
+	var cust_name = $("#cust_name").val();
+	var chart_no = $("#chart_no").val();
+	var visit_cd = $("#visit_cd").val();
+	var rec_per = $("#rec_per").val();
+	var phone_no = $("#phone_no").val();
+	
+	
+	var custData = { "cust_no": cust_no, 
+					 "cust_name": cust_name,
+					 "chart_no": chart_no, 
+					 "visit_cd":visit_cd, 
+					 "rec_per":rec_per,
+					 "phone_no" : phone_no      };
+		
+ 
+			var tbody = $('#cust_list_tbody');
+			var tbodyContent = "";
+			
+			$.ajax({
+				url:'/custAjax',
+				type: 'POST',
+				data: custData,
+				dataType:'json',
+				success: function(data){
+					tbody.children().remove(); 
+ 					for(var i=0; i<data.custList.length; i++){
+ 					tbodyContent += "<tr>" +
+	 	 			"<td style='text-align: left;' >" +data.custList[i].cust_no +"</td>" +
+	 	 			"<td style='text-align: left;'>" +
+	 	 				"<a href='#' onclick=leadDetail('"+data.custList[i].cust_no+"'); id='"+data.custList[i].cust_no+"'>" + data.custList[i].cust_name+"</a></td>" +
+	 	 			"<td style='text-align: left;'>" + data.custList[i].chart_no +"</td>" +
+	 	 			"<td style='text-align: left;' > " +
+	 	 				"<c:forEach var='vititCdList' items='${ vititCdList }'>" +
+ 							"<c:if test= '${ vititCdList.code eq custList.visit_cd }'>${ vititCdList.code_name }</c:if> " +
+ 						"</c:forEach>" +
+	 	 			"</td>" +
+	 	 			"<td style='text-align: left;' > " +
+		 	 			"<c:forEach var='vititDtlCdList' items='${ vititDtlCdList }'>" +
+							"<c:if test= '${ vititDtlCdList.code eq custList.visit_cd }'>${ vititDtlCdList.code_name }</c:if> " +
+						"</c:forEach>" +
+	 	 			"</td>" +
+	 	 			"<td style='text-align: left;'>" + data.custList[i].rec_per + "</td>" +
+	 	 			"<td style='text-align: left;'>" + data.custList[i].phone_no + "</td>" +
+	 	 			"<td style='text-align: left;'>" + data.custList[i].main_address + "</td>" +
+	 	 			"<td style='text-align: left;'>" + data.custList[i].create_date + "</td>" +
+	 	 			"</tr>";
+ 					tbody.append(tbodyContent);
+					}
+				},
+				error: function(){
+					alert("error");
+				}
+			});
+}
+
 
  // 고객 단건 추가
  function cust_add(){
@@ -95,11 +158,14 @@ var ctx = $("#ctx").val();
  // 테이블 행 추가
 function cust_phone_add(cust_no) {
 	var cust_no = cust_no;
-	var phoneTypeCdList = "<c:out value='${phoneTypeCdList}'/>";
-	var phone_type_cd = '<c:out value="${custPList.phone_type_cd}"/>';
+//	var phoneTypeCdList = "<c:out value='${phoneTypeCdList}'/>";
+//	var phone_type_cd = '<c:out value="${custPList.phone_type_cd}"/>';
+//	var phone_type_cd = document.getElementById("phone_type_cd").value;
 	
-	console.log(phoneTypeCdList);
-	console.log(phone_type_cd);
+//	alert(phone_type_cd);
+	
+	var phone_type_cd = new Array();
+	
 	
     var tbody = $('#table_tbody');
 	var tbodyContent = "";
@@ -111,8 +177,8 @@ function cust_phone_add(cust_no) {
 				"<select id='phone_type_cd' name='phone_type_cd'" +
 					"style='margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;'>" +
 				"<option value=''>선택</option>"+
-				"<c:forEach var='phoneTypeCdList' items='"+ phoneTypeCdList +"'>" +
-					"<c:if test= '${ phoneTypeCdList.code eq "+phone_type_cd+" }'>" +
+				"<c:forEach var='phoneTypeCdList' items='phoneTypeCdList'>" +
+					"<c:if test= '${ phoneTypeCdList.code eq 'phone_type_cd' }'>" +
 						"<option value='${ phoneTypeCdList.code }' selected='selected'>${ phoneTypeCdList.code_name}</option>" +
 						"</c:if>" +
 						"<c:if test= '${ phoneTypeCdList.code ne custPList.phone_type_cd }'>"+

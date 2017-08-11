@@ -5,19 +5,39 @@
 	<select id="custList" resultType="com.core.plus.contact.cust.vo.CustVO">
 		select
 			a.cust_no
-      		, date_format(a.create_date, '%Y-%m-%d %H:%i') as create_date
+      		,date_format(a.create_date, '%Y-%m-%d %H:%i') as create_date
 			,a.cust_name
 			,a.chart_no
 			,a.cust_id
 			,a.visit_cd
 			,a.visit_dtl_cd
 			,a.visit_cn
-			,(select phone_area_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) as phone_area_no
-      		,(select phone_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) as phone_no
-      		,(select zip_no from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) as zip_no
-      		,(select main_address from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) as main_address
-		from tb_cust a
-		where a.del_yn = 'N'
+     		,a.rec_per
+      		,c.phone_area_no
+      		,c.phone_no
+      		,b.zip_no
+      		,b.main_address
+		from tb_cust a left join tb_cust_addr b on a.cust_no = b.cust_no left join tb_cust_phone c on a.cust_no = c.cust_no
+		where 1=1 
+        and a.del_yn = 'N' 
+	   		<if test="cust_no !=null and cust_no !=''">
+				and(a.cust_no like concat('%', #{cust_no}, '%') )
+			</if> 
+	   		<if test="cust_name !=null and cust_name !=''">
+				and(a.cust_name like concat('%', #{cust_name}, '%') )
+			</if> 
+	   		<if test="visit_cd !=null and visit_cd !=''">
+				and(a.visit_cd like concat('%', #{visit_cd}, '%') )
+			</if> 
+	   		<if test="visit_dtl_cd !=null and visit_dtl_cd !=''">
+				and(a.visit_dtl_cd like concat('%', #{visit_dtl_cd}, '%') )
+			</if> 
+	   		<if test="rec_per !=null and rec_per !=''">
+				and(a.rec_per like concat('%', #{rec_per}, '%') )
+			</if> 
+	   		<if test="phone_no !=null and phone_no !=''">
+				and(c.phone_no like concat('%', #{phone_no}, '%') )
+			</if> 
 		order by a.update_date desc
 	</select>
 	

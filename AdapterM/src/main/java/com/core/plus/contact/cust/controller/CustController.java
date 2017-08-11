@@ -43,7 +43,7 @@ public class CustController {
 	@RequestMapping(value="/cust")
 	public ModelAndView custList(){
 		List<CustVO> custList = custService.custList();
-		
+						 
 		List<CommonCodeVO> vititCdList = commonCode.vititCdList();
 		List<CommonCodeVO> vititDtlCdList = commonCode.vititDtlCdList();
 		
