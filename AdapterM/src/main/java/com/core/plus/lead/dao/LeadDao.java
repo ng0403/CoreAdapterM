@@ -3,6 +3,8 @@ package com.core.plus.lead.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.core.plus.contact.cust.vo.CustVO;
+import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.lead.vo.LeadVO;
 
 public interface LeadDao {
@@ -14,4 +16,12 @@ public interface LeadDao {
 	void lead_delete(String lead_no); // 가망 고객 삭제
 	
 	public List<LeadVO> leadSearch(Map<String, Object> leadMap); // 가망 고객 조건 검색
+	
+	
+	//popup
+	List<CustVO> custPopupList();
+	List<CustVO> custPopupList(Map<String, Object> map);
+	
+	List<EmpVO> empPopupList();
+	List<EmpVO> empPopupList(Map<String, Object> map);
 }

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.core.plus.contact.cust.vo.CustVO;
+import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.lead.service.LeadService;
 import com.core.plus.lead.vo.LeadVO;
 
@@ -64,7 +66,7 @@ public class LeadController {
 	public String lead_single_add_post(LeadVO vo) {
 		
 		System.out.println("add single ? " + vo.toString());
- 		String cust_no = null;
+ 		String cust_no = vo.getCust_no() ;
  		
 		if(cust_no == null)
 		{
@@ -142,9 +144,58 @@ public class LeadController {
 		kwMap.put("leadList", leadList);
 		
 		System.out.println("leadList? " + leadList.toString());
-		
+		System.out.println("lead list size?" + leadList.size());
 		
 		return kwMap;
 	}
+	
+	//고객 팝업 리스트
+	@RequestMapping(value="custPopListAjax", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> custListPopup(String s_cust_name)
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		// 담당자리스트 불러오는 서비스/다오/맵퍼 작성
+		if(s_cust_name == null || s_cust_name == "")
+		{
+			List<CustVO> custPopupList = leadService.custPopupList();
+			map.put("custPopupList", custPopupList);
+			System.out.println("map ?? " + map.toString());
+			return map;
+		}
+		else
+		{
+			map.put("s_cust_name", s_cust_name);
+			List<CustVO> schCustPopupList = leadService.custPopupList(map);
+			map.put("custPopupList", schCustPopupList);
+			System.out.println("map? " + map.toString());
+			return map;
+		}
+	}
+	
+	//담당자 팝업 리스트
+	@RequestMapping(value="empPopListAjax", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> empListPopup(String s_emp_name)
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		// 담당자리스트 불러오는 서비스/다오/맵퍼 작성
+		if(s_emp_name == null || s_emp_name == "")
+		{
+			List<EmpVO> empPopupList = leadService.empPopupList();
+			map.put("empPopupList", empPopupList);
+			
+			return map;
+		}
+		else
+		{
+			map.put("s_emp_name", s_emp_name);
+			List<EmpVO> schEmpPopupList = leadService.empPopupList(map);
+			map.put("empPopupList", schEmpPopupList);
+			
+			return map;
+		}
+	}
+	
 
 }

@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.core.plus.contact.cust.vo.CustVO;
+import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.lead.vo.LeadVO;
 
 @Repository
@@ -24,7 +26,7 @@ public class LeadDaoImpl implements LeadDao {
 
 	@Override
 	public void lead_insert(LeadVO vo) {
-		
+		System.out.println("insert vo " + vo.toString());
 		sqlSession.insert("lead_single_add", vo);
 		
 	}
@@ -54,6 +56,38 @@ public class LeadDaoImpl implements LeadDao {
 		
 		List<LeadVO> obj = sqlSession.selectList("leadList", leadMap);
 		return obj;
+	}
+
+	@Override
+	public List<CustVO> custPopupList() {
+		// TODO Auto-generated method stub
+		List<CustVO> custPopList = sqlSession.selectList("lead.custPopupList");
+		
+		return custPopList;
+	}
+
+	@Override
+	public List<CustVO> custPopupList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<CustVO> custPopList = sqlSession.selectList("lead.custPopupList", map);
+		
+		return custPopList;
+	}
+
+	@Override
+	public List<EmpVO> empPopupList() {
+		// TODO Auto-generated method stub
+		List<EmpVO> empPopList = sqlSession.selectList("lead.empPopupList");
+		
+		return empPopList;
+	}
+
+	@Override
+	public List<EmpVO> empPopupList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<EmpVO> empPopList = sqlSession.selectList("lead.empPopupList", map);
+		
+		return empPopList;
 	}
 
 	

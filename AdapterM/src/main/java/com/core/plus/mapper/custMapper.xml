@@ -4,22 +4,20 @@
 <mapper namespace="cust">
 	<select id="custList" resultType="com.core.plus.contact.cust.vo.CustVO">
 		select
-			a.cust_no
-      		,date_format(a.create_date, '%Y-%m-%d %H:%i') as create_date
-			,a.cust_name
-			,a.chart_no
-			,a.cust_id
-			,a.visit_cd
-			,a.visit_dtl_cd
-			,a.visit_cn
-     		,a.rec_per
-      		,c.phone_area_no
-      		,c.phone_no
-      		,b.zip_no
-      		,b.main_address
-		from tb_cust a left join tb_cust_addr b on a.cust_no = b.cust_no left join tb_cust_phone c on a.cust_no = c.cust_no
-		where 1=1 
-        and a.del_yn = 'N' 
+		l.lead_no,
+		l.lead_name,
+		l.cust_no,
+	     case when (emp_name) is null then ' '
+		   	   else (emp_name) end as emp_name ,
+	     case when (cust_name) is null then ' '
+		   	   else (cust_name) end as cust_name ,  
+		p.phone_no,
+		l.contact_day,
+		l.rank_cd,
+		date_format(l.create_date, '%Y-%m-%d %H:%i') as create_date
+		from 
+		tb_lead l left join tb_cust c on l.cust_no = c.cust_no left join  tb_emp em on l.emp_no = em.emp_no left join tb_cust_phone p on l.cust_no = p.cust_no
+		where 1=1 and l.del_yn ='N'
 	   		<if test="cust_no !=null and cust_no !=''">
 				and(a.cust_no like concat('%', #{cust_no}, '%') )
 			</if> 
