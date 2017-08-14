@@ -10,12 +10,18 @@ public class TaskVO {
 	private String lead_no;					// lead번호
 	private String oppty_no;				// 영업기회번호
 	private String location;				// 진행장소
-	private String next_dat;				// 다음 일자
+	private String next_day;				// 다음 일자
 	private String emp_no;					// 담당자 번호
 	private String dtype_cd;				// 분류코드
 	private String score_cd;				// 상대 가치 점수
 	private String remark_cn;				// 특이사항
 	
+	
+	// 공통코드에서 불러오기 위한 변수
+	private String code_no;
+	private String code;
+	private String code_name;
+	private String dtype_name;
 	
 	public String getTask_no() {
 		return task_no;
@@ -65,11 +71,11 @@ public class TaskVO {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public String getNext_dat() {
-		return next_dat;
+	public String getNext_day() {
+		return next_day;
 	}
-	public void setNext_dat(String next_dat) {
-		this.next_dat = next_dat;
+	public void setNext_day(String next_day) {
+		this.next_day = next_day;
 	}
 	public String getEmp_no() {
 		return emp_no;
@@ -100,8 +106,33 @@ public class TaskVO {
 	public String toString() {
 		return "TaskVO [task_no=" + task_no + ", create_date=" + create_date + ", update_date=" + update_date
 				+ ", subject=" + subject + ", cust_no=" + cust_no + ", lead_no=" + lead_no + ", oppty_no=" + oppty_no
-				+ ", location=" + location + ", next_dat=" + next_dat + ", emp_no=" + emp_no + ", dtype_cd=" + dtype_cd
+				+ ", location=" + location + ", next_day=" + next_day + ", emp_no=" + emp_no + ", dtype_cd=" + dtype_cd
 				+ ", score_cd=" + score_cd + ", remark_cn=" + remark_cn + "]";
+	}
+	
+	public String getCode_no() {
+		return code_no;
+	}
+	public void setCode_no(String code_no) {
+		this.code_no = code_no;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getCode_name() {
+		return code_name;
+	}
+	public void setCode_name(String code_name) {
+		this.code_name = code_name;
+	}
+	public String getDtype_name() {
+		return dtype_name;
+	}
+	public void setDtype_name(String dtype_name) {
+		this.dtype_name = dtype_name;
 	}
 	
 }

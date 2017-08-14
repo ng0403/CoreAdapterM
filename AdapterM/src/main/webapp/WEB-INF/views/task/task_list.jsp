@@ -15,7 +15,7 @@
 <input type="hidden" id="ctx" value="${ctx}">
 
 <!-- task : task조회 -->
-<div id="taskManager">
+<div id="cupnManager">
 	<div style="height:10px;"></div>
 	<div class="titleDIV">
 		<span class="titleText">
@@ -32,9 +32,9 @@
 <%-- 			<input type="hidden" name="active_flg_srch" value="${cupnListMap.active_flg_srch}"> --%>
 <%-- 			<input type="hidden" name="brand_wid" value="${cupnListMap.brand_wid}"> --%>
 		</form>
-	    <form name="taskListForm" id="taskListForm" method="post" action="${ctx}/taskManager" >
+	    <form name="couponListForm" id="couponListForm" method="post" action="${ctx}/couponManager" >
 		 	<div id="searchDiv">
-	        	<table id="taskSearchTable" class="commonTable">
+	        	<table id="cupnSearchTable" class="commonTable">
 					<tr style="background-color: white; cursor:default; border:0;">
 						 <th style="width:5%;">상담번호</th>
 						 <td style="width:15%;">
@@ -42,7 +42,7 @@
 						 </td> 
 						 <th style="width:5%;">제목</th>
 						 <td style="width:15%;">
-						    <input type="text" id="subject" name=""subject"" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="subject" name="subject" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td>
 						  <th style="width:5%;">고객명</th>
 						 <td style="width:15%;">
@@ -50,14 +50,14 @@
 						 </td>
 					  
  		                 <td style="width: 12%;">
-		                 	<input type="button" value="조회" id="lead_list_srch" onclick="searchKeyword();" class="tr_btn" style="margin-left: 0;">
+		                 	<input type="button" value="조회" id="task_list_srch" onclick="searchKeyword();" class="tr_btn" style="margin-left: 0;">
 		                 </td>
 					</tr>
 					
 					<tr>
 						 <th style="width:5%;">담당자명</th>
 						 <td style="width:15%;">
-						    <input type="text" id="visit_cd" name="visit_cd" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="emp_no" name="emp_no" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td>
 					
 						 <th style="width:5%;">다음일자</th>
@@ -69,14 +69,14 @@
 						 
 						  <th style="width:5%;">분류</th>
 						 <td style="width:15%;">
-						    <select id="dtypeCd" name="dtypeCd" 
+						    <select id="dtype_cd" name="dtype_cd" 
 										style="margin-left: 0; width: 83%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
 								<option value="">선택해 주십시오</option>
 								<c:forEach var="dtypeCd" items="${ dtypeCd }">
-									<c:if test= "${ dtypeCd.code eq taskList.visit_cd }">
+									<c:if test= "${ dtypeCd.code eq taskList.dtype_cd }">
 										<option value="${ dtypeCd.code }">${ dtypeCd.code_name }</option>
 									</c:if>
-									<c:if test= "${ dtypeCd.code ne taskList.visit_cd }">
+									<c:if test= "${ dtypeCd.code ne taskList.dtype_cd }">
 										<option value="${ dtypeCd.code }">${ dtypeCd.code_name }</option>
 									</c:if>
 								</c:forEach>
@@ -91,17 +91,17 @@
 	 	 	<thead>
 	 	 		<tr>
  	 	 			<th style="width: 10%;">task번호</th> 
-	 	 			<th style="width: 8%;">제목</th>
+	 	 			<th style="width: 13%;">제목</th>
  	 	 			<th style="width: 10%;">고객번호</th>
 	 	 			<th style="width: 10%;">고객명</th> 
 	 	 			<th style="width: 10%;">전화번호</th>
 	 	 			<th style="width: 10%;">담당자명</th>
 	 	 			<th style="width: 10%;">다음일자</th>
-	 	 			<th style="width: 17%;">분류</th>
+	 	 			<th style="width: 10%;">분류</th>
 	 	 			<th style="width: 10%;">등록일시</th> 
  	 	 		</tr>
 	 	 	</thead>
-	 	 	<tbody id="cust_list_tbody"> 
+	 	 	<tbody id="task_list_tbody"> 
 	 	 		<c:forEach items="${taskList}" var="list">
 	 	 		<tr>
 	 	 			<td style="text-align: left;" >${list.task_no}</td>
@@ -112,7 +112,7 @@
 	 	 			<td style="text-align: left;" >${list.cust_name}</td>
 	 	 			<td style="text-align: left;" >${list.phone_no}</td>
 	 	 			<td style="text-align: left;" >${list.emp_no}</td>
-	 	 			<td style="text-align: left;" >${list.next_dat}</td>
+	 	 			<td style="text-align: left;" >${list.next_day}</td>
 	 	 			<td style="text-align: left;" >${list.dtype_cd}</td>
 	 	 			<td style="text-align: left;" >${list.create_date}</td>
 	 	 			</tr>
@@ -146,8 +146,8 @@
 	 	 </table>
    	
 		<div class="listFootDiv">
- 		 	 <input type="button" class="func_btn" id="cust_add" value="단건등록" onclick="cust_add();">
-		 	 <input type="button" class="func_btn" id="lead_add_multi" value="다건등록">
+ 		 	 <input type="button" class="func_btn" id="task_add" value="단건등록" onclick="task_add();">
+		 	 <input type="button" class="func_btn" id="task_add_multi" value="다건등록">
 		</div>
 <!-- 	 	<div class="pagingDiv"> -->
 <%-- 			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/> --%>

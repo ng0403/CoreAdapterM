@@ -11,7 +11,7 @@
 		   , p.phone_no
 		   , t.emp_no
 		   , t.next_day
-		   , t.dtype_cd
+		   , (select code_name from tb_code where code_no = '1008' and code = '001') dtype_cd
 		   , date_format(t.create_date, '%Y-%m-%d %H:%i') as create_date
 		 
 		from tb_task t left join tb_cust c on t.cust_no = c.cust_no left join tb_cust_phone p on t.cust_no = p.cust_no
@@ -21,7 +21,7 @@
 	
 	<!-- code 값 -->
 	<select id="taskDtypeCode" resultType="com.core.plus.task.vo.TaskVO">
-		SELECT code_name, code FROM tb_code WHERE code_no = '1018'
+		SELECT code_name, code FROM tb_code WHERE code_no = '1008'
 	</select>
 	<select id="taskScoreCode" resultType="com.core.plus.task.vo.TaskVO">
 		SELECT code_name, code FROM tb_code WHERE code_no = '1009'
