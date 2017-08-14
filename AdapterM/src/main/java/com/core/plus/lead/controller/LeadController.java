@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.lead.service.LeadService;
@@ -27,11 +28,22 @@ public class LeadController {
 	
 	//초기 list 출력
 	@RequestMapping(value="lead")
-	public ModelAndView lead_list() {
+	public ModelAndView lead_list(@RequestParam(value = "PageNum", defaultValue = "1") int PageNum) {
 		System.out.println("entering");
-		List<LeadVO> vo = leadService.lead_list();
+	
+		Map<String, Object> leadMap = new HashMap<String, Object>();
+		leadMap.put("PageNum", PageNum);
+		
+		// paging
+		PagerVO page = leadService.getLeadListRow(leadMap);
+		leadMap.put("page", page); 
+		
+		System.out.println("page?? " + page.toString());
+		
+		List<LeadVO> vo = leadService.lead_list(leadMap);
 		
 		ModelAndView mov = new ModelAndView("lead_list");
+		mov.addObject("page", page);
 		mov.addObject("lead_list", vo);
 		
 		System.out.println("mov ?  " + mov.toString());
@@ -119,7 +131,9 @@ public class LeadController {
 	
 	//조건 검색
 	@RequestMapping(value = "/searchKeyword", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> searchKeyword(String lead_no_srch,
+	public @ResponseBody Map<String, Object> searchKeyword(
+			@RequestParam(value = "PageNum", defaultValue = "1") int PageNum,
+			String lead_no_srch,
 			String lead_name_srch, String cust_no, String emp_no, String contact_day_srch, String rank_cd) {
 	
 		System.out.println("contact_day_srch ? " + contact_day_srch);
@@ -130,6 +144,8 @@ public class LeadController {
 		 
 		
 		Map<String, Object> kwMap = new HashMap<String, Object>(); 
+ 		System.out.println("page num : " + PageNum);
+ 		kwMap.put("PageNum", PageNum);
 		kwMap.put("lead_no_srch", lead_no_srch);
 		kwMap.put("lead_name_srch", lead_name_srch);
 		kwMap.put("cust_no", cust_no);
@@ -138,6 +154,13 @@ public class LeadController {
 		kwMap.put("rank_cd", rank_cd);
 		
 		System.out.println("kwmap? " + kwMap.toString());
+		
+		// paging
+	  PagerVO page = leadService.getLeadListRow(kwMap);
+	  kwMap.put("page", page);
+		
+		
+		
 		
 		List<LeadVO> leadList = leadService.leadSearch(kwMap);
 		

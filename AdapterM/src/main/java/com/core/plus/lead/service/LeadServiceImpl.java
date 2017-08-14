@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.lead.dao.LeadDao;
@@ -18,9 +19,9 @@ public class LeadServiceImpl implements LeadService {
 	@Resource LeadDao leadDao;
 
 	@Override
-	public List<LeadVO> lead_list() {
+	public List<LeadVO> lead_list(Map<String, Object> map) {
 		
-		List<LeadVO> vo = leadDao.lead_list();
+		List<LeadVO> vo = leadDao.lead_list(map);
 		
 		return vo;
 	}
@@ -82,6 +83,20 @@ public class LeadServiceImpl implements LeadService {
 	public List<EmpVO> empPopupList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return leadDao.empPopupList(map);
+	}
+	
+	
+	@Override
+	public PagerVO getLeadListRow(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int PageNum = (Integer)map.get("PageNum");
+		PagerVO page = new PagerVO(PageNum, 0, 10, 10);
+		
+		int totalRowCount = leadDao.getLeadListRow(map);
+		
+		page = new PagerVO(PageNum, totalRowCount, 10, 10);
+		
+		return page;
 	}
 
 }

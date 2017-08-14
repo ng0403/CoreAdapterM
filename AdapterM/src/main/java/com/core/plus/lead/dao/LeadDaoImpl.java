@@ -17,9 +17,9 @@ public class LeadDaoImpl implements LeadDao {
 	@Autowired SqlSession sqlSession;
 
 	@Override
-	public List<LeadVO> lead_list() {
+	public List<LeadVO> lead_list(Map<String, Object> map) {
 		
-		List<LeadVO> vo = sqlSession.selectList("leadList");
+		List<LeadVO> vo = sqlSession.selectList("leadList", map);
 		
 		return vo;
 	}
@@ -88,6 +88,23 @@ public class LeadDaoImpl implements LeadDao {
 		List<EmpVO> empPopList = sqlSession.selectList("lead.empPopupList", map);
 		
 		return empPopList;
+	}
+	
+	
+	@Override
+	public int getLeadListRow(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int totalCount = 0;
+		
+		try {
+			totalCount = sqlSession.selectOne("lead.leadListTotalRow", map);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return totalCount;
 	}
 
 	

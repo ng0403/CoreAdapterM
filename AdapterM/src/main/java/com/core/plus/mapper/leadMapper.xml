@@ -2,22 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lead">
 
-	<select id="leadList" resultType="com.core.plus.lead.vo.LeadVO">
-	  select
+<!-- Paging -->
+	<select id="leadListTotalRow" resultType="int">
+		SELECT count(*)
+		FROM tb_lead
+		WHERE del_yn = 'N' 
+	</select>
+
+
+
+	<select id="leadList" resultType="com.core.plus.lead.vo.LeadVO" parameterType="java.util.Map">
+select
 		l.lead_no,
 		l.lead_name,
 		l.cust_no,
 	     case when (emp_name) is null then ' '
 		   	   else (emp_name) end as emp_name ,
 	     case when (cust_name) is null then ' '
-		   	   else (cust_name) end as cust_name , 
+		   	   else (cust_name) end as cust_name ,  
 		p.phone_no,
 		l.contact_day,
 		l.rank_cd,
 		date_format(l.create_date, '%Y-%m-%d %H:%i') as create_date
-		from tb_lead l, tb_cust c, tb_cust_phone p, tb_emp em
-		where l.cust_no = c.cust_no and c.cust_no = p.cust_no and l.cust_no = p.cust_no and l.del_yn='N'
-	   <choose>
+		from 
+		tb_lead l left join tb_cust c on l.cust_no = c.cust_no left join  tb_emp em on l.emp_no = em.emp_no left join tb_cust_phone p on l.cust_no = p.cust_no
+		where 1=1 and l.del_yn ='N'
+	  <choose>
 	   <when test="lead_no_srch !=null and lead_no_srch !=''">
 			and(lead_no like concat('%', #{lead_no_srch}, '%') )
 		</when> 

@@ -1,7 +1,6 @@
  
 $(function(){
-	 
-	  var flg = $("#flg").val();
+ 	  var flg = $("#flg").val();
  
 	  // 상세보기일 때 text readonly
 	  if(flg == '0'){
@@ -21,6 +20,27 @@ $(function(){
 	  //lead update title div hide
 	  $("#lead_update_title").css("display", "none");
 });
+
+
+//페이징 함수
+function leadPaging(pageNum) {
+	$(document).ready(function() {
+		// 컨트롤러로 전송
+		var ctx = $("#ctx").val();
+		var leadListForm = $("#leadListPagingForm");
+	     
+	    var pageNumInput = $('<input type="hidden" value="'+pageNum+'" name="pageNum">');
+	 
+	    leadListForm.append(pageNumInput);
+	    viewLoadingShow();
+	    leadListForm.submit();
+	});
+}
+
+
+
+
+
 
 //검색 엔터키 기능
 function leadSearchEnter(event) {
@@ -323,7 +343,8 @@ function lead_remove() {
 
 
 //조회
-function searchKeyword(){
+function searchKeyword(a){
+	
  	var lead_no_srch = $("#lead_no_srch").val();
 	var lead_name_srch = $("#lead_name_srch").val();
 	var cust_no = $("#cust_no").val();
@@ -337,7 +358,7 @@ function searchKeyword(){
 		        "cust_no": cust_no, 
 		        "emp_no":emp_no, 
 		        "contact_day_srch":contact_day_srch,
-		        "rank_cd" : rank_cd      };
+		        "rank_cd" : rank_cd , "pageNum" : a};
 		
  
 			var tbody = $('#lead_list_tbody');
@@ -367,6 +388,35 @@ function searchKeyword(){
  					tbody.append(tbodyContent);
 					}
 					 
+
+ 					// 페이징
+ 					$(".pagingDiv").empty();
+ 					var pageContent = "";
+
+ 					console.log(data);
+ 					
+ 					if(data.page.endPageNum == 0 || data.page.endPageNum == 1){
+ 						pageContent = "◀ <input type='text' id='pageInput' readonly='readonly' value='1' style='width: 25px; text-align: center;'/> / 1 ▶";
+ 					} else if(data.opptyPageNum == data.page.startPageNum){
+ 						pageContent = "<input type='hidden' id='opptyPageNum' value='"+data.opptyPageNum+"'/><input type='hidden' id='opptyEndPageNum' value='"+data.page.endPageNum+"'/>"
+ 						+"◀ <input type='text' id='pageInput' value='"+data.page.startPageNum+"' onkeypress=\"opptyPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>" 
+ 						+"<a onclick=\"searchKeyword("+data.page.endPageNum+");\" id='pNum' style='cursor: pointer;'> / "+data.page.endPageNum+"</a>"
+ 						+"<a onclick=\"searchKeyword("+(data.pageNum+1)+");\" id='pNum' style='cursor: pointer;'> ▶ </a>";
+ 					} else if(data.opptyPageNum == data.page.endPageNum){
+ 						pageContent = "<input type='hidden' id='opptyPageNum' value='"+data.opptyPageNum+"'/><input type='hidden' id='opptyEndPageNum' value='"+data.page.endPageNum+"'/>"
+ 						+"<a onclick=\"searchKeyword("+(data.opptyPageNum-1)+");\" id='pNum' style='cursor: pointer;'> ◀ </a>"
+ 						+"<input type='text' id='pageInput' value='"+data.page.endPageNum+"' onkeypress=\"custPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
+ 						+"<a> / "+data.page.endPageNum+"</a> ▶";
+ 					} else {
+ 						pageContent = "<input type='hidden' id='opptyPageNum' value='"+data.opptyPageNum+"'/><input type='hidden' id='opptyEndPageNum' value='"+data.page.endPageNum+"'/>"
+ 						+"<a onclick=\"searchKeyword("+(data.opptyPageNum-1)+",2);\" id='pNum' style='cursor: pointer;'> ◀ </a>"
+ 						+"<input type='text' id='pageInput' value='"+data.opptyPageNum+"' onkeypress=\"opptyPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
+ 						+"<a onclick=\"searchKeyword("+data.page.opptyPageNum+");\" id='pNum' style='cursor: pointer;'> / "+data.page.endPageNum+"</a>"
+ 						+"<a onclick=\"searchKeyword("+(data.opptyPageNum+1)+");\" id='pNum' style='cursor: pointer;'> ▶ </a>";
+ 					}
+ 					$(".pagingDiv").append(pageContent);
+ 					
+ 					
 					
 				},
 				error: function(){
