@@ -2,8 +2,95 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="oppty">
 
+	<!-- Paging -->
+	<select id="opptyListTotalRow" resultType="int">
+		SELECT count(*)
+		FROM tb_oppty
+		WHERE del_yn = 'N'
+		<if test="oppty_no_srch != null and oppty_no_srch != ''">
+			AND (oppty_no like concat('%', #{oppty_no_srch}, '%'))
+		</if>
+		<if test="oppty_name_srch != null and oppty_name_srch != ''">
+			AND (oppty_name like concat('%', #{oppty_name_srch}, '%'))
+		</if>
+		<if test="cust_name_srch != null and cust_name_srch != ''">
+			AND (cust_no in ( select cust_no from tb_cust where cust_name like concat('%', #{cust_name_srch}, '%')))
+		</if>
+		<if test="emp_name_srch != null and emp_name_srch != ''">
+			AND (emp_no like ( select emp_no from tb_emp where emp_name like concat('%', #{emp_name_srch}, '%')))
+		</if>
+		<if test="oppty_status_cd_srch != null and oppty_status_cd_srch != ''">
+			AND (oppty_status_cd like concat('%', #{oppty_status_cd_srch}, '%'))
+		</if>
+		<if test="oppty_stage_cd_srch != null and oppty_stage_cd_srch != ''">
+			AND (oppty_stage_cd like concat('%', #{oppty_stage_cd_srch}, '%'))
+		</if>
+		<if test="exp_close_dt_srch != null and exp_close_dt_srch != ''">
+			AND (exp_close_day like concat('%', #{exp_close_dt_srch}, '%'))
+		</if>
+		<if test="dtype_cd_srch != null and dtype_cd_srch != ''">
+			AND (dtype_cd like concat('%', #{dtype_cd_srch}, '%'))
+		</if>
+		<if test="purchase_type_srch != null and purchase_type_srch != ''">
+			AND (purchase_type like concat('%', #{purchase_type_srch}, '%'))
+		</if>
+	</select>
+	
+	<!-- Paging -->
+	<select id="custPopupRow" resultType="int">
+		SELECT count(*)
+		FROM tb_cust
+		WHERE del_yn = 'N'
+		<if test="s_cust_name != null and s_cust_name != ''">
+			AND (cust_name like concat('%', #{s_cust_name}, '%'))
+		</if>
+	</select>
+	
+	<select id="empPopupRow" resultType="int">
+		SELECT count(*)
+		FROM tb_emp
+		WHERE del_yn = 'N'
+		<if test="s_emp_name != null and s_emp_name != ''">
+			AND (emp_name like concat('%', #{s_emp_name}, '%'))
+		</if>
+	</select>
+	
+	<select id="mainCatePopupRow" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			tb_code
+		WHERE
+			code_no='1015'
+	</select>
+	
+	<select id="midCatePopupRow" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			tb_code a, tb_price_book b
+		WHERE
+			a.code=b.mid_cate_cd
+			AND a.code_no='1016'
+			AND b.main_cate_cd=#{main_cate_cd}
+	</select>
+	
+	<select id="smallCatePopupRow" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			tb_code a, tb_price_book b
+		WHERE
+			a.code = b.small_cate_cd
+			AND b.main_cate_cd = #{main_cate_cd}
+			AND b.mid_cate_cd  = #{mid_cate_cd}
+			AND a.code_no='1017'
+	</select>
+	
 	<!-- List -->
 	<select id="opptyList" resultType="com.core.plus.oppty.vo.OpptyVO" parameterType="java.util.Map">
+		SELECT P.*
+		FROM (
 		SELECT 
 			oppty_no,
 			oppty_name,
@@ -48,6 +135,9 @@
 			<if test="purchase_type_srch != null and purchase_type_srch != ''">
 				AND (purchase_type like concat('%', #{purchase_type_srch}, '%'))
 			</if>
+		) P
+<!-- 		<![CDATA[WHERE SAL.RNUM>=#{page.startRow} and SAL.RNUM<=#{page.endRow}]]> -->
+		LIMIT #{page.limitStartNum}, #{page.pageSize}
 	</select>
 	
 	<!-- OpptyItem List -->
@@ -62,6 +152,7 @@
 			(select code_name from tb_code where code_no = '1017' and code = small_cate_cd) small_cate_name,
 			qty,
 			list_price,
+			(qty*list_price-dc_price) AS total_price,
 			dc_price,
 			payment_day
 		FROM
@@ -211,48 +302,60 @@
 	</select>
 	
 	<select id="mainCatePopupList" resultType="com.core.plus.oppty.vo.OpptyItemVO">
-		SELECT
-			code AS main_cate_cd,
-			code_name AS main_cate_name
-		FROM
-			tb_code
-		WHERE
-			code_no='1015'
-		<if test="s_main_cate_name != null and s_main_cate_name != ''">
-			AND (code_name like concat('%', #{s_main_cate_name}, '%'))
-		</if>
+		SELECT P.*
+		FROM (
+			SELECT
+				code AS main_cate_cd,
+				code_name AS main_cate_name
+			FROM
+				tb_code
+			WHERE
+				code_no='1015'
+			<if test="s_main_cate_name != null and s_main_cate_name != ''">
+				AND (code_name like concat('%', #{s_main_cate_name}, '%'))
+			</if>
+		) P
+		LIMIT #{page.limitStartNum}, #{page.pageSize}
 	</select>
 	
 	<select id="midCatePopupList" resultType="com.core.plus.oppty.vo.OpptyItemVO">
-		SELECT
-			DISTINCT a.code AS mid_cate_cd,
-			a.code_name AS mid_cate_name
-		FROM
-			tb_code a, tb_price_book b
-		WHERE
-			a.code=b.mid_cate_cd
-			AND a.code_no='1016'
-			AND b.main_cate_cd=#{main_cate_cd}
-		<if test="s_main_cate_name != null and s_main_cate_name != ''">
-			AND (a.code_name like concat('%', #{s_mid_cate_name}, '%'))
-		</if>
+		SELECT P.*
+		FROM (
+			SELECT
+				DISTINCT a.code AS mid_cate_cd,
+				a.code_name AS mid_cate_name
+			FROM
+				tb_code a, tb_price_book b
+			WHERE
+				a.code=b.mid_cate_cd
+				AND a.code_no='1016'
+				AND b.main_cate_cd=#{main_cate_cd}
+			<if test="s_mid_cate_name != null and s_mid_cate_name != ''">
+				AND (a.code_name like concat('%', #{s_mid_cate_name}, '%'))
+			</if>
+		) P
+		LIMIT #{page.limitStartNum}, #{page.pageSize}
 	</select>
 	
 	<select id="smallCatePopupList" resultType="com.core.plus.oppty.vo.OpptyItemVO">
-		SELECT
-			DISTINCT a.code AS small_cate_cd,
-			a.code_name AS small_cate_name,
-			b.list_price
-		FROM
-			tb_code a, tb_price_book b
-		WHERE
-			a.code = b.small_cate_cd
-			AND b.main_cate_cd = #{main_cate_cd}
-			AND b.mid_cate_cd  = #{mid_cate_cd}
-			AND a.code_no='1017'
-		<if test="s_small_cate_name != null and s_small_cate_name != ''">
-			AND (a.code_name like concat('%', #{s_small_cate_name}, '%'))
-		</if>
+		SELECT P.*
+		FROM (
+				SELECT
+					DISTINCT a.code AS small_cate_cd,
+					a.code_name AS small_cate_name,
+					b.list_price
+				FROM
+					tb_code a, tb_price_book b
+				WHERE
+					a.code = b.small_cate_cd
+					AND b.main_cate_cd = #{main_cate_cd}
+					AND b.mid_cate_cd  = #{mid_cate_cd}
+					AND a.code_no='1017'
+				<if test="s_small_cate_name != null and s_small_cate_name != ''">
+					AND (a.code_name like concat('%', #{s_small_cate_name}, '%'))
+				</if>
+		) P
+		LIMIT #{page.limitStartNum}, #{page.pageSize}
 	</select>
 	
 </mapper>
