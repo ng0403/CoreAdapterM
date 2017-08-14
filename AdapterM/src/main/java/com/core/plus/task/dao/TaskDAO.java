@@ -2,7 +2,7 @@ package com.core.plus.task.dao;
 
 import java.util.List;
 
-import com.core.plus.task.service.TaskVO;
+import com.core.plus.task.vo.TaskVO;
 
 public interface TaskDAO {
 

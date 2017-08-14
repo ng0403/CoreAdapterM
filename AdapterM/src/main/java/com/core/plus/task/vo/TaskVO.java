@@ -1,4 +1,4 @@
-package com.core.plus.task.service;
+package com.core.plus.task.vo;
 
 public class TaskVO {
 

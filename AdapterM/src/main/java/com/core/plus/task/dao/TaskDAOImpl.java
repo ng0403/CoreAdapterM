@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.core.plus.oppty.vo.OpptyVO;
-import com.core.plus.task.service.TaskVO;
+import com.core.plus.task.vo.TaskVO;
 
 @Repository
 public class TaskDAOImpl implements TaskDAO {

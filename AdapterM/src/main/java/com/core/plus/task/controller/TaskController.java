@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.core.plus.task.service.TaskService;
-import com.core.plus.task.service.TaskVO;
+import com.core.plus.task.vo.TaskVO;
 
 @Controller
 public class TaskController {
