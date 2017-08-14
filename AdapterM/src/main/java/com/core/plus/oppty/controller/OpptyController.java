@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
+import com.core.plus.info.menu.service.MenuService;
+import com.core.plus.info.menu.vo.MenuVo;
 import com.core.plus.oppty.service.OpptyService;
 import com.core.plus.oppty.vo.OpptyItemVO;
 import com.core.plus.oppty.vo.OpptyVO;
@@ -28,11 +31,41 @@ public class OpptyController {
 	@Resource
 	OpptyService opptyService;
 	
+	@Resource
+	MenuService menuService;
+	
+	public void menuImport(ModelAndView mav, String url){
+		String menu_id = menuService.getMenuUrlID(url);
+//		String user_id = session.getAttribute("user").toString();
+	
+		Map<String, String> menuAuthMap = new HashMap<String, String>();
+		menuAuthMap.put("menu_url", url);
+//		menuAuthMap.put("user_id", user_id);
+		menuAuthMap.put("menu_id", menu_id);
+//		MenuVo menuAuth = loginDao.getMenuAuthInfo(menuAuthMap);
+//		mav.addObject("menuAuth", menuAuth);
+			
+		List<MenuVo> mainMenuList = menuService.getMainMenuList(/*user_id*/);
+		List<MenuVo> subMenuList = menuService.getSubMenuList(menuAuthMap);
+		mav.addObject("mainMenuList", mainMenuList);  //mainMenuList
+		mav.addObject("subMenuList", subMenuList);    //subMenuList
+	}
+	
 	// 처음 list 화면
 	@RequestMapping(value="/oppty")
-	public ModelAndView opptyList()
+	public ModelAndView opptyList(HttpSession session,
+			@RequestParam(value = "opptyPageNum", defaultValue = "1") int opptyPageNum)
 	{
-		List<OpptyVO> vo = opptyService.opptyList();
+		Map<String, Object> opptyMap = new HashMap<String, Object>();
+		opptyMap.put("opptyPageNum", opptyPageNum);
+		
+		// paging
+		PagerVO page = opptyService.getOpptyListRow(opptyMap);
+		
+		System.out.println("page : " + page);
+		opptyMap.put("page", page);
+		
+		List<OpptyVO> vo = opptyService.opptyList(opptyMap);
 		List<OpptyVO> status = opptyService.opptyStatusCD();
 		List<OpptyVO> stage = opptyService.opptyStageCD();
 		List<OpptyVO> dtype = opptyService.opptyDtypeCD();
@@ -42,25 +75,30 @@ public class OpptyController {
 		
 		ModelAndView mov = new ModelAndView("oppty_list");
 		
+		mov.addObject("page", page);
+		mov.addObject("opptyPageNum", opptyPageNum);
 		mov.addObject("opptyList", vo);
 		mov.addObject("opptyStatusCd", status);
 		mov.addObject("opptyStageCd", stage);
 		mov.addObject("dtypeCd", dtype);
 		mov.addObject("purchaseType", purchase);
+
+		menuImport(mov, "oppty");
 		
 		return mov;
 	}
 	
 	@RequestMapping(value="oppty_sch", method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> opptSchList(HttpSession session,
-												  @RequestParam(value = "opptyPageNum", defaultValue = "1") int actPageNum,
+												  @RequestParam(value = "opptyPageNum", defaultValue = "1") int opptyPageNum,
 												  String oppty_no_srch, String oppty_name_srch, 
 												  String cust_name_srch, String emp_name_srcj,
 												  String oppty_status_cd_srch, String oppty_stage_cd_srch,
 												  String exp_close_dt_srch, String dtype_cd_srch, String purchase_type_srch)
 	{
 		Map<String, Object> kMap = new HashMap<String, Object>();
-		
+		System.out.println("page num : " + opptyPageNum);
+		kMap.put("opptyPageNum", opptyPageNum);
 		kMap.put("oppty_no_srch", oppty_no_srch);
 		kMap.put("oppty_name_srch", oppty_name_srch);
 		kMap.put("cust_name_srch", cust_name_srch);
@@ -71,6 +109,11 @@ public class OpptyController {
 		kMap.put("dtype_cd_srch", dtype_cd_srch);
 		kMap.put("purchase_type_srch", purchase_type_srch);
 		
+		// paging
+		PagerVO page = opptyService.getOpptyListRow(kMap);
+		kMap.put("page", page);
+		System.out.println("page : " + page);
+				
 		List<OpptyVO> srcList = opptyService.opptySchList(kMap);
 		
 		kMap.put("srcList", srcList);
@@ -104,6 +147,8 @@ public class OpptyController {
 			mov.addObject("paymentCd", payment);
 			mov.addObject("recperCd", recper);
 			
+			menuImport(mov, "oppty");
+			
 			return mov;
 		}
 		else	// 상세보기	OpptyItem도 조회해야함.
@@ -127,6 +172,8 @@ public class OpptyController {
 			mov.addObject("purchaseType", purchase);
 			mov.addObject("paymentCd", payment);
 			mov.addObject("recperCd", recper);
+			
+			menuImport(mov, "oppty");
 			
 			return mov;
 		}
@@ -220,15 +267,21 @@ public class OpptyController {
 	
 	/* Popup*/
 	@RequestMapping(value="custListAjax", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> custListPopup(String s_cust_name)
+	public @ResponseBody Map<String, Object> custListPopup(@RequestParam(value = "custPopupPageNum", defaultValue = "1") int custPopupPageNum, String s_cust_name)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("custPopupPageNum", custPopupPageNum);
+		
+		// paging
+		PagerVO page = opptyService.getCustPopupRow(map);
 		
 		// 고객리스트 불러오는 서비스/다오/맵퍼 작성
 		if(s_cust_name == null || s_cust_name == "")
 		{
 			List<CustVO> custPopupList = opptyService.custPopupList();
 			map.put("custPopupList", custPopupList);
+			map.put("page", page);
+			map.put("pageNum", custPopupPageNum);
 			
 			return map;
 		}
@@ -237,21 +290,29 @@ public class OpptyController {
 			map.put("s_cust_name", s_cust_name);
 			List<CustVO> schCustPopupList = opptyService.custPopupList(map);
 			map.put("custPopupList", schCustPopupList);
+			map.put("page", page);
+			map.put("pageNum", custPopupPageNum);
 			
 			return map;
 		}
 	}
 	
 	@RequestMapping(value="empListAjax", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> empListPopup(String s_emp_name)
+	public @ResponseBody Map<String, Object> empListPopup(@RequestParam(value = "empPopupPageNum", defaultValue = "1") int empPopupPageNum, String s_emp_name)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("empPopupPageNum", empPopupPageNum);
+		
+		// paging
+		PagerVO page = opptyService.getEmpPopupRow(map);
 		
 		// 담당자리스트 불러오는 서비스/다오/맵퍼 작성
 		if(s_emp_name == null || s_emp_name == "")
 		{
 			List<EmpVO> empPopupList = opptyService.empPopupList();
 			map.put("empPopupList", empPopupList);
+			map.put("page", page);
+			map.put("pageNum", empPopupPageNum);
 			
 			return map;
 		}
@@ -260,38 +321,56 @@ public class OpptyController {
 			map.put("s_emp_name", s_emp_name);
 			List<EmpVO> schEmpPopupList = opptyService.empPopupList(map);
 			map.put("empPopupList", schEmpPopupList);
+			map.put("page", page);
+			map.put("pageNum", empPopupPageNum);
 			
 			return map;
 		}
 	}
 	
 	@RequestMapping(value="mainCateListAjax", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> mainCatList(String s_main_cat_name)
+	public @ResponseBody Map<String, Object> mainCatList(@RequestParam(value = "mainCatePopupPageNum", defaultValue = "1") int mainCatePopupPageNum, String s_main_cate_name)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("mainCatePopupPageNum", mainCatePopupPageNum);
+		System.out.println(s_main_cate_name);
+		// paging
+		PagerVO page = opptyService.getMainCatePopupRow(map);
+		map.put("page", page);
+		map.put("pageNum", mainCatePopupPageNum);
 		
-		if(s_main_cat_name == null || s_main_cat_name == "")
+		if(s_main_cate_name == null || s_main_cate_name == "")
 		{
-			List<OpptyItemVO> mainCatePopupList = opptyService.mainCatPopupList();
+			System.out.println("page : " + page);
+			List<OpptyItemVO> mainCatePopupList = opptyService.mainCatPopupList(map);
 			map.put("mainCatePopupList", mainCatePopupList);
-
+			
 			return map;
 		}
 		else
 		{
-			map.put("s_main_cat_name", s_main_cat_name);
+			System.out.println("s_main_cat_name : " +s_main_cate_name);
+			System.out.println("page : " + page);
+			map.put("s_main_cate_name", s_main_cate_name);
 			
 			List<OpptyItemVO> schMainCatePopupList = opptyService.mainCatPopupList(map);
 			map.put("mainCatePopupList", schMainCatePopupList);
-
+			
 			return map;
 		}
 	}
 	
 	@RequestMapping(value="midCateListAjax", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> midCatList(String main_cate_cd, String s_mid_cate_name)
+	public @ResponseBody Map<String, Object> midCatList(@RequestParam(value = "midCatePopupPageNum", defaultValue = "1") int midCatePopupPageNum, String main_cate_cd, String s_mid_cate_name)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("midCatePopupPageNum", midCatePopupPageNum);
+		System.out.println("main_cate_cd : " + main_cate_cd);
+		
+		// paging
+		PagerVO page = opptyService.getMidCatePopupRow(map);
+		map.put("page", page);
+		map.put("pageNum", midCatePopupPageNum);
 		
 		if(s_mid_cate_name == null || s_mid_cate_name == "")
 		{
@@ -299,25 +378,31 @@ public class OpptyController {
 			
 			List<OpptyItemVO> midCatePopupList = opptyService.midCatPopupList(map);
 			map.put("midCatePopupList", midCatePopupList);
-			System.out.println("midCatePopupList : " + midCatePopupList);
 			
 			return map;
 		}
 		else
 		{
+			map.put("main_cate_cd", main_cate_cd);
 			map.put("s_mid_cate_name", s_mid_cate_name);
 			
 			List<OpptyItemVO> schMidCatePopupList = opptyService.midCatPopupList(map);
 			map.put("midCatePopupList", schMidCatePopupList);
-
+			
 			return map;
 		}
 	}
 	
 	@RequestMapping(value="smallCateListAjax", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> smallCatList(String main_cate_cd, String mid_cate_cd, String s_small_cate_name)
+	public @ResponseBody Map<String, Object> smallCatList(@RequestParam(value = "smallCatePopupPageNum", defaultValue = "1") int smallCatePopupPageNum, String main_cate_cd, String mid_cate_cd, String s_small_cate_name)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("smallCatePopupPageNum", smallCatePopupPageNum);
+		
+		// paging
+		PagerVO page = opptyService.getSmallCatePopupRow(map);
+		map.put("page", page);
+		map.put("pageNum", smallCatePopupPageNum);		
 		
 		if(s_small_cate_name == null || s_small_cate_name == "")
 		{
@@ -326,12 +411,13 @@ public class OpptyController {
 			
 			List<OpptyItemVO> smallCatPopupList = opptyService.smallCatPopupList(map);
 			map.put("smallCatePopupList", smallCatPopupList);
-			System.out.println("smallCatPopupList : " + smallCatPopupList);
 			
 			return map;
 		}
 		else
 		{
+			map.put("main_cate_cd", main_cate_cd);
+			map.put("mid_cate_cd", mid_cate_cd);
 			map.put("s_small_cate_name", s_small_cate_name);
 			
 			List<OpptyItemVO> schSmallCatPopupList = opptyService.smallCatPopupList(map);

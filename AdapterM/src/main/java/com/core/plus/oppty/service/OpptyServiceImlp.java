@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.oppty.dao.OpptyDao;
@@ -20,9 +21,9 @@ public class OpptyServiceImlp implements OpptyService {
 	OpptyDao opptyDao;
 	
 	@Override
-	public List<OpptyVO> opptyList() {
+	public List<OpptyVO> opptyList(Map<String, Object> opptyMap) {
 		// TODO Auto-generated method stub
-		return opptyDao.opptyList();
+		return opptyDao.opptyList(opptyMap);
 	}
 	
 	@Override
@@ -178,6 +179,84 @@ public class OpptyServiceImlp implements OpptyService {
 	public List<OpptyItemVO> smallCatPopupList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return opptyDao.smallCatPopupList(map);
+	}
+
+	@Override
+	public PagerVO getOpptyListRow(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int optyPageNum = (Integer)map.get("opptyPageNum");
+		PagerVO page = new PagerVO(optyPageNum, 0, 10, 10);
+		
+		int totalRowCount = opptyDao.getOpptyListRow(map);
+		
+		page = new PagerVO(optyPageNum, totalRowCount, 10, 10);
+		
+		return page;
+	}
+	
+	@Override
+	public PagerVO getCustPopupRow(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int custPageNum = (Integer)map.get("custPopupPageNum");
+		PagerVO page = new PagerVO(custPageNum, 0, 10, 10);
+		
+		int totalRowCount = opptyDao.getOpptyListRow(map);
+		
+		page = new PagerVO(custPageNum, totalRowCount, 10, 10);
+		
+		return page;
+	}
+
+	@Override
+	public PagerVO getEmpPopupRow(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int empPageNum = (Integer)map.get("empPopupPageNum");
+		PagerVO page = new PagerVO(empPageNum, 0, 10, 10);
+		
+		int totalRowCount = opptyDao.getEmpPopupRow(map);
+		
+		page = new PagerVO(empPageNum, totalRowCount, 10, 10);
+		
+		return page;
+	}
+
+	@Override
+	public PagerVO getMainCatePopupRow(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int mainCatePageNum = (Integer)map.get("mainCatePopupPageNum");
+		PagerVO page = new PagerVO(mainCatePageNum, 0, 10, 10);
+		
+		int totalRowCount = opptyDao.getMainCatePopupRow(map);
+		
+		page = new PagerVO(mainCatePageNum, totalRowCount, 10, 10);
+		
+		return page;
+	}
+
+	@Override
+	public PagerVO getMidCatePopupRow(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int midCatePageNum = (Integer)map.get("midCatePopupPageNum");
+		PagerVO page = new PagerVO(midCatePageNum, 0, 10, 10);
+		
+		int totalRowCount = opptyDao.getMidCatePopupRow(map);
+		
+		page = new PagerVO(midCatePageNum, totalRowCount, 10, 10);
+		
+		return page;
+	}
+
+	@Override
+	public PagerVO getSmallCatePopupRow(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int smallCatePageNum = (Integer)map.get("smallCatePopupPageNum");
+		PagerVO page = new PagerVO(smallCatePageNum, 0, 10, 10);
+		
+		int totalRowCount = opptyDao.getSmallPopupRow(map);
+		
+		page = new PagerVO(smallCatePageNum, totalRowCount, 10, 10);
+		
+		return page;
 	}
 
 }

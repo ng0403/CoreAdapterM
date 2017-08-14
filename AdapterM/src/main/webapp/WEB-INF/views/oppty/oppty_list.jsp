@@ -161,30 +161,6 @@
 	 	 			</tr>
 	 	 		</c:forEach>
 	 	 		
-<%-- 	 	 		<c:forEach items="${couponList}" var="couponList"> --%>
-<%-- 	 	 		<input type="hidden" id="img_src" value="${couponList.img_src}"> --%>
-<!-- 	 	 		<tr> -->
-<%-- 	 	 			<td onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');">${couponList.cupn_wid}</td> --%>
-<%-- 	 	 			<td style="text-align: left;" onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');">${couponList.cupn_name}</td> --%>
-<%-- 	 	 			<td style="text-align: left;" onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');">${couponList.file_name}</td> --%>
-<%-- 	 	 			<td style="text-align: right;" onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');"> --%>
-<%-- 	 	 			<c:if test="${couponList.disc_type==1}"> --%>
-<%-- 	 	 				${couponList.disc_rate}% --%>
-<%-- 	 	 			</c:if> --%>
-<%-- 	 	 			<c:if test="${couponList.disc_type==2}"> --%>
-<%-- 	 	 				<fmt:formatNumber value="${couponList.disc_amt}" type="number"/>원 --%>
-<%-- 	 	 			</c:if> --%>
-<!-- 	 	 			</td> -->
-<%-- 	 	 			<td onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');">${couponList.exp_start_dt} ~ ${couponList.exp_end_dt} </td> --%>
-<%-- 	 	 			<td onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');">${couponList.created}</td> --%>
-<%-- 	 	 			<td onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');">${couponList.active_flg}</td> --%>
-<!-- 	 	 		</tr> -->
-<%-- 	 	 		</c:forEach> --%>
-<%-- 	 	 		<c:if test="${couponList.size() == 0}"> --%>
-<!-- 		 	 		<tr style="background-color:white; cursor: default;"> -->
-<!-- 			 	 		<td colspan=8" style="height: 274px;"><b>검색 결과가 없습니다.</b></td> -->
-<!-- 		 	 		</tr> -->
-<%-- 	 	 		</c:if> --%>
 	 	 	</tbody>
 	 	 </table>
    	
@@ -192,34 +168,34 @@
 		 	 <input type="button" class="func_btn" id="oppty_single_add" value="단건등록" onclick="opptySingleAddForm();">
 		 	 <input type="button" class="func_btn" id="oppty_multi_add" value="다건등록">
 		</div>
-<!-- 	 	<div class="pagingDiv"> -->
-<%-- 			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/> --%>
-<%-- 			<input type="hidden" id="startPageNum" value="${page.startPageNum}"/> --%>
-<%-- 			<input type="hidden" id="pageNum" value="${pageNum}"/> --%>
-<%-- 			<c:choose> --%>
-<%-- 				<c:when test="${page.endPageNum == 0 || page.endPageNum == 1}"> --%>
-<%-- 					<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" value="${page.startPageNum}" readonly="readonly"/>   --%>
-<!-- 					<a style="color: black; text-decoration: none;"> / 1</a> -->
-<!-- 					<a style="color: black; text-decoration: none;"> ▶ </a> -->
-<%-- 				</c:when> --%>
-<%-- 				<c:when test="${pageNum == page.startPageNum}"> --%>
-<%-- 					 ◀ <input type="text" id="pageInput" value="${page.startPageNum}"  onkeypress="cupnPageNumInputEnter(event);"/>   --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${page.endPageNum}');" id="pNum" > / ${page.endPageNum}</a> --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${pageNum+1}');" id="pNum"> ▶ </a> --%>
-<%-- 				</c:when> --%>
-<%-- 				<c:when test="${pageNum == page.endPageNum}"> --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${pageNum-1}');" id="pNum"> ◀ </a> --%>
-<%-- 					<input type="text" id="pageInput"  value="${page.endPageNum}" onkeypress="cupnPageNumInputEnter(event);"/>  --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a> --%>
-<!-- 					<a style="color: black; text-decoration: none;"> ▶ </a> -->
-<%-- 				</c:when> --%>
-<%-- 				<c:otherwise> --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${pageNum-1}');" id="pNum" > ◀ </a> --%>
-<%-- 					<input type="text" id="pageInput"  value="${pageNum}" onkeypress="cupnPageNumInputEnter(event);"/>   --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a> --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${pageNum+1}');" id="pNum"> ▶ </a> --%>
-<%-- 				</c:otherwise> --%>
-<%-- 			</c:choose> --%>
-<!-- 		</div> -->
+	 	<div class="pagingDiv">
+			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
+			<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
+			<input type="hidden" id="opptyPageNum" value="${opptyPageNum}"/>
+			<c:choose>
+				<c:when test="${page.endPageNum == 0 || page.endPageNum == 1}">
+					<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" value="${page.startPageNum}" readonly="readonly"/>  
+					<a style="color: black; text-decoration: none;"> / 1</a>
+					<a style="color: black; text-decoration: none;"> ▶ </a>
+				</c:when>
+				<c:when test="${opptyPageNum == page.startPageNum}">
+					 ◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="opptyPageNumInputEnter(event);"/>  
+					<a style="cursor: pointer;" onclick="opptySchList('${page.endPageNum}');" id="pNum" > / ${page.endPageNum}</a>
+					<a style="cursor: pointer;" onclick="opptySchList('${opptyPageNum+1}');" id="pNum"> ▶ </a>
+				</c:when>
+				<c:when test="${opptyPageNum == page.endPageNum}">
+					<a style="cursor: pointer;" onclick="opptySchList('${opptyPageNum-1}');" id="pNum"> ◀ </a>
+					<input type="text" id="pageInput"  value="${page.endPageNum}" onkeypress="opptyPageNumInputEnter(event);"/> 
+					<a style="cursor: pointer;" onclick="opptySchList('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
+					<a style="color: black; text-decoration: none;"> ▶ </a>
+				</c:when>
+				<c:otherwise>
+					<a style="cursor: pointer;" onclick="opptySchList('${opptyPageNum-1}');" id="pNum" > ◀ </a>
+					<input type="text" id="pageInput"  value="${opptyPageNum}" onkeypress="opptyPageNumInputEnter(event);"/>  
+					<a style="cursor: pointer;" onclick="opptySchList('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
+					<a style="cursor: pointer;" onclick="opptySchList('${opptyPageNum+1}');" id="pNum"> ▶ </a>
+				</c:otherwise>
+			</c:choose>
+		</div>
    </div>
 </div>

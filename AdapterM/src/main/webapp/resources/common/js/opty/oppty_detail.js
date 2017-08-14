@@ -39,7 +39,7 @@ function custSchPopupOpen()
 	
 	// list 불러오는 함수.
 //	viewCustList(1);
-	viewCustList();
+	viewCustList(1);
 }
 
 function empSchPopupOpen()
@@ -58,24 +58,30 @@ function empSchPopupOpen()
 		,onOverlayClick : $.unblockUI
 	});
 	
+	$("#pageNum").val("1");
+	
 	// list 불러오는 함수.
-	viewEmpList();
+	viewEmpList(1);
 }
 
 /* 팝업창 고객목록 표시 */
 //function viewCustList(prodMenuPageNum) {
-function viewCustList() 
+function viewCustList(custPopupPageNum) 
 {
 	var ctx = $("#ctx").val();
 	
 	var s_cust_name = $("#s_cust_name").val();
+	var custPopupPageNum = $("#custPopupPageNum").val();
 	
 	console.log(s_cust_name);
 	
 	$.ajax({
 		url: ctx + "/custListAjax", 
 		type: "POST",  
-		data: { s_cust_name : s_cust_name },
+		data: { 
+			custPopupPageNum : custPopupPageNum,
+			s_cust_name : s_cust_name 
+		},
 		dataType: "json",
 		success: function(data) { 
 			
@@ -110,6 +116,32 @@ function viewCustList()
 				});
 			}
 			
+			// 페이징 그리기
+			$("#custPopupPagingDiv").empty();
+			var pageContent = "";
+			
+			if(data.page.endPageNum == 0 || data.page.endPageNum == 1){
+				pageContent = "◀ <input type='text' id='custPopupInput' readonly='readonly' value='1' style='width: 25px; text-align: center;'/> / 1 ▶";
+			} else if(data.pageNum == data.page.startPageNum){
+				pageContent = "<input type='hidden' id='custPageNum' value='"+data.pageNum+"'/><input type='hidden' id='custEndPageNum' value='"+data.page.endPageNum+"'/>"
+				+"◀ <input type='text' id='custPopupInput' value='"+data.page.startPageNum+"' onkeypress=\"custPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>" 
+				+"<a onclick=\"viewCustList("+data.page.endPageNum+");\" id='pNum' style='cursor: pointer;'> / "+data.page.endPageNum+"</a>"
+				+"<a onclick=\"viewCustList("+(data.pageNum+1)+");\" id='pNum' style='cursor: pointer;'> ▶ </a>";
+			} else if(data.pageNum == data.page.endPageNum){
+				pageContent = "<input type='hidden' id='custPageNum' value='"+data.pageNum+"'/><input type='hidden' id='custEndPageNum' value='"+data.page.endPageNum+"'/>"
+				+"<a onclick=\"viewCustList("+(data.pageNum-1)+");\" id='pNum' style='cursor: pointer;'> ◀ </a>"
+				+"<input type='text' id='custPopupInput' value='"+data.page.endPageNum+"' onkeypress=\"custPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
+				+"<a> / "+data.page.endPageNum+"</a> ▶";
+			} else {
+				pageContent = "<input type='hidden' id='custPageNum' value='"+data.pageNum+"'/><input type='hidden' id='custEndPageNum' value='"+data.page.endPageNum+"'/>"
+				+"<a onclick=\"viewCustList("+(data.pageNum-1)+",2);\" id='pNum' style='cursor: pointer;'> ◀ </a>"
+				+"<input type='text' id='custPopupInput' value='"+data.pageNum+"' onkeypress=\"custPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
+				+"<a onclick=\"viewCustList("+data.page.pageNum+");\" id='pNum' style='cursor: pointer;'> / "+data.page.endPageNum+"</a>"
+				+"<a onclick=\"viewCustList("+(data.pageNum+1)+");\" id='pNum' style='cursor: pointer;'> ▶ </a>";
+			}
+			$("#custPopupPagingDiv").append(pageContent);
+			
+			
 		},
 		beforeSend: function(){
         	viewLoadingShow();			
@@ -118,14 +150,41 @@ function viewCustList()
         	viewLoadingHide();	
         },
 		error: function(data) { 
-			alert("가맹점목록을 취득하지 못했습니다.");
+			alert("고객목록을 불러오지 못했습니다.");
 			return false;
 		}
 	});
 }
 
+//가맹점 리스트 페이징 엔터 기능
+function custPageNumInputEnter(event) {
+	$(document).ready(function() {
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if (keycode == '13') {
+			var prodMenuPageNum = parseInt($("#custPopupInput").val());
+			if ($("#custPopupInput").val() == '') {
+				alert("페이지 번호를 입력하세요.")
+				$("#custPopupInput").val($("#custPageNum").val());
+				$("#custPopupInput").focus();
+			} else if(prodMenuPageNum > parseInt($("#custEndPageNum").val())) {
+				alert("페이지 번호가 너무 큽니다.");
+				$("#custPopupInput").val($("#custPageNum").val());
+				$("#custPopupInput").focus();
+			} else if (1 > prodMenuPageNum) {
+				alert("페이지 번호가 너무 작습니다.");
+				$("#custPopupInput").val($("#custPageNum").val());
+				$("#custPopupInput").focus();
+			} else {
+				viewCustList(custPopupPageNum);
+			}
+		}
+		event.stopPropagation();
+	});
+}
+
+
 // 담당자 Popup
-function viewEmpList() {
+function viewEmpList(empPopupPageNum) {
 	var ctx = $("#ctx").val();
 	
 	var s_emp_name = $("#s_emp_name").val();
@@ -135,7 +194,10 @@ function viewEmpList() {
 	$.ajax({
 		url: ctx + "/empListAjax", 
 		type: "POST",  
-		data: { s_emp_name : s_emp_name },
+		data: { 
+			empPopupPageNum : empPopupPageNum,
+			s_emp_name : s_emp_name 
+		},
 		dataType: "json",
 		success: function(data) { 
 			
@@ -149,7 +211,6 @@ function viewEmpList() {
 				$("#empListTbody").append(trElement);
 				$("#empListTbody tr:last").append("<td colspan='3' style='width:100%; height: 260px; cursor: default; background-color: white;' align='center'>검색 결과가 없습니다</td>");
 			} else {
-				console.log(data);
 				$.each(data.empPopupList, function(i) {
 					var trElement = $("#empListTableHeader").clone().removeClass().empty();
 					var emp_no = this.emp_no;
@@ -169,6 +230,32 @@ function viewEmpList() {
 							+ "<td width='30%'>" + emp_name + "</td>");
 				});
 			}
+			console.log(data);
+			
+			// 페이징 그리기
+			$("#empPopupPagingDiv").empty();
+			var pageContent = "";
+			
+			if(data.page.endPageNum == 0 || data.page.endPageNum == 1){
+				pageContent = "◀ <input type='text' id='empPopupInput' readonly='readonly' value='1' style='width: 25px; text-align: center;'/> / 1 ▶";
+			} else if(data.pageNum == data.page.startPageNum){
+				pageContent = "<input type='hidden' id='empPageNum' value='"+data.pageNum+"'/><input type='hidden' id='empEndPageNum' value='"+data.page.endPageNum+"'/>"
+				+"◀ <input type='text' id='empPopupInput' value='"+data.page.startPageNum+"' onkeypress=\"custPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>" 
+				+"<a onclick=\"viewEmpList("+data.page.endPageNum+");\" id='pNum' style='cursor: pointer;'> / "+data.page.endPageNum+"</a>"
+				+"<a onclick=\"viewEmpList("+(data.pageNum+1)+");\" id='pNum' style='cursor: pointer;'> ▶ </a>";
+			} else if(data.pageNum == data.page.endPageNum){
+				pageContent = "<input type='hidden' id='empPageNum' value='"+data.pageNum+"'/><input type='hidden' id='empEndPageNum' value='"+data.page.endPageNum+"'/>"
+				+"<a onclick=\"viewEmpList("+(data.pageNum-1)+");\" id='pNum' style='cursor: pointer;'> ◀ </a>"
+				+"<input type='text' id='empPopupInput' value='"+data.page.endPageNum+"' onkeypress=\"custPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
+				+"<a> / "+data.page.endPageNum+"</a> ▶";
+			} else {
+				pageContent = "<input type='hidden' id='empPageNum' value='"+data.pageNum+"'/><input type='hidden' id='empEndPageNum' value='"+data.page.endPageNum+"'/>"
+				+"<a onclick=\"viewCustList("+(data.pageNum-1)+",2);\" id='pNum' style='cursor: pointer;'> ◀ </a>"
+				+"<input type='text' id='empPopupInput' value='"+data.pageNum+"' onkeypress=\"custPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
+				+"<a onclick=\"viewEmpList("+data.page.pageNum+");\" id='pNum' style='cursor: pointer;'> / "+data.page.endPageNum+"</a>"
+				+"<a onclick=\"viewEmpList("+(data.pageNum+1)+");\" id='pNum' style='cursor: pointer;'> ▶ </a>";
+			}
+			$("#empPopupPagingDiv").append(pageContent);
 			
 		},
 		beforeSend: function(){
@@ -330,8 +417,6 @@ function opptyDel()
 
 	});
 }
-
-
 
 
 

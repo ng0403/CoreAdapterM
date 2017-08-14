@@ -3,6 +3,7 @@ package com.core.plus.oppty.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.oppty.vo.OpptyItemVO;
@@ -10,7 +11,7 @@ import com.core.plus.oppty.vo.OpptyVO;
 
 public interface OpptyDao {
 	
-	List<OpptyVO> opptyList();
+	List<OpptyVO> opptyList(Map<String, Object> opptyMap);
 	List<OpptyVO> opptySchList(Map<String, Object> kwMap);
 	List<OpptyItemVO> opptyItemList(String oppty_no);
 	
@@ -47,4 +48,12 @@ public interface OpptyDao {
 	List<OpptyItemVO> smallCatPopupList();
 	List<OpptyItemVO> smallCatPopupList(Map<String, Object> map);
 
+	// Paging
+	int getOpptyListRow(Map<String, Object> map);
+	int getCustPopupRow(Map<String, Object> map);
+	int getEmpPopupRow(Map<String, Object> map);
+	int getMainCatePopupRow(Map<String, Object> map);
+	int getMidCatePopupRow(Map<String, Object> map);
+	int getSmallPopupRow(Map<String, Object> map);
+	
 }

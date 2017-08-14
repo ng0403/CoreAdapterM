@@ -16,6 +16,8 @@ public class OpptyItemVO {
 	private String main_cate_name;
 	private String mid_cate_name;
 	private String small_cate_name;
+	private int total_price;
+	private int offer_price;
 
 	public String getOppty_no() {
 		return oppty_no;
@@ -119,6 +121,22 @@ public class OpptyItemVO {
 
 	public void setSmall_cate_name(String small_cate_name) {
 		this.small_cate_name = small_cate_name;
+	}
+	
+	public int getTotal_price() {
+		return total_price;
+	}
+
+	public void setTotal_price(int total_price) {
+		this.total_price = total_price;
+	}
+
+	public int getOffer_price() {
+		return offer_price;
+	}
+
+	public void setOffer_price(int offer_price) {
+		this.offer_price = offer_price;
 	}
 
 	@Override

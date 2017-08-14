@@ -22,12 +22,13 @@ $(document).ready(function(){
 </script>
 
 <input type="hidden" id="ctx" value="${ctx}">
+<input type="hidden" id="tmp" value="">
 
 <div id="oppty_detail">
 	<div style="height:10px;"></div>
 	<div class="titleDIV">
 		<span class="titleText">
-		    ■ 매출 > <a style="cursor: pointer;" onclick="opptyActiveFormSubmit('/couponManager','');"> 매출기회관리</a> > <span id="coupon_form_title">매출기회관리 상세 정보</span>
+		    ■ 매출 > <a style="cursor: pointer;" onclick="opptyList();"> 매출기회관리</a> > <span id="coupon_form_title">매출기회관리 상세 정보</span>
 		</span>
 	</div>
 	<div style="height:10px;"></div>
@@ -278,6 +279,7 @@ $(document).ready(function(){
 		<div class="titleDIV">
 			<span class="titleText">
 		    	■ <span id="coupon_form_title">매출 상품</span>
+		    	  <span style="font-size: 8px;">(삭제할 상품을 체크한 후 삭제버튼을 누르고 저장을 눌러주세요.)</span>
 			</span>
 		</div>	
 		<div id="coupon_mdfy_btn_div" style="float: right;">
@@ -288,9 +290,12 @@ $(document).ready(function(){
 		</div>		
 		<div style="height:10px;"></div>
 		
-		<table class="commonTable" id="cupnManagerTabl">
+		<table class="commonTable" id="opptyItemTable">
 			<thead>
 	 	 		<tr>
+	 	 			<th rowspan="2" style="width: 2%; text-align: center;">
+	 	 				<input id="optyItemChk" type="checkbox" onclick="actAllChk(this);" />
+	 	 			</th>
 	 	 			<th >대분류</th>
 	 	 			<th >중분류</th>
 	 	 			<th >소분류</th>
@@ -306,16 +311,22 @@ $(document).ready(function(){
 	 	 	<tbody id="oppty_item_list_tbody">
 	 	 		<c:forEach items="${ itemList }" var="itemList">
 	 	 			<tr class="oppty_item_list_tr">
+	 	 				<td>
+	 	 					<input type="checkbox" class="del_chk" name="del_chk">
+	 	 				</td>
+<!-- 	 	 				<td> -->
+<%-- 	 	 					<input type="checkbox" class="del_chk" name="del_chk" onclick="actChkCancel();> --%>
+<!-- 	 	 				</td> -->
 		 	 			<td style="text-align: left;" >
-		 	 				<input type="hidden" class="main_cate_cd" name="main_cate_cd" value="">
+		 	 				<input type="hidden" class="main_cate_cd" name="main_cate_cd" value="${ itemList.main_cate_cd }">
 		 	 				<input type="text"  class="main_cate_name" name="main_cate_name" value="${ itemList.main_cate_name }" readonly="readonly">
 		 	 			</td>
 	 		 			<td style="text-align: left;" >
-	 		 				<input type="hidden" class="mid_cate_cd" id="mid_cate_cd" name="mid_cate_cd" value="">
+	 		 				<input type="hidden" class="mid_cate_cd" id="mid_cate_cd" name="mid_cate_cd" value="${ itemList.mid_cate_cd }">
 	 		 				<input type="text" class="mid_cate_name" id="mid_cate_name" name="mid_cate_name" value="${ itemList.mid_cate_name }" readonly="readonly" onclick="midCatPopup();">
 	 		 			</td>
 	 		 			<td style="text-align: left;" >
-							<input type="hidden" class="small_cate_cd" name="small_cate_cd" value="">	 		 			
+							<input type="hidden" class="small_cate_cd" name="small_cate_cd" value="${ itemList.small_cate_cd }">	 		 			
 	 		 				<input type="text" class="small_cate_name" name="small_cate_name" value="${ itemList.small_cate_name }" readonly="readonly" onclick="smallCatPopup();">
 	 		 			</td>
 	 		 			<td style="text-align: left;" >
@@ -325,16 +336,16 @@ $(document).ready(function(){
 	 		 				<input type="text" class="list_price" name="list_price" value="${ itemList.list_price }">
 	 		 			</td>
 	 		 			<td style="text-align: left;" >
-	 		 				<input type="text" class="total_price" name="total_price" value=""> <!-- 총금액 -->
+	 		 				<input type="text" class="total_price" name="total_price" value="${ itemList.total_price }" readonly="readonly"> <!-- 총금액 -->
 	 		 			</td>
 	 		 			<td style="text-align: left;" >
 	 		 				<input type="text" class="dc_price" name="dc_price" value="${ itemList.dc_price }">
 	 		 			</td>
 	 		 			<td style="text-align: left;" >
-	 		 				<input type="text" class="offer_price" name="offer_price" value=""> <!-- 제안금액 -->
+	 		 				<input type="text" class="offer_price" name="offer_price" value="${ itemList.offer_price }"> <!-- 제안금액 -->
 	 		 			</td>
 	 		 			<td style="text-align: left;" >
-	 		 				<input type="text" class="patment_day" id="payment_day" name="payment_day" value="${ itemList.payment_day }">
+	 		 				<input type="text" class="patment_day" name="payment_day" value="${ itemList.payment_day }">
 	 		 			</td>
 	 	 			</tr>
 	 	 		</c:forEach>
@@ -380,7 +391,7 @@ $(document).ready(function(){
 			 	 	<tbody id="custListTbody"></tbody>
 				</table>
 			<!-- 페이징 DIV -->
-			<div class="pagingDiv" id="prodMenuPagingDiv" style="width: 100%; text-align: center;"></div>
+			<div class="pagingDiv" id="custPopupPagingDiv" style="width: 100%; text-align: center;"></div>
 		</div>	
 	</div>
 	</form>
@@ -422,7 +433,7 @@ $(document).ready(function(){
 			 	 	<tbody id="empListTbody"></tbody>
 				</table>
 			<!-- 페이징 DIV -->
-			<div class="pagingDiv" id="prodMenuPagingDiv" style="width: 100%; text-align: center;"></div>
+			<div class="pagingDiv" id="empPopupPagingDiv" style="width: 100%; text-align: center;"></div>
 		</div>	
 	</div>
 	</form>
@@ -448,7 +459,7 @@ $(document).ready(function(){
 			 	 			    <input type="text" id="s_main_cate_name" name="s_main_cate_name" style="width: 70%;" maxlength="100"/>&nbsp;&nbsp;
 							</td>
 							<td style="width: 40%; text-align: right;">
-								<input type="button" value="검색" class="back_btn" style="float: right;" onclick="viewEmpList();"/> <!-- onclick="viewProdMenuList(1); -->
+								<input type="button" value="검색" class="back_btn" style="float: right;" onclick="viewMainCateList(1);"/>
 							</td>			
 			 	 		</tr>
 			 	 	</thead>
@@ -464,7 +475,7 @@ $(document).ready(function(){
 			 	 	<tbody id="mainCateListTbody"></tbody>
 				</table>
 			<!-- 페이징 DIV -->
-			<div class="pagingDiv" id="prodMenuPagingDiv" style="width: 100%; text-align: center;"></div>
+			<div class="pagingDiv" id="mainCatePagingDiv" style="width: 100%; text-align: center;"></div>
 		</div>	
 	</div>
 	</form>
@@ -490,7 +501,7 @@ $(document).ready(function(){
 			 	 			    <input type="text" id="s_mid_cate_name" name="s_mid_cate_name" style="width: 70%;" maxlength="100"/>&nbsp;&nbsp;
 							</td>
 							<td style="width: 40%; text-align: right;">
-								<input type="button" value="검색" class="back_btn" style="float: right;" onclick="viewEmpList();"/> <!-- onclick="viewProdMenuList(1); -->
+								<input type="button" value="검색" class="back_btn" style="float: right;" onclick="viewMidCateList(1);"/> <!-- onclick="viewProdMenuList(1); -->
 							</td>			
 			 	 		</tr>
 			 	 	</thead>
@@ -506,7 +517,7 @@ $(document).ready(function(){
 			 	 	<tbody id="midCateListTbody"></tbody>
 				</table>
 			<!-- 페이징 DIV -->
-			<div class="pagingDiv" id="prodMenuPagingDiv" style="width: 100%; text-align: center;"></div>
+			<div class="pagingDiv" id="midCatePagingDiv" style="width: 100%; text-align: center;"></div>
 		</div>	
 	</div>
 	</form>
@@ -532,7 +543,7 @@ $(document).ready(function(){
 			 	 			    <input type="text" id="s_small_cate_name" name="s_small_cate_name" style="width: 70%;" maxlength="100"/>&nbsp;&nbsp;
 							</td>
 							<td style="width: 40%; text-align: right;">
-								<input type="button" value="검색" class="back_btn" style="float: right;" onclick="viewEmpList();"/> <!-- onclick="viewProdMenuList(1); -->
+								<input type="button" value="검색" class="back_btn" style="float: right;" onclick="viewSmallCateList(1);"/> <!-- onclick="viewProdMenuList(1); -->
 							</td>			
 			 	 		</tr>
 			 	 	</thead>
@@ -548,7 +559,7 @@ $(document).ready(function(){
 			 	 	<tbody id="smallCateListTbody"></tbody>
 				</table>
 			<!-- 페이징 DIV -->
-			<div class="pagingDiv" id="prodMenuPagingDiv" style="width: 100%; text-align: center;"></div>
+			<div class="pagingDiv" id="smallCatePagingDiv" style="width: 100%; text-align: center;"></div>
 		</div>	
 	</div>
 	</form>

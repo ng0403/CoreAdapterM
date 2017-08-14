@@ -19,7 +19,7 @@ function opptySingleAddForm()
 	location.href = ctx + "/oppty_detail";
 }
 
-function opptySchList()
+function opptySchList(opptyPageNum)
 {
 	var oppty_no_srch 	= $("#oppty_no_srch").val();
 	var oppty_name_srch = $("#oppty_name_srch").val();
@@ -34,10 +34,13 @@ function opptySchList()
 	var tbody = $('#oppty_list_tbody');
 	var tbodyContent = "";
 	
+	console.log(opptyPageNum);
+	
 	$.ajax({
 		url:ctx + '/oppty_sch',
 		type: 'POST',
 		data: {
+			opptyPageNum		 : opptyPageNum,
 			oppty_no_srch 		 : oppty_no_srch,
 			oppty_name_srch  	 : oppty_name_srch,
 			cust_name_srch		 : cust_name_srch,
@@ -74,11 +77,61 @@ function opptySchList()
 
 				tbody.append(tbodyContent);
 			}
-			 
+			
+			// 페이징
+			$(".pagingDiv").empty();
+			var pageContent = "";
+
+			console.log(data);
+			
+			if(data.page.endPageNum == 0 || data.page.endPageNum == 1){
+				pageContent = "◀ <input type='text' id='pageInput' readonly='readonly' value='1' style='width: 25px; text-align: center;'/> / 1 ▶";
+			} else if(data.opptyPageNum == data.page.startPageNum){
+				pageContent = "<input type='hidden' id='opptyPageNum' value='"+data.opptyPageNum+"'/><input type='hidden' id='opptyEndPageNum' value='"+data.page.endPageNum+"'/>"
+				+"◀ <input type='text' id='pageInput' value='"+data.page.startPageNum+"' onkeypress=\"opptyPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>" 
+				+"<a onclick=\"opptySchList("+data.page.endPageNum+");\" id='pNum' style='cursor: pointer;'> / "+data.page.endPageNum+"</a>"
+				+"<a onclick=\"opptySchList("+(data.pageNum+1)+");\" id='pNum' style='cursor: pointer;'> ▶ </a>";
+			} else if(data.opptyPageNum == data.page.endPageNum){
+				pageContent = "<input type='hidden' id='opptyPageNum' value='"+data.opptyPageNum+"'/><input type='hidden' id='opptyEndPageNum' value='"+data.page.endPageNum+"'/>"
+				+"<a onclick=\"opptySchList("+(data.opptyPageNum-1)+");\" id='pNum' style='cursor: pointer;'> ◀ </a>"
+				+"<input type='text' id='pageInput' value='"+data.page.endPageNum+"' onkeypress=\"custPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
+				+"<a> / "+data.page.endPageNum+"</a> ▶";
+			} else {
+				pageContent = "<input type='hidden' id='opptyPageNum' value='"+data.opptyPageNum+"'/><input type='hidden' id='opptyEndPageNum' value='"+data.page.endPageNum+"'/>"
+				+"<a onclick=\"opptySchList("+(data.opptyPageNum-1)+",2);\" id='pNum' style='cursor: pointer;'> ◀ </a>"
+				+"<input type='text' id='pageInput' value='"+data.opptyPageNum+"' onkeypress=\"opptyPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
+				+"<a onclick=\"opptySchList("+data.page.opptyPageNum+");\" id='pNum' style='cursor: pointer;'> / "+data.page.endPageNum+"</a>"
+				+"<a onclick=\"opptySchList("+(data.opptyPageNum+1)+");\" id='pNum' style='cursor: pointer;'> ▶ </a>";
+			}
+			$(".pagingDiv").append(pageContent);
 			
 		},
 		error: function(){
 			alert("error");
 		}
 	});
+}
+
+//페이징 엔터키
+function opptyPageNumInputEnter(event) {
+	var keycode = (event.keyCode ? event.keyCode : event.which);
+	if (keycode == '13') {
+		var pageNum = parseInt($("#pageInput").val());
+		if ($("#pageInput").val() == '') {
+			alert("페이지 번호를 입력하세요.")
+			$("#pageInput").val($("#pageNum").val());
+			$("#pageInput").focus();
+		} else if(pageNum > parseInt($("#endPageNum").val())) {
+			alert("페이지 번호가 너무 큽니다.");
+			$("#pageInput").val($("#pageNum").val());
+			$("#pageInput").focus();
+		} else if (1 > pageNum) {
+			alert("페이지 번호가 너무 작습니다.");
+			$("#pageInput").val($("#pageNum").val());
+			$("#pageInput").focus();
+		} else {
+			cupnPaging(pageNum);
+		}
+	}
+	event.stopPropagation();
 }

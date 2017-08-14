@@ -5,8 +5,10 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Repository;
 
+import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.oppty.vo.OpptyItemVO;
@@ -19,9 +21,9 @@ public class OpptyDaoImpl implements OpptyDao {
 	SqlSession sqlSession;
 
 	@Override
-	public List<OpptyVO> opptyList() {
+	public List<OpptyVO> opptyList(Map<String, Object> opptyMap) {
 		// TODO Auto-generated method stub
-		List<OpptyVO> vo = sqlSession.selectList("oppty.opptyList");
+		List<OpptyVO> vo = sqlSession.selectList("oppty.opptyList", opptyMap);
 		
 		return vo;
 	}
@@ -203,6 +205,7 @@ public class OpptyDaoImpl implements OpptyDao {
 	@Override
 	public List<OpptyItemVO> mainCatPopupList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
+		System.out.println(map);
 		List<OpptyItemVO> mainCatePopList = sqlSession.selectList("oppty.mainCatePopupList", map);
 		
 		return mainCatePopList;
@@ -238,6 +241,102 @@ public class OpptyDaoImpl implements OpptyDao {
 		List<OpptyItemVO> smallCatePopupList = sqlSession.selectList("oppty.smallCatePopupList", map);
 		
 		return smallCatePopupList;
+	}
+
+	@Override
+	public int getOpptyListRow(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int totalCount = 0;
+		
+		try {
+			totalCount = sqlSession.selectOne("oppty.opptyListTotalRow", map);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return totalCount;
+	}
+
+	@Override
+	public int getCustPopupRow(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int totalCount = 0;
+		
+		try {
+			totalCount = sqlSession.selectOne("oppty.custPopupRow", map);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return totalCount;
+	}
+
+	@Override
+	public int getEmpPopupRow(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int totalCount = 0;
+		
+		try {
+			totalCount = sqlSession.selectOne("oppty.empPopupRow", map);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return totalCount;
+	}
+
+	@Override
+	public int getMainCatePopupRow(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int totalCount = 0;
+		
+		try {
+			totalCount = sqlSession.selectOne("oppty.mainCatePopupRow", map);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return totalCount;
+	}
+
+	@Override
+	public int getMidCatePopupRow(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int totalCount = 0;
+		
+		try {
+			totalCount = sqlSession.selectOne("oppty.midCatePopupRow", map);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return totalCount;
+	}
+
+	@Override
+	public int getSmallPopupRow(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int totalCount = 0;
+		
+		try {
+			totalCount = sqlSession.selectOne("oppty.smallCatePopupRow", map);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return totalCount;
 	}
 
 }

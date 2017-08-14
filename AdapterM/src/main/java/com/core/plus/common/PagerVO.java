@@ -10,7 +10,7 @@ public class PagerVO {
 	private int endPageNum;		//끝페이지 index번호
 	private int currentPageNum; //현재페이지 번호
 	private int totalPageCount; //전체페이징 갯수
-
+	private int limitStartNum;
 	
 	public PagerVO(){}
 
@@ -19,12 +19,16 @@ public class PagerVO {
 		this.currentPageNum = currentPageNum;
 		this.pageSize=pageSize;
 		this.pageBlockSize=pageBlockSize;
+		
+		limitStartNum = (currentPageNum-1)*10;
 		startRow = (currentPageNum-1)*pageSize+1;
+		
 		if(startRow != 1){
 			endRow  = startRow-1;
 		} else {
 			endRow = startRow;
 		}
+		
 		totalPageCount = (int) Math.ceil((double)totalCount/pageSize);
 		
 		startPageNum = (int)((currentPageNum-1)/pageBlockSize)*pageBlockSize+1;
@@ -105,14 +109,23 @@ public class PagerVO {
 	public void setCurrentPageNum(int currentPageNum) {
 		this.currentPageNum = currentPageNum;
 	}
+	
+	public int getLimitStartNum() {
+		return limitStartNum;
+	}
+
+	public void setLimitStartNum(int limitStartNum) {
+		this.limitStartNum = limitStartNum;
+	}
 
 	@Override
 	public String toString() {
-		return "PagerVO [totalCount=" + totalCount + ", pageSize=" + pageSize
-				+ ", pageBlockSize=" + pageBlockSize + ", startRow=" + startRow
-				+ ", endRow=" + endRow + ", startPageNum=" + startPageNum
-				+ ", endPageNum=" + endPageNum + ", currentPageNum="
-				+ currentPageNum + ", totalPageCount=" + totalPageCount + "]";
+		return "PagerVO [totalCount=" + totalCount + ", pageSize=" + pageSize + ", pageBlockSize=" + pageBlockSize
+				+ ", startRow=" + startRow + ", endRow=" + endRow + ", startPageNum=" + startPageNum + ", endPageNum="
+				+ endPageNum + ", currentPageNum=" + currentPageNum + ", totalPageCount=" + totalPageCount
+				+ ", limitStartNum=" + limitStartNum + "]";
 	}
+
+	
 	
 }
