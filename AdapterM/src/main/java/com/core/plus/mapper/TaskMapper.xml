@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="task">
+
+	<select id="taskList" resultType="com.core.plus.task.vo.TaskVO" parameterType="java.util.Map">
+		select 
+			 t.task_no
+		   , t.subject
+		   , c.cust_no
+		   , c.cust_name
+		   , p.phone_no
+		   , t.emp_no
+		   , t.next_day
+		   , t.dtype_cd
+		   , date_format(t.create_date, '%Y-%m-%d %H:%i') as create_date
+		 
+		from tb_task t left join tb_cust c on t.cust_no = c.cust_no left join tb_cust_phone p on t.cust_no = p.cust_no
+	
+	</select>
+
+	
+	<!-- code 값 -->
+	<select id="taskDtypeCode" resultType="com.core.plus.task.vo.TaskVO">
+		SELECT code_name, code FROM tb_code WHERE code_no = '1018'
+	</select>
+	<select id="taskScoreCode" resultType="com.core.plus.task.vo.TaskVO">
+		SELECT code_name, code FROM tb_code WHERE code_no = '1009'
+	</select>
+	
+	<!-- Index 채번 -->
+	<select id="taskNoIndex" resultType="com.core.plus.task.vo.TaskVO">
+		SELECT 
+			IF(SUBSTR(MAX(task_no), 1, 10) = DATE_FORMAT(now(), '%Y%m%d%H'), 
+			MAX(oppty_no)+1, concat(DATE_FORMAT(now(), '%Y%m%d%H'),'00001')) task_no 
+		FROM tb_task USE INDEX(PRIMARY)
+	</select>
+
+</mapper>

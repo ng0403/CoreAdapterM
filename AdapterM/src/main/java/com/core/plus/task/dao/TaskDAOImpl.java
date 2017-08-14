@@ -24,4 +24,19 @@ public class TaskDAOImpl implements TaskDAO {
 		return vo;
 	}
 
+	//분류코드
+	@Override
+	public List<TaskVO> taskDtypeCD() {
+		
+		List<TaskVO> code = sqlSession.selectList("task.taskDtypeCode");
+		return code;
+	}
+
+	//상대가치점수
+	@Override
+	public List<TaskVO> taskScoreCD() {
+		List<TaskVO> code = sqlSession.selectList("task.taskScoreCode");
+		return code;
+	}
+
 }

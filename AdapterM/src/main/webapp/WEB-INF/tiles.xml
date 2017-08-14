@@ -49,6 +49,15 @@
 		<put-attribute name="body" value="/WEB-INF/views/cust/cust_detail.jsp"></put-attribute>
 	</definition>
 	
+	<!-- task -->
+	<definition name="task_list" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/task/task_list.jsp"></put-attribute>
+	</definition>
+	
+	<!-- task detail -->
+		<definition name="task_detail" extends="onebodyLayout">
+		<put-attribute name="body" value="/WEB-INF/views/task/task_detail.jsp"></put-attribute>
+	</definition>
 	
 	<!-- test -->
 	<definition name="test" extends="onebodyLayout">
