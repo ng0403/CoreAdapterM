@@ -61,12 +61,12 @@
 										style="margin-left: 0; width: 83%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
 								<option value="">선택해 주십시오</option>
 								<c:forEach var="vititCdList" items="${ vititCdList }">
-									<c:if test= "${ vititCdList.code eq custDlist.visit_cd }">
+<%-- 									<c:if test= "${ vititCdList.code eq custDlist.visit_cd }"> --%>
+<%-- 										<option value="${ vititCdList.code }">${ vititCdList.code_name }</option> --%>
+<%-- 									</c:if> --%>
+<%-- 									<c:if test= "${ vititCdList.code ne custDlist.visit_cd }"> --%>
 										<option value="${ vititCdList.code }">${ vititCdList.code_name }</option>
-									</c:if>
-									<c:if test= "${ vititCdList.code ne custDlist.visit_cd }">
-										<option value="${ vititCdList.code }">${ vititCdList.code_name }</option>
-									</c:if>
+<%-- 									</c:if> --%>
 								</c:forEach>
 							</select>
 						 </td>

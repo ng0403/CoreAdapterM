@@ -33,4 +33,16 @@ public class TaskServiceImpl implements TaskService {
 		return taskDao.taskScoreCD();
 	}
 
+	//인덱스번호
+	@Override
+	public TaskVO taskNoIndex() {
+		return taskDao.taskNoIndex();
+	}
+
+	//상세보기
+	@Override
+	public Object taskDetail(String task_no) {
+		return taskDao.taskDetail(task_no);
+	}
+
 }

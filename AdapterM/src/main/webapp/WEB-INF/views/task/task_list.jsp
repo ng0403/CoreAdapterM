@@ -1,8 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page   language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
+
 <script type="text/javascript" src="${ctx}/resources/common/js/task/task.js"></script> 
 
 <script type="text/javascript">
@@ -25,7 +28,7 @@
 	<div style="height:10px;"></div>
 	<div class="commonList">
 		<!-- 페이징 전용 폼 -->
-	    <form id="taskListPagingForm" method="post" action="${ctx}/taskManager" >
+	    <form id="taskListPagingForm" method="post" action="${ctx}/couponManager" >
 <%-- 		    <input type="hidden" name="cupn_name_srch" value="${cupnListMap.cupn_name_srch}"> --%>
 <%-- 			<input type="hidden" name="exp_start_dt_srch" value="${cupnListMap.exp_start_dt_srch}"> --%>
 <%-- 			<input type="hidden" name="exp_end_dt_srch" value="${cupnListMap.exp_end_dt_srch}"> --%>
@@ -64,7 +67,7 @@
 						 <td style="width:15%;">
 <!-- 							<input type="text" id="next_day" name="next_day" value=""  style="width : 80%;" onkeypress="cupnEnterSearch(event);"> -->
  							<input type="text" name="next_day" id="next_day" value="" class="expt_fin_d" 
-							 		readonly="readonly" style="width : 35%; text-align: center; cursor: pointer;">
+							 		readonly="readonly" style="width : 80%; text-align: center; cursor: pointer;">
  						 </td>
 						 
 						  <th style="width:5%;">분류</th>
@@ -73,12 +76,12 @@
 										style="margin-left: 0; width: 83%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
 								<option value="">선택해 주십시오</option>
 								<c:forEach var="dtypeCd" items="${ dtypeCd }">
-									<c:if test= "${ dtypeCd.code eq taskList.dtype_cd }">
+<%-- 									<c:if test= "${ dtypeCd.code eq taskList.dtype_cd }"> --%>
+<%-- 										<option value="${ dtypeCd.code }">${ dtypeCd.code_name }</option> --%>
+<%-- 									</c:if> --%>
+<%-- 									<c:if test= "${ dtypeCd.code ne taskList.dtype_cd }"> --%>
 										<option value="${ dtypeCd.code }">${ dtypeCd.code_name }</option>
-									</c:if>
-									<c:if test= "${ dtypeCd.code ne taskList.dtype_cd }">
-										<option value="${ dtypeCd.code }">${ dtypeCd.code_name }</option>
-									</c:if>
+<%-- 									</c:if> --%>
 								</c:forEach>
 							</select>
 						 </td>

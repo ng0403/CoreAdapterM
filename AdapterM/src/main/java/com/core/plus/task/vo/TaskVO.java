@@ -7,6 +7,7 @@ public class TaskVO {
 	private String update_date;				// 수정일시
 	private String subject;					// 제목
 	private String cust_no;					// 고객번호
+	private String cust_name;				// 고객이름
 	private String lead_no;					// lead번호
 	private String oppty_no;				// 영업기회번호
 	private String location;				// 진행장소
@@ -15,6 +16,7 @@ public class TaskVO {
 	private String dtype_cd;				// 분류코드
 	private String score_cd;				// 상대 가치 점수
 	private String remark_cn;				// 특이사항
+	private String phone_no;					// 전화번호
 	
 	
 	// 공통코드에서 불러오기 위한 변수
@@ -52,6 +54,13 @@ public class TaskVO {
 	}
 	public void setCust_no(String cust_no) {
 		this.cust_no = cust_no;
+	}
+	
+	public String getCust_name() {
+		return cust_name;
+	}
+	public void setCust_name(String cust_name) {
+		this.cust_name = cust_name;
 	}
 	public String getLead_no() {
 		return lead_no;
@@ -134,5 +143,10 @@ public class TaskVO {
 	public void setDtype_name(String dtype_name) {
 		this.dtype_name = dtype_name;
 	}
-	
+	public String getPhone_no() {
+		return phone_no;
+	}
+	public void setPhone_no(String phone_no) {
+		this.phone_no = phone_no;
+	}
 }

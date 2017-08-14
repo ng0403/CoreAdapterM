@@ -39,4 +39,17 @@ public class TaskDAOImpl implements TaskDAO {
 		return code;
 	}
 
+	//인덱스번호
+	@Override
+	public TaskVO taskNoIndex() {
+		return sqlSession.selectOne("task.taskNoIndex");
+	}
+
+	//상세보기
+	@Override
+	public Object taskDetail(String task_no) {
+		OpptyVO detail = sqlSession.selectOne("task.taskDetail", task_no);
+		return detail;
+	}
+
 }
