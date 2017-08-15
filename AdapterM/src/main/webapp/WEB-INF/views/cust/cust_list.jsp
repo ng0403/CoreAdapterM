@@ -6,6 +6,18 @@
 <script type="text/javascript" src="${ctx}/resources/common/js/cust/cust.js"></script> 
 
 <script type="text/javascript">
+//내원코드리스트 저장
+var vititCdList = new Array();
+	<c:forEach var='vititCdList' items='${vititCdList}' varStatus="status">
+	vititCdList.push("${vititCdList.code}");
+	vititCdList.push("${vititCdList.code_name}");	
+	</c:forEach>
+//내원경로상세코드리스트 저장
+var vititDtlCdList = new Array();
+	<c:forEach var='vititDtlCdList' items='${vititDtlCdList}' varStatus="status">
+	vititDtlCdList.push("${vititDtlCdList.code}");
+	vititDtlCdList.push("${vititDtlCdList.code_name}");	
+	</c:forEach>
  $(document).ready(function(){
 	$('#contact_day_srch').datepicker();
 

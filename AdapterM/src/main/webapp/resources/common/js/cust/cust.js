@@ -42,20 +42,28 @@ function searchKeyword(){
 				success: function(data){
 					tbody.children().remove(); 
  					for(var i=0; i<data.custList.length; i++){
+						var vititCdList_contents = '';
+					    for(var j=0;j < vititCdList.length; j++){
+					    	if(vititCdList[j] == data.custList[i].visit_cd){
+					    		vititCdList_contents = vititCdList[++j];
+					    	}
+						}
+					    var vititDtlCdList_contents = '';
+					    for(var i=0;i < vititDtlCdList.length; i++){
+					    	for(var j=0;j < vititDtlCdList.length; j++){
+						    	if(vititDtlCdList[j] == data.custList[i].visit_dtl_cd){
+						    		vititDtlCdList_contents = vititDtlCdList[++j];
+						    	}
+							}
+						}
  					tbodyContent += "<tr>" +
 	 	 			"<td style='text-align: left;' >" +data.custList[i].cust_no +"</td>" +
 	 	 			"<td style='text-align: left;'>" +
 	 	 				"<a href='#' onclick=leadDetail('"+data.custList[i].cust_no+"'); id='"+data.custList[i].cust_no+"'>" + data.custList[i].cust_name+"</a></td>" +
 	 	 			"<td style='text-align: left;'>" + data.custList[i].chart_no +"</td>" +
-	 	 			"<td style='text-align: left;' > " +
-	 	 				"<c:forEach var='vititCdList' items='${ vititCdList }'>" +
- 							"<c:if test= '${ vititCdList.code eq custList.visit_cd }'>${ vititCdList.code_name }</c:if> " +
- 						"</c:forEach>" +
+	 	 			"<td style='text-align: left;' > " + vititCdList_contents +
 	 	 			"</td>" +
-	 	 			"<td style='text-align: left;' > " +
-		 	 			"<c:forEach var='vititDtlCdList' items='${ vititDtlCdList }'>" +
-							"<c:if test= '${ vititDtlCdList.code eq custList.visit_cd }'>${ vititDtlCdList.code_name }</c:if> " +
-						"</c:forEach>" +
+	 	 			"<td style='text-align: left;' > " + vititDtlCdList_contents +
 	 	 			"</td>" +
 	 	 			"<td style='text-align: left;'>" + data.custList[i].rec_per + "</td>" +
 	 	 			"<td style='text-align: left;'>" + data.custList[i].phone_no + "</td>" +
@@ -164,52 +172,41 @@ function cust_phone_add(cust_no) {
 	
 //	alert(phone_type_cd);
 	
-	var phone_type_cd = new Array();
-	
-	
     var tbody = $('#table_tbody');
-	var tbodyContent = "";
+    var phoneTypeCdList_contents = '';
+    for(var i=0;i < phoneTypeCdList.length; i++){
+    	phoneTypeCdList_contents += "<option value='"+phoneTypeCdList[i]+"'>"+phoneTypeCdList[++i]+"</option>";
+	}
+    var phoneCountryCdList_contents = '';
+    for(var i=0;i < phoneCountryCdList.length; i++){
+    	phoneCountryCdList_contents += "<option value='"+phoneCountryCdList[i]+"'>"+phoneCountryCdList[++i]+"</option>";
+	}
+	var tbodyContent = "<tr>"+
+							"<td>" +
+								"<select id='phone_type_cd' name='phone_type_cd'" +
+									"style='margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;'>" +
+									"<option value=''>선택</option>"+ 
+									phoneTypeCdList_contents + 
+								"</select>"+
+							"</td>"+
+							"<td>"+
+								"<select id='phone_country_cd' name='phone_country_cd' " + 
+										"style='margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;'>" +
+									"<option value=''>선택</option>" +
+									phoneCountryCdList_contents +
+								"</select>" +
+							"</td>"+
+							
+							"<td>"+
+								"<input type='text' id='phone_area_no' name='phone_area_no'> " +
+							"</td>" +
+							"<td>"+
+								"<input type='text' id='phone_no' name='phone_no'> " + 
+							"</td>" +
+						"</tr>";
 	
 	// 새로 그려준다.
-	tbody.append(
-		"<tr>"+
-			"<td>" +
-				"<select id='phone_type_cd' name='phone_type_cd'" +
-					"style='margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;'>" +
-				"<option value=''>선택</option>"+
-				"<c:forEach var='phoneTypeCdList' items='phoneTypeCdList'>" +
-					"<c:if test= '${ phoneTypeCdList.code eq 'phone_type_cd' }'>" +
-						"<option value='${ phoneTypeCdList.code }' selected='selected'>${ phoneTypeCdList.code_name}</option>" +
-						"</c:if>" +
-						"<c:if test= '${ phoneTypeCdList.code ne custPList.phone_type_cd }'>"+
-							"<option value='${ phoneTypeCdList.code }'>${ phoneTypeCdList.code_name }</option>"+
-						"</c:if>"+
-					"</c:forEach>"+
-				"</select>"+
-			"</td>"+
-			"<td>"+
-				"<select id='phone_country_cd' name='phone_country_cd' " + 
-						"style='margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;'>" +
-				"<option value=''>선택</option>" +
-				"<c:forEach var='phoneCountryCdList' items='${ phoneCountryCdList }'> " +
-						"<c:if test= '${ phoneCountryCdList.code eq custPList.phone_country_cd }'>" +
-							"<option value='${ phoneCountryCdList.code }' selected='selected'>${ phoneCountryCdList.code_name }</option>" +
-						"</c:if>" +
-						"<c:if test= '${ phoneCountryCdList.code ne custPList.phone_country_cd }'> " +
-							"<option value='${ phoneCountryCdList.code }'>${ phoneCountryCdList.code_name }</option>" +
-						"</c:if>" +
-					"</c:forEach>"+
-				"</select> " +
-			"</td>"+
-			
-			"<td>"+
-				"<input type='text' id='phone_area_no' name='phone_area_no'> " +
-			"</td>" +
-			"<td>"+
-				"<input type='text' id='phone_no' name='phone_no'> " + 
-			"</td>" +
-		"</tr>"
-	);
+	tbody.append(tbodyContent);
     
 }
 

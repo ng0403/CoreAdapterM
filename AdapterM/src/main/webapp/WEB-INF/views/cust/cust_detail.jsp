@@ -7,6 +7,24 @@
 <script type="text/javascript" src="/resources/common/js/cust/cust.js"></script> 
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script type="text/javascript">
+//연락처타입코드리스트 저장
+var phoneTypeCdList = new Array();
+	<c:forEach var='phoneTypeCdList' items='${phoneTypeCdList}' varStatus="status">
+	phoneTypeCdList.push("${phoneTypeCdList.code}");
+	phoneTypeCdList.push("${phoneTypeCdList.code_name}");	
+	</c:forEach>
+//국가번호코드리스트 저장
+var phoneCountryCdList = new Array();
+	<c:forEach var='phoneCountryCdList' items='${phoneCountryCdList}' varStatus="status">
+	phoneCountryCdList.push("${phoneCountryCdList.code}");
+	phoneCountryCdList.push("${phoneCountryCdList.code_name}");	
+	</c:forEach>
+//주소타입코드리스트 저장
+var addrTypeCdList = new Array();
+	<c:forEach var='addrTypeCdList' items='${addrTypeCdList}' varStatus="status">
+	addrTypeCdList.push("${addrTypeCdList.code}");
+	addrTypeCdList.push("${addrTypeCdList.code_name}");	
+	</c:forEach>
 $(document).ready(function(){
 	$('#contact_day').datepicker();
  });
