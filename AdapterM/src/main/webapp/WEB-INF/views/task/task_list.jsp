@@ -7,6 +7,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 
 <script type="text/javascript" src="${ctx}/resources/common/js/task/task.js"></script> 
+<script type="text/javascript" src="${ctx}/resources/common/js/task/task_detail.js"></script> 
 
 <script type="text/javascript">
  $(document).ready(function(){
@@ -41,15 +42,15 @@
 					<tr style="background-color: white; cursor:default; border:0;">
 						 <th style="width:5%;">상담번호</th>
 						 <td style="width:15%;">
-						    <input type="text" id="task_no_srch" name="task_no_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="task_no_srch" name="task_no_srch" value="" style="width:80%" onkeypress="taskenterSearch(event);">
 						 </td> 
 						 <th style="width:5%;">제목</th>
 						 <td style="width:15%;">
-						    <input type="text" id="subject_srch" name="subject_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="subject_srch" name="subject_srch" value="" style="width:80%" onkeypress="taskenterSearch(event);">
 						 </td>
 						  <th style="width:5%;">고객명</th>
 						 <td style="width:15%;">
-						    <input type="text" id="cust_name_srch" name="cust_name_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="cust_name_srch" name="cust_name_srch" value="" style="width:80%" onkeypress="taskenterSearch(event);">
 						 </td>
 					  
  		                 <td style="width: 12%;">
@@ -60,7 +61,7 @@
 					<tr>
 						 <th style="width:5%;">담당자명</th>
 						 <td style="width:15%;">
-						    <input type="text" id="emp_name_srch" name="emp_name_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="emp_name_srch" name="emp_name_srch" value="" style="width:80%" onkeypress="taskenterSearch(event);">
 						 </td>
 					
 						 <th style="width:5%;">다음일자</th>

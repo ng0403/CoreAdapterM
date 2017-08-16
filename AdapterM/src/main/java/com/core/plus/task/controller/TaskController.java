@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
+import com.core.plus.info.menu.service.MenuService;
+import com.core.plus.info.menu.vo.MenuVo;
 import com.core.plus.lead.vo.LeadVO;
 import com.core.plus.oppty.vo.OpptyVO;
 import com.core.plus.task.service.TaskService;
@@ -29,6 +31,26 @@ public class TaskController {
 	
 	@Resource
 	TaskService taskService;
+	
+	@Resource
+	MenuService menuService;
+	
+	public void menuImport(ModelAndView mav, String url){
+		String menu_id = menuService.getMenuUrlID(url);
+//		String user_id = session.getAttribute("user").toString();
+	
+		Map<String, String> menuAuthMap = new HashMap<String, String>();
+		menuAuthMap.put("menu_url", url);
+//		menuAuthMap.put("user_id", user_id);
+		menuAuthMap.put("menu_id", menu_id);
+//		MenuVo menuAuth = loginDao.getMenuAuthInfo(menuAuthMap);
+//		mav.addObject("menuAuth", menuAuth);
+			
+		List<MenuVo> mainMenuList = menuService.getMainMenuList(/*user_id*/);
+		List<MenuVo> subMenuList = menuService.getSubMenuList(menuAuthMap);
+		mav.addObject("mainMenuList", mainMenuList);  //mainMenuList
+		mav.addObject("subMenuList", subMenuList);    //subMenuList
+	}
 	
 	// List
 	@RequestMapping(value="/task")
@@ -43,6 +65,8 @@ public class TaskController {
 		mov.addObject("taskList", taskList);
 		mov.addObject("dtypeCd", dtypeCd);
 		mov.addObject("scoreCd", scoreCd);
+		
+		menuImport(mov, "task");
 		
 		return mov;
 	}
@@ -96,6 +120,8 @@ public class TaskController {
 			mov.addObject("scoreCd", scoreCd);
 			mov.addObject("flg", "1");
 			
+			menuImport(mov, "task");
+			
 			return mov;
 		}
 		else	// 상세보기	
@@ -112,6 +138,8 @@ public class TaskController {
 			mov.addObject("dtypeCd", dtypeCd);
 			mov.addObject("scoreCd", scoreCd);
 			mov.addObject("flg", "2");
+			
+			menuImport(mov, "task");
 			
 			return mov;
 		}

@@ -9,6 +9,7 @@
 
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script type="text/javascript" src="${ctx}/resources/common/js/task/task.js"></script>
+<script type="text/javascript" src="${ctx}/resources/common/js/task/task_detail.js"></script> 
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -158,16 +159,16 @@
 			
 			<c:if test="${flg == 1 }">
 			 	 <div id="cust_single_add_div">
-			 	 	<input type="button" class="func_btn" id="task_single_add" value="저장" onclick= "task_add_save();">
-			 	 	<input type="button" class="func_btn" id="task_single_del" value="삭제" onclick= "task_del_save();">
-			 	 	<input type="button" class="func_btn" id="task_single_cancel" value="취소" onclick="task_cancel();">
+			 	 	<input type="button" class="func_btn" id="task_single_cancel" value="조회" onclick="task_cancel();">
+			 	 	<input type="button" class="tr_btn" id="task_single_add" value="저장" onclick= "task_add_save();">
+			 	 	<input type="button" class="tr_btn" id="task_single_del" value="삭제" onclick= "task_del_save();">
 			 	 </div> 
 			 </c:if>
 			 <c:if test="${flg == 2 }">	 
 			 	  <div id="cust_update_div">
-			 	 	<input type="button" class="func_btn" id="task_single_modify" value="수정" onclick="task_modify_save();">
-			 	 	<input type="button" class="func_btn" id="task_single_del" value="삭제" onclick= "task_del_save();">
-			 	 	<input type="button" class="func_btn" id="task_single_cancel" value="취소" onclick="task_cancel();">
+			 	 	<input type="button" class="func_btn" id="task_single_cancel" value="조회" onclick="task_cancel();">
+			 	 	<input type="button" class="tr_btn" id="task_single_modify" value="편집" onclick="task_modify_save();">
+			 	 	<input type="button" class="tr_btn" id="task_single_del" value="삭제" onclick= "task_del_save();">
 			 	 </div> 
 			 </c:if>
 	    </div>
