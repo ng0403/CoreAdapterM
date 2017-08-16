@@ -7,6 +7,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.core.plus.common.PagerVO;
+import com.core.plus.contact.cust.vo.CustVO;
+import com.core.plus.emp.vo.EmpVO;
+import com.core.plus.lead.vo.LeadVO;
+import com.core.plus.oppty.vo.OpptyVO;
 import com.core.plus.task.dao.TaskDAO;
 import com.core.plus.task.vo.TaskVO;
 
@@ -62,6 +67,100 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public int taskEdit(TaskVO taskVo) {
 		return taskDao.taskEdit(taskVo);
+	}
+
+	//삭제
+	@Override
+	public int taskDelete(TaskVO taskVo) {
+		return taskDao.taskDelete(taskVo);
+	}
+
+	@Override
+	public PagerVO getCustPopupRow(Map<String, Object> map) {
+		int custPageNum = (Integer)map.get("custPopupPageNum");
+		PagerVO page = new PagerVO(custPageNum, 0, 10, 10);
+		
+		int totalRowCount = taskDao.getTaskListRow(map);
+		
+		page = new PagerVO(custPageNum, totalRowCount, 10, 10);
+		
+		return page;
+	}
+
+	@Override
+	public List<CustVO> custPopupList() {
+		return taskDao.custPopupList();
+	}
+
+	@Override
+	public List<CustVO> custPopupList(Map<String, Object> map) {
+		return taskDao.custPopupList(map);
+	}
+
+	@Override
+	public PagerVO getEmpPopupRow(Map<String, Object> map) {
+		int empPageNum = (Integer)map.get("empPopupPageNum");
+		PagerVO page = new PagerVO(empPageNum, 0, 10, 10);
+		
+		int totalRowCount = taskDao.getEmpPopupRow(map);
+		
+		page = new PagerVO(empPageNum, totalRowCount, 10, 10);
+		
+		return page;
+	}
+
+	@Override
+	public List<EmpVO> empPopupList() {
+		return taskDao.empPopupList();
+	}
+
+	@Override
+	public List<EmpVO> empPopupList(Map<String, Object> map) {
+		return taskDao.empPopupList(map);
+	}
+
+	@Override
+	public PagerVO getLeadPopupRow(Map<String, Object> map) {
+		int leadPageNum = (Integer)map.get("leadPopupPageNum");
+		PagerVO page = new PagerVO(leadPageNum, 0, 10, 10);
+		
+		int totalRowCount = taskDao.getLeadPopupRow(map);
+		
+		page = new PagerVO(leadPageNum, totalRowCount, 10, 10);
+		
+		return page;
+	}
+
+	@Override
+	public List<LeadVO> leadPopupList() {
+		return taskDao.leadPopupList();
+	}
+
+	@Override
+	public List<LeadVO> leadPopupList(Map<String, Object> map) {
+		return taskDao.leadPopupList(map);
+	}
+
+	@Override
+	public PagerVO getOpptyPopupRow(Map<String, Object> map) {
+		int opptyPageNum = (Integer)map.get("opptyPopupPageNum");
+		PagerVO page = new PagerVO(opptyPageNum, 0, 10, 10);
+		
+		int totalRowCount = taskDao.getOpptyPopupRow(map);
+		
+		page = new PagerVO(opptyPageNum, totalRowCount, 10, 10);
+		
+		return page;
+	}
+
+	@Override
+	public List<OpptyVO> opptyPopupList() {
+		return taskDao.opptyPopupList();
+	}
+
+	@Override
+	public List<OpptyVO> opptyPopupList(Map<String, Object> map) {
+		return taskDao.opptyPopupList(map);
 	}
 
 	

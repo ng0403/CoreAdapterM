@@ -7,6 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.core.plus.contact.cust.vo.CustVO;
+import com.core.plus.emp.vo.EmpVO;
+import com.core.plus.lead.vo.LeadVO;
 import com.core.plus.oppty.vo.OpptyVO;
 import com.core.plus.task.vo.TaskVO;
 
@@ -73,6 +76,113 @@ public class TaskDAOImpl implements TaskDAO {
 	public int taskEdit(TaskVO taskVo) {
 		int result = sqlSession.insert("task.taskEdit", taskVo);
 		return result;
+	}
+
+	@Override
+	public int taskDelete(TaskVO taskVo) {
+		int result = sqlSession.delete("task.taskDelete", taskVo);
+		return result;
+	}
+
+	@Override
+	public int getTaskListRow(Map<String, Object> map) {
+		int totalCount = 0;
+		try {
+			totalCount = sqlSession.selectOne("task.taskListTotalRow", map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return totalCount;
+	}
+
+	@Override
+	public List<CustVO> custPopupList() {
+		List<CustVO> custPopList = sqlSession.selectList("task.custPopupList");
+		return custPopList;
+	}
+
+	@Override
+	public List<CustVO> custPopupList(Map<String, Object> map) {
+		List<CustVO> custPopList = sqlSession.selectList("task.custPopupList", map);
+		return custPopList;
+	}
+
+	@Override
+	public int getEmpPopupRow(Map<String, Object> map) {
+		int totalCount = 0;
+		
+		try {
+			totalCount = sqlSession.selectOne("task.empPopupRow", map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return totalCount;
+	}
+
+	@Override
+	public List<EmpVO> empPopupList() {
+		List<EmpVO> empPopList = sqlSession.selectList("task.empPopupList");
+		return empPopList;
+	}
+
+	@Override
+	public List<EmpVO> empPopupList(Map<String, Object> map) {
+		List<EmpVO> empPopList = sqlSession.selectList("task.empPopupList", map);
+		return empPopList;
+	}
+
+	@Override
+	public int getLeadPopupRow(Map<String, Object> map) {
+		int totalCount = 0;
+		try {
+			totalCount = sqlSession.selectOne("task.leadPopupRow", map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return totalCount;
+	}
+
+	@Override
+	public List<LeadVO> leadPopupList() {
+		List<LeadVO> leadPopupList = sqlSession.selectList("task.leadPopupList");
+		return leadPopupList;
+	}
+
+	@Override
+	public List<LeadVO> leadPopupList(Map<String, Object> map) {
+		List<LeadVO> leadPopupList = sqlSession.selectList("task.leadPopupList", map);
+		return leadPopupList;
+	}
+
+	@Override
+	public int getOpptyPopupRow(Map<String, Object> map) {
+		int totalCount = 0;
+		try {
+			totalCount = sqlSession.selectOne("task.opptyPopupRow", map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return totalCount;
+	}
+
+	@Override
+	public List<OpptyVO> opptyPopupList() {
+		List<OpptyVO> opptyPopupList = sqlSession.selectList("task.opptyPopupList");
+		return opptyPopupList;
+	}
+
+	@Override
+	public List<OpptyVO> opptyPopupList(Map<String, Object> map) {
+		List<OpptyVO> opptyPopupList = sqlSession.selectList("task.opptyPopupList", map);
+		return opptyPopupList;
 	}
 
 	

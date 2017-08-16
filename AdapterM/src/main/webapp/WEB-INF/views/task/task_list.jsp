@@ -10,7 +10,7 @@
 
 <script type="text/javascript">
  $(document).ready(function(){
-	$('#contact_day_srch').datepicker();
+	$('#next_day_srch').datepicker();
 
  });
 </script>
