@@ -17,6 +17,26 @@
 		from tb_task t left join tb_cust c on t.cust_no = c.cust_no 
 					   left join tb_cust_phone p on t.cust_no = p.cust_no
 					   left join tb_emp e on t.emp_no = e.emp_no
+		WHERE
+			1=1
+			<if test="task_no_srch != null and task_no_srch != ''">
+				AND (task_no like concat('%', #{task_no_srch}, '%'))
+			</if>
+			<if test="subject_srch != null and subject_srch != ''">
+				AND (subject like concat('%', #{subject_srch}, '%'))
+			</if>
+			<if test="cust_name_srch != null and cust_name_srch != ''">
+				AND (cust_no in ( select cust_no from tb_cust where cust_name like concat('%', #{cust_name_srch}, '%')))
+			</if>
+			<if test="emp_name_srch != null and emp_name_srch != ''">
+				AND (emp_no like ( select emp_no from tb_emp where emp_name like concat('%', #{emp_name_srch_srch}, '%')))
+			</if>
+			<if test="next_day_srch != null and next_day_srch != ''">
+				AND (next_day like concat('%', #{next_day_srch}, '%'))
+			</if>
+			<if test="dtype_cd_srch != null and dtype_cd_srch != ''">
+				AND (dtype_cd like concat('%', #{dtype_cd_srch}, '%'))
+			</if>
 	</select>
 
 	
@@ -44,15 +64,71 @@
 		  , (select cust_name from tb_cust where cust_no = c.cust_no ) as cust_name
        	  , (select emp_name from tb_emp where emp_no = e.emp_no) as emp_no
        	  , t.next_day
-          , (select code_name from tb_code where code_no = '1008' and code = dtype_cd) as dtype_cd
+          , (select code_name from tb_code where code_no = '1008' and code = dtype_cd) as dtype_name
+          , t.dtype_cd
 		  , t.lead_no
           , t.oppty_no
-          , (select code_name from tb_code where code_no = '1009' and code = score_cd) as score_cd
+          , (select code_name from tb_code where code_no = '1009' and code = score_cd) as score_name
+          , t.score_cd
           , t.location
           , t.remark_cn 
 		from tb_task t left join tb_cust c on t.cust_no = c.cust_no 
 					   left join tb_cust_phone p on t.cust_no = p.cust_no
-					   left join tb_emp e on t.emp_no = e.emp_no;
+					   left join tb_emp e on t.emp_no = e.emp_no
+		where t.task_no = #{task_no}
 	</select>
+	
+	<insert id="taskInsert"  parameterType="com.core.plus.task.vo.TaskVO">
+		<selectKey keyProperty="task_no" resultType="String" order="BEFORE">
+			SELECT IF(SUBSTR(MAX(task_no), 1, 10) = DATE_FORMAT(now(), '%Y%m%d%H'), MAX(oppty_no)+1, concat(DATE_FORMAT(now(), '%Y%m%d%H'),'00001')) task_no 
+			FROM tb_task USE INDEX(PRIMARY)
+		</selectKey>
+		insert into tb_task
+		(
+		    task_no
+		  , subject
+		  , cust_no
+		  , emp_no
+		  , next_day
+		  , dtype_cd
+		  , lead_no
+		  , oppty_no
+		  , score_cd
+		  , location
+		  , remark_cn
+		)  
+		values
+		(
+		  	
+		  #{task_no},
+		  #{subject},
+		  #{cust_no},
+		  #{emp_no},
+		  #{next_day},
+		  #{dtype_cd},
+		  #{lead_no},
+		  #{oppty_no},
+		  #{score_cd},
+		  #{location},
+		  #{remark_cn}
+		) 
+	</insert>
+
+	<update id="taskEdit">
+		update tb_task
+		set 
+		    subject   = #{subject}
+		  , cust_no   = #{cust_no}
+		  , emp_no    = #{emp_no}
+		  , next_day  = #{next_day}
+		  , dtype_cd  = #{dtype_cd}
+		  , lead_no	  = #{lead_no}
+		  , oppty_no  = #{oppty_no}
+		  , score_cd  = #{score_cd}
+		  , location  = #{location}
+		  , remark_cn = #{remark_cn}
+		where task_no = #{task_no}
+	</update>
+
 
 </mapper>

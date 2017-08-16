@@ -41,66 +41,46 @@
 					<tr style="background-color: white; cursor:default; border:0;">
 						 <th style="width:5%;">상담번호</th>
 						 <td style="width:15%;">
-						    <input type="text" id="task_no" name="task_no" value="" style="width:80%" 
-
-onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="task_no_srch" name="task_no_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td> 
 						 <th style="width:5%;">제목</th>
 						 <td style="width:15%;">
-						    <input type="text" id="subject" name="subject" value="" style="width:80%" 
-
-onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="subject_srch" name="subject_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td>
 						  <th style="width:5%;">고객명</th>
 						 <td style="width:15%;">
-						    <input type="text" id="cust_name" name="cust_name" value="" style="width:80%" 
-
-onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="cust_name_srch" name="cust_name_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td>
 					  
  		                 <td style="width: 12%;">
-		                 	<input type="button" value="조회" id="task_list_srch" onclick="searchKeyword();" 
-
-class="tr_btn" style="margin-left: 0;">
+		                 	<input type="button" value="조회" id="task_list_srch" onclick="searchKeyword();" class="tr_btn" style="margin-left: 0;">
 		                 </td>
 					</tr>
 					
 					<tr>
 						 <th style="width:5%;">담당자명</th>
 						 <td style="width:15%;">
-						    <input type="text" id="emp_no" name="emp_no" value="" style="width:80%" 
-
-onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="emp_name_srch" name="emp_name_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td>
 					
 						 <th style="width:5%;">다음일자</th>
 						 <td style="width:15%;">
-<!-- 							<input type="text" id="next_day" name="next_day" value=""  style="width : 
-
-80%;" onkeypress="cupnEnterSearch(event);"> -->
- 							<input type="text" name="next_day" id="next_day" value="" class="expt_fin_d" 
-							 		readonly="readonly" style="width : 80%; text-align: center; 
-
-cursor: pointer;">
+<!-- 							<input type="text" id="next_day" name="next_day" value=""  style="width : 80%;" onkeypress="cupnEnterSearch(event);"> -->
+ 							<input type="text" name="next_day_srch" id="next_day_srch" value="" class="expt_fin_d" 
+							 		readonly="readonly" style="width : 80%; text-align: center; cursor: pointer;">
  						 </td>
 						 
 						  <th style="width:5%;">분류</th>
 						 <td style="width:15%;">
-						    <select id="dtype_cd" name="dtype_cd" 
-										style="margin-left: 0; width: 83%; text-align: 
-
-center; font-size: 10.5px; padding: 0.3em 0.3em;">
+						    <select id="dtype_cd_srch" name="dtype_cd_srch" 
+										style="margin-left: 0; width: 83%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
 								<option value="">선택해 주십시오</option>
 								<c:forEach var="dtypeCd" items="${ dtypeCd }">
 <%-- 									<c:if test= "${ dtypeCd.code eq taskList.dtype_cd }"> --%>
-<%-- 										<option value="${ dtypeCd.code }">${ 
-
-dtypeCd.code_name }</option> --%>
+<%-- 										<option value="${ dtypeCd.code }">${ dtypeCd.code_name }</option> --%>
 <%-- 									</c:if> --%>
 <%-- 									<c:if test= "${ dtypeCd.code ne taskList.dtype_cd }"> --%>
-										<option value="${ dtypeCd.code }">${ 
-
-dtypeCd.code_name }</option>
+										<option value="${ dtypeCd.code }">${ dtypeCd.code_name }</option>
 <%-- 									</c:if> --%>
 								</c:forEach>
 							</select>
@@ -114,13 +94,13 @@ dtypeCd.code_name }</option>
 	 	 	<thead>
 	 	 		<tr>
  	 	 			<th style="width: 10%;">task번호</th> 
-	 	 			<th style="width: 13%;">제목</th>
+	 	 			<th style="width: 15%;">제목</th>
  	 	 			<th style="width: 10%;">고객번호</th>
-	 	 			<th style="width: 10%;">고객명</th> 
-	 	 			<th style="width: 10%;">전화번호</th>
-	 	 			<th style="width: 10%;">담당자명</th>
+	 	 			<th style="width: 9%;">고객명</th> 
+	 	 			<th style="width: 9%;">전화번호</th>
+	 	 			<th style="width: 9%;">담당자명</th>
 	 	 			<th style="width: 10%;">다음일자</th>
-	 	 			<th style="width: 10%;">분류</th>
+	 	 			<th style="width: 12%;">분류</th>
 	 	 			<th style="width: 10%;">등록일시</th> 
  	 	 		</tr>
 	 	 	</thead>
@@ -129,9 +109,7 @@ dtypeCd.code_name }</option>
 	 	 		<tr>
 	 	 			<td style="text-align: left;" >${list.task_no}</td>
 	 	 			<td style="text-align: left;" >
-	 	 				<a href="#" onclick="custDetail('${list.task_no}');" id="${list.task_no}">
-
-${list.subject}</a>
+	 	 				<a href="#" onclick="taskDetail('${list.task_no}');" id="${list.task_no}">${list.subject}</a>
 	 	 			</td>
 	 	 			<td style="text-align: left;" >${list.cust_no}</td>
 	 	 			<td style="text-align: left;" >${list.cust_name}</td>
@@ -146,18 +124,10 @@ ${list.subject}</a>
 <%-- 	 	 		<c:forEach items="${couponList}" var="couponList"> --%>
 <%-- 	 	 		<input type="hidden" id="img_src" value="${couponList.img_src}"> --%>
 <!-- 	 	 		<tr> -->
-<%-- 	 	 			<td onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');">
-
-${couponList.cupn_wid}</td> --%>
-<%-- 	 	 			<td style="text-align: left;" onclick="goCouponForm('${couponList.cupn_wid}', 
-
-'${couponList.active_flg}');">${couponList.cupn_name}</td> --%>
-<%-- 	 	 			<td style="text-align: left;" onclick="goCouponForm('${couponList.cupn_wid}', 
-
-'${couponList.active_flg}');">${couponList.file_name}</td> --%>
-<%-- 	 	 			<td style="text-align: right;" onclick="goCouponForm('${couponList.cupn_wid}', 
-
-'${couponList.active_flg}');"> --%>
+<%-- 	 	 			<td onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');">${couponList.cupn_wid}</td> --%>
+<%-- 	 	 			<td style="text-align: left;" onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');">${couponList.cupn_name}</td> --%>
+<%-- 	 	 			<td style="text-align: left;" onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');">${couponList.file_name}</td> --%>
+<%-- 	 	 			<td style="text-align: right;" onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');"> --%>
 <%-- 	 	 			<c:if test="${couponList.disc_type==1}"> --%>
 <%-- 	 	 				${couponList.disc_rate}% --%>
 <%-- 	 	 			</c:if> --%>
@@ -165,15 +135,9 @@ ${couponList.cupn_wid}</td> --%>
 <%-- 	 	 				<fmt:formatNumber value="${couponList.disc_amt}" type="number"/>원 --%>
 <%-- 	 	 			</c:if> --%>
 <!-- 	 	 			</td> -->
-<%-- 	 	 			<td onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');">
-
-${couponList.exp_start_dt} ~ ${couponList.exp_end_dt} </td> --%>
-<%-- 	 	 			<td onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');">
-
-${couponList.created}</td> --%>
-<%-- 	 	 			<td onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');">
-
-${couponList.active_flg}</td> --%>
+<%-- 	 	 			<td onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');">${couponList.exp_start_dt} ~ ${couponList.exp_end_dt} </td> --%>
+<%-- 	 	 			<td onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');">${couponList.created}</td> --%>
+<%-- 	 	 			<td onclick="goCouponForm('${couponList.cupn_wid}', '${couponList.active_flg}');">${couponList.active_flg}</td> --%>
 <!-- 	 	 		</tr> -->
 <%-- 	 	 		</c:forEach> --%>
 <%-- 	 	 		<c:if test="${couponList.size() == 0}"> --%>
@@ -194,39 +158,25 @@ ${couponList.active_flg}</td> --%>
 <%-- 			<input type="hidden" id="pageNum" value="${pageNum}"/> --%>
 <%-- 			<c:choose> --%>
 <%-- 				<c:when test="${page.endPageNum == 0 || page.endPageNum == 1}"> --%>
-<%-- 					<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" 
-
-value="${page.startPageNum}" readonly="readonly"/>   --%>
+<%-- 					<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" value="${page.startPageNum}" readonly="readonly"/>   --%>
 <!-- 					<a style="color: black; text-decoration: none;"> / 1</a> -->
 <!-- 					<a style="color: black; text-decoration: none;"> ▶ </a> -->
 <%-- 				</c:when> --%>
 <%-- 				<c:when test="${pageNum == page.startPageNum}"> --%>
-<%-- 					 ◀ <input type="text" id="pageInput" value="${page.startPageNum}"  
-
-onkeypress="cupnPageNumInputEnter(event);"/>   --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${page.endPageNum}');" id="pNum" > / 
-
-${page.endPageNum}</a> --%>
+<%-- 					 ◀ <input type="text" id="pageInput" value="${page.startPageNum}"  onkeypress="cupnPageNumInputEnter(event);"/>   --%>
+<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${page.endPageNum}');" id="pNum" > / ${page.endPageNum}</a> --%>
 <%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${pageNum+1}');" id="pNum"> ▶ </a> --%>
 <%-- 				</c:when> --%>
 <%-- 				<c:when test="${pageNum == page.endPageNum}"> --%>
 <%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${pageNum-1}');" id="pNum"> ◀ </a> --%>
-<%-- 					<input type="text" id="pageInput"  value="${page.endPageNum}" 
-
-onkeypress="cupnPageNumInputEnter(event);"/>  --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${page.endPageNum}');" id="pNum"> / 
-
-${page.endPageNum}</a> --%>
+<%-- 					<input type="text" id="pageInput"  value="${page.endPageNum}" onkeypress="cupnPageNumInputEnter(event);"/>  --%>
+<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a> --%>
 <!-- 					<a style="color: black; text-decoration: none;"> ▶ </a> -->
 <%-- 				</c:when> --%>
 <%-- 				<c:otherwise> --%>
 <%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${pageNum-1}');" id="pNum" > ◀ </a> --%>
-<%-- 					<input type="text" id="pageInput"  value="${pageNum}" onkeypress="cupnPageNumInputEnter
-
-(event);"/>   --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${page.endPageNum}');" id="pNum"> / 
-
-${page.endPageNum}</a> --%>
+<%-- 					<input type="text" id="pageInput"  value="${pageNum}" onkeypress="cupnPageNumInputEnter(event);"/>   --%>
+<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a> --%>
 <%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${pageNum+1}');" id="pNum"> ▶ </a> --%>
 <%-- 				</c:otherwise> --%>
 <%-- 			</c:choose> --%>

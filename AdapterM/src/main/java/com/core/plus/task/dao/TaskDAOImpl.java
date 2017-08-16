@@ -1,6 +1,7 @@
 package com.core.plus.task.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,13 @@ public class TaskDAOImpl implements TaskDAO {
 		return code;
 	}
 
+	//조회
+	@Override
+	public List<TaskVO> taskSchList(Map<String, Object> taskMap) {
+		List<TaskVO> vo = sqlSession.selectList("task.taskList", taskMap);
+		return vo;
+	}
+	
 	//인덱스번호
 	@Override
 	public TaskVO taskNoIndex() {
@@ -48,8 +56,25 @@ public class TaskDAOImpl implements TaskDAO {
 	//상세보기
 	@Override
 	public Object taskDetail(String task_no) {
-		OpptyVO detail = sqlSession.selectOne("task.taskDetail", task_no);
+		TaskVO detail = sqlSession.selectOne("task.taskDetail", task_no);
+		System.out.println("taskDetail"+detail);
 		return detail;
 	}
+
+	//추가
+	@Override
+	public int taskInsert(TaskVO taskVo) {
+		int result = sqlSession.insert("task.taskInsert", taskVo);
+		return result;
+	}
+
+	//수정
+	@Override
+	public int taskEdit(TaskVO taskVo) {
+		int result = sqlSession.insert("task.taskEdit", taskVo);
+		return result;
+	}
+
+	
 
 }

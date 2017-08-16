@@ -24,6 +24,8 @@ public class TaskVO {
 	private String code;
 	private String code_name;
 	private String dtype_name;
+	private String score_name;
+	
 	
 	public String getTask_no() {
 		return task_no;
@@ -111,14 +113,6 @@ public class TaskVO {
 		this.remark_cn = remark_cn;
 	}
 	
-	@Override
-	public String toString() {
-		return "TaskVO [task_no=" + task_no + ", create_date=" + create_date + ", update_date=" + update_date
-				+ ", subject=" + subject + ", cust_no=" + cust_no + ", lead_no=" + lead_no + ", oppty_no=" + oppty_no
-				+ ", location=" + location + ", next_day=" + next_day + ", emp_no=" + emp_no + ", dtype_cd=" + dtype_cd
-				+ ", score_cd=" + score_cd + ", remark_cn=" + remark_cn + "]";
-	}
-	
 	public String getCode_no() {
 		return code_no;
 	}
@@ -143,10 +137,26 @@ public class TaskVO {
 	public void setDtype_name(String dtype_name) {
 		this.dtype_name = dtype_name;
 	}
+	public String getScore_name() {
+		return score_name;
+	}
+	public void setScore_name(String score_name) {
+		this.score_name = score_name;
+	}
 	public String getPhone_no() {
 		return phone_no;
 	}
 	public void setPhone_no(String phone_no) {
 		this.phone_no = phone_no;
 	}
+	@Override
+	public String toString() {
+		return "TaskVO [task_no=" + task_no + ", create_date=" + create_date + ", update_date=" + update_date
+				+ ", subject=" + subject + ", cust_no=" + cust_no + ", cust_name=" + cust_name + ", lead_no=" + lead_no
+				+ ", oppty_no=" + oppty_no + ", location=" + location + ", next_day=" + next_day + ", emp_no=" + emp_no
+				+ ", dtype_cd=" + dtype_cd + ", score_cd=" + score_cd + ", remark_cn=" + remark_cn + ", phone_no="
+				+ phone_no + ", code_no=" + code_no + ", code=" + code + ", code_name=" + code_name + ", dtype_name="
+				+ dtype_name + ", score_name=" + score_name + "]";
+	}
+	
 }
