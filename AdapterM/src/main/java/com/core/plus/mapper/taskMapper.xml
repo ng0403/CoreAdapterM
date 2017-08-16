@@ -18,7 +18,7 @@
 					   left join tb_cust_phone p on t.cust_no = p.cust_no
 					   left join tb_emp e on t.emp_no = e.emp_no
 		WHERE
-			1=1
+			t.del_yn = 'N'
 			<if test="task_no_srch != null and task_no_srch != ''">
 				AND (task_no like concat('%', #{task_no_srch}, '%'))
 			</if>
@@ -37,6 +37,7 @@
 			<if test="dtype_cd_srch != null and dtype_cd_srch != ''">
 				AND (dtype_cd like concat('%', #{dtype_cd_srch}, '%'))
 			</if>
+			order by create_date desc
 	</select>
 
 	
