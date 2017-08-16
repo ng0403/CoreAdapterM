@@ -4,8 +4,9 @@
 <c:set var="ctx" value="${pageContext.request.contextPath }" />    
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<script type="text/javascript" src="/resources/common/js/cust/cust.js"></script> 
+<script type="text/javascript" src="${ctx}/resources/common/js/cust/cust.js"></script> 
 <script src="http://malsup.github.com/jquery.form.js"></script>
+
 <script type="text/javascript">
 //연락처타입코드리스트 저장
 var phoneTypeCdList = new Array();
@@ -146,37 +147,55 @@ $(document).ready(function(){
 	
 	<c:if test="${flg == 1 }">
 	 	 <div id="cust_single_add_div">
+	 	 	<input type="button" class="func_btn" id="cust_list" onclick="custList();" value="조회">
 	 	 	<input type="button" class="func_btn" id="cust_single_add" value="저장" onclick="cust_add_save();">
 	 	 	<input type="button" class="func_btn" id="cust_single_cancel" value="취소" onclick="cust_cancel();">
 	 	 </div> 
 	 </c:if>
 	 <c:if test="${flg == 2 }">	 
 	 	  <div id="cust_update_div">
-	 	 	<input type="button" class="func_btn" id="cust_single_modify" value="수정" onclick="cust_modify_save();">
-	 	 	<input type="button" class="func_btn" id="cust_single_cancel" value="취소" onclick="cust_cancel();">
+		 	<input type="button" class="func_btn" id="cust_list" onclick="custList();" value="조회">
+	 		<input type="button" class="func_btn" id="cust_single_modify" value="수정" onclick="cust_modify_save();">
+			<input type="button" class="func_btn" id="cust_single_cancel" value="취소" onclick="cust_cancel();">
 	 	 </div> 
 	 </c:if>
     </div>
     
-    
     <div id="cust_phone_div" style="float: right; margin-top: 25px; margin-bottom: 7px;">
  	 	<input type="button" class="func_btn" id="cust_update" value="추가" onclick="cust_phone_add(${custDlist.cust_no});">
  	 	<input type="button" class="func_btn" id="cust_delete" value="삭제" onclick="cust_remove();">
- 	 	<input type="button" class="func_btn" id="cust_detail_cancel" value="저장" onclick="cust_phone_save();">
-	</div> 
+ 	 	<input type="button" class="func_btn" id="cust_detail_cancel" value="저장" onclick="cust_phone_save(${custDlist.cust_no});">
+	</div>
+
+	 
     <div id="cust_phone">
-    	<table id="cust_form_tbl" class="commonDetailTable">
+    	<div style="height:50px;"></div>
+			<div class="titleDIV">
+				<span class="titleText">
+	    			■ <span id="coupon_form_title">전화번호</span>
+					<span style="font-size: 8px;">(삭제할 전화번호를 체크한 후 삭제버튼을 누르고 저장을 눌러주세요.)</span>
+				</span>
+		</div>
+		<div style="height:25px;"></div>	
+    	<table id="custP_form_tbl" class="commonDetailTable">
 	    	<thead>
 				<tr>
+					<td rowspan="2" style="width: 2%; text-align: center;">
+	 	 				<input id="custPhoneChk" class="custPhoneChk" type="checkbox" onclick="actAllChk(this);" />
+	 	 			</td>
 		 			<th style="text-align:center;">구분</th>
 					<th style="text-align:center;">국가코드</th>
 					<th style="text-align:center;">국번호</th>
 					<th style="text-align:center;">고유번호</th>
+					<th style="text-align: center;">메인여부</th>
 				</tr>
 			</thead>
 			<tbody id="table_tbody">
 				<c:forEach items="${custPList}" var="custPList" >
 				<tr>
+					<td style="width: 2%; text-align: center;">
+	 	 				<input type="checkbox" class="del_chk" name="del_chk">
+	 	 			</td>
 					<td>
 						<select id="phone_type_cd" name="phone_type_cd" 
 								style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
@@ -193,7 +212,7 @@ $(document).ready(function(){
 		 			</td>
 					<td>
 			 			 <select id="phone_country_cd" name="phone_country_cd" 
-									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
+									style="margin-left: 0; width: 90%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
 								<option value="">선택</option>
 								<c:forEach var="phoneCountryCdList" items="${ phoneCountryCdList }">
 									<c:if test= "${ phoneCountryCdList.code eq custPList.phone_country_cd }">
@@ -206,11 +225,21 @@ $(document).ready(function(){
 							</select>
 		  			</td>
 					<td>
-						<input type="text" id="phone_area_no" name="phone_area_no" value="${custPList.phone_area_no}" >
+						<input type="text" id="phone_area_no" name="phone_area_no" style="width: 90%;" value="${custPList.phone_area_no}" >
 		 			</td>
 					<td> 
-			       		<input type="text" id="phone_no" name="phone_no" value="${custPList.phone_no}"> 
+			       		<input type="text" id="phone_no" name="phone_no" style="width: 90%;" value="${custPList.phone_no}"> 
 		 			</td>
+		 			<c:if test= "${ custPList.primary_yn eq 'Y' }">
+	 					<td style="text-align: center;">
+	 	 					<input id="custPhoneChk" class="phone_primary_yn" type="checkbox" checked="checked" />
+	 	 				</td>
+	 				</c:if>
+	 				<c:if test= "${ custPList.primary_yn eq 'N' }">
+	 					<td style="text-align: center;">
+ 	 						<input id="custPhoneChk" class="phone_primary_yn" type="checkbox" />
+	 					</td>
+ 					</c:if>
 				</tr>	
 				</c:forEach>
 			</tbody>
@@ -219,44 +248,74 @@ $(document).ready(function(){
         
     <div id="cust_address_div" style="float: right; margin-top: 25px; margin-bottom: 7px;">
  	 	<input type="button" class="func_btn" id="cust_update" value="추가" onclick="cust_address_add(${custDlist.cust_no});">
- 	 	<input type="button" class="func_btn" id="cust_delete" value="삭제" onclick="cust_remove();">
- 	 	<input type="button" class="func_btn" id="cust_detail_cancel" value="저장" onclick="cust_phone_save();">
-	</div> 
+ 	 	<input type="button" class="func_btn" id="cust_delete" value="삭제" onclick="custAddr_remove();">
+ 	 	<input type="button" class="func_btn" id="cust_detail_cancel" value="저장" onclick="cust_addr_save(${custDlist.cust_no});">
+	</div>
+	
+	<div style="height:25px;"></div>
+	<div class="titleDIV">
+		<span class="titleText">
+	    	■ <span id="coupon_form_title">우편번호</span>
+	    	  <span style="font-size: 8px;">(삭제할 우편번호를 체크한 후 삭제버튼을 누르고 저장을 눌러주세요.)</span>
+		</span>
+	</div>	
     <div id="cust_address">
-    	<table id="cust_form_tbl" class="commonDetailTable">
-			<tr>
-	 			<th style="text-align:center;">구분</th>
-				<th style="text-align:center;">우편번호</th>
-				<th style="text-align:center;">기본주소</th>
-				<th style="text-align:center;">상세주소</th>
-			</tr>
-			<c:forEach items="${custAList}" var="custAList" >
-			<tr>
-				<td>
-					<select id="addr_type_cd" name="addr_type_cd" 
-								style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
-							<option value="">선택</option>
-							<c:forEach var="addrTypeCdList" items="${ addrTypeCdList }">
-								<c:if test= "${ addrTypeCdList.code eq custAList.addr_type_cd }">
-									<option value="${ addrTypeCdList.code }" selected="selected">${ addrTypeCdList.code_name }</option>
-								</c:if>
-								<c:if test= "${ addrTypeCdList.code ne custAList.addr_type_cd }">
-									<option value="${ addrTypeCdList.code }">${ addrTypeCdList.code_name }</option>
-								</c:if>
-							</c:forEach>
-						</select>
-	 			</td>
-				<td>
-	 			 <input type="text" id="zip_no" name="zip_no" value="${custAList.zip_no }" >
-	  			</td>
-				<td>
-					<input type="text" id="main_address" name="main_address" style="width: 80%;"  value="${custAList.main_address}" >
-	 			</td>
-				<td> 
-		       		<input type="text" id="detail_address" name="detail_address" style="width: 80%;" value="${custAList.detail_address}"> 
-	 			</td>
-			</tr>	
-			</c:forEach>
+    	<table id="custA_form_tbl" class="commonDetailTable">
+    		<thead>
+				<tr>
+					<td style="width: 2%; text-align: center;">
+	 	 				<input id="custAddrChk" class="custAddrChk" type="checkbox" onclick="actAllChk(this);" />
+	 	 			</td>
+	 				<th style="text-align:center;">구분</th>
+					<th style="text-align:center;">우편번호</th>
+					<th style="text-align:center;">기본주소</th>
+					<th style="text-align:center;">상세주소</th>
+					<th style="text-align: center;">메인여부</th>
+				</tr>
+			</thead>
+			<tbody id="tableAddr_tbody">
+				<c:forEach items="${custAList}" var="custAList" >
+					<tr>
+						<td style="width: 2%; text-align: center;">
+	 	 					<input id="custAddrChk" class="custAddrChk" type="checkbox" onclick="actAllChk(this);" />
+	 	 				</td>
+						<td>
+							<select id="addr_type_cd" name="addr_type_cd" 
+									style="margin-left: 0; width: 90%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
+								<option value="">선택</option>
+								<c:forEach var="addrTypeCdList" items="${ addrTypeCdList }">
+									<c:if test= "${ addrTypeCdList.code eq custAList.addr_type_cd }">
+										<option value="${ addrTypeCdList.code }" selected="selected">${ addrTypeCdList.code_name }</option>
+									</c:if>
+									<c:if test= "${ addrTypeCdList.code ne custAList.addr_type_cd }">
+										<option value="${ addrTypeCdList.code }">${ addrTypeCdList.code_name }</option>
+									</c:if>
+								</c:forEach>
+							</select>
+		 				</td>
+						<td>
+							<input type="text" id="zip_no" name="zip_no" style="width: 90%;" value="${custAList.zip_no }" >
+	  					</td>
+						<td>
+							<input type="text" id="main_address" name="main_address" style="width: 90%;"  value="${custAList.main_address}" >
+			 			</td>
+						<td> 
+			    	   		<input type="text" id="detail_address" name="detail_address" style="width: 90%;" value="${custAList.detail_address}"> 
+	 					</td>
+	 					<c:if test= "${ custAList.primary_yn eq 'Y' }">
+	 						<td style="text-align: center;">
+	 	 						<input id="custAddrChk" class="addr_primary_yn" type="checkbox" checked="checked" />
+	 	 					</td>
+	 					</c:if>
+	 					<c:if test= "${ custAList.primary_yn eq 'N' }">
+	 						<td style="text-align: center;">
+	 	 						<input id="custAddrChk" class="addr_primary_yn" type="checkbox" />
+	 	 					</td>
+	 					</c:if>
+	 					
+					</tr>	
+				</c:forEach>
+			</tbody>
     	</table>
     </div>
     

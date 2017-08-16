@@ -20,20 +20,18 @@
 		insert into tb_cust_addr (
 								cust_no
 								,addr_type_cd
-								,road_yn
 								,zip_no
 								,main_address
 								,detail_address
-<!-- 								,primary_yn -->
+								,primary_yn
 		)
 		values(
 			#{cust_no}
            	,#{addr_type_cd}
-           	,#{road_yn}
            	,#{zip_no}
            	,#{main_address}
            	,#{detail_address}
-<!--            	,#{primary_yn} -->
+           	,#{primary_yn}
 		)
 	</insert>
 	

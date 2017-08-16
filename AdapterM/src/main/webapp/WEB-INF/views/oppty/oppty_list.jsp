@@ -149,7 +149,7 @@
 	 		 			</td>
 		 	 			<td style="text-align: left;" >${ list.cust_no }</td>
 	 		 			<td style="text-align: left;" >${ list.cust_name }</td>
-	 		 			<td style="text-align: left;" ><!-- 전화번호 --></td>
+	 		 			<td style="text-align: left;" >${ list.cust_phone }</td>
 	 		 			<td style="text-align: left;" >${ list.emp_name }</td>
 	 		 			<td style="text-align: left;" >${ list.oppty_status_cd }</td>
 	 		 			<td style="text-align: left;" >${ list.oppty_stage_cd }</td>

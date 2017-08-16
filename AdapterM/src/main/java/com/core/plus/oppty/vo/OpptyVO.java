@@ -8,6 +8,7 @@ public class OpptyVO {
 	private String oppty_name; 		// 기회명
 	private String cust_no; 		// 고객번호
 	private String cust_name;		// 고객이름
+	private String cust_phone;		// 전화번호
 	private String emp_no; 			// 담당자번호
 	private String emp_name;		// 담당자이름
 	private String oppty_status_cd; // 기회상태구분
@@ -78,6 +79,14 @@ public class OpptyVO {
 
 	public void setCust_name(String cust_name) {
 		this.cust_name = cust_name;
+	}
+	
+	public String getCust_phone() {
+		return cust_phone;
+	}
+
+	public void setCust_phone(String cust_phone) {
+		this.cust_phone = cust_phone;
 	}
 
 	public String getEmp_no() {

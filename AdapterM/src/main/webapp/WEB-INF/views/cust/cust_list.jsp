@@ -61,7 +61,7 @@ var vititDtlCdList = new Array();
 						 </td>
 					  
  		                 <td style="width: 12%;">
-		                 	<input type="button" value="조회" id="lead_list_srch" onclick="searchKeyword();" class="tr_btn" style="margin-left: 0;">
+		                 	<input type="button" value="조회" id="lead_list_srch" onclick="searchKeyword(1);" class="tr_btn" style="margin-left: 0;">
 		                 </td>
 					</tr>
 					
@@ -130,7 +130,7 @@ var vititDtlCdList = new Array();
 						</c:forEach>
 	 	 			</td>
 	 	 			<td style="text-align: left;" >${list.rec_per}</td>
-	 	 			<td style="text-align: left;" >${list.phone_no}</td>
+	 	 			<td style="text-align: left;" >${list.phone_area_no}${list.phone_no}</td>
 	 	 			<td style="text-align: left;" >${list.main_address}</td>
 	 	 			<td style="text-align: left;" >${list.create_date}</td>
 	 	 			</tr>
@@ -167,34 +167,34 @@ var vititDtlCdList = new Array();
  		 	 <input type="button" class="func_btn" id="cust_add" value="단건등록" onclick="cust_add();">
 		 	 <input type="button" class="func_btn" id="lead_add_multi" value="다건등록">
 		</div>
-<!-- 	 	<div class="pagingDiv"> -->
-<%-- 			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/> --%>
-<%-- 			<input type="hidden" id="startPageNum" value="${page.startPageNum}"/> --%>
-<%-- 			<input type="hidden" id="pageNum" value="${pageNum}"/> --%>
-<%-- 			<c:choose> --%>
-<%-- 				<c:when test="${page.endPageNum == 0 || page.endPageNum == 1}"> --%>
-<%-- 					<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" value="${page.startPageNum}" readonly="readonly"/>   --%>
-<!-- 					<a style="color: black; text-decoration: none;"> / 1</a> -->
-<!-- 					<a style="color: black; text-decoration: none;"> ▶ </a> -->
-<%-- 				</c:when> --%>
-<%-- 				<c:when test="${pageNum == page.startPageNum}"> --%>
-<%-- 					 ◀ <input type="text" id="pageInput" value="${page.startPageNum}"  onkeypress="cupnPageNumInputEnter(event);"/>   --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${page.endPageNum}');" id="pNum" > / ${page.endPageNum}</a> --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${pageNum+1}');" id="pNum"> ▶ </a> --%>
-<%-- 				</c:when> --%>
-<%-- 				<c:when test="${pageNum == page.endPageNum}"> --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${pageNum-1}');" id="pNum"> ◀ </a> --%>
-<%-- 					<input type="text" id="pageInput"  value="${page.endPageNum}" onkeypress="cupnPageNumInputEnter(event);"/>  --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a> --%>
-<!-- 					<a style="color: black; text-decoration: none;"> ▶ </a> -->
-<%-- 				</c:when> --%>
-<%-- 				<c:otherwise> --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${pageNum-1}');" id="pNum" > ◀ </a> --%>
-<%-- 					<input type="text" id="pageInput"  value="${pageNum}" onkeypress="cupnPageNumInputEnter(event);"/>   --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a> --%>
-<%-- 					<a style="cursor: pointer;" onclick="cupnPaging('${pageNum+1}');" id="pNum"> ▶ </a> --%>
-<%-- 				</c:otherwise> --%>
-<%-- 			</c:choose> --%>
-<!-- 		</div> -->
+	 	<div class="pagingDiv">
+			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
+			<input type="hidden" id="startPageNum" value="${page.startPageNum}"/>
+			<input type="hidden" id="pageNum" value="${pageNum}"/>
+			<c:choose>
+				<c:when test="${page.endPageNum == 0 || page.endPageNum == 1}">
+					<a style="color: black; text-decoration: none;"> ◀ </a><input type="text" id="pageInput" value="${page.startPageNum}" readonly="readonly"/>  
+					<a style="color: black; text-decoration: none;"> / 1</a>
+					<a style="color: black; text-decoration: none;"> ▶ </a>
+				</c:when>
+				<c:when test="${pageNum == page.startPageNum}">
+					 ◀ <input type="text" id="pageInput" value="${page.startPageNum}"  onkeypress="cupnPageNumInputEnter(event);"/>  
+					<a style="cursor: pointer;" onclick="cupnPaging('${page.endPageNum}');" id="pNum" > / ${page.endPageNum}</a>
+					<a style="cursor: pointer;" onclick="cupnPaging('${pageNum+1}');" id="pNum"> ▶ </a>
+				</c:when>
+				<c:when test="${pageNum == page.endPageNum}">
+					<a style="cursor: pointer;" onclick="cupnPaging('${pageNum-1}');" id="pNum"> ◀ </a>
+					<input type="text" id="pageInput"  value="${page.endPageNum}" onkeypress="cupnPageNumInputEnter(event);"/> 
+					<a style="cursor: pointer;" onclick="cupnPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
+					<a style="color: black; text-decoration: none;"> ▶ </a>
+				</c:when>
+				<c:otherwise>
+					<a style="cursor: pointer;" onclick="cupnPaging('${pageNum-1}');" id="pNum" > ◀ </a>
+					<input type="text" id="pageInput"  value="${pageNum}" onkeypress="cupnPageNumInputEnter(event);"/>  
+					<a style="cursor: pointer;" onclick="cupnPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
+					<a style="cursor: pointer;" onclick="cupnPaging('${pageNum+1}');" id="pNum"> ▶ </a>
+				</c:otherwise>
+			</c:choose>
+		</div>
    </div>
 </div>

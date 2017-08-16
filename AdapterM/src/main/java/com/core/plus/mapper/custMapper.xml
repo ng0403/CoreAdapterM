@@ -2,22 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cust">
-	<select id="custList" resultType="com.core.plus.contact.cust.vo.CustVO">
+	<select id="custListTotalRow" resultType="int">
+		SELECT count(*)
+		FROM tb_cust
+		where del_yn = 'N'
+			<if test="cust_no !=null and cust_no !=''">
+				and(cust_no like concat('%', #{cust_no}, '%') )
+			</if> 
+	   		<if test="cust_name !=null and cust_name !=''">
+				and(cust_name like concat('%', #{cust_name}, '%') )
+			</if> 
+	   		<if test="visit_cd !=null and visit_cd !=''">
+				and(visit_cd like concat('%', #{visit_cd}, '%') )
+			</if> 
+	   		<if test="visit_dtl_cd !=null and visit_dtl_cd !=''">
+				and(visit_dtl_cd like concat('%', #{visit_dtl_cd}, '%') )
+			</if> 
+	   		<if test="rec_per !=null and rec_per !=''">
+				and(rec_per like concat('%', #{rec_per}, '%') )
+			</if> 
+	   		<if test="phone_no !=null and phone_no !=''">
+				and(c.phone_no like concat('%', #{phone_no}, '%') )
+			</if>
+	</select>
+
+	<select id="custList" resultType="com.core.plus.contact.cust.vo.CustVO" parameterType="java.util.Map">
+		SELECT P.*
+		FROM (
 		select
-		l.lead_no,
-		l.lead_name,
-		l.cust_no,
-	     case when (emp_name) is null then ' '
-		   	   else (emp_name) end as emp_name ,
-	     case when (cust_name) is null then ' '
-		   	   else (cust_name) end as cust_name ,  
-		p.phone_no,
-		l.contact_day,
-		l.rank_cd,
-		date_format(l.create_date, '%Y-%m-%d %H:%i') as create_date
-		from 
-		tb_lead l left join tb_cust c on l.cust_no = c.cust_no left join  tb_emp em on l.emp_no = em.emp_no left join tb_cust_phone p on l.cust_no = p.cust_no
-		where 1=1 and l.del_yn ='N'
+         a.cust_no
+            , date_format(a.create_date, '%Y-%m-%d %H:%i') as create_date
+         ,a.cust_name
+         ,case when(a.chart_no) is null then '' else (a.chart_no) end as chart_no
+         ,a.cust_id
+         ,a.visit_cd
+         ,a.visit_dtl_cd
+         ,a.visit_cn
+         ,case when(rec_per) is null then '' else (rec_per) end as rec_per
+         ,(select phone_area_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) as phone_area_no
+         ,(select phone_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) as phone_no
+         ,(select zip_no from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) as zip_no
+         ,case when (select main_address from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) is null then ''
+          else (select main_address from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) end as main_address
+      	from tb_cust a
+     	where a.del_yn = 'N'
 	   		<if test="cust_no !=null and cust_no !=''">
 				and(a.cust_no like concat('%', #{cust_no}, '%') )
 			</if> 
@@ -37,6 +65,8 @@
 				and(c.phone_no like concat('%', #{phone_no}, '%') )
 			</if> 
 		order by a.update_date desc
+		) P
+		LIMIT #{page.limitStartNum}, #{page.pageSize}
 	</select>
 	
 	<select id="custDetailList" resultType="com.core.plus.contact.cust.vo.CustVO" parameterType="String">
@@ -114,5 +144,5 @@
 			del_yn = 'N'
 		where cust_no = #{cust_no}
 	</update>
-
+	
 </mapper>

@@ -1,11 +1,13 @@
 package com.core.plus.contact.cust.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.dao.CustDAO;
 import com.core.plus.contact.cust.vo.CustVO;
 
@@ -15,9 +17,9 @@ public class CustServiceImpl implements CustService{
 	CustDAO custDao;
 
 	@Override
-	public List<CustVO> custList() {
+	public List<CustVO> custList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		List<CustVO> custList = custDao.custList();
+		List<CustVO> custList = custDao.custList(map);
 		
 		return custList;
 	}
@@ -41,6 +43,19 @@ public class CustServiceImpl implements CustService{
 		// TODO Auto-generated method stub
 		int result = custDao.custMdfy(cvo);
 		return result;
+	}
+
+	@Override
+	public PagerVO getCustListRow(Map<String, Object> custMap) {
+		// TODO Auto-generated method stub
+		int optyPageNum = (Integer)custMap.get("custPageNum");
+		PagerVO page = new PagerVO(optyPageNum, 0, 10, 10);
+		
+		int totalRowCount = custDao.getCustListRow(custMap);
+		
+		page = new PagerVO(optyPageNum, totalRowCount, 10, 10);
+		
+		return page;
 	}
 
 }

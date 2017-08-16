@@ -1,5 +1,6 @@
 package com.core.plus.contact.cust.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.service.CommonCodeService;
 import com.core.plus.contact.cust.service.CustAddrService;
 import com.core.plus.contact.cust.service.CustPhoneService;
@@ -41,14 +43,25 @@ public class CustController {
 	MenuService menuService;
 	
 	@RequestMapping(value="/cust")
-	public ModelAndView custList(){
-		List<CustVO> custList = custService.custList();
-						 
+	public ModelAndView custList(@RequestParam(value = "custPageNum", defaultValue = "1") int custPageNum){
+		Map<String, Object> custMap = new HashMap<String, Object>();
+		custMap.put("custPageNum", custPageNum);
+		
+		// paging
+		PagerVO page = custService.getCustListRow(custMap);
+		System.out.println("cust page : " + page);
+		custMap.put("page", page);
+		
+		List<CustVO> custList = custService.custList(custMap);
+
 		List<CommonCodeVO> vititCdList = commonCode.vititCdList();
 		List<CommonCodeVO> vititDtlCdList = commonCode.vititDtlCdList();
 		
 		ModelAndView mav = new ModelAndView();
+		
 		mav.setViewName("cust_list");
+		mav.addObject("page", page);
+		mav.addObject("pageNum", custPageNum);
 		mav.addObject("custList", custList);
 		mav.addObject("vititCdList", vititCdList);
 		mav.addObject("vititDtlCdList", vititDtlCdList);
@@ -64,13 +77,25 @@ public class CustController {
 	
 	@RequestMapping(value="/custAjax")
 	@ResponseBody
-	public Map<String, Object> custListAjax(){
+	public Map<String, Object> custListAjax(@RequestParam(value = "custPageNum", defaultValue = "1") int custPageNum){
 		Map<String, Object> result = new HashMap<String, Object>(0);
-		List<CustVO> custList = custService.custList();
+		Map<String, Object> custMap = new HashMap<String, Object>();
+		custMap.put("custPageNum", custPageNum);
+
+		// paging
+		PagerVO page = custService.getCustListRow(custMap);
+		custMap.put("page", page);
+				
+		List<CustVO> custList = custService.custList(custMap);
 		
 		List<CommonCodeVO> vititCdList = commonCode.vititCdList();
 		List<CommonCodeVO> vititDtlCdList = commonCode.vititDtlCdList();
 		
+		System.out.println("cust page : " + page);
+		System.out.println("custList : " + custList);
+		
+		result.put("page", page);
+		result.put("pageNum", custPageNum);
 		result.put("custList", custList);
 		result.put("vititCdList", vititCdList);
 		result.put("vititDtlCdList", vititDtlCdList);
@@ -115,6 +140,7 @@ public class CustController {
 		mav.addObject("phoneCountryCdList", phoneCountryCdList);
 		mav.addObject("addrTypeCdList", addrTypeCdList);
 		
+		menuImport(mav, "cust");
 		
 		return mav;
 	}
@@ -166,28 +192,38 @@ public class CustController {
 		return custVO;
 	}
 	
-	@RequestMapping(value="/custPhoneSave")
+	@RequestMapping(value="/custPhoneSave", method=RequestMethod.POST)
 	@ResponseBody
 	public List<CustVO> custPhoneSave(
-			@RequestParam(value="custP_list[]",required=false) List<String> custP_list
+			@RequestParam(value="custPlist[]",required=false) List<String> custP_list
 			,String cust_no){
 		
+		System.out.println("cust_no : " + cust_no);
+		System.out.println("custP_list : " + custP_list);
+		
 		int Dresult = custPhoneService.custPhoneDelete(cust_no);
+		
 		//파라미터 리스트
-		List<CustVO> custPH_list = null;
+		List<CustVO> custPH_list = new ArrayList<CustVO>();
 		//반환 리스트
 		List<CustVO> custPList;
+
+		System.out.println(custP_list.size());
+		
 		if(custP_list != null){
 			for(int i=0; i < custP_list.size(); i++){
 				CustVO cvo = new CustVO();
+				
 				cvo.setCust_no(cust_no);
-				cvo.setPhone_type_cd(custP_list.get(++i));
+				cvo.setPhone_type_cd(custP_list.get(i));
 				cvo.setPhone_country_cd(custP_list.get(++i));
 				cvo.setPhone_area_no(custP_list.get(++i));
 				cvo.setPhone_no(custP_list.get(++i));
 				cvo.setPrimary_yn(custP_list.get(++i));
+
 				custPH_list.add(cvo);
 			}
+			
 			int Iresult = custPhoneService.custPhoneAdd(custPH_list);
 		}
 		custPList = custPhoneService.custPhoneDetailList(cust_no);
@@ -198,30 +234,37 @@ public class CustController {
 	@RequestMapping(value="/custAddrSave")
 	@ResponseBody
 	public List<CustVO> custAddrSave(
-			@RequestParam(value="custA_list[]",required=false) List<String> custA_list
+			@RequestParam(value="custAlist[]",required=false) List<String> custA_list
 			,String cust_no){
+		
+		System.out.println("custA_list : " + custA_list);
+		
 		int Dresult = custAddrService.custAddrDelete(cust_no);
+		
 		//파라미터 리스트
-		List<CustVO> custAD_list = null;
+		List<CustVO> custAD_list = new ArrayList<CustVO>();
 		//반환 리스트
 		List<CustVO> custAList;
 		
 		if(custA_list != null){
 			for(int i=0; i < custA_list.size(); i++){
 				CustVO cvo = new CustVO();
-				cvo.setCust_no(custA_list.get(i));
-				cvo.setAddr_type_cd(custA_list.get(++i));
-				cvo.setRoad_yn(custA_list.get(++i));
+				
+				cvo.setCust_no(cust_no);
+				cvo.setAddr_type_cd(custA_list.get(i));
 				cvo.setZip_no(custA_list.get(++i));
 				cvo.setMain_address(custA_list.get(++i));
 				cvo.setDetail_address(custA_list.get(++i));
 				cvo.setPrimary_yn(custA_list.get(++i));
+				
 				custAD_list.add(cvo);
 			}
+			
 			int result = custAddrService.custAddrAdd(custAD_list);
 		}
 		
 		custAList = custAddrService.custAddrDetailList(cust_no);
+		
 		return custAList;
 	}
 

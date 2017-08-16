@@ -1,6 +1,7 @@
 package com.core.plus.contact.cust.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,9 @@ public class CustDAOImpl implements CustDAO{
 	private SqlSession sqlSession;
 
 	@Override
-	public List<CustVO> custList() {
+	public List<CustVO> custList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		List<CustVO> custList = sqlSession.selectList("cust.custList");
+		List<CustVO> custList = sqlSession.selectList("cust.custList", map);
 		
 		return custList;
 	}
@@ -41,6 +42,22 @@ public class CustDAOImpl implements CustDAO{
 		// TODO Auto-generated method stub
 		int result = sqlSession.update("cust.custUpdate", cvo);
 		return result;
+	}
+
+	@Override
+	public int getCustListRow(Map<String, Object> custMap) {
+		// TODO Auto-generated method stub
+		int totalCount = 0;
+		
+		try {
+			totalCount = sqlSession.selectOne("cust.custListTotalRow", custMap);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return totalCount;
 	}
 
 }

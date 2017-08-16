@@ -64,7 +64,7 @@ function opptySchList(opptyPageNum)
 	 				"<a onclick=opptyDetail('"+data.srcList[i].oppty_no+"'); id='"+data.srcList[i].oppty_no+"'>" + data.srcList[i].oppty_name+"</a></td>" +
 	 			"<td style='text-align: left;'>" + data.srcList[i].cust_no +"</td>" +
 	 			"<td style='text-align: left;'>" + data.srcList[i].cust_name +"</td>" +
-	 			"<td style='text-align: left;'>" + data.srcList[i].phone_no + "</td>" +
+	 			"<td style='text-align: left;'>" + data.srcList[i].cust_phone + "</td>" +
 	 			"<td style='text-align: left;'>" + data.srcList[i].emp_name + "</td>" +
 	 			"<td style='text-align: left;'>" + data.srcList[i].oppty_status_cd + "</td>" +
 	 			"<td style='text-align: left;'>" + data.srcList[i].oppty_stage_cd + "</td>" +
