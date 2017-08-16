@@ -82,22 +82,22 @@
 		WHERE
 			t.del_yn = 'N'
 			<if test="task_no_srch != null and task_no_srch != ''">
-				AND (task_no like concat('%', #{task_no_srch}, '%'))
+				AND (t.task_no like concat('%', #{task_no_srch}, '%'))
 			</if>
 			<if test="subject_srch != null and subject_srch != ''">
-				AND (subject like concat('%', #{subject_srch}, '%'))
+				AND (t.subject like concat('%', #{subject_srch}, '%'))
 			</if>
 			<if test="cust_name_srch != null and cust_name_srch != ''">
-				AND (cust_no in ( select cust_no from tb_cust where cust_name like concat('%', #{cust_name_srch}, '%')))
+				AND (t.cust_no in ( select cust_no from tb_cust where cust_name like concat('%', #{cust_name_srch}, '%')))
 			</if>
 			<if test="emp_name_srch != null and emp_name_srch != ''">
-				AND (emp_no like ( select emp_no from tb_emp where emp_name like concat('%', #{emp_name_srch_srch}, '%')))
+				AND (t.emp_no like ( select emp_no from tb_emp where emp_name like concat('%', #{emp_name_srch_srch}, '%')))
 			</if>
 			<if test="next_day_srch != null and next_day_srch != ''">
-				AND (next_day like concat('%', #{next_day_srch}, '%'))
+				AND (t.next_day like concat('%', DATE_FORMAT(#{next_day_srch}, '%Y%m%d'), '%'))
 			</if>
 			<if test="dtype_cd_srch != null and dtype_cd_srch != ''">
-				AND (dtype_cd like concat('%', #{dtype_cd_srch}, '%'))
+				AND (t.dtype_cd like concat('%', #{dtype_cd_srch}, '%'))
 			</if>
 			order by t.create_date desc
 	</select>
