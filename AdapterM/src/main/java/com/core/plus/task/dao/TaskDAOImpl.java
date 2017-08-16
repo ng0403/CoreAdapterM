@@ -96,7 +96,7 @@ public class TaskDAOImpl implements TaskDAO {
 		
 		return totalCount;
 	}
-
+	
 	@Override
 	public List<CustVO> custPopupList() {
 		List<CustVO> custPopList = sqlSession.selectList("task.custPopupList");
@@ -112,7 +112,6 @@ public class TaskDAOImpl implements TaskDAO {
 	@Override
 	public int getEmpPopupRow(Map<String, Object> map) {
 		int totalCount = 0;
-		
 		try {
 			totalCount = sqlSession.selectOne("task.empPopupRow", map);
 			
@@ -184,7 +183,6 @@ public class TaskDAOImpl implements TaskDAO {
 		List<OpptyVO> opptyPopupList = sqlSession.selectList("task.opptyPopupList", map);
 		return opptyPopupList;
 	}
-
 	
 
 }

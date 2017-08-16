@@ -54,7 +54,17 @@ public class TaskController {
 	
 	// List
 	@RequestMapping(value="/task")
-	public ModelAndView TaskList() {
+	public ModelAndView TaskList(HttpSession session,
+			@RequestParam(value = "taskPageNum", defaultValue = "1") int taskPageNum) {
+		
+		Map<String, Object> taskMap = new HashMap<String, Object>();
+		taskMap.put("taskPageNum", taskPageNum);
+		
+		// paging
+		PagerVO page = taskService.getTaskListRow(taskMap);
+		
+		System.out.println("page : " + page);
+		taskMap.put("page", page);
 		
 		List<TaskVO> taskList = taskService.taskList();				// 전체 리스트
 		List<TaskVO> dtypeCd  = taskService.taskDtypeCD();			// 분류코드
@@ -62,6 +72,8 @@ public class TaskController {
 		
 		ModelAndView mov = new ModelAndView("task_list");
 		
+		mov.addObject("page", page);
+		mov.addObject("taskPageNum", taskPageNum);
 		mov.addObject("taskList", taskList);
 		mov.addObject("dtypeCd", dtypeCd);
 		mov.addObject("scoreCd", scoreCd);
@@ -90,9 +102,9 @@ public class TaskController {
 		taskMap.put("dtype_cd_srch", dtype_cd_srch);
 		
 		// paging
-		//PagerVO page = taskService.getTaskListRow(taskMap);
-		//taskMap.put("page", page);
-		//System.out.println("page : " + page);
+		PagerVO page = taskService.getTaskListRow(taskMap);
+		taskMap.put("page", page);
+		System.out.println("page : " + page);
 				
 		List<TaskVO> srcList = taskService.taskSchList(taskMap);
 		
@@ -189,7 +201,7 @@ public class TaskController {
 		map.put("custPopupPageNum", custPopupPageNum);
 		
 		// paging
-		PagerVO page = taskService.getCustPopupRow(map);
+		PagerVO page = taskService.getTaskPopupRow(map);
 		
 		// 고객리스트 불러오는 서비스/다오/맵퍼 작성
 		if(s_cust_name == null || s_cust_name == "")

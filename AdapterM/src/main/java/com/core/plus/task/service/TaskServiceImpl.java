@@ -76,7 +76,7 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public PagerVO getCustPopupRow(Map<String, Object> map) {
+	public PagerVO getTaskPopupRow(Map<String, Object> map) {
 		int custPageNum = (Integer)map.get("custPopupPageNum");
 		PagerVO page = new PagerVO(custPageNum, 0, 10, 10);
 		
@@ -161,6 +161,19 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public List<OpptyVO> opptyPopupList(Map<String, Object> map) {
 		return taskDao.opptyPopupList(map);
+	}
+
+	//페이징
+	@Override
+	public PagerVO getTaskListRow(Map<String, Object> map) {
+		int taskPageNum = (Integer)map.get("taskPageNum");
+		PagerVO page = new PagerVO(taskPageNum, 0, 10, 10);
+		
+		int totalRowCount = taskDao.getTaskListRow(map);
+		
+		page = new PagerVO(taskPageNum, totalRowCount, 10, 10);
+		
+		return page;
 	}
 
 	

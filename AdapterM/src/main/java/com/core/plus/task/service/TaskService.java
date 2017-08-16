@@ -11,7 +11,8 @@ import com.core.plus.oppty.vo.OpptyVO;
 import com.core.plus.task.vo.TaskVO;
 
 public interface TaskService {
-
+	
+	PagerVO getTaskListRow(Map<String, Object> map);					// 페이징
 	List<TaskVO> taskList();											// List화면
 	List<TaskVO> taskDtypeCD();											// 분류코드
 	List<TaskVO> taskScoreCD();											// 상대가치점수
@@ -22,7 +23,7 @@ public interface TaskService {
 	int taskEdit(TaskVO taskVo);										// 수정
 	int taskDelete(TaskVO taskVo);										// 삭제
 	
-	PagerVO getCustPopupRow(Map<String, Object> map);					// 고객 팝업 페이지
+	PagerVO getTaskPopupRow(Map<String, Object> map);					// 고객 팝업 페이지
 	List<CustVO> custPopupList();										// 고객 리스트
 	List<CustVO> custPopupList(Map<String, Object> map);				// 고객 리스트
 	
