@@ -18,7 +18,7 @@
 
 <input type="hidden" id="ctx" value="${ctx}">
 <input type="hidden" id="flg" value="${flg}">
-
+  
 <!-- task : task조회 -->
 <div id="cupnManager">
 	<div style="height:10px;"></div>
