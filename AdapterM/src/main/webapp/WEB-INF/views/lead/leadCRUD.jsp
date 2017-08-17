@@ -107,7 +107,7 @@ $(document).ready(function(){
 	 	 <div id="lead_detail_div">
 	 	 	<input type="button" class="func_btn" id="lead_update" value="편집" onclick="lead_modify();">
 	 	 	<input type="button" class="tr_btn" id="lead_delete" value="삭제" onclick="lead_remove();">
-	 	 	<input type="button" class="func_btn" id="lead_single_cancel" value="취소" onclick="lead_cancel();">
+	 	 	<input type="button" class="func_btn" id="lead_single_cancel" value="조회" onclick="lead_cancel();">
 	 	 </div> 
 	 </c:if>
 	
@@ -119,8 +119,8 @@ $(document).ready(function(){
 	 </c:if>
 	  
 	 	  <div id="lead_update_div">
+	 	 	<input type="button" class="func_btn" id="lead_single_cancel" value="조회" onclick="lead_cancel();">
 	 	 	<input type="button" class="tr_btn" id="lead_single_add" value="수정" onclick="lead_modify_save();">
-	 	 	<input type="button" class="func_btn" id="lead_single_cancel" value="취소" onclick="lead_cancel();">
 	 	 </div> 
  
     </div>
