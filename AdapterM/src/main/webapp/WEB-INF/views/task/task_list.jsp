@@ -36,7 +36,7 @@
 <%-- 			<input type="hidden" name="active_flg_srch" value="${cupnListMap.active_flg_srch}"> --%>
 <%-- 			<input type="hidden" name="brand_wid" value="${cupnListMap.brand_wid}"> --%>
 		</form>
-	    <form name="couponListForm" id="couponListForm" method="post" action="${ctx}/task" >
+	    <form name="taskListForm" id="taskListForm" method="post" action="${ctx}/task" >
 		 	<div id="searchDiv">
 	        	<table id="cupnSearchTable" class="commonTable">
 					<tr style="background-color: white; cursor:default; border:0;">
@@ -91,7 +91,7 @@
 				</table>
 			</div>
 		</form>
-	 	 <table class="commonTable" id="cupnManagerTabl">
+	 	 <table class="commonTable" id="taskManagerTabl">
 	 	 	<thead>
 	 	 		<tr>
  	 	 			<th style="width: 10%;">task번호</th> 
@@ -142,7 +142,7 @@
 				<c:when test="${taskPageNum == page.startPageNum}">
 					 ◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="taskPageNumInputEnter(event);"/>  
 					<a style="cursor: pointer;" onclick="taskSchList('${page.endPageNum}');" id="pNum" > / ${page.endPageNum}</a>
-					<a style="cursor: pointer;" onclick="taskySchList('${opptyPageNum+1}');" id="pNum"> ▶ </a>
+					<a style="cursor: pointer;" onclick="taskSchList('${opptyPageNum+1}');" id="pNum"> ▶ </a>
 				</c:when>
 				<c:when test="${taskPageNum == page.endPageNum}">
 					<a style="cursor: pointer;" onclick="taskSchList('${taskPageNum-1}');" id="pNum"> ◀ </a>
