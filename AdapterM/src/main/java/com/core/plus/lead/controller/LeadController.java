@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
+import com.core.plus.info.menu.service.MenuService;
+import com.core.plus.info.menu.vo.MenuVo;
 import com.core.plus.lead.service.LeadService;
 import com.core.plus.lead.vo.LeadVO;
 
@@ -24,6 +26,26 @@ public class LeadController {
 	
 	@Resource
 	LeadService leadService;
+	
+	@Resource
+	MenuService menuService;
+	
+	public void menuImport(ModelAndView mav, String url){
+		String menu_id = menuService.getMenuUrlID(url);
+//		String user_id = session.getAttribute("user").toString();
+	
+		Map<String, String> menuAuthMap = new HashMap<String, String>();
+		menuAuthMap.put("menu_url", url);
+//		menuAuthMap.put("user_id", user_id);
+		menuAuthMap.put("menu_id", menu_id);
+//		MenuVo menuAuth = loginDao.getMenuAuthInfo(menuAuthMap);
+//		mav.addObject("menuAuth", menuAuth);
+			
+		List<MenuVo> mainMenuList = menuService.getMainMenuList(/*user_id*/);
+		List<MenuVo> subMenuList = menuService.getSubMenuList(menuAuthMap);
+		mav.addObject("mainMenuList", mainMenuList);  //mainMenuList
+		mav.addObject("subMenuList", subMenuList);    //subMenuList
+	}
 	
 	
 	//초기 list 출력
@@ -46,6 +68,8 @@ public class LeadController {
 		mov.addObject("page", page);
 		mov.addObject("lead_list", vo);
 		
+		menuImport(mov, "lead");
+		
 		System.out.println("mov ?  " + mov.toString());
 		return mov;
 		
@@ -60,6 +84,8 @@ public class LeadController {
 		mov.addObject("nal","2017-08-09");
 		mov.addObject("flg", "0");
 		System.out.println(mov.toString());
+		
+		menuImport(mov, "lead");
 		return mov;
 	}
 	
