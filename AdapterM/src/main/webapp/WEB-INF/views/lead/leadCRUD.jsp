@@ -106,20 +106,20 @@ $(document).ready(function(){
 	<c:if test="${flg == 0 }">
 	 	 <div id="lead_detail_div">
 	 	 	<input type="button" class="func_btn" id="lead_update" value="편집" onclick="lead_modify();">
-	 	 	<input type="button" class="func_btn" id="lead_delete" value="삭제" onclick="lead_remove();">
+	 	 	<input type="button" class="tr_btn" id="lead_delete" value="삭제" onclick="lead_remove();">
 	 	 	<input type="button" class="func_btn" id="lead_single_cancel" value="취소" onclick="lead_cancel();">
 	 	 </div> 
 	 </c:if>
 	
 	<c:if test="${flg == 1 }">
 	 	 <div id="lead_single_add_div">
-	 	 	<input type="button" class="func_btn" id="lead_single_add" value="저장" onclick="lead_single_save();">
-	 	 	<input type="button" class="func_btn" id="lead_single_cancel" value="취소" onclick="lead_cancel();">
+	 	 	<input type="button" class="func_btn" id="lead_single_cancel" value="조회" onclick="lead_cancel();">
+	 	 	<input type="button" class="tr_btn" id="lead_single_add" value="저장" onclick="lead_single_save();">
 	 	 </div> 
 	 </c:if>
 	  
 	 	  <div id="lead_update_div">
-	 	 	<input type="button" class="func_btn" id="lead_single_add" value="수정" onclick="lead_modify_save();">
+	 	 	<input type="button" class="tr_btn" id="lead_single_add" value="수정" onclick="lead_modify_save();">
 	 	 	<input type="button" class="func_btn" id="lead_single_cancel" value="취소" onclick="lead_cancel();">
 	 	 </div> 
  
