@@ -16,6 +16,11 @@
 
 $(document).ready(function(){
 	$('#exp_close_day').datepicker();
+// 	.keyup(function(e) {
+//         if(e.keyCode == 8 || e.keyCode == 46) {
+//         	$.datepicker._clearDate(this);
+//         }
+//     });
 });
 
  

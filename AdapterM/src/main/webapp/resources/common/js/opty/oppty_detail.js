@@ -292,8 +292,58 @@ function opptySingleAdd()
 {
 	$(document).ready(function() {
 		
-		console.log($("#sorce").val());
-		
+		if($("#oppty_name").val == null || $("#oppty_name").val() == "")
+		{
+			alert("기회명을 입력하세요.");
+			return false;
+		}
+		if($("#cust_name").val() == null || $("#cust_name").val() == "")
+		{
+			alert("고객을 선택하세요.");
+			return false;
+		}
+		if($("#emp_name").val() == null || $("#emp_name").val() == "")
+		{
+			alert("담당자를 선택하세요.");
+			return false;
+		}
+		if($("#oppty_status_cd_sel").val() == null || $("#oppty_status_cd_sel").val() == "")
+		{
+			alert("기회상태를 선택하세요.");
+			return false;
+		}
+		if($("#oppty_stage_cd_sel").val() == null || $("#oppty_stage_cd_sel").val() == "")
+		{
+			alert("기회단계를 선택하세요.");
+			return false;
+		}
+		if($("#dtype_cd_sel").val() == null || $("#dtype_cd_sel").val() == "")
+		{
+			alert("분류를 선택하세요.");
+			return false;
+		}
+		if($("#purchase_type_sel").val() == null || $("#purchase_type_sel").val() == "")
+		{
+			alert("구매형태를 선택하세요.");
+			return false;
+		}
+		if($("#payment_cd_sel").val() == null || $("#payment_cd_sel").val() == "")
+		{
+			alert("결재처를 선택하세요.");
+			return false;
+		}
+		if($("#rec_per_cd_sel").val() == null || $("#rec_per_cd_sel").val() == "")
+		{
+			alert("소개자를 선택하세요.");
+			return false;
+		}
+		if($("#exp_close_day").val() == "" || $("#exp_close_day").val() == null)
+		{
+			var now = new Date();
+			var date = now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate();
+			
+			$("#exp_close_day").val(date);
+		}
 		if($("#score").val() == 0 || $("#score").val() == null || $("#score").val() == "")
 		{
 			$("#score").val(0);
