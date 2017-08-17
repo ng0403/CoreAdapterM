@@ -94,7 +94,7 @@ function opptySchList(opptyPageNum)
 			} else if(data.opptyPageNum == data.page.endPageNum){
 				pageContent = "<input type='hidden' id='opptyPageNum' value='"+data.opptyPageNum+"'/><input type='hidden' id='opptyEndPageNum' value='"+data.page.endPageNum+"'/>"
 				+"<a onclick=\"opptySchList("+(data.opptyPageNum-1)+");\" id='pNum' style='cursor: pointer;'> ◀ </a>"
-				+"<input type='text' id='pageInput' value='"+data.page.endPageNum+"' onkeypress=\"custPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
+				+"<input type='text' id='pageInput' value='"+data.page.endPageNum+"' onkeypress=\"opptyPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
 				+"<a> / "+data.page.endPageNum+"</a> ▶";
 			} else {
 				pageContent = "<input type='hidden' id='opptyPageNum' value='"+data.opptyPageNum+"'/><input type='hidden' id='opptyEndPageNum' value='"+data.page.endPageNum+"'/>"

@@ -39,8 +39,10 @@
          ,a.visit_dtl_cd
          ,a.visit_cn
          ,case when(rec_per) is null then '' else (rec_per) end as rec_per
-         ,(select phone_area_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) as phone_area_no
-         ,(select phone_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) as phone_no
+         ,case when (select phone_area_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) is null then ''
+          else (select phone_area_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) end as phone_area_no
+         ,case when (select phone_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) is null then ''
+          else (select phone_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) end as phone_no
          ,(select zip_no from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) as zip_no
          ,case when (select main_address from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) is null then ''
           else (select main_address from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) end as main_address
