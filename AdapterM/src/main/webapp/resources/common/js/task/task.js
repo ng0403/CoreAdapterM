@@ -25,8 +25,6 @@ function taskSchList(taskPageNum) {
 	var tbody = $('#task_list_tbody');
 	var tbodyContent = "";
 	
-	console.log(taskPageNum);
-	
 	$.ajax({
 		url:ctx + '/task_sch',
 		type: 'POST',
@@ -67,8 +65,6 @@ function taskSchList(taskPageNum) {
 			$(".pagingDiv").empty();
 			var pageContent = "";
 
-			console.log(data);
-			
 			if(data.page.endPageNum == 0 || data.page.endPageNum == 1){
 				pageContent = "◀ <input type='text' id='pageInput' readonly='readonly' value='1' style='width: 25px; text-align: center;'/> / 1 ▶";
 			} else if(data.opptyPageNum == data.page.startPageNum){
@@ -89,7 +85,6 @@ function taskSchList(taskPageNum) {
 				+"<a onclick=\"taskSchList("+(data.taskPageNum+1)+");\" id='pNum' style='cursor: pointer;'> ▶ </a>";
 			}
 			$(".pagingDiv").append(pageContent);
-			
 		},
 		error: function(){
 			alert("error");
