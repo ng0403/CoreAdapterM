@@ -83,11 +83,11 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public PagerVO getTaskPopupRow(Map<String, Object> map) {
+		
 		int custPageNum = (Integer)map.get("custPopupPageNum");
 		PagerVO page = new PagerVO(custPageNum, 0, 10, 10);
 		
 		int totalRowCount = taskDao.getTaskListRow(map);
-		
 		page = new PagerVO(custPageNum, totalRowCount, 10, 10);
 		
 		return page;
@@ -105,11 +105,11 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public PagerVO getEmpPopupRow(Map<String, Object> map) {
+		
 		int empPageNum = (Integer)map.get("empPopupPageNum");
 		PagerVO page = new PagerVO(empPageNum, 0, 10, 10);
 		
 		int totalRowCount = taskDao.getEmpPopupRow(map);
-		
 		page = new PagerVO(empPageNum, totalRowCount, 10, 10);
 		
 		return page;
@@ -127,11 +127,11 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public PagerVO getLeadPopupRow(Map<String, Object> map) {
+		
 		int leadPageNum = (Integer)map.get("leadPopupPageNum");
 		PagerVO page = new PagerVO(leadPageNum, 0, 10, 10);
 		
 		int totalRowCount = taskDao.getLeadPopupRow(map);
-		
 		page = new PagerVO(leadPageNum, totalRowCount, 10, 10);
 		
 		return page;
@@ -149,11 +149,11 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public PagerVO getOpptyPopupRow(Map<String, Object> map) {
+		
 		int opptyPageNum = (Integer)map.get("opptyPopupPageNum");
 		PagerVO page = new PagerVO(opptyPageNum, 0, 10, 10);
 		
 		int totalRowCount = taskDao.getOpptyPopupRow(map);
-		
 		page = new PagerVO(opptyPageNum, totalRowCount, 10, 10);
 		
 		return page;
@@ -177,7 +177,6 @@ public class TaskServiceImpl implements TaskService {
 		PagerVO page = new PagerVO(taskPageNum, 0, 10, 10);
 		
 		int totalRowCount = taskDao.getTaskListRow(map);
-		
 		page = new PagerVO(taskPageNum, totalRowCount, 10, 10);
 		
 		return page;

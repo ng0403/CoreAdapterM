@@ -55,15 +55,13 @@ public class TaskController {
 	// List
 	@RequestMapping(value="/task")
 	public ModelAndView TaskList(HttpSession session,
-			@RequestParam(value = "taskPageNum", defaultValue = "1") int taskPageNum) {
+									@RequestParam(value = "taskPageNum", defaultValue = "1") int taskPageNum) {
 		
 		Map<String, Object> taskMap = new HashMap<String, Object>();
 		taskMap.put("taskPageNum", taskPageNum);
 		
 		// paging
 		PagerVO page = taskService.getTaskListRow(taskMap);
-		
-		System.out.println("page : " + page);
 		taskMap.put("page", page);
 		
 		List<TaskVO> taskList = taskService.taskList(taskMap);		// 전체 리스트
@@ -93,8 +91,6 @@ public class TaskController {
 	{
 		Map<String, Object> taskMap = new HashMap<String, Object>();
 		
-		System.out.println("page num : " + taskPageNum);
-		
 		taskMap.put("taskPageNum", taskPageNum);
 		taskMap.put("task_no_srch", task_no_srch);
 		taskMap.put("subject_srch", subject_srch);
@@ -105,12 +101,9 @@ public class TaskController {
 		
 		// paging
 		PagerVO page = taskService.getTaskListRow(taskMap);
-		
 		taskMap.put("page", page);
-		System.out.println("page : " + page);
 				
 		List<TaskVO> srcList = taskService.taskSchList(taskMap);
-		
 		taskMap.put("srcList", srcList);
 		
 		return taskMap;
@@ -118,10 +111,8 @@ public class TaskController {
 	
 	// 상세보기 및 단건등록화면
 	@RequestMapping(value="task_detail")
-	public ModelAndView taskDetail(String task_no, String flg)
-	{
-		System.out.println(task_no);
-	
+	public ModelAndView taskDetail(String task_no, String flg) {
+
 		if(task_no == null || task_no == "")	// 단건등록 시
 		{
 			TaskVO taskNoIndex	 = taskService.taskNoIndex();			// 인덱스번호
@@ -141,15 +132,12 @@ public class TaskController {
 		}
 		else	// 상세보기	
 		{
-			//List<OpptyItemVO> itemList 	= taskService.opptyItemList(task_no);
 			List<TaskVO> dtypeCd  = taskService.taskDtypeCD();			// 분류코드
 			List<TaskVO> scoreCd  = taskService.taskScoreCD();			// 상대가치점수
 			
-			//System.out.println("itemList : " + itemList);
 			ModelAndView mov = new ModelAndView("task_detail");
 
 			mov.addObject("taskDetail",  taskService.taskDetail(task_no));
-			//mov.addObject("itemList", itemList);
 			mov.addObject("dtypeCd", dtypeCd);
 			mov.addObject("scoreCd", scoreCd);
 			mov.addObject("flg", "2");
@@ -162,8 +150,7 @@ public class TaskController {
 	
 	/* CUD */
 	@RequestMapping(value="task_single_add", method=RequestMethod.POST)
-	public @ResponseBody int taskSingleInsert(TaskVO taskVo, HttpSession session, HttpServletRequest request)
-	{
+	public @ResponseBody int taskSingleInsert(TaskVO taskVo, HttpSession session, HttpServletRequest request) {
 		int result = 0;
 		result = taskService.taskInsert(taskVo);
 		
@@ -172,23 +159,20 @@ public class TaskController {
 	
 	// 수정
 	@RequestMapping(value="task_edit", method=RequestMethod.POST)
-	public @ResponseBody int taskEdit(TaskVO taskVo, HttpSession session)
-	{
+	public @ResponseBody int taskEdit(TaskVO taskVo, HttpSession session) {
+		
 		int result = 0;
 		int flg=2;
-		System.out.println("task_edit : " + taskVo);
 		
 		result = taskService.taskEdit(taskVo);
-		
-		System.out.println("edit : " + result);
-		
+
 		return result;
 	}
 	
 	// 삭제
 	@RequestMapping(value="task_delete", method=RequestMethod.POST)
-	public @ResponseBody int taskDelete(TaskVO taskVo, HttpSession session)
-	{
+	public @ResponseBody int taskDelete(TaskVO taskVo, HttpSession session) {
+		
 		int result = 0;
 		
 		result = taskService.taskDelete(taskVo);
@@ -198,8 +182,9 @@ public class TaskController {
 	
 	/* Popup*/
 	@RequestMapping(value="taskCustListAjax", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> taskCustListPopup(@RequestParam(value = "custPopupPageNum", defaultValue = "1") int custPopupPageNum, String s_cust_name)
-	{
+	public @ResponseBody Map<String, Object> taskCustListPopup(@RequestParam(value = "custPopupPageNum", defaultValue = "1") 
+																int custPopupPageNum, String s_cust_name) {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("custPopupPageNum", custPopupPageNum);
 		
@@ -207,19 +192,20 @@ public class TaskController {
 		PagerVO page = taskService.getTaskPopupRow(map);
 		
 		// 고객리스트 불러오는 서비스/다오/맵퍼 작성
-		if(s_cust_name == null || s_cust_name == "")
-		{
+		if(s_cust_name == null || s_cust_name == "") {
 			List<CustVO> custPopupList = taskService.custPopupList();
 			map.put("custPopupList", custPopupList);
 			map.put("page", page);
 			map.put("pageNum", custPopupPageNum);
 			
 			return map;
-		}
-		else
-		{
+			
+		} else {
+			
 			map.put("s_cust_name", s_cust_name);
+			
 			List<CustVO> schCustPopupList = taskService.custPopupList(map);
+			
 			map.put("custPopupList", schCustPopupList);
 			map.put("page", page);
 			map.put("pageNum", custPopupPageNum);
@@ -229,8 +215,8 @@ public class TaskController {
 	}
 	
 	@RequestMapping(value="taskEmpListAjax", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> taskEmpListPopup(@RequestParam(value = "empPopupPageNum", defaultValue = "1") int empPopupPageNum, String s_emp_name)
-	{
+	public @ResponseBody Map<String, Object> taskEmpListPopup(@RequestParam(value = "empPopupPageNum", defaultValue = "1") 
+																int empPopupPageNum, String s_emp_name) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("empPopupPageNum", empPopupPageNum);
 		
@@ -238,19 +224,22 @@ public class TaskController {
 		PagerVO page = taskService.getEmpPopupRow(map);
 		
 		// 담당자리스트 불러오는 서비스/다오/맵퍼 작성
-		if(s_emp_name == null || s_emp_name == "")
-		{
+		if(s_emp_name == null || s_emp_name == "") {
+			
 			List<EmpVO> empPopupList = taskService.empPopupList();
+			
 			map.put("empPopupList", empPopupList);
 			map.put("page", page);
 			map.put("pageNum", empPopupPageNum);
 			
 			return map;
-		}
-		else
-		{
+			
+		} else {
+			
 			map.put("s_emp_name", s_emp_name);
+			
 			List<EmpVO> schEmpPopupList = taskService.empPopupList(map);
+			
 			map.put("empPopupList", schEmpPopupList);
 			map.put("page", page);
 			map.put("pageNum", empPopupPageNum);
@@ -261,8 +250,9 @@ public class TaskController {
 	
 	
 	@RequestMapping(value="taskLeadListAjax", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> taskLeadListPopup(@RequestParam(value = "leadPopupPageNum", defaultValue = "1") int leadPopupPageNum, String s_lead_name)
-	{
+	public @ResponseBody Map<String, Object> taskLeadListPopup(@RequestParam(value = "leadPopupPageNum", defaultValue = "1") 
+																int leadPopupPageNum, String s_lead_name) {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("leadPopupPageNum", leadPopupPageNum);
 		
@@ -270,19 +260,22 @@ public class TaskController {
 		PagerVO page = taskService.getLeadPopupRow(map);
 		
 		// 가망고객리스트 불러오는 서비스/다오/맵퍼 작성
-		if(s_lead_name == null || s_lead_name == "")
-		{
+		if(s_lead_name == null || s_lead_name == ""){
+			
 			List<LeadVO> leadPopupList = taskService.leadPopupList();
+			
 			map.put("leadPopupList", leadPopupList);
 			map.put("page", page);
 			map.put("pageNum", leadPopupPageNum);
 			
 			return map;
-		}
-		else
-		{
+			
+		} else {
+			
 			map.put("s_lead_name", s_lead_name);
+			
 			List<LeadVO> schLeadPopupList = taskService.leadPopupList(map);
+			
 			map.put("leadPopupList", schLeadPopupList);
 			map.put("page", page);
 			map.put("pageNum", leadPopupPageNum);
@@ -291,10 +284,10 @@ public class TaskController {
 		}
 	}
 	
-	
 	@RequestMapping(value="taskOpptyListAjax", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> taskOpptyListPopup(@RequestParam(value = "opptyPopupPageNum", defaultValue = "1") int opptyPopupPageNum, String s_oppty_name)
-	{
+	public @ResponseBody Map<String, Object> taskOpptyListPopup(@RequestParam(value = "opptyPopupPageNum", defaultValue = "1") 
+																	int opptyPopupPageNum, String s_oppty_name) {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("opptyPopupPageNum", opptyPopupPageNum);
 		
@@ -302,19 +295,21 @@ public class TaskController {
 		PagerVO page = taskService.getOpptyPopupRow(map);
 		
 		// 영업기회 리스트 불러오는 서비스/다오/맵퍼 작성
-		if(s_oppty_name == null || s_oppty_name == "")
-		{
+		if(s_oppty_name == null || s_oppty_name == "") {
+			
 			List<OpptyVO> opptyPopupList = taskService.opptyPopupList();
+			
 			map.put("opptyPopupList", opptyPopupList);
 			map.put("page", page);
 			map.put("pageNum", opptyPopupPageNum);
 			
 			return map;
-		}
-		else
-		{
+		} else {
+			
 			map.put("s_oppty_name", s_oppty_name);
+			
 			List<OpptyVO> schOpptyPopupList = taskService.opptyPopupList(map);
+			
 			map.put("opptyPopupList", schOpptyPopupList);
 			map.put("page", page);
 			map.put("pageNum", opptyPopupPageNum);

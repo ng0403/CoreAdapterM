@@ -54,7 +54,7 @@
 						 </td>
 					  
  		                 <td style="width: 12%;">
-		                 	<input type="button" value="조회" id="task_list_srch" onclick="searchKeyword();" class="tr_btn" style="margin-left: 0;">
+		                 	<input type="button" value="조회" id="task_list_srch" onclick="taskSchList();" class="tr_btn" style="margin-left: 0;">
 		                 </td>
 					</tr>
 					

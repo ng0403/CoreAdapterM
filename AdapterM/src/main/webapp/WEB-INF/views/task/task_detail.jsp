@@ -10,6 +10,7 @@
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script type="text/javascript" src="${ctx}/resources/common/js/task/task.js"></script>
 <script type="text/javascript" src="${ctx}/resources/common/js/task/task_detail.js"></script> 
+<script type="text/javascript" src="${ctx}/resources/common/js/task/task_popup.js"></script> 
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -72,13 +73,13 @@
 				<th style="text-align:right;">고객</th>
 				<td>
 					<input type="hidden" id="cust_no" name="cust_no" value="${taskDetail.cust_no}" >
-					<input type="text" name="cust_name" id="cust_name" maxlength="50" value="${taskDetail.cust_name}" style="width: 60%;">
+					<input type="text" name="cust_name" id="cust_name" maxlength="50" value="${taskDetail.cust_name}" style="width: 60%; background-color: white;" disabled="disabled">
 					<input type="button" class="back_btn" id="custSchBtn" value="고객" onclick="custSchPopupOpen();">
 	 			</td>
 				<th id="impTh" style="text-align:right;">* 담당자</th>
 				<td> 
 		       		<input type="hidden" name="emp_no" id="emp_no" value="${taskDetail.emp_no}"> 
-					<input name="emp_name" id="emp_name" type="text" maxlength="50" value="${taskDetail.emp_name}" style="width: 60%;">
+					<input name="emp_name" id="emp_name" type="text" maxlength="50" value="${taskDetail.emp_name}" style="width: 60%; background-color: white;" disabled="disabled">
 					<input type="button" class="back_btn" id="empSchBtn" value="담담자" onclick="empSchPopupOpen();">
 	 			</td>
 			</tr>
@@ -86,7 +87,7 @@
 			<tr>
 				<th id="impTh" class="discount_cost" style="text-align:right;">* 다음일자</th>
 				<td id="td_disc_type">	
-					<input type="text" name="next_day" id="next_day" value="${taskDetail.next_day}" maxlength="10" style="width: 30%; text-align: center;" >
+					<input type="text" name="next_day" id="next_day" value="${taskDetail.next_day}" maxlength="10" style="width: 30%; text-align: center; cursor:pointer;"  >
 				</td>
 				<th id="impTh" style="text-align:right;">* 분류</th>
 				<td>
@@ -108,13 +109,13 @@
 				<th style="text-align:right;">가망고객</th>
 				<td >	
 					<input type="hidden" id="lead_no" name="lead_no" value="${taskDetail.lead_no}" >
-					<input type="text" name="lead_name" id="lead_name" maxlength="50" value="${taskDetail.lead_name}" style="width: 60%;">
+					<input type="text" name="lead_name" id="lead_name" maxlength="50" value="${taskDetail.lead_name}" style="width: 60%; background-color: white;" disabled="disabled">
 					<input type="button" class="back_btn" id="leadSchBtn" value="가망고객" onclick="leadSchPopupOpen();">
 				</td>
 				<th  style="text-align:right;">영업기회</th>
 				<td>
 					<input type="hidden" name="oppty_no" id="oppty_no" value="${taskDetail.oppty_no}"> 
-					<input name="oppty_name" id="oppty_name" type="text" maxlength="50" value="${taskDetail.oppty_name}" style="width: 60%;">
+					<input name="oppty_name" id="oppty_name" type="text" maxlength="50" value="${taskDetail.oppty_name}" style="width: 60%; background-color: white;" disabled="disabled">
 					<input type="button" class="back_btn" id="opptySchBtn" value="영업기회" onclick="opptySchPopupOpen(); ">
 	 			</td>
 	 		</tr>

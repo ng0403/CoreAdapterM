@@ -73,9 +73,10 @@
 		   	  , t.subject
 		   	  , c.cust_no
 		      , (select cust_name from tb_cust c where c.cust_no = t.cust_no ) as cust_name
-       	      , case when (select concat(phone_area_no, phone_no) from tb_cust_phone p where p.cust_no = t.cust_no and primary_yn = 'Y')  is null then '' 
+       	      , case when (select concat(phone_area_no, phone_no) from tb_cust_phone p where p.cust_no = t.cust_no and primary_yn = 'Y')  is null then ' ' 
          	 		else (select concat(phone_area_no, phone_no) from tb_cust_phone p where p.cust_no = t.cust_no and primary_yn = 'Y') end as phone_no
-		      , (select emp_name from tb_emp e where e.emp_no = t.emp_no) as emp_no
+		      , case when (select emp_name from tb_emp e where e.emp_no = t.emp_no) is null then ' ' 
+              		else (select emp_name from tb_emp e where e.emp_no = t.emp_no) end as emp_no
 		      , t.next_day
        	      , (select code_name from tb_code code where code_no = '1008' and code.code = t.dtype_cd) as dtype_cd
 		      , date_format(t.create_date, '%Y-%m-%d %H:%i') as create_date

@@ -71,7 +71,6 @@ public class TaskDAOImpl implements TaskDAO {
 	public Object taskDetail(String task_no) {
 		
 		TaskVO detail = sqlSession.selectOne("task.taskDetail", task_no);
-		System.out.println("taskDetail"+detail);
 		return detail;
 	}
 
