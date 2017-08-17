@@ -56,13 +56,13 @@ $(document).ready(function(){
 					<th id="impTh" style="text-align: right;">*고객</th>
 					<td>
 						<input type="hidden" name="cust_no" id="cust_no" value="${opptyDetail.cust_no}"> 
-						<input type="text" name="cust_name" id="cust_name" maxlength="50" value="${opptyDetail.cust_name}" style="width: 70%;">
+						<input type="text" name="cust_name" id="cust_name" maxlength="50" value="${opptyDetail.cust_name}" style="width: 70%;" readonly="readonly">
 						<input type="button" class="back_btn" id="custSchBtn" value="고객" onclick="custSchPopupOpen();">
 					</td>
 					<th id="impTh" style="text-align: right;">*담당자</th>
 					<td>
 						<input type="hidden" name="emp_no" id="emp_no" value="${opptyDetail.emp_no}"> 
-						<input name="emp_name" id="emp_name" type="text" maxlength="50" value="${opptyDetail.emp_name}" style="width: 70%;">
+						<input name="emp_name" id="emp_name" type="text" maxlength="50" value="${opptyDetail.emp_name}" style="width: 70%;" readonly="readonly">
 						<input type="button" class="back_btn" id="empSchBtn" value="담담자" onclick="empSchPopupOpen();">
 					</td>
 				</tr>

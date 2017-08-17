@@ -10,7 +10,7 @@
 
 <script type="text/javascript">
  $(document).ready(function(){
-	$('#exp_end_dt_srch').datepicker();
+	$('#exp_close_dt_srch').datepicker();
 
  });
 </script>
