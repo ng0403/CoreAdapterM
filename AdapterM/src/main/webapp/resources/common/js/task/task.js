@@ -10,6 +10,7 @@
 */
 
 var ctx = $("#ctx").val();
+var flg = $("#flg").val();
 
 //상담조회
 function taskSchList(taskPageNum) {
@@ -151,3 +152,75 @@ function taskPaging(pageNum) {
 	    taskListForm.submit();
 	});
 }
+
+
+//엑셀 출력 적용 함수
+function download_list_Excel(formID) {
+	
+	flg = $("#flg").val();
+	
+	alert(flg);
+	
+	var ctx = $("#ctx").val();
+	var form = $("#"+formID);
+	var excel = $('<input type="hidden" value="true" name="excel">');
+	
+	if(confirm("리스트를 출력하시겠습니까? 대량의 경우 대기시간이 필요합니다.")){
+		
+		form.append(excel);
+		if(flg == 0)
+		{
+			form.attr("action", "/task");
+			form.submit();
+		}
+		else
+		{
+			
+			var $form = $("<form>");
+			$form.attr({
+				"action":"/task_sch",
+				"method":"post",
+				"id":"taskExcelForm"
+			})
+
+			var $sch_cust_nm = $("<input>");
+			$sch_cust_nm.attr({
+				"type":"hidden",
+				"name":"sch_cust_nm",
+				"value":sch_cust_nm
+			})
+		
+			var $sch_comp_num = $("<input>");
+			$sch_comp_num.attr({
+				"type":"hidden",
+				"name":"sch_comp_num",
+				"value":sch_comp_num
+			})
+			
+			var $sch_corp_num = $("<input>");
+			$sch_corp_num.attr({
+				"type":"hidden",
+				"name":"sch_corp_num",
+				"value":sch_corp_num
+			})
+			
+			var $ccPageNum = $("<input>");
+			$ccPageNum.attr({
+				"type":"hidden",
+				"name":"ccPageNum",
+				"value":ccPageNum
+			})
+			
+			$form.append($sch_cust_nm).append($sch_comp_num).append($sch_corp_num);
+			$form.append($ccPageNum);
+			form.submit();
+		}
+	} 
+	$("input[name=excel]").val("");
+}
+
+
+
+
+
+

@@ -17,6 +17,7 @@
 </script>
 
 <input type="hidden" id="ctx" value="${ctx}">
+<input type="hidden" id="flg" value="${flg}">
 
 <!-- task : task조회 -->
 <div id="cupnManager">
@@ -91,6 +92,11 @@
 				</table>
 			</div>
 		</form>
+		
+		<!-- 엑셀 출력 -->
+		<form id="taskExcelForm" name="taskExcelForm" method="post"></form>	
+		
+		
 	 	 <table class="commonTable" id="taskManagerTabl">
 	 	 	<thead>
 	 	 		<tr>
@@ -125,8 +131,9 @@
 	 	 </table>
    	
 		<div class="listFootDiv">
- 		 	 <input type="button" class="func_btn" id="task_add" value="단건등록" onclick="task_add();">
+ 		 	 <input type="button" class="func_btn" id="task_add"       value="단건등록" onclick="task_add();">
 		 	 <input type="button" class="func_btn" id="task_add_multi" value="다건등록">
+		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('taskExcelForm');" />	
 		</div>
 		
 		<div class="pagingDiv">

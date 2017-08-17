@@ -55,14 +55,32 @@ public class TaskController {
 	// List
 	@RequestMapping(value="/task")
 	public ModelAndView TaskList(HttpSession session,
-									@RequestParam(value = "taskPageNum", defaultValue = "1") int taskPageNum) {
+									@RequestParam(value = "taskPageNum", defaultValue = "1") int taskPageNum,
+									String excel ) {
 		
 		Map<String, Object> taskMap = new HashMap<String, Object>();
 		taskMap.put("taskPageNum", taskPageNum);
 		
+		int flg=0;
+		//엑셀 출력 부분(리스트 전체 출력)
+		if(excel != null){
+			if(excel.equals("true")){
+				
+				ModelAndView mav = new ModelAndView("/task/taskList_excel");
+				List<TaskVO> taskExcelExport = taskService.taskExcelExport(taskMap);
+				mav.addObject("taskExcelExport", taskExcelExport);
+				
+				return mav;
+			}
+		}
+		
+		
 		// paging
 		PagerVO page = taskService.getTaskListRow(taskMap);
 		taskMap.put("page", page);
+		
+		
+		
 		
 		List<TaskVO> taskList = taskService.taskList(taskMap);		// 전체 리스트
 		List<TaskVO> dtypeCd  = taskService.taskDtypeCD();			// 분류코드

@@ -209,5 +209,19 @@ public class TaskDAOImpl implements TaskDAO {
 		return opptyPopupList;
 	}
 
+	//엑셀 출력
+	@Override
+	public List<TaskVO> taskExcelExport(Map<String, Object> taskMap) {
+		
+		List<TaskVO> taskExcelExport = null;
+		try {
+			taskExcelExport = sqlSession.selectList("task.taskExcelExport", taskMap);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return taskExcelExport;
+	}
+
 
 }

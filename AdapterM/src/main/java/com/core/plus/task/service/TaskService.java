@@ -44,5 +44,7 @@ public interface TaskService {
 	List<OpptyVO> opptyPopupList();										// 영업기회 리스트
 	List<OpptyVO> opptyPopupList(Map<String, Object> map);				// 영업기회 리스트
 	
+	List<TaskVO> taskExcelExport(Map<String, Object> taskMap);			// 엑셀 출력
+	
 	
 }

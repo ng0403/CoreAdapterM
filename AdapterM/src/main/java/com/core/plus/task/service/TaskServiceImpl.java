@@ -182,4 +182,11 @@ public class TaskServiceImpl implements TaskService {
 		return page;
 	}
 
+	//엑셀 출력
+	@Override
+	public List<TaskVO> taskExcelExport(Map<String, Object> taskMap) {
+		List<TaskVO> taskExcelExport = taskDao.taskExcelExport(taskMap);
+		return taskExcelExport;
+	}
+
 }
