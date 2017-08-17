@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import com.core.plus.contact.cust.vo.CommonCodeVO;
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.info.menu.service.MenuService;
 import com.core.plus.info.menu.vo.MenuVo;
+import com.core.plus.oppty.vo.OpptyVO;
 
 @Controller
 public class CustController {
@@ -266,6 +268,15 @@ public class CustController {
 		custAList = custAddrService.custAddrDetailList(cust_no);
 		
 		return custAList;
+	}
+	
+	@RequestMapping(value="cust_delete", method=RequestMethod.POST)
+	public @ResponseBody int custDelete(CustVO custVo, HttpSession session)
+	{
+		int result = 0;
+		
+		result = custService.custDelete(custVo);
+		return result;
 	}
 
 	

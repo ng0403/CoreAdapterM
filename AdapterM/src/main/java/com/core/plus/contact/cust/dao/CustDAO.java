@@ -17,4 +17,6 @@ public interface CustDAO {
 
 	int getCustListRow(Map<String, Object> custMap);
 
+	int custDelete(CustVO custVo);
+
 }

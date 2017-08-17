@@ -140,7 +140,7 @@ $(document).ready(function(){
 	<c:if test="${flg == 0 }">
 	 	 <div id="cust_detail_div">
 	 	 	<input type="button" class="func_btn" id="cust_update" value="편집" onclick="cust_modify(${custDlist.cust_no});">
-	 	 	<input type="button" class="tr_btn" id="cust_delete" value="삭제" onclick="cust_remove();">
+	 	 	<input type="button" class="tr_btn" id="cust_delete" value="삭제" onclick="cust_delete(${custDlist.cust_no});">
 	 	 	<input type="button" class="func_btn" id="cust_detail_cancel" value="취소" onclick="cust_cancel();">
 	 	 </div> 
 	 </c:if>
@@ -156,8 +156,7 @@ $(document).ready(function(){
 	 	  <div id="cust_update_div">
 		 	<input type="button" class="func_btn" id="cust_list" onclick="custList();" value="조회">
 	 		<input type="button" class="func_btn" id="cust_single_modify" value="편집" onclick="cust_modify();">
-	 		<input type="button" class="tr_btn" id="cust_delete" value="삭제" onclick="cust_remove();">
-<!-- 			<input type="button" class="func_btn" id="cust_single_cancel" value="취소" onclick="cust_cancel();"> -->
+	 		<input type="button" class="tr_btn" id="cust_delete" value="삭제" onclick="custDelete();">
 	 	 </div> 
 	 </c:if>
     </div>

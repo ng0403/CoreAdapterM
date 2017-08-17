@@ -58,4 +58,10 @@ public class CustServiceImpl implements CustService{
 		return page;
 	}
 
+	@Override
+	public int custDelete(CustVO custVo) {
+		// TODO Auto-generated method stub
+		return custDao.custDelete(custVo);
+	}
+
 }

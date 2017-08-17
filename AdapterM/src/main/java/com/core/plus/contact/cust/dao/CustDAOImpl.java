@@ -60,4 +60,11 @@ public class CustDAOImpl implements CustDAO{
 		return totalCount;
 	}
 
+	@Override
+	public int custDelete(CustVO custVo) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.update("cust.custDelete", custVo);
+		return result;
+	}
+
 }

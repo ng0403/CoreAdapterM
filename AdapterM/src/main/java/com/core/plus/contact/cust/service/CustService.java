@@ -18,4 +18,6 @@ public interface CustService {
 
 	PagerVO getCustListRow(Map<String, Object> custMap);
 
+	int custDelete(CustVO custVo);
+
 }

@@ -8,6 +8,7 @@
 * cust_cancel()							: 고객 취소버튼(리스트로 이동)
 * cust_phone_add(cust_no)				: 테이블 행 추가
 * cust_remove() 						: 테이블 행 삭제
+* cust_delete()							: 고객 삭제
 * 
 */
 
@@ -40,6 +41,40 @@ $(document).ready(function(){
 function custList()
 {
 	location.href = ctx + '/cust';
+}
+
+function custDelete()
+{
+	 console.log($("#cust_no").val());
+	 
+	$(document).ready(function() {
+		var ynChk = confirm("해당 기회를 삭제하시겠습니까?");
+		if(ynChk)
+		{
+			$.ajax({
+				type : 'POST',
+				url : ctx + '/cust_delete',
+				data : {
+					cust_no 		: $("#cust_no").val()
+				},
+				dataType : "json",
+				success : function(data) {
+					alert("고객이 삭제되었습니다.");
+					alert("고객 리스트로 이동합니다.");
+						
+					location.href = ctx + '/cust';
+				},
+				error : function(request,status,error) {
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+		}
+		else
+		{
+			alert("취소되었습니다.");
+		}
+	});
+	 
 }
 
 // 고객 조회
@@ -248,6 +283,7 @@ function searchKeyword(pageNum){
 	});
  }
  
+
  
  // 취소버튼 
  function cust_cancel(){
