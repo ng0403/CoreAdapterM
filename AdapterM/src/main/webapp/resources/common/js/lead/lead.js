@@ -370,6 +370,8 @@ function searchKeyword(a){
 				data: leadData,
 				dataType:'json',
 				success: function(data){
+					console.log(data);
+					
 					tbody.children().remove(); 
 			  
  					for(var i=0; i<data.leadList.length; i++){ 
@@ -380,7 +382,7 @@ function searchKeyword(a){
 	 	 			"<td style='text-align: left;'>" + data.leadList[i].cust_no +"</td>" +
 	 	 			"<td style='text-align: left;'>" +data.leadList[i].cust_name +"</td>" +
 	 	 			"<td style='text-align: left;'>" + data.leadList[i].phone_no + "</td>" +
-	 	 			"<td style='text-align: left;'>" + data.leadList[i].emp_no + "</td>" +
+	 	 			"<td style='text-align: left;'>" + data.leadList[i].emp_name + "</td>" +
 	 	 			"<td style='text-align: left;'>" + data.leadList[i].contact_day + "</td>" +
 	 	 			"<td style='text-align: left;'>" + data.leadList[i].rank_cd + "</td>" +
 	 	 			"<td style='text-align: left;'>" + data.leadList[i].create_date + "</td>" +

@@ -59,8 +59,8 @@
 					and(rank_cd like concat('%', #{rank_cd}, '%') )
 				</when> 
 	  		</choose>
-			order by update_date DESC
-	  )
+			order by l.update_date DESC
+	  ) P
 	  limit #{page.limitStartNum}, #{page.pageSize}
 	</select>
 	

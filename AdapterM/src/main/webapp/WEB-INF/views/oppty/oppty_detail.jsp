@@ -264,7 +264,7 @@ $(document).ready(function(){
 				</c:if>
 				<c:if test="${ opptyDetail.oppty_no != null }">
 					<input type="button" class="func_btn" id="oppty_list" onclick="opptyList();" value="조회">
- 		 			<input type="button" class="tr_btn" id="oppty_detail_mdfy" onclick="opptyEdit();" value="편집">
+ 		 			<input type="button" class="func_btn" id="oppty_detail_mdfy" onclick="opptyMody();" value="편집">
  		 			<input type="button" class="tr_btn" id="oppty_detail_del" onclick="opptyDel();" value="삭제">
 				</c:if>
  			</div>
@@ -283,7 +283,7 @@ $(document).ready(function(){
 			</span>
 		</div>	
 		<div id="coupon_mdfy_btn_div" style="float: right;">
-			<input type="button" class="func_btn" id="oppty_list" onclick="opptyList();" value="조회">				
+<!-- 			<input type="button" class="func_btn" id="oppty_list" onclick="opptyList();" value="조회">				 -->
 			<input type="button" class="func_btn" id="opptyItem_add" onclick="opptyItemAdd();" value="추가">
 			<input type="button" class="tr_btn" id="opptyItem_save" onclick="opptyItemInsert();" value="저장" >
 			<input type="button" class="tr_btn" id="opptyItem_save" onclick="opptyItemDelte();" value="삭제" >

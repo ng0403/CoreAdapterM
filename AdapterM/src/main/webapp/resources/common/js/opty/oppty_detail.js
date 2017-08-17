@@ -341,6 +341,23 @@ function opptySingleAdd()
 	});
 }
 
+// 편집 버튼 제어
+function opptyMody()
+{
+	if($("#oppty_detail_mdfy").val() == "편집")
+	{
+		$("#oppty_detail_mdfy").val("저장");
+		$("#oppty_detail_mdfy").removeClass("func_btn");
+		$("#oppty_detail_mdfy").addClass("tr_btn");
+		
+		return false;
+	}
+	if($("#oppty_detail_mdfy").val() == "저장")
+	{
+		opptyEdit();
+	}
+	
+}
 
 // edit 수정
 function opptyEdit()

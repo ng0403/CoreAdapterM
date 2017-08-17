@@ -197,6 +197,24 @@ function searchKeyword(pageNum){
 		}
 	});
  }
+ 
+ function cust_modify()
+ {
+	 if($("#cust_single_modify").val() == "편집")
+	{
+		$("#cust_single_modify").val("저장");
+		$("#cust_single_modify").removeClass("func_btn");
+		$("#cust_single_modify").addClass("tr_btn");
+			
+		return false;
+	}
+	if($("#cust_single_modify").val() == "저장")
+	{
+		cust_modify_save();
+	}
+	 
+ }
+ 
 // 고객 수정
  function cust_modify_save() {
 	$(document).ready(function() {
