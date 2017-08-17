@@ -129,7 +129,7 @@
 				AND (oppty_stage_cd like concat('%', #{oppty_stage_cd_srch}, '%'))
 			</if>
 			<if test="exp_close_dt_srch != null and exp_close_dt_srch != ''">
-				AND (exp_close_day like concat('%', #{exp_close_dt_srch}, '%'))
+				AND (exp_close_day like concat('%', DATE_FORMAT(#{exp_close_dt_srch}, '%Y%m%d'), '%'))
 			</if>
 			<if test="dtype_cd_srch != null and dtype_cd_srch != ''">
 				AND (dtype_cd like concat('%', #{dtype_cd_srch}, '%'))
