@@ -4,11 +4,12 @@
 
 #content {/* Section 본문 내용 전체 DIV */
     background: white;
-    border-left: 1px solid black;
+/*     border-left: 1px solid black; */
 	min-height: 100%;
 	width: 99.5%;
 	height: 100%;
-	padding-left: 0.8%;
+/* 	padding-left: 0.8%; */
+	padding-left: 40px;
 	overflow-x: hidden;
 	overflow-y: auto; 
 }

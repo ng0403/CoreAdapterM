@@ -118,9 +118,9 @@ html { font-size: 50%; }
 
 /* Main Layout */
 #wrap { 
-	overflow: hidden; 
-	height: 100%;
-	background: #71B1D1; 
+/* 	overflow: hidden;  */
+/* 	height: 100%; */
+/* 	background: #71B1D1;  */
 }
 
 #wrap > #main_lnb { 
@@ -130,7 +130,8 @@ html { font-size: 50%; }
 
 #wrap > #content_wrap {
     float: left;
-    width: 88%;
+/*     width: 88%; */
+	width: 96%;
     height: 100%;
     position: relative;
 }
