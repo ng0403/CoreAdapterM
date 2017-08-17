@@ -15,6 +15,7 @@ var ctx = $("#ctx").val();
 
 //상담조회
 function searchKeyword() {
+	
 	var task_no_srch   = $("#task_no_srch").val();
 	var subject_srch   = $("#subject_srch").val();
 	var cust_name_srch = $("#cust_name_srch").val();
@@ -27,7 +28,8 @@ function searchKeyword() {
 					 "cust_name_srch": cust_name_srch, 
 					 "emp_no_srch"   : emp_no_srch, 
 					 "next_day_srch" : next_day_srch,
-					 "dtype_cd_srch" : dtype_cd_srch      };
+					 "dtype_cd_srch" : dtype_cd_srch      
+					};
  
 			var tbody = $('#task_list_tbody');
 			var tbodyContent = "";
@@ -98,6 +100,7 @@ function task_add_save() {
 					dataType : "json",
 					success : function(data) {
 						alert("상담이 저장되었습니다.");
+						alert("상담 리스트로 이동합니다.");
 						location.href="/task";
 					}, error : function(request,status,error) {
 					        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -134,6 +137,7 @@ function task_modify_save() {
 					dataType : "json",
 					success : function(data) {
 						alert("상담이 수정되었습니다.");
+						alert("상담 리스트로 이동합니다.");
 						location.href="/task";
 					}, error : function(request,status,error) {
 					        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

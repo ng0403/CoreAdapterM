@@ -24,10 +24,17 @@ public class TaskDAOImpl implements TaskDAO {
 	public List<TaskVO> taskList() {
 		
 		List<TaskVO> vo = sqlSession.selectList("task.taskList");
-		
 		return vo;
 	}
 
+	//List 페이지
+	@Override
+	public List<TaskVO> taskList(Map<String, Object> taskMap) {
+		
+		List<TaskVO> vo = sqlSession.selectList("task.taskList", taskMap);
+		return vo;
+	}
+	
 	//분류코드
 	@Override
 	public List<TaskVO> taskDtypeCD() {
@@ -39,6 +46,7 @@ public class TaskDAOImpl implements TaskDAO {
 	//상대가치점수
 	@Override
 	public List<TaskVO> taskScoreCD() {
+		
 		List<TaskVO> code = sqlSession.selectList("task.taskScoreCode");
 		return code;
 	}
@@ -46,6 +54,7 @@ public class TaskDAOImpl implements TaskDAO {
 	//조회
 	@Override
 	public List<TaskVO> taskSchList(Map<String, Object> taskMap) {
+		
 		List<TaskVO> vo = sqlSession.selectList("task.taskList", taskMap);
 		return vo;
 	}
@@ -53,12 +62,14 @@ public class TaskDAOImpl implements TaskDAO {
 	//인덱스번호
 	@Override
 	public TaskVO taskNoIndex() {
+		
 		return sqlSession.selectOne("task.taskNoIndex");
 	}
 
 	//상세보기
 	@Override
 	public Object taskDetail(String task_no) {
+		
 		TaskVO detail = sqlSession.selectOne("task.taskDetail", task_no);
 		System.out.println("taskDetail"+detail);
 		return detail;
@@ -67,6 +78,7 @@ public class TaskDAOImpl implements TaskDAO {
 	//추가
 	@Override
 	public int taskInsert(TaskVO taskVo) {
+		
 		int result = sqlSession.insert("task.taskInsert", taskVo);
 		return result;
 	}
@@ -74,18 +86,21 @@ public class TaskDAOImpl implements TaskDAO {
 	//수정
 	@Override
 	public int taskEdit(TaskVO taskVo) {
+		
 		int result = sqlSession.insert("task.taskEdit", taskVo);
 		return result;
 	}
 
 	@Override
 	public int taskDelete(TaskVO taskVo) {
+		
 		int result = sqlSession.delete("task.taskDelete", taskVo);
 		return result;
 	}
 
 	@Override
 	public int getTaskListRow(Map<String, Object> map) {
+		
 		int totalCount = 0;
 		try {
 			totalCount = sqlSession.selectOne("task.taskListTotalRow", map);
@@ -99,18 +114,21 @@ public class TaskDAOImpl implements TaskDAO {
 	
 	@Override
 	public List<CustVO> custPopupList() {
+		
 		List<CustVO> custPopList = sqlSession.selectList("task.custPopupList");
 		return custPopList;
 	}
 
 	@Override
 	public List<CustVO> custPopupList(Map<String, Object> map) {
+		
 		List<CustVO> custPopList = sqlSession.selectList("task.custPopupList", map);
 		return custPopList;
 	}
 
 	@Override
 	public int getEmpPopupRow(Map<String, Object> map) {
+		
 		int totalCount = 0;
 		try {
 			totalCount = sqlSession.selectOne("task.empPopupRow", map);
@@ -124,18 +142,21 @@ public class TaskDAOImpl implements TaskDAO {
 
 	@Override
 	public List<EmpVO> empPopupList() {
+		
 		List<EmpVO> empPopList = sqlSession.selectList("task.empPopupList");
 		return empPopList;
 	}
 
 	@Override
 	public List<EmpVO> empPopupList(Map<String, Object> map) {
+		
 		List<EmpVO> empPopList = sqlSession.selectList("task.empPopupList", map);
 		return empPopList;
 	}
 
 	@Override
 	public int getLeadPopupRow(Map<String, Object> map) {
+		
 		int totalCount = 0;
 		try {
 			totalCount = sqlSession.selectOne("task.leadPopupRow", map);
@@ -149,18 +170,21 @@ public class TaskDAOImpl implements TaskDAO {
 
 	@Override
 	public List<LeadVO> leadPopupList() {
+		
 		List<LeadVO> leadPopupList = sqlSession.selectList("task.leadPopupList");
 		return leadPopupList;
 	}
 
 	@Override
 	public List<LeadVO> leadPopupList(Map<String, Object> map) {
+		
 		List<LeadVO> leadPopupList = sqlSession.selectList("task.leadPopupList", map);
 		return leadPopupList;
 	}
 
 	@Override
 	public int getOpptyPopupRow(Map<String, Object> map) {
+		
 		int totalCount = 0;
 		try {
 			totalCount = sqlSession.selectOne("task.opptyPopupRow", map);
@@ -174,15 +198,17 @@ public class TaskDAOImpl implements TaskDAO {
 
 	@Override
 	public List<OpptyVO> opptyPopupList() {
+		
 		List<OpptyVO> opptyPopupList = sqlSession.selectList("task.opptyPopupList");
 		return opptyPopupList;
 	}
 
 	@Override
 	public List<OpptyVO> opptyPopupList(Map<String, Object> map) {
+		
 		List<OpptyVO> opptyPopupList = sqlSession.selectList("task.opptyPopupList", map);
 		return opptyPopupList;
 	}
-	
+
 
 }

@@ -27,6 +27,12 @@ public class TaskServiceImpl implements TaskService {
 		return taskDao.taskList();
 	}
 
+	//List 페이징
+	@Override
+	public List<TaskVO> taskList(Map<String, Object> taskMap) {
+		return taskDao.taskList(taskMap);
+	}
+	
 	//분류코드
 	@Override
 	public List<TaskVO> taskDtypeCD() {
@@ -166,6 +172,7 @@ public class TaskServiceImpl implements TaskService {
 	//페이징
 	@Override
 	public PagerVO getTaskListRow(Map<String, Object> map) {
+		
 		int taskPageNum = (Integer)map.get("taskPageNum");
 		PagerVO page = new PagerVO(taskPageNum, 0, 10, 10);
 		
@@ -175,7 +182,5 @@ public class TaskServiceImpl implements TaskService {
 		
 		return page;
 	}
-
-	
 
 }

@@ -13,12 +13,17 @@ import com.core.plus.task.vo.TaskVO;
 public interface TaskService {
 	
 	PagerVO getTaskListRow(Map<String, Object> map);					// 페이징
-	List<TaskVO> taskList();											// List화면
+	List<TaskVO> taskList();											// List
+	List<TaskVO> taskList(Map<String, Object> taskMap);					// List 페이징
+	List<TaskVO> taskSchList(Map<String, Object> taskMap);				// 조회
+	
 	List<TaskVO> taskDtypeCD();											// 분류코드
 	List<TaskVO> taskScoreCD();											// 상대가치점수
-	List<TaskVO> taskSchList(Map<String, Object> taskMap);				// 조회
+	
 	TaskVO taskNoIndex();												// 인덱스 번호
+	
 	Object taskDetail(String task_no);									// 상세보기
+	
 	int taskInsert(TaskVO taskVo);										// 추가
 	int taskEdit(TaskVO taskVo);										// 수정
 	int taskDelete(TaskVO taskVo);										// 삭제
@@ -38,5 +43,6 @@ public interface TaskService {
 	PagerVO getOpptyPopupRow(Map<String, Object> map);					// 영업기회 팝업 페이지
 	List<OpptyVO> opptyPopupList();										// 영업기회 리스트
 	List<OpptyVO> opptyPopupList(Map<String, Object> map);				// 영업기회 리스트
+	
 	
 }

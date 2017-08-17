@@ -66,7 +66,7 @@ public class TaskController {
 		System.out.println("page : " + page);
 		taskMap.put("page", page);
 		
-		List<TaskVO> taskList = taskService.taskList();				// 전체 리스트
+		List<TaskVO> taskList = taskService.taskList(taskMap);		// 전체 리스트
 		List<TaskVO> dtypeCd  = taskService.taskDtypeCD();			// 분류코드
 		List<TaskVO> scoreCd  = taskService.taskScoreCD();			// 상대가치점수
 		
@@ -92,7 +92,9 @@ public class TaskController {
 												  String next_day_srch, String dtype_cd_srch)
 	{
 		Map<String, Object> taskMap = new HashMap<String, Object>();
+		
 		System.out.println("page num : " + taskPageNum);
+		
 		taskMap.put("taskPageNum", taskPageNum);
 		taskMap.put("task_no_srch", task_no_srch);
 		taskMap.put("subject_srch", subject_srch);
@@ -103,6 +105,7 @@ public class TaskController {
 		
 		// paging
 		PagerVO page = taskService.getTaskListRow(taskMap);
+		
 		taskMap.put("page", page);
 		System.out.println("page : " + page);
 				
