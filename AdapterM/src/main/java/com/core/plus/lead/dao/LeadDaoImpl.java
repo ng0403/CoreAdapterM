@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.lead.vo.LeadVO;
+import com.core.plus.task.vo.TaskVO;
 
 @Repository
 public class LeadDaoImpl implements LeadDao {
@@ -105,6 +106,20 @@ public class LeadDaoImpl implements LeadDao {
 		}
 		
 		return totalCount;
+	}
+
+	// 엑셀 출력
+	@Override
+	public List<LeadVO> leadExcelExport(Map<String, Object> leadMap) {
+		
+		List<LeadVO> leadExcelExport = null;
+		try {
+			leadExcelExport = sqlSession.selectList("lead.leadExcelExport", leadMap);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return leadExcelExport;
 	}
 
 	

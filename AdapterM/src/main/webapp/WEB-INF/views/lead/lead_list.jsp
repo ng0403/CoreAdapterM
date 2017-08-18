@@ -14,6 +14,7 @@
 </script>
 
 <input type="hidden" id="ctx" value="${ctx}">
+<input type="hidden" id="flg" value="${flg}">
 <!-- 쿠폰관리 : 쿠폰목록조회 -->
 <div id="cupnManager">
 	<div style="height:10px;"></div>
@@ -75,6 +76,8 @@
 				</table>
 			</div>
 		</form>
+		<!-- 엑셀 출력 -->
+		<form id="leadExcelForm" name="leadExcelForm" method="post"></form>
 	 	 <table class="commonTable" id="cupnManagerTabl">
 	 	 	<thead>
 	 	 		<tr>
@@ -112,6 +115,7 @@
 		<div class="listFootDiv">
  		 	 <input type="button" class="func_btn" id="lead_add" value="단건등록" onclick="lead_add();">
 		 	 <input type="button" class="func_btn" id="lead_add_multi" value="다건등록">
+		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('leadExcelForm');" >	
 		</div>
 	 	<div class="pagingDiv">
 			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>

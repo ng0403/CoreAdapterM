@@ -72,8 +72,7 @@ public class TaskController {
 				ModelAndView mav = new ModelAndView("/task/taskList_excel");
 				List<TaskVO> taskExcelExport = taskService.taskExcelExport(taskMap);
 				mav.addObject("taskExcelExport", taskExcelExport);
-				
-				
+
 				return mav;
 			}
 		}
@@ -109,7 +108,6 @@ public class TaskController {
 										  String next_day_srch, String dtype_cd_srch,
 										  String excel) {
 		
-		int flg=1;
 		ModelAndView mov = new ModelAndView(new MappingJacksonJsonView());
 		JSONArray json = new JSONArray();
 		
@@ -128,28 +126,25 @@ public class TaskController {
 		taskMap.put("page", page);
 				
 		List<TaskVO> srcList = taskService.taskSchList(taskMap);
+		taskMap.put("srcList", srcList);
 		
+		int flg=1;
 		// 엑셀 출력 부분 (검색조건에 맞는 리스트 출력)
 		if (excel != null) {
 			if (excel.equals("true")) {
 				
-				flg=1;
-				ModelAndView mav = new ModelAndView(new MappingJacksonJsonView());
-				
-				List<TaskVO> taskExcel = taskService.taskSchExcel(taskMap);
-				json = new JSONArray();
-				System.out.println("flg" + flg);
-				mav.addObject("taskExcel", json.fromObject(taskExcel));
-				mav.setViewName("/task/taskList_excel");
-
+				ModelAndView mav = new ModelAndView("/task/taskList_excel_src");
+				List<TaskVO> taskSchExcel = taskService.taskSchExcel(taskMap);
+				mav.addObject("taskSchExcel", taskSchExcel);
+				System.out.println("taskSchExcel"+taskSchExcel);
 				return mav;
+				
 			}
 		}
-		
-//		taskMap.put("srcList", srcList);
-		mov.addObject("page", page);
-		mov.addObject("flg", flg);
-		mov.addObject("srcList", srcList);
+
+			mov.addObject("page", page);
+			mov.addObject("flg", flg);
+			mov.addObject("srcList", srcList);
 		return mov;
 	}
 	
@@ -160,7 +155,7 @@ public class TaskController {
 		ModelAndView result = new ModelAndView();
 		Map<String, Object> taskMap = new HashMap<String, Object> ();
 		
-		taskMap.put("some",req.getParameter("some"));    		// where에 들어갈 조건??
+		//taskMap.put("some",req.getParameter("some"));    		// where에 들어갈 조건??
 		 
 		List<TaskVO> list = taskService.taskSchExcel(taskMap);	// 쿼리
 		result.addObject("taskExcelExport", list); 				// 쿼리 결과를 model에 담아줌

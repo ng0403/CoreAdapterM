@@ -26,7 +26,10 @@ public interface LeadService {
 	List<EmpVO> empPopupList(Map<String, Object> map);
 	
 	// Paging
-		PagerVO getLeadListRow(Map<String, Object> map);
+	PagerVO getLeadListRow(Map<String, Object> map);
+	
+	//엑셀 출력
+	List<LeadVO> leadExcelExport(Map<String, Object> leadMap);
 	
 	
 }

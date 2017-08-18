@@ -169,15 +169,14 @@ function download_list_Excel(formID) {
 		
 		if(flg == 0) 
 		{
-			
-			form.attr("action", "/task");
+			form.attr("action", "/toExcel");
 			form.submit();
 			
 		} 
-		else(flg != 0) 
+		else(flg == 1) 
 		{
-
-		
+//			form.attr("action", "/task_sch");
+//			form.submit();
 		}
 	} 
 	$("input[name=excel]").val("");

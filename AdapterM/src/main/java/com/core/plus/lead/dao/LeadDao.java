@@ -27,5 +27,8 @@ public interface LeadDao {
 	
 	int getLeadListRow(Map<String, Object> map);
 	
+	// 엑셀 출력
+	List<LeadVO> leadExcelExport(Map<String, Object> leadMap);
+	
 	
 }

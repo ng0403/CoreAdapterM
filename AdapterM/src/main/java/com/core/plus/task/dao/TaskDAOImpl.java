@@ -227,15 +227,9 @@ public class TaskDAOImpl implements TaskDAO {
 	@Override
 	public List<TaskVO> taskSchExcel(Map<String, Object> taskMap) {
 		
-		List<TaskVO> taskSchExcel = null;
-		
-		try {
-			taskSchExcel = sqlSession.selectList("task.taskExcelExport", taskMap);
+		List<TaskVO> vo  = sqlSession.selectList("task.taskExcelExport", taskMap);
+		return vo;
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return taskSchExcel;
 	}
 
 

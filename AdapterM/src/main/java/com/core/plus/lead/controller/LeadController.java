@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import com.core.plus.info.menu.service.MenuService;
 import com.core.plus.info.menu.vo.MenuVo;
 import com.core.plus.lead.service.LeadService;
 import com.core.plus.lead.vo.LeadVO;
+import com.core.plus.task.vo.TaskVO;
 
 @Controller
 public class LeadController {
@@ -244,6 +247,23 @@ public class LeadController {
 			
 			return map;
 		}
+	}
+	
+	
+	//엑셀 출력 
+	@RequestMapping(value = "/toLeadExcel",  method=RequestMethod.POST)
+	public ModelAndView toExcel(HttpServletRequest req, HttpSession session) {
+		int flg=0;
+		ModelAndView result = new ModelAndView();
+		Map<String, Object> leadMap = new HashMap<String, Object> ();
+		
+		//taskMap.put("some",req.getParameter("some"));    			// where에 들어갈 조건??
+		 
+		List<LeadVO> list = leadService.leadExcelExport(leadMap);	// 쿼리
+		result.addObject("leadExcelExport", list); 					// 쿼리 결과를 model에 담아줌
+		result.setViewName("/lead/leadList_excel");					// 엑셀로 출력하기 위한 jsp 페이지
+		 
+		return result;
 	}
 	
 

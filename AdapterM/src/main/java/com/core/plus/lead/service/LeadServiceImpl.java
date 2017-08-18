@@ -12,6 +12,7 @@ import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.lead.dao.LeadDao;
 import com.core.plus.lead.vo.LeadVO;
+import com.core.plus.task.vo.TaskVO;
 
 @Service
 public class LeadServiceImpl implements LeadService {
@@ -97,6 +98,14 @@ public class LeadServiceImpl implements LeadService {
 		page = new PagerVO(PageNum, totalRowCount, 10, 10);
 		
 		return page;
+	}
+
+	// 엑셀 출력
+	@Override
+	public List<LeadVO> leadExcelExport(Map<String, Object> leadMap) {
+		
+		List<LeadVO> leadExcelExport = leadDao.leadExcelExport(leadMap);
+		return leadExcelExport;
 	}
 
 }
