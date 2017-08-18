@@ -95,6 +95,7 @@ public class CustDAOImpl implements CustDAO{
 			String cust_name = null;
 			String visit_cd = null;
 			String visit_dtl_cd = null;
+			String rec_per = null;
 			
 			int rows = sheet.getPhysicalNumberOfRows();
 //			int cells = row.getPhysicalNumberOfCells();
@@ -118,7 +119,6 @@ public class CustDAOImpl implements CustDAO{
 				cell = row.getCell(2);
 				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
 				{
-//					cell.setCellType(Cell.CELL_TYPE_STRING);
 					int tmp = (int) cell.getNumericCellValue();
 					visit_cd = String.format("%03d", tmp);
 					
@@ -129,11 +129,13 @@ public class CustDAOImpl implements CustDAO{
 				cell = row.getCell(3);
 				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
 				{
-//					cell.setCellType(Cell.CELL_TYPE_STRING);
 					int tmp = (int) cell.getNumericCellValue();
 					visit_dtl_cd = String.format("%03d", tmp);
 					
 				}
+				
+				cell = row.getCell(4);	// cust_name
+				rec_per = cell.getStringCellValue().trim();
 
 				// VO
 				CustVO custVo = new CustVO();
@@ -141,6 +143,7 @@ public class CustDAOImpl implements CustDAO{
 				custVo.setCust_name(cust_name);
 				custVo.setVisit_cd(visit_cd);
 				custVo.setVisit_dtl_cd(visit_dtl_cd);
+				custVo.setRec_per(rec_per);
 				
 				System.out.println("VO : " + custVo);
 				

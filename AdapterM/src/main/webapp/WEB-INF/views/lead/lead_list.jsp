@@ -114,7 +114,7 @@
    	
 		<div class="listFootDiv">
  		 	 <input type="button" class="func_btn" id="lead_add" value="단건등록" onclick="lead_add();">
-		 	 <input type="button" class="func_btn" id="lead_add_multi" value="다건등록">
+		 	 <input type="button" class="func_btn" id="lead_add_multi" value="다건등록" onclick="leadExcelImportOpen();">
 		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('leadExcelForm');" >	
 		</div>
 	 	<div class="pagingDiv">

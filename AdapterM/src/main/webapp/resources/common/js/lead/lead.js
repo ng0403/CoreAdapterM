@@ -469,7 +469,7 @@ function leadExcelImportOpen()
 
 	var popX = winX + (winWidth - popWidth)/2;
 	var popY = winY + (winHeight - popHeight)/2;
-	var popUrl = "opptyExcelImportTab";
+	var popUrl = "leadExcelImportTab";
 	var popOption = "width=520, height=160, resize=no, scrollbars=no, status=no, location=no, directories=no; ,top=pop,left=popX";
 	window.open(popUrl, "_blank","width="+popWidth+"px,height="+popHeight+"px,top="+popY+",left="+popX);
 }
