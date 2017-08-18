@@ -6,7 +6,7 @@
 
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 
-<script type="text/javascript" src="${ctx}/resources/common/js/opty/oppty.js"></script> 
+<script type="text/javascript" src="${ctx}/resources/common/js/opty/oppty.js"></script>
 
 <script type="text/javascript">
  $(document).ready(function(){
@@ -166,7 +166,7 @@
    	
 		<div class="listFootDiv">
 		 	 <input type="button" class="func_btn" id="oppty_single_add" value="단건등록" onclick="opptySingleAddForm();">
-		 	 <input type="button" class="func_btn" id="oppty_multi_add" value="다건등록">
+		 	 <input type="button" class="func_btn" id="oppty_multi_add" value="다건등록" onclick="opptyExcelImportOpen();">
 		</div>
 	 	<div class="pagingDiv">
 			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>

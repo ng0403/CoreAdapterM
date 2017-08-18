@@ -1,11 +1,13 @@
 package com.core.plus.contact.cust.service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.dao.CustDAO;
@@ -62,6 +64,14 @@ public class CustServiceImpl implements CustService{
 	public int custDelete(CustVO custVo) {
 		// TODO Auto-generated method stub
 		return custDao.custDelete(custVo);
+	}
+
+	@Override
+	public int excelUpload(MultipartFile destFile) {
+		// TODO Auto-generated method stub
+		int result = custDao.custUploadExcel(destFile);
+		
+		return result;
 	}
 
 }

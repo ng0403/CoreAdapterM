@@ -147,4 +147,10 @@
 		where cust_no = #{cust_no}
 	</update>
 	
+	<!-- import Test -->
+	<insert id="custExcelInsert" parameterType="com.core.plus.contact.cust.vo.CustVO">
+		insert into tb_cust (cust_no, cust_name, visit_cd, visit_dtl_cd)
+		values (#{cust_no}, #{cust_name}, #{visit_cd}, #{visit_dtl_cd})
+	</insert>
+	
 </mapper>

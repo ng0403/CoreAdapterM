@@ -1,7 +1,10 @@
 package com.core.plus.contact.cust.dao;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.core.plus.contact.cust.vo.CustVO;
 
@@ -18,5 +21,7 @@ public interface CustDAO {
 	int getCustListRow(Map<String, Object> custMap);
 
 	int custDelete(CustVO custVo);
+
+	int custUploadExcel(MultipartFile destFile);
 
 }

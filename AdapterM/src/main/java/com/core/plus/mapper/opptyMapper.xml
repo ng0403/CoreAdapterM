@@ -240,6 +240,18 @@
             )
 	</insert>
 	
+	<insert id="oppty_multi_insert" parameterType="com.core.plus.oppty.vo.OpptyVO">
+		INSERT INTO	tb_oppty
+			(oppty_no, oppty_name, cust_no, emp_no, oppty_status_cd, oppty_stage_cd, score, 
+			 exp_close_day, dtype_cd, sur_plan_cn, purchase_type, payment_cd, rec_per_cd, remark_cn)
+		VALUES
+			(
+			 #{oppty_no},
+			 #{oppty_name}, #{cust_no}, #{emp_no}, #{oppty_status_cd}, #{oppty_stage_cd}, #{score}, DATE_FORMAT(#{exp_close_day}, '%Y%m%d'), #{dtype_cd}, 
+			 #{sur_plan_cn}, #{purchase_type},#{payment_cd}, #{rec_per_cd}, #{remark_cn}
+            )
+	</insert>
+	
 	<update id="opptyEdit" parameterType="com.core.plus.oppty.vo.OpptyVO">
 		UPDATE tb_oppty
 		SET

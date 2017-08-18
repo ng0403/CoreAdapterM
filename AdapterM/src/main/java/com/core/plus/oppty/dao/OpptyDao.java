@@ -3,6 +3,8 @@ package com.core.plus.oppty.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
@@ -55,5 +57,6 @@ public interface OpptyDao {
 	int getMainCatePopupRow(Map<String, Object> map);
 	int getMidCatePopupRow(Map<String, Object> map);
 	int getSmallPopupRow(Map<String, Object> map);
+	int opptyUploadExcel(MultipartFile excelFile);
 	
 }

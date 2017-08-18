@@ -3,6 +3,8 @@ package com.core.plus.oppty.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
@@ -57,6 +59,7 @@ public interface OpptyService {
 	PagerVO getMainCatePopupRow(Map<String, Object> map);
 	PagerVO getMidCatePopupRow(Map<String, Object> map);
 	PagerVO getSmallCatePopupRow(Map<String, Object> map);
+	int excelUpload(MultipartFile excelFile);
 	
 
 }

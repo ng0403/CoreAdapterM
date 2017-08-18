@@ -1,14 +1,22 @@
 package com.core.plus.oppty.dao;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.SystemEnvironmentPropertySource;
-import org.springframework.stereotype.Repository;
 
-import com.core.plus.common.PagerVO;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.oppty.vo.OpptyItemVO;
@@ -339,4 +347,166 @@ public class OpptyDaoImpl implements OpptyDao {
 		return totalCount;
 	}
 
+	@Override
+	public int opptyUploadExcel(MultipartFile excelFile) {
+		// TODO Auto-generated method stub
+		System.out.println("Excel Upload Dao");
+		int result = 0;
+		
+		try {
+			Workbook workBook = WorkbookFactory.create(excelFile.getInputStream());
+			Sheet sheet = workBook.getSheetAt(0);
+			Row row = null;
+			Cell cell = null;
+			
+			String oppty_no   = null;
+			String oppty_name = null;
+			String cust_no = null;
+			String emp_no  = null;
+			String oppty_status_cd = null;
+			String oppty_stage_cd  = null;
+			String exp_close_day = null;
+			String dtype_cd = null;
+			String sur_plan_cn = null;
+			String purchase_type = null;
+			String payment_cd = null;
+			String rec_per_cd = null;
+			String remark_cn  = null;
+			int  score = 0;
+			
+			int rows = sheet.getPhysicalNumberOfRows();
+			System.out.println(rows);
+			
+			for(int i=0; i<rows; i++) {
+				row = sheet.getRow(i);
+				
+				cell = row.getCell(0);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					cell.setCellType(Cell.CELL_TYPE_STRING);
+					oppty_no = cell.getStringCellValue();
+					
+					System.out.println("oppty_no");
+				}
+				
+				cell = row.getCell(1);
+				oppty_name = cell.getStringCellValue().trim();
+				
+				System.out.println("oppty_name");
+
+				cell = row.getCell(2);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					cell.setCellType(Cell.CELL_TYPE_STRING);
+					cust_no = cell.getStringCellValue();
+					
+					System.out.println("cust_no");
+				}
+				
+				cell = row.getCell(3);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					cell.setCellType(Cell.CELL_TYPE_STRING);
+					emp_no = cell.getStringCellValue();
+					
+					System.out.println("emp_no");
+				}
+				
+				cell = row.getCell(4);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					int tmp = (int) cell.getNumericCellValue();
+					oppty_status_cd = String.format("%03d", tmp);
+				}
+				
+				cell = row.getCell(5);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					int tmp = (int) cell.getNumericCellValue();
+					oppty_stage_cd = String.format("%03d", tmp);
+				}
+				
+				cell = row.getCell(6);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					score = (int) cell.getNumericCellValue();
+				}
+				
+				cell = row.getCell(7);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					int tmp = (int) cell.getNumericCellValue();
+					exp_close_day = String.valueOf(tmp);
+				}
+				
+				cell = row.getCell(8);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					int tmp = (int) cell.getNumericCellValue();
+					dtype_cd = String.format("%03d", tmp);
+				}
+				
+				cell = row.getCell(9);
+				sur_plan_cn = cell.getStringCellValue();
+				
+				cell = row.getCell(10);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					int tmp = (int) cell.getNumericCellValue();
+					purchase_type = String.format("%03d", tmp);
+				}
+				
+				cell = row.getCell(11);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					int tmp = (int) cell.getNumericCellValue();
+					payment_cd = String.format("%03d", tmp);
+				}
+				
+				cell = row.getCell(12);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					int tmp = (int) cell.getNumericCellValue();
+					rec_per_cd = String.format("%03d", tmp);
+				}
+				
+				cell = row.getCell(13);
+				remark_cn = cell.getStringCellValue();
+				
+				OpptyVO opptyVo = new OpptyVO();
+				opptyVo.setOppty_no(oppty_no);
+				opptyVo.setOppty_name(oppty_name);
+				opptyVo.setCust_no(cust_no);
+				opptyVo.setEmp_no(emp_no);
+				opptyVo.setOppty_status_cd(oppty_status_cd);
+				opptyVo.setOppty_stage_cd(oppty_stage_cd);
+				opptyVo.setScore(score);
+				opptyVo.setExp_close_day(exp_close_day);
+				opptyVo.setDtype_cd(dtype_cd);
+				opptyVo.setSur_plan_cn(sur_plan_cn);
+				opptyVo.setPurchase_type(purchase_type);
+				opptyVo.setPayment_cd(payment_cd);
+				opptyVo.setRec_per_cd(rec_per_cd);
+				opptyVo.setRemark_cn(remark_cn);
+				
+				System.out.println("VO : " + opptyVo);
+				
+				if(oppty_no != null || opptyVo.getOppty_no() != null)
+				{
+					result += sqlSession.insert("oppty.oppty_multi_insert", opptyVo);
+				}
+			}
+			
+		} catch (InvalidFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		
+		return result;
+	}
+	
 }

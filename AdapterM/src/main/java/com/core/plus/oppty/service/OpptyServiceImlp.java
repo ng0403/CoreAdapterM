@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.vo.CustVO;
@@ -257,6 +258,14 @@ public class OpptyServiceImlp implements OpptyService {
 		page = new PagerVO(smallCatePageNum, totalRowCount, 10, 10);
 		
 		return page;
+	}
+
+	@Override
+	public int excelUpload(MultipartFile excelFile) {
+		// TODO Auto-generated method stub
+		int result = opptyDao.opptyUploadExcel(excelFile);
+		
+		return result;
 	}
 
 }
