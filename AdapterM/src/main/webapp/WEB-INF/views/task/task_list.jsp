@@ -55,7 +55,7 @@
 						 </td>
 					  
  		                 <td style="width: 12%;">
-		                 	<input type="button" value="조회" id="task_list_srch" onclick="taskSchList();" class="tr_btn" style="margin-left: 0;">
+		                 	<input type="button" value="조회" id="task_list_srch" onclick="taskSchList(); " class="tr_btn" >
 		                 </td>
 					</tr>
 					
@@ -133,7 +133,7 @@
 		<div class="listFootDiv">
  		 	 <input type="button" class="func_btn" id="task_add"       value="단건등록" onclick="task_add();">
 		 	 <input type="button" class="func_btn" id="task_add_multi" value="다건등록">
-		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('taskExcelForm');" />	
+		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('taskExcelForm');" >	
 		</div>
 		
 		<div class="pagingDiv">

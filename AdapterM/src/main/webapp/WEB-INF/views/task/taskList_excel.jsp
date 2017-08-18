@@ -30,6 +30,9 @@
 	border: thin solid black;
 	text-align: center;
 }
+#no{
+	mso-number-format: "@";
+}
 </style>
 </head>
 <body>
@@ -51,7 +54,7 @@
 		<c:if test="${not empty taskExcelExport}">			
 			<c:forEach var="taskExcelExport" items="${taskExcelExport}" >
 				<tr>
-					<td class="body"><c:out value="${taskExcelExport.task_no}"></c:out></td>
+					<td class="body" id="no" ><c:out value="${taskExcelExport.task_no}"></c:out></td>
 					<td class="body"><c:out value="${taskExcelExport.subject}"></c:out></td>
 					<td class="body"><c:out value="${taskExcelExport.cust_no}"></c:out></td>
 					<td class="body"><c:out value="${taskExcelExport.cust_name}"></c:out></td>

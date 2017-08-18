@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
 import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.vo.CustVO;
@@ -24,6 +25,8 @@ import com.core.plus.lead.vo.LeadVO;
 import com.core.plus.oppty.vo.OpptyVO;
 import com.core.plus.task.service.TaskService;
 import com.core.plus.task.vo.TaskVO;
+
+import net.sf.json.JSONArray;
 
 @Controller
 public class TaskController {
@@ -70,17 +73,14 @@ public class TaskController {
 				List<TaskVO> taskExcelExport = taskService.taskExcelExport(taskMap);
 				mav.addObject("taskExcelExport", taskExcelExport);
 				
+				
 				return mav;
 			}
 		}
 		
-		
 		// paging
 		PagerVO page = taskService.getTaskListRow(taskMap);
 		taskMap.put("page", page);
-		
-		
-		
 		
 		List<TaskVO> taskList = taskService.taskList(taskMap);		// 전체 리스트
 		List<TaskVO> dtypeCd  = taskService.taskDtypeCD();			// 분류코드
@@ -100,13 +100,19 @@ public class TaskController {
 	}
 	
 	// 조회
-	@RequestMapping(value="task_sch", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> taskSchList(HttpSession session,
-												  @RequestParam(value = "taskPageNum", defaultValue = "1") int taskPageNum,
-												  String task_no_srch, String subject_srch, 
-												  String cust_name_srch, String emp_name_srch,
-												  String next_day_srch, String dtype_cd_srch)
-	{
+	@RequestMapping(value="/task_sch", method=RequestMethod.POST)
+	@ResponseBody
+	public  ModelAndView taskSchList(HttpSession session,
+										  @RequestParam(value = "taskPageNum", defaultValue = "1") int taskPageNum,
+										  String task_no_srch, String subject_srch, 
+										  String cust_name_srch, String emp_name_srch,
+										  String next_day_srch, String dtype_cd_srch,
+										  String excel) {
+		
+		int flg=1;
+		ModelAndView mov = new ModelAndView(new MappingJacksonJsonView());
+		JSONArray json = new JSONArray();
+		
 		Map<String, Object> taskMap = new HashMap<String, Object>();
 		
 		taskMap.put("taskPageNum", taskPageNum);
@@ -122,9 +128,29 @@ public class TaskController {
 		taskMap.put("page", page);
 				
 		List<TaskVO> srcList = taskService.taskSchList(taskMap);
-		taskMap.put("srcList", srcList);
 		
-		return taskMap;
+		// 엑셀 출력 부분 (검색조건에 맞는 리스트 출력)
+		if (excel != null) {
+			if (excel.equals("true")) {
+				
+				flg=1;
+				ModelAndView mav = new ModelAndView(new MappingJacksonJsonView());
+				
+				List<TaskVO> taskExcel = taskService.taskSchExcel(taskMap);
+				json = new JSONArray();
+				System.out.println("flg" + flg);
+				mav.addObject("taskExcel", json.fromObject(taskExcel));
+				mav.setViewName("/task/taskList_excel");
+
+				return mav;
+			}
+		}
+		
+//		taskMap.put("srcList", srcList);
+		mov.addObject("page", page);
+		mov.addObject("flg", flg);
+		mov.addObject("srcList", srcList);
+		return mov;
 	}
 	
 	// 상세보기 및 단건등록화면

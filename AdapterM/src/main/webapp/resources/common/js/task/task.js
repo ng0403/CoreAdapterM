@@ -157,25 +157,26 @@ function taskPaging(pageNum) {
 //엑셀 출력 적용 함수
 function download_list_Excel(formID) {
 	
-	flg = $("#flg").val();
-	
-	alert(flg);
-	
+	var flg = $("#flg").val();
 	var ctx = $("#ctx").val();
 	var form = $("#"+formID);
 	var excel = $('<input type="hidden" value="true" name="excel">');
 	
-	if(confirm("리스트를 출력하시겠습니까? 대량의 경우 대기시간이 필요합니다.")){
+	if(confirm("리스트를 출력하시겠습니까? 대량의 경우 대기시간이 필요합니다.")) 
+	{
 		
 		form.append(excel);
-		if(flg == 0)
-		{
-			form.attr("action", "/task");
-			form.submit();
-		}
-		else
+		
+		if(flg == 0) 
 		{
 			
+			form.attr("action", "/task");
+			form.submit();
+			
+		} 
+		else(flg != 0) 
+		{
+
 			var $form = $("<form>");
 			$form.attr({
 				"action":"/task_sch",
@@ -183,37 +184,60 @@ function download_list_Excel(formID) {
 				"id":"taskExcelForm"
 			})
 
-			var $sch_cust_nm = $("<input>");
-			$sch_cust_nm.attr({
+			var $task_no_srch = $("<input>");
+			$task_no_srch.attr({
 				"type":"hidden",
-				"name":"sch_cust_nm",
-				"value":sch_cust_nm
+				"name":"task_no_srch",
+				"value":task_no_srch
 			})
 		
-			var $sch_comp_num = $("<input>");
-			$sch_comp_num.attr({
+			var $subject_srch = $("<input>");
+			$subject_srch.attr({
 				"type":"hidden",
-				"name":"sch_comp_num",
-				"value":sch_comp_num
+				"name":"subject_srch",
+				"value":subject_srch
 			})
 			
-			var $sch_corp_num = $("<input>");
-			$sch_corp_num.attr({
+			var $cust_name_srch = $("<input>");
+			$cust_name_srch.attr({
 				"type":"hidden",
-				"name":"sch_corp_num",
-				"value":sch_corp_num
+				"name":"cust_name_srch",
+				"value":cust_name_srch
 			})
 			
-			var $ccPageNum = $("<input>");
-			$ccPageNum.attr({
+			var $emp_name_srch = $("<input>");
+			$emp_name_srch.attr({
 				"type":"hidden",
-				"name":"ccPageNum",
-				"value":ccPageNum
+				"name":"emp_name_srch",
+				"value":emp_name_srch
 			})
 			
-			$form.append($sch_cust_nm).append($sch_comp_num).append($sch_corp_num);
-			$form.append($ccPageNum);
+			var $next_day_srch = $("<input>");
+			$next_day_srch.attr({
+				"type":"hidden",
+				"name":"next_day_srch",
+				"value":next_day_srch
+			})
+			
+			var $dtype_cd_srch = $("<input>");
+			$dtype_cd_srch.attr({
+				"type":"hidden",
+				"name":"dtype_cd_srch",
+				"value":dtype_cd_srch
+			})
+			
+			var $taskPageNum = $("<input>");
+			$taskPageNum.attr({
+				"type":"hidden",
+				"name":"taskPageNum",
+				"value":taskPageNum
+			})
+			
+			$form.append($task_no_srch).append($subject_srch).append($cust_name_srch);
+			$form.append($emp_name_srch).append($next_day_srch).append($dtype_cd_srch);
+			$form.append($taskPageNum);
 			form.submit();
+		
 		}
 	} 
 	$("input[name=excel]").val("");
