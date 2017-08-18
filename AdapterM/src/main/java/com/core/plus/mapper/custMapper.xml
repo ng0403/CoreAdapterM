@@ -81,8 +81,8 @@
 		         ,a.cust_name
 		         ,case when(a.chart_no) is null then '' else (a.chart_no) end as chart_no
 		         ,a.cust_id
-		         ,a.visit_cd
-		         ,a.visit_dtl_cd
+		         ,(select code_name from tb_code code where code_no = '1001' and code.code = a.visit_cd ) as visit_cd
+		         ,(select code_name from tb_code code where code_no = '1001' and code.code = a.visit_cd ) as visit_dtl_cd
 		         ,a.visit_cn
 		         ,case when(rec_per) is null then '' else (rec_per) end as rec_per
 		         ,case when (select phone_area_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) is null then ''

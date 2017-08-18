@@ -58,7 +58,7 @@
 		<c:if test="${not empty opptyExcelExport}">			
 			<c:forEach var="opptyExcelExport" items="${opptyExcelExport}" >
 				<tr>
-					<td class="body" id="no" ><c:out value="${opptyExcelExport.oopty_no}"></c:out></td>
+					<td class="body" id="no" ><c:out value="${opptyExcelExport.oppty_no}"></c:out></td>
 					<td class="body"><c:out value="${opptyExcelExport.oppty_name}"></c:out></td>
 					<td class="body" id="no"><c:out value="${opptyExcelExport.cust_no}"></c:out></td>
 					<td class="body"><c:out value="${opptyExcelExport.cust_name}"></c:out></td>

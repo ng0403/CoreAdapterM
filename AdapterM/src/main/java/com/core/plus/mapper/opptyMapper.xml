@@ -182,7 +182,7 @@
 				(select code_name from tb_code where code_no = '1008' and code = dtype_cd) dtype_cd,
 				(select code_name from tb_code where code_no = '1012' and code = purchase_type) purchase_type,
 				(select code_name from tb_code where code_no = '1014' and code = rec_per_cd) rec_per_cd,
-				create_date
+				date_format(opty.create_date, '%Y-%m-%d %H:%i') as create_date
 			FROM
 				tb_oppty opty
 			WHERE

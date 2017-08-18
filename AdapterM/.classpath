@@ -33,7 +33,5 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Yeonghwa/설치파일/Java Library/json/ezmorph-1.0.6.jar"/>
-	<classpathentry kind="lib" path="C:/Yeonghwa/설치파일/Java Library/json/json-lib-2.4-jdk15.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
