@@ -177,66 +177,6 @@ function download_list_Excel(formID) {
 		else(flg != 0) 
 		{
 
-			var $form = $("<form>");
-			$form.attr({
-				"action":"/task_sch",
-				"method":"post",
-				"id":"taskExcelForm"
-			})
-
-			var $task_no_srch = $("<input>");
-			$task_no_srch.attr({
-				"type":"hidden",
-				"name":"task_no_srch",
-				"value":task_no_srch
-			})
-		
-			var $subject_srch = $("<input>");
-			$subject_srch.attr({
-				"type":"hidden",
-				"name":"subject_srch",
-				"value":subject_srch
-			})
-			
-			var $cust_name_srch = $("<input>");
-			$cust_name_srch.attr({
-				"type":"hidden",
-				"name":"cust_name_srch",
-				"value":cust_name_srch
-			})
-			
-			var $emp_name_srch = $("<input>");
-			$emp_name_srch.attr({
-				"type":"hidden",
-				"name":"emp_name_srch",
-				"value":emp_name_srch
-			})
-			
-			var $next_day_srch = $("<input>");
-			$next_day_srch.attr({
-				"type":"hidden",
-				"name":"next_day_srch",
-				"value":next_day_srch
-			})
-			
-			var $dtype_cd_srch = $("<input>");
-			$dtype_cd_srch.attr({
-				"type":"hidden",
-				"name":"dtype_cd_srch",
-				"value":dtype_cd_srch
-			})
-			
-			var $taskPageNum = $("<input>");
-			$taskPageNum.attr({
-				"type":"hidden",
-				"name":"taskPageNum",
-				"value":taskPageNum
-			})
-			
-			$form.append($task_no_srch).append($subject_srch).append($cust_name_srch);
-			$form.append($emp_name_srch).append($next_day_srch).append($dtype_cd_srch);
-			$form.append($taskPageNum);
-			form.submit();
 		
 		}
 	} 
@@ -244,7 +184,10 @@ function download_list_Excel(formID) {
 }
 
 
-
-
+function exportToExcel(){
+	document.taskExcelForm.action="/toExcel";
+	document.taskExcelForm.method="POST"
+	document.taskExcelForm.submit();
+}
 
 

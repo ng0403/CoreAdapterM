@@ -94,46 +94,45 @@
 		</form>
 		
 		<!-- 엑셀 출력 -->
-		<form id="taskExcelForm" name="taskExcelForm" method="post"></form>	
-		
-		
-	 	 <table class="commonTable" id="taskManagerTabl">
-	 	 	<thead>
-	 	 		<tr>
- 	 	 			<th style="width: 10%;">task번호</th> 
-	 	 			<th style="width: 15%;">제목</th>
- 	 	 			<th style="width: 10%;">고객번호</th>
-	 	 			<th style="width: 9%;">고객명</th> 
-	 	 			<th style="width: 9%;">전화번호</th>
-	 	 			<th style="width: 9%;">담당자명</th>
-	 	 			<th style="width: 10%;">다음일자</th>
-	 	 			<th style="width: 12%;">분류</th>
-	 	 			<th style="width: 10%;">등록일시</th> 
- 	 	 		</tr>
-	 	 	</thead>
-	 	 	<tbody id="task_list_tbody"> 
-	 	 		<c:forEach items="${taskList}" var="list">
-	 	 		<tr>
-	 	 			<td style="text-align: left;" >${list.task_no}</td>
-	 	 			<td style="text-align: left;" >
-	 	 				<a href="#" onclick="taskDetail('${list.task_no}');" id="${list.task_no}">${list.subject}</a>
-	 	 			</td>
-	 	 			<td style="text-align: left;" >${list.cust_no}</td>
-	 	 			<td style="text-align: left;" >${list.cust_name}</td>
-	 	 			<td style="text-align: left;" >${list.phone_no}</td>
-	 	 			<td style="text-align: left;" >${list.emp_no}</td>
-	 	 			<td style="text-align: left;" >${list.next_day}</td>
-	 	 			<td style="text-align: left;" >${list.dtype_cd}</td>
-	 	 			<td style="text-align: left;" >${list.create_date}</td>
-	 	 			</tr>
-	 	 		</c:forEach>
-	 	 	</tbody>
-	 	 </table>
-   	
+		<form id="taskExcelForm" name="taskExcelForm" method="post">
+			<table class="commonTable" id="taskManagerTabl">
+		 	 	<thead>
+		 	 		<tr>
+	 	 	 			<th style="width: 10%;">task번호</th> 
+		 	 			<th style="width: 15%;">제목</th>
+	 	 	 			<th style="width: 10%;">고객번호</th>
+		 	 			<th style="width: 9%;">고객명</th> 
+		 	 			<th style="width: 9%;">전화번호</th>
+		 	 			<th style="width: 9%;">담당자명</th>
+		 	 			<th style="width: 10%;">다음일자</th>
+		 	 			<th style="width: 12%;">분류</th>
+		 	 			<th style="width: 10%;">등록일시</th> 
+	 	 	 		</tr>
+		 	 	</thead>
+		 	 	<tbody id="task_list_tbody"> 
+		 	 		<c:forEach items="${taskList}" var="list">
+		 	 		<tr>
+		 	 			<td style="text-align: left;" >${list.task_no}</td>
+		 	 			<td style="text-align: left;" >
+		 	 				<a href="#" onclick="taskDetail('${list.task_no}');" id="${list.task_no}">${list.subject}</a>
+		 	 			</td>
+		 	 			<td style="text-align: left;" >${list.cust_no}</td>
+		 	 			<td style="text-align: left;" >${list.cust_name}</td>
+		 	 			<td style="text-align: left;" >${list.phone_no}</td>
+		 	 			<td style="text-align: left;" >${list.emp_no}</td>
+		 	 			<td style="text-align: left;" >${list.next_day}</td>
+		 	 			<td style="text-align: left;" >${list.dtype_cd}</td>
+		 	 			<td style="text-align: left;" >${list.create_date}</td>
+		 	 			</tr>
+		 	 		</c:forEach>
+		 	 	</tbody>
+		 	 </table>
+   		</form>	
 		<div class="listFootDiv">
  		 	 <input type="button" class="func_btn" id="task_add"       value="단건등록" onclick="task_add();">
 		 	 <input type="button" class="func_btn" id="task_add_multi" value="다건등록">
-		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('taskExcelForm');" >	
+<!-- 		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('taskExcelForm');" >	 -->
+		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="exportToExcel();" >	
 		</div>
 		
 		<div class="pagingDiv">

@@ -153,6 +153,22 @@ public class TaskController {
 		return mov;
 	}
 	
+	//엑셀 출력 
+	@RequestMapping(value = "/toExcel",  method=RequestMethod.POST)
+	public ModelAndView toExcel(HttpServletRequest req, HttpSession session) {
+		
+		ModelAndView result = new ModelAndView();
+		Map<String, Object> taskMap = new HashMap<String, Object> ();
+		
+		taskMap.put("some",req.getParameter("some"));    		// where에 들어갈 조건??
+		 
+		List<TaskVO> list = taskService.taskSchExcel(taskMap);	// 쿼리
+		result.addObject("taskExcelExport", list); 				// 쿼리 결과를 model에 담아줌
+		result.setViewName("/task/taskList_excel");				// 엑셀로 출력하기 위한 jsp 페이지
+		 
+		return result;
+	}
+	
 	// 상세보기 및 단건등록화면
 	@RequestMapping(value="task_detail")
 	public ModelAndView taskDetail(String task_no, String flg) {
