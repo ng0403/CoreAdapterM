@@ -61,5 +61,8 @@ public interface OpptyService {
 	PagerVO getSmallCatePopupRow(Map<String, Object> map);
 	int excelUpload(MultipartFile excelFile);
 	
+	// excel Export
+	List<OpptyVO> opptyExcelExport(Map<String, Object> opptykMap);
+	
 
 }

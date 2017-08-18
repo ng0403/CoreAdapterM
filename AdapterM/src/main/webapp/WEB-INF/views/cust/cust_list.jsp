@@ -26,6 +26,7 @@ var vititDtlCdList = new Array();
 </script>
 
 <input type="hidden" id="ctx" value="${ctx}">
+<input type="hidden" id="flg" value="${flg}">
 <!-- 고객 : 고객목록조회 -->
 <div id="cupnManager">
 	<div style="height:10px;"></div>
@@ -98,6 +99,9 @@ var vititDtlCdList = new Array();
 				</table>
 			</div>
 		</form>
+		
+		<!-- 엑셀 출력 -->
+		<form id="custExcelForm" name="custExcelForm" method="post"></form>
 	 	 <table class="commonTable" id="cupnManagerTabl">
 	 	 	<thead>
 	 	 		<tr>
@@ -167,6 +171,7 @@ var vititDtlCdList = new Array();
 		<div class="listFootDiv">
  		 	 <input type="button" class="func_btn" id="cust_add" value="단건등록" onclick="cust_add();">
 		 	 <input type="button" class="func_btn" id="lead_add_multi" value="다건등록" onclick="excelImportOpen();">
+		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('custExcelForm');" >
 		</div>
 	 	<div class="pagingDiv">
 			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>

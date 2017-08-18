@@ -9,7 +9,7 @@
 	SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat ( "yyyyMMddHHmmss", Locale.KOREA );
 	Date currentTime = new Date();
 	String mTime = mSimpleDateFormat.format (currentTime);
-	response.setHeader("Content-Disposition", "attachment; filename="+UriUtils.encodeFragment("상담목록","UTF-8")+mTime+".xls;'");
+	response.setHeader("Content-Disposition", "attachment; filename="+UriUtils.encodeFragment("매출목록","UTF-8")+mTime+".xls;'");
 	response.setHeader("Content-Description", "JSP Generated Data");
 	response.setContentType("application/vnd.ms-excel");
 %>
@@ -60,7 +60,7 @@
 				<tr>
 					<td class="body" id="no" ><c:out value="${opptyExcelExport.oopty_no}"></c:out></td>
 					<td class="body"><c:out value="${opptyExcelExport.oppty_name}"></c:out></td>
-					<td class="body"><c:out value="${opptyExcelExport.cust_no}"></c:out></td>
+					<td class="body" id="no"><c:out value="${opptyExcelExport.cust_no}"></c:out></td>
 					<td class="body"><c:out value="${opptyExcelExport.cust_name}"></c:out></td>
 					<td class="body"><c:out value="${opptyExcelExport.phone_no}"></c:out></td>
 					<td class="body"><c:out value="${opptyExcelExport.emp_no}"></c:out></td>

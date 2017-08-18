@@ -695,6 +695,34 @@ function checkFileType(filePath)
 }
 
 
+//엑셀 출력 적용 함수
+function download_list_Excel(formID) {
+	
+	var flg = $("#flg").val();
+	var ctx = $("#ctx").val();
+	var form = $("#"+formID);
+	var excel = $('<input type="hidden" value="true" name="excel">');
+	
+	if(confirm("리스트를 출력하시겠습니까? 대량의 경우 대기시간이 필요합니다.")) 
+	{
+		
+		form.append(excel);
+		
+		if(flg == 0) 
+		{
+			form.attr("action", "/toCustExcel");
+			form.submit();
+			
+		} 
+		else(flg == 1) 
+		{
+//			form.attr("action", "/task_sch");
+//			form.submit();
+		}
+	} 
+	$("input[name=excel]").val("");
+}
+
 
 
 

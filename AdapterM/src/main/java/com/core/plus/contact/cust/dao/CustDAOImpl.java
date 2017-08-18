@@ -19,6 +19,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.core.plus.contact.cust.vo.CustVO;
+import com.core.plus.task.vo.TaskVO;
 
 @Repository
 public class CustDAOImpl implements CustDAO{
@@ -160,6 +161,20 @@ public class CustDAOImpl implements CustDAO{
 		}
 		
 		return result;
+	}
+
+	// 엑셀 출력
+	@Override
+	public List<CustVO> custExcelExport(Map<String, Object> custkMap) {
+		
+		List<CustVO> custExcelExport = null;
+		try {
+			custExcelExport = sqlSession.selectList("cust.custExcelExport", custkMap);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return custExcelExport;
 	}
 
 }

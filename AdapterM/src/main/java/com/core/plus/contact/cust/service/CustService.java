@@ -25,4 +25,6 @@ public interface CustService {
 
 	int excelUpload(MultipartFile destFile);
 
+	List<CustVO> custExcelExport(Map<String, Object> custkMap);					// 엑셀 출력
+
 }

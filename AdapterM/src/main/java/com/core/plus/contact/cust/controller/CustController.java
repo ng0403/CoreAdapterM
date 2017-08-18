@@ -9,6 +9,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.info.menu.service.MenuService;
 import com.core.plus.info.menu.vo.MenuVo;
 import com.core.plus.oppty.vo.OpptyVO;
+import com.core.plus.task.vo.TaskVO;
 
 @Controller
 public class CustController {
@@ -110,6 +112,23 @@ public class CustController {
 		return result;
 	}
 	
+	//엑셀 출력 
+	@RequestMapping(value = "/toCustExcel",  method=RequestMethod.POST)
+	public ModelAndView toExcel(HttpServletRequest req, HttpSession session) {
+		
+		int flg =1;
+		ModelAndView result = new ModelAndView();
+		Map<String, Object> custkMap = new HashMap<String, Object> ();
+		
+		//taskMap.put("some",req.getParameter("some"));    			// where에 들어갈 조건??
+		 
+		List<CustVO> list = custService.custExcelExport(custkMap);	// 쿼리
+		result.addObject("custExcelExport", list); 					// 쿼리 결과를 model에 담아줌
+		result.setViewName("/cust/custList_excel");					// 엑셀로 출력하기 위한 jsp 페이지
+		 
+		return result;
+	}
+
 	@RequestMapping(value="/custForm")
 	public ModelAndView custForm(@RequestParam("cust_no") String cust_no){
 		

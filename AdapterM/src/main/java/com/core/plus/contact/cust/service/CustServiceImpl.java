@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.dao.CustDAO;
 import com.core.plus.contact.cust.vo.CustVO;
+import com.core.plus.task.vo.TaskVO;
 
 @Service
 public class CustServiceImpl implements CustService{
@@ -72,6 +73,13 @@ public class CustServiceImpl implements CustService{
 		int result = custDao.custUploadExcel(destFile);
 		
 		return result;
+	}
+
+	// 엑셀 출력
+	@Override
+	public List<CustVO> custExcelExport(Map<String, Object> custkMap) {
+		List<CustVO> custExcelExport = custDao.custExcelExport(custkMap);
+		return custExcelExport;
 	}
 
 }

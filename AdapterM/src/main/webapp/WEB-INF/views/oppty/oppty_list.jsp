@@ -17,6 +17,7 @@
 
 
 <input type="hidden" id="ctx" value="${ctx}">
+<input type="hidden" id="flg" value="${flg}">
 
 <!-- 매출관리 : 매출기회조회 -->
 
@@ -122,6 +123,8 @@
 				</table>
 			</div>
 		</form>
+		<!-- 엑셀 출력 -->
+		<form id="opptyExcelForm" name="opptyExcelForm" method="post"></form>
 	 	 <table class="commonTable" id="cupnManagerTabl">
 	 	 	<thead>
 	 	 		<tr>
@@ -167,6 +170,7 @@
 		<div class="listFootDiv">
 		 	 <input type="button" class="func_btn" id="oppty_single_add" value="단건등록" onclick="opptySingleAddForm();">
 		 	 <input type="button" class="func_btn" id="oppty_multi_add" value="다건등록" onclick="opptyExcelImportOpen();">
+		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('opptyExcelForm');" >	
 		</div>
 	 	<div class="pagingDiv">
 			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>

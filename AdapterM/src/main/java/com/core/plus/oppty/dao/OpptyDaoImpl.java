@@ -21,6 +21,7 @@ import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.oppty.vo.OpptyItemVO;
 import com.core.plus.oppty.vo.OpptyVO;
+import com.core.plus.task.vo.TaskVO;
 
 @Repository
 public class OpptyDaoImpl implements OpptyDao {
@@ -507,6 +508,19 @@ public class OpptyDaoImpl implements OpptyDao {
 		System.out.println(result);
 		
 		return result;
+	}
+
+	@Override
+	public List<OpptyVO> opptyExcelExport(Map<String, Object> opptykMap) {
+		
+		List<OpptyVO> opptyExcelExport = null;
+		try {
+			opptyExcelExport = sqlSession.selectList("oppty.opptyExcelExport", opptykMap);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return opptyExcelExport;
 	}
 	
 }

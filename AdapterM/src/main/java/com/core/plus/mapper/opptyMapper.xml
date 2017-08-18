@@ -164,6 +164,60 @@
 			oppty_no = #{oppty_no}
 	</select>
 	
+	<!-- excel export -->
+	<select id="opptyExcelExport" parameterType="string" resultType="map">
+		SELECT X.*
+		FROM ( 
+			SELECT 
+				oppty_no,
+				oppty_name,
+				cust_no,
+				(select cust_name from tb_cust cust where cust.cust_no = opty.cust_no) cust_name,
+				case when (select concat(phone_area_no, phone_no) from tb_cust_phone p where p.cust_no = opty.cust_no) is null then '' 
+				else (select concat(phone_area_no, phone_no) from tb_cust_phone p where p.cust_no = opty.cust_no) end as cust_phone,
+				(select emp_name  from tb_emp  emp  where emp.emp_no = opty.emp_no) emp_name,
+				(select code_name from tb_code where code_no = '1010' and code = oppty_status_cd) oppty_status_cd,
+				(select code_name from tb_code where code_no = '1011' and code = oppty_stage_cd)  oppty_stage_cd,
+				exp_close_day,
+				(select code_name from tb_code where code_no = '1008' and code = dtype_cd) dtype_cd,
+				(select code_name from tb_code where code_no = '1012' and code = purchase_type) purchase_type,
+				(select code_name from tb_code where code_no = '1014' and code = rec_per_cd) rec_per_cd,
+				create_date
+			FROM
+				tb_oppty opty
+			WHERE
+				del_yn = 'N'
+				<if test="oppty_no_srch != null and oppty_no_srch != ''">
+					AND (oppty_no like concat('%', #{oppty_no_srch}, '%'))
+				</if>
+				<if test="oppty_name_srch != null and oppty_name_srch != ''">
+					AND (oppty_name like concat('%', #{oppty_name_srch}, '%'))
+				</if>
+				<if test="cust_name_srch != null and cust_name_srch != ''">
+					AND (cust_no in ( select cust_no from tb_cust where cust_name like concat('%', #{cust_name_srch}, '%')))
+				</if>
+				<if test="emp_name_srch != null and emp_name_srch != ''">
+					AND (emp_no like ( select emp_no from tb_emp where emp_name like concat('%', #{emp_name_srch}, '%')))
+				</if>
+				<if test="oppty_status_cd_srch != null and oppty_status_cd_srch != ''">
+					AND (oppty_status_cd like concat('%', #{oppty_status_cd_srch}, '%'))
+				</if>
+				<if test="oppty_stage_cd_srch != null and oppty_stage_cd_srch != ''">
+					AND (oppty_stage_cd like concat('%', #{oppty_stage_cd_srch}, '%'))
+				</if>
+				<if test="exp_close_dt_srch != null and exp_close_dt_srch != ''">
+					AND (exp_close_day like concat('%', DATE_FORMAT(#{exp_close_dt_srch}, '%Y%m%d'), '%'))
+				</if>
+				<if test="dtype_cd_srch != null and dtype_cd_srch != ''">
+					AND (dtype_cd like concat('%', #{dtype_cd_srch}, '%'))
+				</if>
+				<if test="purchase_type_srch != null and purchase_type_srch != ''">
+					AND (purchase_type like concat('%', #{purchase_type_srch}, '%'))
+				</if>
+			ORDER BY update_date DESC
+		)X
+	</select>
+	
 	<!-- Detail -->
 	<select id="opptyDetail" resultType="com.core.plus.oppty.vo.OpptyVO" parameterType="com.core.plus.oppty.vo.OpptyVO">
 		SELECT 

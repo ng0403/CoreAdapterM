@@ -124,6 +124,25 @@ public class OpptyController {
 		return kMap;
 	}
 	
+	//엑셀 출력 
+	@RequestMapping(value = "/toOpptyExcel",  method=RequestMethod.POST)
+	public ModelAndView toExcel(HttpServletRequest req, HttpSession session) {
+		
+		int flg =0;
+		ModelAndView result = new ModelAndView();
+		Map<String, Object> opptykMap = new HashMap<String, Object> ();
+		
+		//taskMap.put("some",req.getParameter("some"));    				// where에 들어갈 조건??
+		 
+		List<OpptyVO> list = opptyService.opptyExcelExport(opptykMap);	// 쿼리
+		result.addObject("opptyExcelExport", list); 					// 쿼리 결과를 model에 담아줌
+		result.setViewName("/oppty/opptyList_excel");					// 엑셀로 출력하기 위한 jsp 페이지
+		 
+		return result;
+	}
+	
+	
+	
 	// 상세보기 및 단건등록화면
 	@RequestMapping(value="oppty_detail")
 	public ModelAndView opptyDetail(String oppty_no, String flg)

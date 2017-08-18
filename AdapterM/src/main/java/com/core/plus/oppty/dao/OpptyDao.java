@@ -59,4 +59,7 @@ public interface OpptyDao {
 	int getSmallPopupRow(Map<String, Object> map);
 	int opptyUploadExcel(MultipartFile excelFile);
 	
+	// excel Export
+	List<OpptyVO> opptyExcelExport(Map<String, Object> opptykMap);
+	
 }

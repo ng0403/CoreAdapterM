@@ -14,6 +14,7 @@ import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.oppty.dao.OpptyDao;
 import com.core.plus.oppty.vo.OpptyItemVO;
 import com.core.plus.oppty.vo.OpptyVO;
+import com.core.plus.task.vo.TaskVO;
 
 @Service
 public class OpptyServiceImlp implements OpptyService {
@@ -266,6 +267,13 @@ public class OpptyServiceImlp implements OpptyService {
 		int result = opptyDao.opptyUploadExcel(excelFile);
 		
 		return result;
+	}
+
+	@Override
+	public List<OpptyVO> opptyExcelExport(Map<String, Object> opptykMap) {
+		
+		List<OpptyVO> opptyExcelExport = opptyDao.opptyExcelExport(opptykMap);
+		return opptyExcelExport;
 	}
 
 }
