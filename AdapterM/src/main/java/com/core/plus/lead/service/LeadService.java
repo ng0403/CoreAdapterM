@@ -3,6 +3,8 @@ package com.core.plus.lead.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
@@ -31,5 +33,6 @@ public interface LeadService {
 	//엑셀 출력
 	List<LeadVO> leadExcelExport(Map<String, Object> leadMap);
 	
+	int excelUpload(MultipartFile excelFile);
 	
 }

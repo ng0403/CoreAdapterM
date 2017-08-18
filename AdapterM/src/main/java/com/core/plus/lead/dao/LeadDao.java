@@ -3,6 +3,8 @@ package com.core.plus.lead.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
 import com.core.plus.lead.vo.LeadVO;
@@ -30,5 +32,6 @@ public interface LeadDao {
 	// 엑셀 출력
 	List<LeadVO> leadExcelExport(Map<String, Object> leadMap);
 	
+	int leadUploadExcel(MultipartFile excelFile);
 	
 }

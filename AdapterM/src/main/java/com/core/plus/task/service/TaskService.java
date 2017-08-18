@@ -3,6 +3,8 @@ package com.core.plus.task.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
@@ -47,5 +49,7 @@ public interface TaskService {
 	List<TaskVO> taskExcelExport(Map<String, Object> taskMap);			// 엑셀 출력
 	List<TaskVO> taskSchExcel(Map<String, Object> taskMap);				// 엑셀 검색 조건에 맞게 출력
 	
+	// Excel
+	int excelUpload(MultipartFile excelFile);	
 	
 }

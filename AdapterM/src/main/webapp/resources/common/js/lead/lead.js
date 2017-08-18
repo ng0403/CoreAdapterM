@@ -456,4 +456,62 @@ function download_list_Excel(formID) {
 	} 
 	$("input[name=excel]").val("");
 }
- 
+
+//엑셀 Import 팝업	
+function leadExcelImportOpen() 
+{
+	var popWidth  = '520'; // 파업사이즈 너비
+	var popHeight = '160'; // 팝업사이즈 높이
+	var winHeight = document.body.clientHeight;	// 현재창의 높이
+	var winWidth = document.body.clientWidth;	// 현재창의 너비
+	var winX = window.screenLeft;	// 현재창의 x좌표
+	var winY = window.screenTop;	// 현재창의 y좌표
+
+	var popX = winX + (winWidth - popWidth)/2;
+	var popY = winY + (winHeight - popHeight)/2;
+	var popUrl = "opptyExcelImportTab";
+	var popOption = "width=520, height=160, resize=no, scrollbars=no, status=no, location=no, directories=no; ,top=pop,left=popX";
+	window.open(popUrl, "_blank","width="+popWidth+"px,height="+popHeight+"px,top="+popY+",left="+popX);
+}
+
+//엑셀파일 insert
+function leadExcelCheck()
+{
+    var excelFile = $("#excelFile").val();
+    
+    if (excelFile == "" || excelFile == null) 
+    {
+        alert("파일을 선택해주세요.");
+        
+        return false;
+    } 
+    else if (!leadCheckFileType(excelFile)) 
+    {
+        alert("엑셀 파일만 업로드 가능합니다.");
+        
+        return false;
+    }
+    if (confirm("업로드 하시겠습니까?")) 
+    {
+    	$("#excelUploadForm").append(excelFile);
+    	$("#excelUploadForm").submit();
+	}
+	
+//	opener.parent.location.reload();
+}
+
+//엑셀 파일 추가 fucntion
+function leadCheckFileType(filePath) 
+{
+	var fileFormat = filePath.split(".");
+	
+	if (fileFormat.indexOf("xlsx") > -1) {
+		return true;
+	} 
+	else {
+		return false;
+	}
+
+}
+
+

@@ -1,11 +1,20 @@
 package com.core.plus.lead.dao;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
@@ -122,5 +131,116 @@ public class LeadDaoImpl implements LeadDao {
 		return leadExcelExport;
 	}
 
-	
+	@Override
+	public int leadUploadExcel(MultipartFile excelFile) {
+		// TODO Auto-generated method stub
+		System.out.println("Excel Upload Dao");
+		int result = 0;
+		
+		try {
+			Workbook workBook = WorkbookFactory.create(excelFile.getInputStream());
+			Sheet sheet = workBook.getSheetAt(0);
+			Row row = null;
+			Cell cell = null;
+			
+			String lead_no   = null;
+			String lead_name = null;
+			String cust_no = null;
+			String emp_no  = null;
+			String contact_day = null;
+			String rank_cd  = null;
+			String reason_cd = null;
+			String remark_cn = null;
+			
+			int rows = sheet.getPhysicalNumberOfRows();
+			System.out.println(rows);
+			
+			for(int i=0; i<rows; i++) {
+				row = sheet.getRow(i);
+				
+				cell = row.getCell(0);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					cell.setCellType(Cell.CELL_TYPE_STRING);
+					lead_no = cell.getStringCellValue();
+					
+					System.out.println("oppty_no");
+				}
+				
+				cell = row.getCell(1);
+				lead_name = cell.getStringCellValue().trim();
+				
+				System.out.println("oppty_name");
+
+				cell = row.getCell(2);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					cell.setCellType(Cell.CELL_TYPE_STRING);
+					cust_no = cell.getStringCellValue();
+					
+					System.out.println("cust_no");
+				}
+				
+				cell = row.getCell(3);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					cell.setCellType(Cell.CELL_TYPE_STRING);
+					emp_no = cell.getStringCellValue();
+					
+					System.out.println("emp_no");
+				}
+				
+				cell = row.getCell(4);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					int tmp = (int) cell.getNumericCellValue();
+					contact_day = String.valueOf(tmp);
+				}
+				
+				cell = row.getCell(5);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					int tmp = (int) cell.getNumericCellValue();
+					rank_cd = String.format("%03d", tmp);
+				}
+				
+				cell = row.getCell(6);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					int tmp = (int) cell.getNumericCellValue();
+					reason_cd = String.format("%03d", tmp);
+				}
+				
+				cell = row.getCell(7);
+				remark_cn = cell.getStringCellValue();
+				
+				LeadVO leadVo = new LeadVO();
+				leadVo.setLead_no(lead_no);;
+				leadVo.setLead_name(lead_name);
+				leadVo.setCust_no(cust_no);
+				leadVo.setEmp_no(emp_no);
+				leadVo.setContact_day(contact_day);
+				leadVo.setRank_cd(rank_cd);
+				leadVo.setReason_cd(reason_cd);
+				leadVo.setRemark_cn(remark_cn);
+				
+				System.out.println("VO : " + leadVo);
+				
+				if(lead_no != null || leadVo.getLead_no() != null)
+				{
+					result += sqlSession.insert("lead.lead_multi_insert", leadVo);
+				}
+			}
+			
+		} catch (InvalidFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		
+		return result;
+	}
 }

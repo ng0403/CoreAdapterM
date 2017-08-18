@@ -1,11 +1,20 @@
 package com.core.plus.task.dao;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.core.plus.contact.cust.vo.CustVO;
 import com.core.plus.emp.vo.EmpVO;
@@ -232,5 +241,134 @@ public class TaskDAOImpl implements TaskDAO {
 			
 	}
 
+	@Override
+	public int taskUploadExcel(MultipartFile excelFile) {
+		// TODO Auto-generated method stub
+		System.out.println("Excel Upload Dao");
+		int result = 0;
+		
+		try {
+			Workbook workBook = WorkbookFactory.create(excelFile.getInputStream());
+			Sheet sheet = workBook.getSheetAt(0);
+			Row row = null;
+			Cell cell = null;
+			
+			String task_no   = null;
+			String subject  = null;
+			String cust_no  = null;
+			String emp_no   = null;
+			String lead_no  = null;
+			String oppty_no = null;
+			String location = null;
+			String next_day = null;
+			String dtype_cd = null;
+			String score_cd = null;
+			String remark_cn = null;
+			
+			int rows = sheet.getPhysicalNumberOfRows();
+			System.out.println(rows);
+			
+			for(int i=0; i<rows; i++) {
+				row = sheet.getRow(i);
+				
+				cell = row.getCell(0);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					cell.setCellType(Cell.CELL_TYPE_STRING);
+					task_no = cell.getStringCellValue();
+				}
+				
+				cell = row.getCell(1);
+				subject = cell.getStringCellValue().trim();
+				
+				cell = row.getCell(2);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					cell.setCellType(Cell.CELL_TYPE_STRING);
+					cust_no = cell.getStringCellValue();
+				}
+				
+				cell = row.getCell(3);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					cell.setCellType(Cell.CELL_TYPE_STRING);
+					emp_no = cell.getStringCellValue();
+					
+					System.out.println("emp_no");
+				}
+				
+				cell = row.getCell(4);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					cell.setCellType(Cell.CELL_TYPE_STRING);
+					lead_no = cell.getStringCellValue();
+				}
+				
+				cell = row.getCell(5);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					cell.setCellType(Cell.CELL_TYPE_STRING);
+					oppty_no = cell.getStringCellValue();
+				}
+				
+				cell = row.getCell(6);
+				location = cell.getStringCellValue();
+				
+				cell = row.getCell(7);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					int tmp = (int) cell.getNumericCellValue();
+					next_day = String.valueOf(tmp);
+				}
+				
+				cell = row.getCell(8);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					int tmp = (int) cell.getNumericCellValue();
+					dtype_cd = String.format("%03d", tmp);
+				}
+				
+				cell = row.getCell(9);
+				if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					int tmp = (int) cell.getNumericCellValue();
+					score_cd = String.format("%03d", tmp);
+				}
+				
+				cell = row.getCell(10);
+				remark_cn = cell.getStringCellValue();
+				
+				TaskVO taskVo = new TaskVO();
+				taskVo.setTask_no(task_no);;
+				taskVo.setLead_name(subject);
+				taskVo.setCust_no(cust_no);
+				taskVo.setLead_no(lead_no);;
+				taskVo.setOppty_no(oppty_no);
+				taskVo.setEmp_no(emp_no);
+				taskVo.setLocation(location);
+				taskVo.setNext_day(next_day);
+				taskVo.setDtype_cd(dtype_cd);
+				taskVo.setScore_cd(score_cd);
+				taskVo.setRemark_cn(remark_cn);
+				
+				System.out.println("VO : " + taskVo);
+				
+				if(task_no != null || taskVo.getTask_no() != null)
+				{
+					result += sqlSession.insert("task.task_multi_insert", task_no);
+				}
+			}
+			
+		} catch (InvalidFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		
+		return result;
+	}	
 
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.core.plus.common.PagerVO;
 import com.core.plus.contact.cust.vo.CustVO;
@@ -106,6 +107,14 @@ public class LeadServiceImpl implements LeadService {
 		
 		List<LeadVO> leadExcelExport = leadDao.leadExcelExport(leadMap);
 		return leadExcelExport;
+	}
+	
+	@Override
+	public int excelUpload(MultipartFile excelFile) {
+		// TODO Auto-generated method stub
+		int result = leadDao.leadUploadExcel(excelFile);
+		
+		return result;
 	}
 
 }
