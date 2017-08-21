@@ -60,8 +60,8 @@ function leadSearchEnter(event) {
  
 // 리드 상세정보
  function leadDetail(a) {
-	  
    var no = a; 
+   console.log(no);
    location.href="/lead_detail?lead_no=" + no; 
 	 
  }
@@ -106,13 +106,13 @@ function leadSearchEnter(event) {
  	});
  	
  	// list 불러오는 함수.
- 	viewEmpList();
+ 	viewEmpList(1);
  }
  
  
  
 //고객 Popup
- function viewCustList() {
+ function viewCustList(pageNum) {
  	var ctx = $("#ctx").val();
  	
  	var s_cust_name = $("#s_cust_name").val();
@@ -122,7 +122,10 @@ function leadSearchEnter(event) {
  	$.ajax({
  		url: ctx + "/custPopListAjax", 
  		type: "POST",  
- 		data: { s_cust_name : s_cust_name },
+ 		data: {
+ 			pageNum     : pageNum,
+ 			s_cust_name : s_cust_name 
+ 		},
  		dataType: "json",
  		success: function(data) { 
  			
@@ -173,7 +176,7 @@ function leadSearchEnter(event) {
  
  
 //담당자 Popup
- function viewEmpList() {
+ function viewEmpList(pageNum) {
  	var ctx = $("#ctx").val();
  	
  	var s_emp_name = $("#s_emp_name").val();
@@ -183,7 +186,10 @@ function leadSearchEnter(event) {
  	$.ajax({
  		url: ctx + "/empPopListAjax", 
  		type: "POST",  
- 		data: { s_emp_name : s_emp_name },
+ 		data: { 
+ 			pageNum     : pageNum,
+ 			s_emp_name : s_emp_name 
+ 		},
  		dataType: "json",
  		success: function(data) { 
  			
@@ -515,3 +521,8 @@ function leadCheckFileType(filePath)
 }
 
 
+//Popup 닫기
+function popClose()
+{
+	$.unblockUI();
+}

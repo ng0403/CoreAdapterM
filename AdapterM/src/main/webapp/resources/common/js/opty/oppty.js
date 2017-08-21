@@ -35,6 +35,7 @@ function opptySchList(opptyPageNum)
 	var tbodyContent = "";
 	
 	console.log(opptyPageNum);
+	console.log(exp_close_dt_srch);
 	
 	$.ajax({
 		url:ctx + '/oppty_sch',

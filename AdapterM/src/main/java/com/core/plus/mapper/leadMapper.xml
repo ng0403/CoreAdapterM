@@ -96,7 +96,7 @@
    
    </update>
    
-   <select id="lead_detail" resultType="com.core.plus.lead.vo.LeadVO">
+   <select id="lead_detail" resultType="com.core.plus.lead.vo.LeadVO" parameterType="String">
    
    select
     l.lead_no,
@@ -111,7 +111,7 @@
       l.reason_cd, 
     l.remark_cn
    from tb_lead l, tb_cust c, tb_emp e
-   where lead_no= #{lead_no} and l.cust_no = c.cust_no
+   where lead_no= #{lead_no} and l.cust_no = c.cust_no and l.emp_no = e.emp_no
    </select>
    
    

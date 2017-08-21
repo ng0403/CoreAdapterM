@@ -162,9 +162,9 @@ $(document).ready(function(){
     </div>
     
     <div id="cust_phone_div" style="float: right; margin-top: 25px; margin-bottom: 7px;">
- 	 	<input type="button" class="func_btn" id="cust_update" value="추가" onclick="cust_phone_add(${custDlist.cust_no});">
+ 	 	<input type="button" class="func_btn" id="cust_update" value="추가" onclick="cust_phone_add();">
  	 	<input type="button" class="tr_btn" id="cust_delete" value="삭제" onclick="cust_remove();">
- 	 	<input type="button" class="tr_btn" id="cust_detail_cancel" value="저장" onclick="cust_phone_save(${custDlist.cust_no});">
+ 	 	<input type="button" class="tr_btn" id="cust_detail_cancel" value="저장" onclick="cust_phone_save();">
 	</div>
 
 	 
@@ -247,9 +247,9 @@ $(document).ready(function(){
     </div>
         
     <div id="cust_address_div" style="float: right; margin-top: 25px; margin-bottom: 7px;">
- 	 	<input type="button" class="func_btn" id="cust_update" value="추가" onclick="cust_address_add(${custDlist.cust_no});">
+ 	 	<input type="button" class="func_btn" id="cust_update" value="추가" onclick="cust_address_add();">
  	 	<input type="button" class="tr_btn" id="cust_delete" value="삭제" onclick="custAddr_remove();">
- 	 	<input type="button" class="tr_btn" id="cust_detail_cancel" value="저장" onclick="cust_addr_save(${custDlist.cust_no});">
+ 	 	<input type="button" class="tr_btn" id="cust_detail_cancel" value="저장" onclick="cust_addr_save();">
 	</div>
 	
 	<div style="height:25px;"></div>

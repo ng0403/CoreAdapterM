@@ -134,7 +134,7 @@ $(document).ready(function(){
 <!-- 고객 모달창 시작 -->
 <div id="custListModalDiv" style="display: none;">
     <div style="width: 100%; height:7%; background-color: #ececec;" align="right">
- 		<input type="button" value="X" id="popupBoxClose" onclick="popupClose();" >
+ 		<input type="button" value="X" id="popupBoxClose" onclick="popClose();" >
  	</div>
 	<form method='post' name='custListPopup' id='custListPopup'>
 	<div id="custListModalContent" style="margin: 0 1.5% 0 1.5%;">
@@ -147,10 +147,10 @@ $(document).ready(function(){
 			 	 		<tr id="custListTableHeader">
 			 	 			<th style="width: 20%; text-align: right; padding-right: 1%;">고객명 : </th>
 			 	 			<td style="width: 40%;">
-			 	 			    <input type="text" id="s_emp_name" name="s_emp_name" style="width: 70%;" maxlength="100"/>&nbsp;&nbsp;
+			 	 			    <input type="text" id="s_cust_name" name="s_cust_name" style="width: 70%;" maxlength="100"/>&nbsp;&nbsp;
 							</td>
 							<td style="width: 40%; text-align: right;">
-								<input type="button" value="검색" class="back_btn" style="float: right;" onclick="viewCustList();"/> <!-- onclick="viewProdMenuList(1); -->
+								<input type="button" value="검색" class="back_btn" style="float: right;" onclick="viewCustList(1);"/> <!-- onclick="viewProdMenuList(1); -->
 							</td>			
 			 	 		</tr>
 			 	 	</thead>
@@ -178,7 +178,7 @@ $(document).ready(function(){
 <!-- 담당자 모달창 시작 -->
 <div id="empListModalDiv" style="display: none;">
     <div style="width: 100%; height:7%; background-color: #ececec;" align="right">
- 		<input type="button" value="X" id="popupBoxClose" onclick="popupClose();" >
+ 		<input type="button" value="X" id="popupBoxClose" onclick="popClose();" >
  	</div>
 	<form method='post' name='custListPopup' id='custListPopup'>
 	<div id="empListModalContent" style="margin: 0 1.5% 0 1.5%;">
@@ -194,7 +194,7 @@ $(document).ready(function(){
 			 	 			    <input type="text" id="s_emp_name" name="s_emp_name" style="width: 70%;" maxlength="100"/>&nbsp;&nbsp;
 							</td>
 							<td style="width: 40%; text-align: right;">
-								<input type="button" value="검색" class="back_btn" style="float: right;" onclick="viewEmpList();"/> <!-- onclick="viewProdMenuList(1); -->
+								<input type="button" value="검색" class="back_btn" style="float: right;" onclick="viewEmpList(1);"/> <!-- onclick="viewProdMenuList(1); -->
 							</td>			
 			 	 		</tr>
 			 	 	</thead>

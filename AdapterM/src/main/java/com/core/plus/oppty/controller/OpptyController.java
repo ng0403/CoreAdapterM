@@ -108,13 +108,14 @@ public class OpptyController {
 		kMap.put("emp_name_srcj", emp_name_srcj);
 		kMap.put("oppty_status_cd_srch", oppty_status_cd_srch);
 		kMap.put("oppty_stage_cd_srch", oppty_stage_cd_srch);
-		kMap.put("exp_close_dt_srch", dtype_cd_srch);
+		kMap.put("exp_close_dt_srch", exp_close_dt_srch);
 		kMap.put("dtype_cd_srch", dtype_cd_srch);
 		kMap.put("purchase_type_srch", purchase_type_srch);
 		
 		// paging
 		PagerVO page = opptyService.getOpptyListRow(kMap);
 		kMap.put("page", page);
+		System.out.println("Map : " + kMap);
 		System.out.println("page : " + page);
 				
 		List<OpptyVO> srcList = opptyService.opptySchList(kMap);

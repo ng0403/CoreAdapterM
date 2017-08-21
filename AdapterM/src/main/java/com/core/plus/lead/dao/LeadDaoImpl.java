@@ -50,7 +50,7 @@ public class LeadDaoImpl implements LeadDao {
 
 	@Override
 	public LeadVO lead_detail(String lead_no) {
-		 
+		 System.out.println("Dao : " + lead_no);
 		return sqlSession.selectOne("lead_detail", lead_no);
 	}
 

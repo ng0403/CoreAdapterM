@@ -222,7 +222,11 @@ function searchKeyword(pageNum){
 				},
 				dataType : "json",
 				success : function(data) {
+					console.log(data);
+					$("#cust_no").val(data.cust_no);
+					console.log($("#cust_no").val());
 					alert("고객이 저장되었습니다.");
+					console.log($("#cust_no").val());
 				}, error : function(request,status,error) {
 				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				}
@@ -292,13 +296,9 @@ function searchKeyword(pageNum){
  
 
  // 테이블 행 추가
-function cust_phone_add(cust_no) {
-	var cust_no = cust_no;
-//	var phoneTypeCdList = "<c:out value='${phoneTypeCdList}'/>";
-//	var phone_type_cd = '<c:out value="${custPList.phone_type_cd}"/>';
-//	var phone_type_cd = document.getElementById("phone_type_cd").value;
+function cust_phone_add() {
+	var cust_no = $("#cust_no").val();
 	
-//	alert(phone_type_cd);
 	console.log(cust_no);
 	
     var tbody = $('#table_tbody');
@@ -323,7 +323,7 @@ function cust_phone_add(cust_no) {
 							"</td>"+
 							"<td>"+
 								"<select id='phone_country_cd' name='phone_country_cd' " + 
-										"style='margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;'>" +
+										"style='margin-left: 0; width: 90%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;'>" +
 									"<option value=''>선택</option>" +
 									phoneCountryCdList_contents +
 								"</select>" +
@@ -357,9 +357,10 @@ function cust_remove() {
 }
 
 // 전화번호 등록
-function cust_phone_save(cust_no)
+//function cust_phone_save(cust_no)
+function cust_phone_save()
 {
-	var cust_no = cust_no;
+	var cust_no = $("#cust_no").val();
 	var phone_type_cd = [];
 	var country_cd	  = [];
 	var phone_area_no = [];
@@ -477,9 +478,9 @@ function cust_phone_save(cust_no)
 }
 
 // 우편 테이블 행 추가
-function cust_address_add(cust_no)
+function cust_address_add()
 {
-	var cust_no = cust_no;
+	var cust_no = $("#cust_no").val();
 	console.log(cust_no);
 
 	var tbody = $('#tableAddr_tbody');
@@ -527,9 +528,10 @@ function custAddr_remove() {
 	
 }
 
-function cust_addr_save(cust_no)
+//function cust_addr_save(cust_no)
+function cust_addr_save()
 {
-	var cust_no = cust_no;
+	var cust_no = $("#cust_no").val();
 	var addr_type_cd   = [];
 	var zip_no	  	   = [];
 	var main_address   = [];

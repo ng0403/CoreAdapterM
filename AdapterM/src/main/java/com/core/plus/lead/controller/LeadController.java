@@ -25,6 +25,7 @@ import com.core.plus.info.menu.service.MenuService;
 import com.core.plus.info.menu.vo.MenuVo;
 import com.core.plus.lead.service.LeadService;
 import com.core.plus.lead.vo.LeadVO;
+import com.core.plus.oppty.service.OpptyService;
 import com.core.plus.task.vo.TaskVO;
 
 @Controller
@@ -35,6 +36,9 @@ public class LeadController {
 	
 	@Resource
 	MenuService menuService;
+	
+	@Resource
+	OpptyService opptyService;
 	
 	public void menuImport(ModelAndView mav, String url){
 		String menu_id = menuService.getMenuUrlID(url);
@@ -85,6 +89,7 @@ public class LeadController {
 	@RequestMapping(value="lead_detail", method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView lead_detail(@RequestParam("lead_no") String lead_no){ 
 	 
+		System.out.println("lead_no : " + lead_no);
 		ModelAndView mov = new ModelAndView("leadCRUD");
 		mov.addObject("detail", leadService.lead_detail(lead_no));
 		mov.addObject("nal","2017-08-09");
@@ -102,6 +107,9 @@ public class LeadController {
 
 		ModelAndView mov = new ModelAndView("leadCRUD");
 		mov.addObject("flg", "1");
+		
+		menuImport(mov, "lead");
+		
 		return mov;
 	}
 	 
@@ -131,6 +139,8 @@ public class LeadController {
 			ModelAndView mov = new ModelAndView("leadCRUD");
 			mov.addObject("detail", leadService.lead_detail(lead_no));
 			mov.addObject("flg", "2");
+			
+			menuImport(mov, "lead");
 			
 			return mov;
 		}
@@ -206,15 +216,21 @@ public class LeadController {
 	
 	//고객 팝업 리스트
 	@RequestMapping(value="custPopListAjax", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> custListPopup(String s_cust_name)
+	public @ResponseBody Map<String, Object> custListPopup(@RequestParam(value = "PageNum", defaultValue = "1") int PageNum, String s_cust_name)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("custPopupPageNum", PageNum);
+		
+		PagerVO page = opptyService.getCustPopupRow(map);
 		
 		// 담당자리스트 불러오는 서비스/다오/맵퍼 작성
 		if(s_cust_name == null || s_cust_name == "")
 		{
 			List<CustVO> custPopupList = leadService.custPopupList();
 			map.put("custPopupList", custPopupList);
+			map.put("page", page);
+			map.put("pageNum", PageNum);
+			
 			System.out.println("map ?? " + map.toString());
 			return map;
 		}
@@ -223,22 +239,31 @@ public class LeadController {
 			map.put("s_cust_name", s_cust_name);
 			List<CustVO> schCustPopupList = leadService.custPopupList(map);
 			map.put("custPopupList", schCustPopupList);
+			map.put("page", page);
+			map.put("pageNum", PageNum);
+			
 			System.out.println("map? " + map.toString());
+			
 			return map;
 		}
 	}
 	
 	//담당자 팝업 리스트
 	@RequestMapping(value="empPopListAjax", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> empListPopup(String s_emp_name)
+	public @ResponseBody Map<String, Object> empListPopup(@RequestParam(value = "PageNum", defaultValue = "1") int PageNum, String s_emp_name)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("empPopupPageNum", PageNum);
+		
+		PagerVO page = opptyService.getEmpPopupRow(map);
 		
 		// 담당자리스트 불러오는 서비스/다오/맵퍼 작성
 		if(s_emp_name == null || s_emp_name == "")
 		{
 			List<EmpVO> empPopupList = leadService.empPopupList();
 			map.put("empPopupList", empPopupList);
+			map.put("page", page);
+			map.put("PageNum", PageNum);
 			
 			return map;
 		}
@@ -247,6 +272,8 @@ public class LeadController {
 			map.put("s_emp_name", s_emp_name);
 			List<EmpVO> schEmpPopupList = leadService.empPopupList(map);
 			map.put("empPopupList", schEmpPopupList);
+			map.put("page", page);
+			map.put("PageNum", PageNum);
 			
 			return map;
 		}
