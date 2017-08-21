@@ -12,7 +12,11 @@ $(function(){
 			$("#rank_cd").attr("readonly", true); 
 			$("#reason_cd").attr("readonly", true);
 			$("#remark_cn").attr("readonly", true);  
+			$("#emp_list_pop").attr("disabled", true);
+			$("#cust_list_pop").attr("disabled", true);
 	  }
+	  
+	
  
 	  // lead update button div hide
 	  $("#lead_update_div").css("display", "none");
@@ -305,8 +309,10 @@ function lead_modify(){
 	$("#contact_day").attr("readonly", false);
 	$("#rank_cd").attr("readonly", false); 
 	$("#reason_cd").attr("readonly", false);
-	$("#remark_cn").attr("readonly", false); 
-	
+	$("#remark_cn").attr("readonly", false);  
+	$("#emp_list_pop").attr("disabled", false);
+	$("#cust_list_pop").attr("disabled", false);
+	 
 	
 	$("#lead_detail_div").css("display", "none");
 	$("#lead_update_div").css("display", "block");
