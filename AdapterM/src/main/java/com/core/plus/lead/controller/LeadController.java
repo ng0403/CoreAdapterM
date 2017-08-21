@@ -290,6 +290,7 @@ public class LeadController {
 		//taskMap.put("some",req.getParameter("some"));    			// where에 들어갈 조건??
 		 
 		List<LeadVO> list = leadService.leadExcelExport(leadMap);	// 쿼리
+		System.out.println("size? " + list.size());
 		result.addObject("leadExcelExport", list); 					// 쿼리 결과를 model에 담아줌
 		result.setViewName("/lead/leadList_excel");					// 엑셀로 출력하기 위한 jsp 페이지
 		 

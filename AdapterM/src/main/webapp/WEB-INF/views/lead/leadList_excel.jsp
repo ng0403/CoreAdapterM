@@ -59,7 +59,7 @@
 					<td class="body" id="no"><c:out value="${leadExcelExport.cust_no}"></c:out></td>
 					<td class="body"><c:out value="${leadExcelExport.cust_name}"></c:out></td>
 					<td class="body"><c:out value="${leadExcelExport.phone_no}"></c:out></td>
-					<td class="body"><c:out value="${leadExcelExport.emp_no}"></c:out></td>
+					<td class="body"><c:out value="${leadExcelExport.emp_name}"></c:out></td>
 					<td class="body"><c:out value="${leadExcelExport.contact_day}"></c:out></td>
 					<td class="body"><c:out value="${leadExcelExport.rank_cd}"></c:out></td>
 					<td class="body"><c:out value="${leadExcelExport.create_date}"></c:out></td>
@@ -67,7 +67,7 @@
 			</c:forEach>
 		</c:if>
 			
-		<c:if test="${leadExcelExport.size() == 0}">
+		<c:if test="${fn:length(leadExcelExport) == 0}" >
 			<tr style="cursor: default; background-color: white;">
 				<td colspan="9" style="height: 100%; text-align: center;"><b>검색 결과가 없습니다.</b></td>
 			</tr>
