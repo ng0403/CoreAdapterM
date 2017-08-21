@@ -6,7 +6,10 @@
 * enterSearch(event)                	: 엔터키 기능
 * taskPageNumInputEnter(event)          : 페이징 엔터키 기능
 * taskPaging(pageNum)              	 	: 페이징 함수
-* 
+* download_list_Excel(formID)			: 엑셀 출력 함수
+* taskExcelImportOpen() 				: 엑셀 Import 팝업
+* taskExcelCheck()						: 엑셀 Insert
+* taskCheckFileType(filePath) 			: 엑셀 파일 추가
 */
 
 var ctx = $("#ctx").val();

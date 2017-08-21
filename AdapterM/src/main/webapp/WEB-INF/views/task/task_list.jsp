@@ -69,7 +69,7 @@
 						 <td style="width:15%;">
 <!-- 							<input type="text" id="next_day" name="next_day" value=""  style="width : 80%;" onkeypress="cupnEnterSearch(event);"> -->
  							<input type="text" name="next_day_srch" id="next_day_srch" value="" class="expt_fin_d" 
-							 		readonly="readonly" style="width : 80%; text-align: center; cursor: pointer;">
+							 		readonly="readonly" style="width : 80%; text-align: center; cursor: pointer;" >
  						 </td>
 						 
 						  <th style="width:5%;">분류</th>
