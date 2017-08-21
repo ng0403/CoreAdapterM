@@ -87,6 +87,7 @@ function searchKeyword(pageNum){
 	var rec_per = $("#rec_per").val();
 	var phone_no = $("#phone_no").val();
 	
+	console.log(visit_cd);
 	
 	var custData = { 
 			 		 "custPageNum" : pageNum,

@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <script type="text/javascript" src="${ctx}/resources/common/js/cust/cust.js"></script> 
-<script type="text/javascript" src="${ctx}/resources/common/js/common/excel.js"></script> 
 
 <script type="text/javascript">
 //내원코드리스트 저장
