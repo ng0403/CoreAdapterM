@@ -21,13 +21,14 @@
            case when (emp_name) is null then ' '
                   else (emp_name) end as emp_name ,
            case when (cust_name) is null then ' '
-                  else (cust_name) end as cust_name ,  
-         p.phone_no,
+                  else (cust_name) end as cust_name , 
+           case when (phone_no) is null then ' '
+                  else (phone_no) end as phone_no ,  
          l.contact_day,
          l.rank_cd,
          date_format(l.create_date, '%Y-%m-%d %H:%i') as create_date
       from 
-         tb_lead l left join tb_cust c on l.cust_no = c.cust_no left join  tb_emp em on l.emp_no = em.emp_no left join tb_cust_phone p on l.cust_no = p.cust_no
+         tb_lead l left join tb_cust c on l.cust_no = c.cust_no left join  tb_emp em on l.emp_no = em.emp_no left join tb_cust_phone p on l.cust_no = p.cust_no and p.primary_yn = 'Y'
       where 1=1 and l.del_yn ='N'
          <choose>
             <when test="lead_no_srch !=null and lead_no_srch !=''">
