@@ -1,11 +1,11 @@
 /**
 * 함수 목록
 * taskSchList(taskPageNum)              : 상담 조회
-* task_add_save()                   : 상담 단건 추가
-* taskDetail(a)                     : 상담 상세정보
-* enterSearch(event)                : 엔터키 기능
-* taskPageNumInputEnter(event)         : 페이징 엔터키 기능
-* taskPaging(pageNum)               : 페이징 함수
+* task_add_save()                   	: 상담 단건 추가
+* taskDetail(a)                     	: 상담 상세정보
+* enterSearch(event)                	: 엔터키 기능
+* taskPageNumInputEnter(event)          : 페이징 엔터키 기능
+* taskPaging(pageNum)              	 	: 페이징 함수
 * 
 */
 
