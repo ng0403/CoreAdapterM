@@ -16,18 +16,8 @@ var ctx = $("#ctx").val();
 
 $(document).ready(function(){
 	$(document).on( 'click','.phone_primary_yn', function(event) {
-//		console.log($(this).prop("checked"));
-		
-//		if($(".phone_primary_yn").prop("checked") == true) 
-//		{
-//			$(".phone_primary_yn").prop("checked", false);
-//		}
-//		else
-//		{
-			$(".phone_primary_yn").prop("checked", false);
-			$(this).prop("checked", true);
-//		}
-		
+		$(".phone_primary_yn").prop("checked", false);
+		$(this).prop("checked", true);
 		
 	});
 	
@@ -35,6 +25,14 @@ $(document).ready(function(){
 		$(".addr_primary_yn").prop("checked", false);
 		$(this).prop("checked", true);
 	});	
+	
+//	$(document).on( 'click','.postcodify_search', function(event) {
+//		// 팝업창 표시
+//		console.log("TEMP");
+//		$(this).postcodifyPopUp();
+//	});
+	
+	
 	
 });
 
@@ -407,6 +405,7 @@ function cust_phone_save()
 		success:function(data){
 			console.log(data);
 			tbody.children().remove();
+			alert("전화번호가 등록되었습니다.");
 			
 			var size = data.length;
 			
@@ -502,13 +501,13 @@ function cust_address_add()
 								"</select>"+
 							"</td>"+
 							"<td>"+
-								"<input type='text' id='zip_no' name='zip_no' style='width: 90%;'> " +
+								"<input type='text' id='postcodify_search' class='postcodify postcodify_postcode5' onclick='postPop();' name='zip_no' style='width: 90%;'> " +
 							"</td>" +
 							"<td>"+
-								"<input type='text' id='main_address' name='main_address' style='width: 90%;'> " + 
+								"<input type='text' id='main_address' class='postcodify postcodify_address' name='main_address' style='width: 90%;'> " + 
 							"</td>" +
 							"<td>"+
-							"<input type='text' id='detail_address' name='detail_address' style='width: 90%;'> " + 
+							"<input type='text' id='detail_address' class='postcodify postcodify_details' name='detail_address' style='width: 90%;'> " + 
 							"</td>" +
 							"<td style='width: 2%; text-align: center;'>" +
 								"<input id='custAddrChk' class='addr_primary_yn' type='checkbox' />" +
@@ -517,6 +516,15 @@ function cust_address_add()
 
 	// 새로 그려준다.
 	tbody.append(tbodyContent);
+	
+//	$(document).on( 'click','.postcodify_search',function(event) {
+//		// 팝업창 표시
+//		$(".postcodify_search").postcodifyPopUp();
+//	});
+}
+function postPop()
+{
+	$(".postcodify postcodify_postcode5").postcodifyPopUp();
 }
 
 //테이블 행 삭제
@@ -580,6 +588,8 @@ function cust_addr_save()
 		success:function(data){
 			console.log(data);
 			tbody.children().remove();
+			
+			alert("우편번호가 입력되었습니다.");
 			
 			var size = data.length;
 			

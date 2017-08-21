@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <script type="text/javascript" src="${ctx}/resources/common/js/cust/cust.js"></script> 
+<script type="text/javascript" src="${ctx}/resources/common/js/common/search.min.js"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
 
 <script type="text/javascript">
