@@ -127,42 +127,38 @@ public class TaskController {
 		// paging
 		PagerVO page = taskService.getTaskListRow(taskMap);
 		taskMap.put("page", page);
-				
+		
 		List<TaskVO> srcList = taskService.taskSchList(taskMap);
 		taskMap.put("srcList", srcList);
+				
+		mov.addObject("page", page);
+		mov.addObject("srcList", srcList);
 		
-		int flg=1;
-		// 엑셀 출력 부분 (검색조건에 맞는 리스트 출력)
-		if (excel != null) {
-			if (excel.equals("true")) {
-				
-				ModelAndView mav = new ModelAndView("/task/taskList_excel_src");
-				List<TaskVO> taskSchExcel = taskService.taskSchExcel(taskMap);
-				mav.addObject("taskSchExcel", taskSchExcel);
-				System.out.println("taskSchExcel"+taskSchExcel);
-				return mav;
-				
-			}
-		}
-
-			mov.addObject("page", page);
-			mov.addObject("flg", flg);
-			mov.addObject("srcList", srcList);
 		return mov;
 	}
 	
 	//엑셀 출력 
 	@RequestMapping(value = "/toExcel",  method=RequestMethod.POST)
-	public ModelAndView toExcel(HttpServletRequest req, HttpSession session) {
+	public ModelAndView toExcel(HttpServletRequest req, HttpSession session, 
+									String task_no_srch,  String subject_srch,  String cust_name_srch, 
+									String emp_name_srch, String next_day_srch, String dtype_cd_srch) {
 		
 		ModelAndView result = new ModelAndView();
 		Map<String, Object> taskMap = new HashMap<String, Object> ();
 		
-		//taskMap.put("some",req.getParameter("some"));    		// where에 들어갈 조건??
+		taskMap.put("task_no_srch", task_no_srch);
+		taskMap.put("subject_srch", subject_srch);
+		taskMap.put("cust_name_srch", cust_name_srch);
+		taskMap.put("emp_name_srch", emp_name_srch);
+		taskMap.put("next_day_srch", next_day_srch);
+		taskMap.put("dtype_cd_srch", dtype_cd_srch);
+		
+		//taskMap.put("some",req.getParameter("some"));    			// where에 들어갈 조건??
 		 
-		List<TaskVO> list = taskService.taskSchExcel(taskMap);	// 쿼리
-		result.addObject("taskExcelExport", list); 				// 쿼리 결과를 model에 담아줌
-		result.setViewName("/task/taskList_excel");				// 엑셀로 출력하기 위한 jsp 페이지
+		List<TaskVO> list = taskService.taskExcelExport(taskMap);	// 쿼리
+		System.out.println("taskMap"+ taskMap.toString());
+		result.addObject("taskExcelExport", list); 					// 쿼리 결과를 model에 담아줌
+		result.setViewName("/task/taskList_excel");					// 엑셀로 출력하기 위한 jsp 페이지
 		 
 		return result;
 	}

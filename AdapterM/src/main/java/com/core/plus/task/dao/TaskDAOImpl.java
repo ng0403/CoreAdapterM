@@ -232,15 +232,6 @@ public class TaskDAOImpl implements TaskDAO {
 		return taskExcelExport;
 	}
 
-	//엑셀 검색 조건에 맞는 출력
-	@Override
-	public List<TaskVO> taskSchExcel(Map<String, Object> taskMap) {
-		
-		List<TaskVO> vo  = sqlSession.selectList("task.taskExcelExport", taskMap);
-		return vo;
-			
-	}
-
 	@Override
 	public int taskUploadExcel(MultipartFile excelFile) {
 		// TODO Auto-generated method stub

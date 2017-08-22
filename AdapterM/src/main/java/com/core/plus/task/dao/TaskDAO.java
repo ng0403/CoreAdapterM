@@ -45,7 +45,6 @@ public interface TaskDAO {
 	List<OpptyVO> opptyPopupList(Map<String, Object> map);
 	
 	List<TaskVO> taskExcelExport(Map<String, Object> taskMap);			// 엑셀 출력
-	List<TaskVO> taskSchExcel(Map<String, Object> taskMap);				// 엑셀 검색 조건에 맞게 출력
 	
 	int taskUploadExcel(MultipartFile excelFile);
 	

@@ -56,7 +56,7 @@
 				<tr>
 					<td class="body" id="no" ><c:out value="${taskExcelExport.task_no}"></c:out></td>
 					<td class="body"><c:out value="${taskExcelExport.subject}"></c:out></td>
-					<td class="body"><c:out value="${taskExcelExport.cust_no}"></c:out></td>
+					<td class="body" id="no"><c:out value="${taskExcelExport.cust_no}"></c:out></td>
 					<td class="body"><c:out value="${taskExcelExport.cust_name}"></c:out></td>
 					<td class="body"><c:out value="${taskExcelExport.phone_no}"></c:out></td>
 					<td class="body"><c:out value="${taskExcelExport.emp_no}"></c:out></td>

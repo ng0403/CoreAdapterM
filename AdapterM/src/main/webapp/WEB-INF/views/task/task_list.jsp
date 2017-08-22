@@ -10,10 +10,9 @@
 <script type="text/javascript" src="${ctx}/resources/common/js/task/task_detail.js"></script> 
 
 <script type="text/javascript">
- $(document).ready(function(){
-	$('#next_day_srch').datepicker();
-
- });
+	$(document).ready(function(){
+		$('#next_day_srch').datepicker();
+ 	});
 </script>
 
 <input type="hidden" id="ctx" value="${ctx}">
@@ -29,15 +28,7 @@
 	</div>
 	<div style="height:10px;"></div>
 	<div class="commonList">
-		<!-- 페이징 전용 폼 -->
-	    <form id="taskListPagingForm" method="post" action="${ctx}/task" >
-<%-- 		    <input type="hidden" name="cupn_name_srch" value="${cupnListMap.cupn_name_srch}"> --%>
-<%-- 			<input type="hidden" name="exp_start_dt_srch" value="${cupnListMap.exp_start_dt_srch}"> --%>
-<%-- 			<input type="hidden" name="exp_end_dt_srch" value="${cupnListMap.exp_end_dt_srch}"> --%>
-<%-- 			<input type="hidden" name="active_flg_srch" value="${cupnListMap.active_flg_srch}"> --%>
-<%-- 			<input type="hidden" name="brand_wid" value="${cupnListMap.brand_wid}"> --%>
-		</form>
-	    <form name="taskListForm" id="taskListForm" method="post" action="${ctx}/task" >
+	    <form name="taskListForm" id="taskListForm" method="post" action="${ctx}/couponManager" >
 		 	<div id="searchDiv">
 	        	<table id="cupnSearchTable" class="commonTable">
 					<tr style="background-color: white; cursor:default; border:0;">
@@ -131,7 +122,7 @@
 		<div class="listFootDiv">
  		 	 <input type="button" class="func_btn" id="task_add"       value="단건등록" onclick="task_add();">
 		 	 <input type="button" class="func_btn" id="task_add_multi" value="다건등록" onclick="taskExcelImportOpen();">
-		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('taskExcelForm');" >	
+		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('taskListForm');" >	
 <!-- 		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="exportToExcel();" >	 -->
 		</div>
 		
