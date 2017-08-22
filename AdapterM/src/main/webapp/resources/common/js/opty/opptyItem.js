@@ -7,6 +7,12 @@
  */
 
 var ctx = $("#ctx").val();
+var tmp;
+var selQty;
+var selDC;
+var main_cate_cd;
+var mid_cate_cd;
+var totalPrice;
 
 $(document).ready(function(){
 //	$('.patment_day').datepicker();
@@ -22,11 +28,16 @@ $(document).ready(function(){
 	mainCatePopup();
 	midCatePopup();
 	smallCatePopup();
-//	opptyItemDelte();
 	
-	var tmp;
-	var main_cate_cd;
-	var mid_cate_cd;
+	// 입력하는 수량의 위치를 담아준다.
+	$(document).on( 'click','.qty',function(event) {
+		selQty = $(this);
+	});
+	
+	$(document).on('click', '.offer_price', function(event) {
+		selDC = $(this);
+		totalPrice = selDC.parent().parent().children().eq(6).children().eq(0).val();
+	});
 	
 });
 
@@ -49,11 +60,11 @@ function opptyItemAdd()
 			"<td style='text-align: left;'>" +
 				"<input type='hidden' class='small_cate_cd' name='small_cate_cd' value=''>" +
 				"<input type='text' class='small_cate_name' name='small_cate_name' readonly='readonly'></td>"+
-			"<td style='text-align: left;'><input type='text' class='qty' name='qty'></td>"+
+			"<td style='text-align: left;'><input type='text' class='qty' name='qty' onkeyup='totalPrice();'></td>"+
 			"<td style='text-align: left;'><input type='text' class='list_price' name='list_price'></td>"+
 			"<td style='text-align: left;'><input type='text' class='total_price' name='total_price' readonly='readonly'></td>"+
-			"<td style='text-align: left;'><input type='text' class='dc_price' name='dc_price'></td>"+
-			"<td style='text-align: left;'><input type='text' class='offer_price' name='offer_price'></td>"+
+			"<td style='text-align: left;'><input type='text' class='dc_price' name='dc_price' readonly='readonly'></td>"+
+			"<td style='text-align: left;'><input type='text' class='offer_price' name='offer_price' onkeyup='dcPrice();'></td>"+
 			"<td style='text-align: left;'><input type='text' class='payment_day' id='payment_day' name='payment_day'></td>"+
 		"</tr>"
 	);
@@ -488,9 +499,9 @@ function viewSmallCateList(smallCatePopupPageNum)
 						setTimeout($.unblockUI, 0);
 						tmp.parent().children().eq(0).val(small_cate_cd);
 						tmp.val(small_cate_name);
-						console.log(tmp.parent().children().eq(1));
-						console.log(tmp.parent().parent().children().eq(4));
-						console.log(tmp.parent().parent().children().eq(5));
+						tmp.parent().parent().children().eq(5).children().eq(0).val(list_price);		
+						
+						console.log(tmp.parent().parent().children().eq(4).val());	// qty
 					});
 					
 					addMouseEvent(trElement);
@@ -541,6 +552,48 @@ function viewSmallCateList(smallCatePopupPageNum)
 			return false;
 		}
 	});
+}
+
+function totalPrice()
+{
+	var inputQty = selQty.val();
+	var listPrice = selQty.parent().parent().children().eq(5).children().eq(0).val();
+	var totalPrice = inputQty * listPrice;
+	
+	// total_price에 값 대입
+	total = selQty.parent().parent().children().eq(6).children().eq(0).val(totalPrice);
+	
+//	console.log(selQty.parent().parent().children().eq(5).children().eq(0).val());	// list_price
+//	console.log(selQty.parent().parent().children().eq(6).children().eq(0).val());	// total_price
+	
+}
+
+
+function dcPrice()
+{
+	var offerPrice = selDC.parent().parent().children().eq(8).children().eq(0).val();
+	var dcTotalPrice = 0;
+	
+	console.log(totalPrice);
+	
+	if(totalPrice < offerPrice)
+	{
+		alert("총금액보다 제안금액이 큽니다.");
+		return false;
+	}
+	else if(totalPrice > offerPrice)
+	{
+		dcTotalPrice = totalPrice - offerPrice;
+	}
+	else if(dcTotalPrice > 0)
+	{
+		selDC.parent().parent().children().eq(7).children().eq(0).val(dcTotalPrice);
+	}
+	else if(offerPrice == 0 || offerPrice == "")
+	{
+		selDC.parent().parent().children().eq(7).children().eq(0).val(0);
+	}
+	
 }
 
 // 체크박스 전체 선택.
