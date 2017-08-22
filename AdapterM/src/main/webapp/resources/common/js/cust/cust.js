@@ -80,7 +80,7 @@ function searchKeyword(pageNum){
 	
 	var cust_no = $("#cust_no").val();
 	var cust_name = $("#cust_name").val();
-	var chart_no = $("#chart_no").val();
+ 	var chart_no = $("#chart_no").val();
 	var visit_cd = $("#visit_cd").val();
 	var rec_per = $("#rec_per").val();
 	var phone_no = $("#phone_no").val();

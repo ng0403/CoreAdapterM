@@ -45,7 +45,7 @@ var vititDtlCdList = new Array();
 <%-- 			<input type="hidden" name="active_flg_srch" value="${cupnListMap.active_flg_srch}"> --%>
 <%-- 			<input type="hidden" name="brand_wid" value="${cupnListMap.brand_wid}"> --%>
 		</form>
-	    <form name="couponListForm" id="couponListForm" method="post" action="${ctx}/couponManager" >
+	    <form name="custListForm" id="custListForm" method="post" action="${ctx}/couponManager" >
 		 	<div id="searchDiv">
 	        	<table id="cupnSearchTable" class="commonTable">
 					<tr style="background-color: white; cursor:default; border:0;">
@@ -55,7 +55,7 @@ var vititDtlCdList = new Array();
 						 </td> 
 						 <th style="width:5%;">고객명</th>
 						 <td style="width:15%;">
-						    <input type="text" id="cust_nnme" name="cust_nnme" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="cust_name" name="cust_name" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td>
 						  <th style="width:5%;">차트번호</th>
 						 <td style="width:15%;">
@@ -171,7 +171,7 @@ var vititDtlCdList = new Array();
 		<div class="listFootDiv">
  		 	 <input type="button" class="func_btn" id="cust_add" value="단건등록" onclick="cust_add();">
 		 	 <input type="button" class="func_btn" id="lead_add_multi" value="다건등록" onclick="excelImportOpen();">
-		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('custExcelForm');" >
+		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('custListForm');" >
 		</div>
 	 	<div class="pagingDiv">
 			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>

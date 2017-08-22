@@ -67,7 +67,7 @@
 			</c:forEach>
 		</c:if>
 			
-		<c:if test="${custExcelExport.size() == 0}">
+		<c:if test="${fn:length(custExcelExport) == 0}">
 			<tr style="cursor: default; background-color: white;">
 				<td colspan="9" style="height: 100%; text-align: center;"><b>검색 결과가 없습니다.</b></td>
 			</tr>

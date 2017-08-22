@@ -127,12 +127,24 @@ public class OpptyController {
 	
 	//엑셀 출력 
 	@RequestMapping(value = "/toOpptyExcel",  method=RequestMethod.POST)
-	public ModelAndView toExcel(HttpServletRequest req, HttpSession session) {
+	public ModelAndView toExcel(HttpServletRequest req, HttpSession session, 
+			 String oppty_no_srch, String oppty_name_srch, 
+			  String cust_name_srch, String emp_name_srcj,
+			  String oppty_status_cd_srch, String oppty_stage_cd_srch,
+			  String exp_close_dt_srch, String dtype_cd_srch, String purchase_type_srch) {
 		
 		int flg =0;
 		ModelAndView result = new ModelAndView();
 		Map<String, Object> opptykMap = new HashMap<String, Object> ();
-		
+		opptykMap.put("oppty_no_srch", oppty_no_srch);
+		opptykMap.put("oppty_name_srch", oppty_name_srch);
+		opptykMap.put("cust_name_srch", cust_name_srch);
+		opptykMap.put("emp_name_srcj", emp_name_srcj);
+		opptykMap.put("oppty_status_cd_srch", oppty_status_cd_srch);
+		opptykMap.put("oppty_stage_cd_srch", oppty_stage_cd_srch);
+		opptykMap.put("exp_close_dt_srch", exp_close_dt_srch);
+		opptykMap.put("dtype_cd_srch", dtype_cd_srch);
+		opptykMap.put("purchase_type_srch", purchase_type_srch);
 		//taskMap.put("some",req.getParameter("some"));    				// where에 들어갈 조건??
 		 
 		List<OpptyVO> list = opptyService.opptyExcelExport(opptykMap);	// 쿼리
