@@ -282,14 +282,28 @@ public class LeadController {
 	
 	//엑셀 출력 
 	@RequestMapping(value = "/toLeadExcel",  method=RequestMethod.POST)
-	public ModelAndView toExcel(HttpServletRequest req, HttpSession session) {
-		int flg=0;
+	public ModelAndView toExcel(HttpServletRequest req, HttpSession session, String lead_no_srch,
+			String lead_name_srch, String cust_no, String emp_no, String contact_day_srch, String rank_cd) {
+		
+		String contact_day;
+		
+		contact_day = contact_day_srch.replace("-", "");
+		 
+ 
+		System.out.println("lead_name_srch ? " + lead_name_srch);
 		ModelAndView result = new ModelAndView();
 		Map<String, Object> leadMap = new HashMap<String, Object> ();
+		leadMap.put("lead_no_srch", lead_no_srch);
+		leadMap.put("lead_name_srch", lead_name_srch);
+		leadMap.put("cust_no", cust_no);
+		leadMap.put("emp_no", emp_no);
+		leadMap.put("contact_day", contact_day);
+		leadMap.put("rank_cd", rank_cd);
 		
 		//taskMap.put("some",req.getParameter("some"));    			// where에 들어갈 조건??
 		 
 		List<LeadVO> list = leadService.leadExcelExport(leadMap);	// 쿼리
+		System.out.println("excel list  ? " + list.toString());
 		System.out.println("size? " + list.size());
 		result.addObject("leadExcelExport", list); 					// 쿼리 결과를 model에 담아줌
 		result.setViewName("/lead/leadList_excel");					// 엑셀로 출력하기 위한 jsp 페이지

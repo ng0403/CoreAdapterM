@@ -42,12 +42,12 @@
          </choose> 
           <choose>
              <when test="cust_no !=null and cust_no !=''">
-               and(cust_no like concat('%', #{cust_no}, '%') )
+               and(l.cust_no like concat('%', #{cust_no}, '%') )
             </when> 
          </choose>
           <choose>
             <when test="emp_no !=null and emp_no !=''">
-               and(emp_no like concat('%', #{emp_no}, '%') )
+               and(em.emp_no like concat('%', #{emp_no}, '%') )
             </when> 
           </choose>
            <choose>
@@ -177,12 +177,12 @@
          </choose> 
           <choose>
              <when test="cust_no !=null and cust_no !=''">
-               and(cust_no like concat('%', #{cust_no}, '%') )
+               and(l.cust_no like concat('%', #{cust_no}, '%') )
             </when> 
          </choose>
           <choose>
             <when test="emp_no !=null and emp_no !=''">
-               and(emp_no like concat('%', #{emp_no}, '%') )
+               and(em.emp_no like concat('%', #{emp_no}, '%') )
             </when> 
           </choose>
            <choose>

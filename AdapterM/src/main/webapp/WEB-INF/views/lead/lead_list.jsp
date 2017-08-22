@@ -25,15 +25,8 @@
 	</div>
 	<div style="height:10px;"></div>
 	<div class="commonList">
-		<!-- 페이징 전용 폼 -->
-	    <form id="leadListPagingForm" method="post" action="${ctx}/couponManager" >
-<%-- 		    <input type="hidden" name="cupn_name_srch" value="${cupnListMap.cupn_name_srch}"> --%>
-<%-- 			<input type="hidden" name="exp_start_dt_srch" value="${cupnListMap.exp_start_dt_srch}"> --%>
-<%-- 			<input type="hidden" name="exp_end_dt_srch" value="${cupnListMap.exp_end_dt_srch}"> --%>
-<%-- 			<input type="hidden" name="active_flg_srch" value="${cupnListMap.active_flg_srch}"> --%>
-<%-- 			<input type="hidden" name="brand_wid" value="${cupnListMap.brand_wid}"> --%>
-		</form>
-	    <form name="couponListForm" id="couponListForm" method="post" action="${ctx}/couponManager" >
+ 
+	    <form name="leadListForm" id="leadListForm" method="post" action="${ctx}/couponManager" >
 		 	<div id="searchDiv">
 	        	<table id="cupnSearchTable" class="commonTable">
 					<tr style="background-color: white; cursor:default; border:0;">
@@ -115,7 +108,7 @@
 		<div class="listFootDiv">
  		 	 <input type="button" class="func_btn" id="lead_add" value="단건등록" onclick="lead_add();">
 		 	 <input type="button" class="func_btn" id="lead_add_multi" value="다건등록" onclick="leadExcelImportOpen();">
-		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('leadExcelForm');" >	
+		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('leadListForm');" >	
 		</div>
 	 	<div class="pagingDiv">
 			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
