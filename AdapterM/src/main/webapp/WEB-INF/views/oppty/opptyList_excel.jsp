@@ -77,7 +77,19 @@
 			
 		<c:if test="${fn:length(opptyExcelExport) == 0}">
 			<tr style="cursor: default; background-color: white;">
-				<td colspan="9" style="height: 100%; text-align: center;"><b>검색 결과가 없습니다.</b></td>
+				<td class="body" id="no" ><c:out value=""></c:out></td>
+					<td class="body"></td>
+					<td class="body" id="no"></td>
+					<td class="body"></td>
+					<td class="body"></td>
+					<td class="body"></td>
+					<td class="body"></td>
+					<td class="body"></td>
+					<td class="body"></td>
+					<td class="body"></td>
+					<td class="body"></td>
+					<td class="body"></td>
+					<td class="body"></td>
 			</tr>
 		</c:if>
 	</tbody>

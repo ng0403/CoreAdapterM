@@ -15,6 +15,29 @@
 var ctx = $("#ctx").val();
 
 
+function wordch(thisword)
+{
+	console.log(thisword);
+	
+	var flag = true;
+	var specialChars="~`!@#$%^&*-=+\|[](){};:'<.,>/?_";
+
+	wordadded = thisword;
+
+	for(i=0; i<wordadded.length; i++) 
+	{
+		for (j = 0; j < specialChars.length; j++) 
+		{         
+			if (wordadded.charAt(i) == specialChars.charAt(j))
+			{
+				flag = false;
+				break;
+	         }
+	     }
+	  }
+	return flag;
+}
+
 function opptyList()
 {
 	location.href = ctx + "/oppty";
@@ -340,13 +363,26 @@ function opptySingleAdd()
 		if($("#exp_close_day").val() == "" || $("#exp_close_day").val() == null)
 		{
 			var now = new Date();
-			var date = now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate();
+			var date = now.getFullYear() + "-" + (now.getMonth()+1) + "-" + now.getDate();
+			
+			console.log(now);
+			console.log(date);
 			
 			$("#exp_close_day").val(date);
 		}
 		if($("#score").val() == 0 || $("#score").val() == null || $("#score").val() == "")
 		{
 			$("#score").val(0);
+		}
+		if(wordch($("#sur_plan_cn").val()) == false)
+		{
+			alert("시/수술계획 특수문자는 입력불가능합니다.");
+			return false;
+		}
+		if(wordch($("#description").val()) == false)
+		{
+			alert("특이사항에는 특수문자는 입력불가능합니다.");
+			return false;
 		}
 		
 		var ynChk = confirm("해당 기회를 추가하시겠습니까?");
@@ -400,6 +436,21 @@ function opptyMody()
 		$("#oppty_detail_mdfy").removeClass("func_btn");
 		$("#oppty_detail_mdfy").addClass("tr_btn");
 		
+		$("#oppty_name").prop("readonly", false);
+		$("#score").prop("readonly", false);
+		$("#exp_close_day").prop("readonly", false);
+		$("#sur_plan_cn").prop("readonly", false);
+		$("#description").prop("readonly", false);
+		
+		$("#custSchBtn").prop("disabled", false);
+		$("#empSchBtn").prop("disabled", false);
+		$("#oppty_status_cd_sel").prop("disabled", false);
+		$("#oppty_stage_cd_sel").prop("disabled", false);
+		$("#dtype_cd_sel").prop("disabled", false);
+		$("#purchase_type_sel").prop("disabled", false);
+		$("#payment_cd_sel").prop("disabled", false);
+		$("#rec_per_cd_sel").prop("disabled", false);
+		
 		return false;
 	}
 	if($("#oppty_detail_mdfy").val() == "저장")
@@ -413,6 +464,61 @@ function opptyMody()
 function opptyEdit()
 {
 	$(document).ready(function() {
+		if($("#oppty_name").val == null || $("#oppty_name").val() == "")
+		{
+			alert("기회명을 입력하세요.");
+			return false;
+		}
+		if($("#cust_name").val() == null || $("#cust_name").val() == "")
+		{
+			alert("고객을 선택하세요.");
+			return false;
+		}
+		if($("#emp_name").val() == null || $("#emp_name").val() == "")
+		{
+			alert("담당자를 선택하세요.");
+			return false;
+		}
+		if($("#oppty_status_cd_sel").val() == null || $("#oppty_status_cd_sel").val() == "")
+		{
+			alert("기회상태를 선택하세요.");
+			return false;
+		}
+		if($("#oppty_stage_cd_sel").val() == null || $("#oppty_stage_cd_sel").val() == "")
+		{
+			alert("기회단계를 선택하세요.");
+			return false;
+		}
+		if($("#dtype_cd_sel").val() == null || $("#dtype_cd_sel").val() == "")
+		{
+			alert("분류를 선택하세요.");
+			return false;
+		}
+		if($("#purchase_type_sel").val() == null || $("#purchase_type_sel").val() == "")
+		{
+			alert("구매형태를 선택하세요.");
+			return false;
+		}
+		if($("#payment_cd_sel").val() == null || $("#payment_cd_sel").val() == "")
+		{
+			alert("결재처를 선택하세요.");
+			return false;
+		}
+		if($("#rec_per_cd_sel").val() == null || $("#rec_per_cd_sel").val() == "")
+		{
+			alert("소개자를 선택하세요.");
+			return false;
+		}
+		if(wordch($("#sur_plan_cn").val()) == false)
+		{
+			alert("특수문자는 입력불가능합니다.");
+			return false;
+		}
+		if(wordch($("#description").val()) == false)
+		{
+			alert("특수문자는 입력불가능합니다.");
+			return false;
+		}
 
 		var ynChk = confirm("해당 기회를 수정하시겠습니까?");
 		if(ynChk)

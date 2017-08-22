@@ -131,27 +131,41 @@ public class OpptyController {
 			 String oppty_no_srch, String oppty_name_srch, 
 			  String cust_name_srch, String emp_name_srcj,
 			  String oppty_status_cd_srch, String oppty_stage_cd_srch,
-			  String exp_close_dt_srch, String dtype_cd_srch, String purchase_type_srch) {
+			  String exp_close_dt_srch, String dtype_cd_srch, String purchase_type_srch, String flg) {
 		
-		int flg =0;
+		
+		char temp = flg.charAt(flg.length()-1);
+		
+		System.out.println(temp);
 		ModelAndView result = new ModelAndView();
 		Map<String, Object> opptykMap = new HashMap<String, Object> ();
-		opptykMap.put("oppty_no_srch", oppty_no_srch);
-		opptykMap.put("oppty_name_srch", oppty_name_srch);
-		opptykMap.put("cust_name_srch", cust_name_srch);
-		opptykMap.put("emp_name_srcj", emp_name_srcj);
-		opptykMap.put("oppty_status_cd_srch", oppty_status_cd_srch);
-		opptykMap.put("oppty_stage_cd_srch", oppty_stage_cd_srch);
-		opptykMap.put("exp_close_dt_srch", exp_close_dt_srch);
-		opptykMap.put("dtype_cd_srch", dtype_cd_srch);
-		opptykMap.put("purchase_type_srch", purchase_type_srch);
-		//taskMap.put("some",req.getParameter("some"));    				// where에 들어갈 조건??
+		
+		if(temp == '0')
+		{
+			opptykMap.put("oppty_no_srch", oppty_no_srch);
+			opptykMap.put("oppty_name_srch", oppty_name_srch);
+			opptykMap.put("cust_name_srch", cust_name_srch);
+			opptykMap.put("emp_name_srcj", emp_name_srcj);
+			opptykMap.put("oppty_status_cd_srch", oppty_status_cd_srch);
+			opptykMap.put("oppty_stage_cd_srch", oppty_stage_cd_srch);
+			opptykMap.put("exp_close_dt_srch", exp_close_dt_srch);
+			opptykMap.put("dtype_cd_srch", dtype_cd_srch);
+			opptykMap.put("purchase_type_srch", purchase_type_srch);
+			//taskMap.put("some",req.getParameter("some"));    				// where에 들어갈 조건??
+			
+			List<OpptyVO> list = opptyService.opptyExcelExport(opptykMap);	// 쿼리
+			result.addObject("opptyExcelExport", list); 					// 쿼리 결과를 model에 담아줌
+			result.setViewName("/oppty/opptyList_excel");					// 엑셀로 출력하기 위한 jsp 페이지
+			
+			return result;
+		}
+		else
+		{
+			result.setViewName("/oppty/opptyList_excel");					// 엑셀로 출력하기 위한 jsp 페이지
+			
+			return result;
+		}
 		 
-		List<OpptyVO> list = opptyService.opptyExcelExport(opptykMap);	// 쿼리
-		result.addObject("opptyExcelExport", list); 					// 쿼리 결과를 model에 담아줌
-		result.setViewName("/oppty/opptyList_excel");					// 엑셀로 출력하기 위한 jsp 페이지
-		 
-		return result;
 	}
 	
 	

@@ -53,22 +53,41 @@ $(document).ready(function(){
 					</td>
 					<th id="impTh" style="text-align:right;">*기회명</th>
 					<td>
-						<input name="oppty_name" id="oppty_name" type="text" value="${opptyDetail.oppty_name}" style="width: 53.4%;">
+						<c:if test="${ opptyNoIndex.oppty_no != null }">	<!-- 신규 -->
+							<input name="oppty_name" id="oppty_name" type="text" value="${opptyDetail.oppty_name}" style="width: 53.4%;">
+						</c:if>
+						<c:if test="${ opptyNoIndex.oppty_no == null }">	<!-- 상세 -->
+							<input name="oppty_name" id="oppty_name" type="text" value="${opptyDetail.oppty_name}" style="width: 53.4%;" readonly="readonly">
+						</c:if>
 					</td>
 				</tr>
 				<!-- popup -->
 				<tr>
 					<th id="impTh" style="text-align: right;">*고객</th>
 					<td>
-						<input type="hidden" name="cust_no" id="cust_no" value="${opptyDetail.cust_no}"> 
-						<input type="text" name="cust_name" id="cust_name" maxlength="50" value="${opptyDetail.cust_name}" style="width: 70%;" readonly="readonly">
-						<input type="button" class="back_btn" id="custSchBtn" value="고객" onclick="custSchPopupOpen();">
+						<c:if test="${ opptyNoIndex.oppty_no != null }">	<!-- 신규 -->
+							<input type="hidden" name="cust_no" id="cust_no" value="${opptyDetail.cust_no}"> 
+							<input type="text" name="cust_name" id="cust_name" maxlength="50" value="${opptyDetail.cust_name}" style="width: 70%;" readonly="readonly">
+							<input type="button" class="back_btn" id="custSchBtn" value="고객" onclick="custSchPopupOpen();">
+						</c:if>
+						<c:if test="${ opptyNoIndex.oppty_no == null }">	<!-- 상세 -->
+							<input type="hidden" name="cust_no" id="cust_no" value="${opptyDetail.cust_no}"> 
+							<input type="text" name="cust_name" id="cust_name" maxlength="50" value="${opptyDetail.cust_name}" style="width: 70%;" readonly="readonly">
+							<input type="button" class="back_btn" id="custSchBtn" value="고객" onclick="custSchPopupOpen();" disabled="disabled">
+						</c:if>
 					</td>
 					<th id="impTh" style="text-align: right;">*담당자</th>
 					<td>
-						<input type="hidden" name="emp_no" id="emp_no" value="${opptyDetail.emp_no}"> 
-						<input name="emp_name" id="emp_name" type="text" maxlength="50" value="${opptyDetail.emp_name}" style="width: 70%;" readonly="readonly">
-						<input type="button" class="back_btn" id="empSchBtn" value="담담자" onclick="empSchPopupOpen();">
+						<c:if test="${ opptyNoIndex.oppty_no != null }">	<!-- 신규 -->
+							<input type="hidden" name="emp_no" id="emp_no" value="${opptyDetail.emp_no}"> 
+							<input name="emp_name" id="emp_name" type="text" maxlength="50" value="${opptyDetail.emp_name}" style="width: 70%;" readonly="readonly">
+							<input type="button" class="back_btn" id="empSchBtn" value="담담자" onclick="empSchPopupOpen();">
+						</c:if>
+						<c:if test="${ opptyNoIndex.oppty_no == null }">	<!-- 상세 -->
+							<input type="hidden" name="emp_no" id="emp_no" value="${opptyDetail.emp_no}"> 
+							<input name="emp_name" id="emp_name" type="text" maxlength="50" value="${opptyDetail.emp_name}" style="width: 70%;" readonly="readonly">
+							<input type="button" class="back_btn" id="empSchBtn" value="담담자" onclick="empSchPopupOpen();" disabled="disabled">
+						</c:if>
 					</td>
 				</tr>
 				<tr>
@@ -87,7 +106,7 @@ $(document).ready(function(){
 						</c:if>
 						<c:if test="${ opptyNoIndex.oppty_no == null }">
 							<select id="oppty_status_cd_sel" name="oppty_status_cd_srch" 
-									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
+									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;" disabled="disabled">
 								<option value="">선택해 주십시오</option>
 									<c:forEach var="status" items="${ opptyStatusCd }">
 										<c:if test="${ opptyDetail.oppty_status_cd == status.code }">
@@ -115,7 +134,7 @@ $(document).ready(function(){
 						
 						<c:if test="${ opptyNoIndex.oppty_no == null }">
 							<select id="oppty_stage_cd_sel" name="oppty_stage_cd_sel" 
-									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
+									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;" disabled="disabled">
 								<option value="">선택해 주십시오</option>
 								<c:forEach var="stage" items="${ opptyStageCd }">
 									<c:if test="${ opptyDetail.oppty_stage_cd == stage.code }">
@@ -132,11 +151,21 @@ $(document).ready(function(){
 				<tr>
 					<th  style="text-align:right;">점수</th>
 					<td>
-						<input type="text" name="score" id="score" value="${opptyDetail.score}" maxlength="10" style="width: 30%; text-align: center;">
+						<c:if test="${ opptyNoIndex.oppty_no != null }">	<!-- 신규 -->
+							<input type="text" name="score" id="score" value="${opptyDetail.score}" maxlength="10" style="width: 30%; text-align: center;">
+						</c:if>
+						<c:if test="${ opptyNoIndex.oppty_no == null }">	<!-- 상세 -->
+							<input type="text" name="score" id="score" value="${opptyDetail.score}" maxlength="10" style="width: 30%; text-align: center;" readonly="readonly">
+						</c:if>
 					</td>
 					<th  style="text-align:right;">예상종료일자</th>
 					<td>
-						<input type="text" name="exp_close_day" id="exp_close_day" value="${opptyDetail.exp_close_day}" maxlength="10" style="width: 30%; text-align: center;">
+						<c:if test="${ opptyNoIndex.oppty_no != null }">	<!-- 신규 -->
+							<input type="text" name="exp_close_day" id="exp_close_day" value="${opptyDetail.exp_close_day}" maxlength="10" style="width: 30%; text-align: center;">
+						</c:if>
+						<c:if test="${ opptyNoIndex.oppty_no == null }">	<!-- 상세 -->
+							<input type="text" name="exp_close_day" id="exp_close_day" value="${opptyDetail.exp_close_day}" maxlength="10" style="width: 30%; text-align: center;" readonly="readonly">
+						</c:if>
 					</td>
 				</tr>
 				<tr>
@@ -153,7 +182,7 @@ $(document).ready(function(){
 						</c:if>
 						<c:if test="${ opptyNoIndex.oppty_no == null }">
 							<select id="dtype_cd_sel" name="dtype_cd_sel" 
-									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
+									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;" disabled="disabled">
 								<option value="">선택해 주십시오</option>
 								<c:forEach var="dtype" items="${ dtypeCd }">
 									<c:if test="${ opptyDetail.dtype_cd == dtype.code }">
@@ -179,7 +208,7 @@ $(document).ready(function(){
 						</c:if>
 						<c:if test="${ opptyNoIndex.oppty_no == null }">
 							<select id="purchase_type_sel" name="purchase_type_sel" 
-									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
+									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;" disabled="disabled">
 								<option value="">선택해 주십시오</option>
 								<c:forEach var="purchase_type" items="${ purchaseType }">
 									<c:if test="${ opptyDetail.purchase_type == purchase_type.code }">
@@ -207,7 +236,7 @@ $(document).ready(function(){
 						</c:if>
 						<c:if test="${ opptyNoIndex.oppty_no == null }">
 							<select id="payment_cd_sel" name="payment_cd_sel" 
-								style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
+								style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;" disabled="disabled">
 								<option value="">선택해 주십시오</option>
 								<c:forEach var="payment_cd" items="${ paymentCd }">
 									<c:if test="${ opptyDetail.payment_cd == payment_cd.code }">
@@ -233,7 +262,7 @@ $(document).ready(function(){
 						</c:if>
 						<c:if test="${ opptyNoIndex.oppty_no == null }">
 							<select id="rec_per_cd_sel" name="rec_per_cd_sel" 
-									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
+									style="margin-left: 0; width: 70%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;" disabled="disabled">
 								<option value="">선택해 주십시오</option>
 								<c:forEach var="recper_cd" items="${ recperCd }">
 									<c:if test="${ opptyDetail.rec_per_cd == recper_cd.code }">
@@ -250,13 +279,23 @@ $(document).ready(function(){
 				<tr>
 					<th style="text-align:right;">시/수술계획</th>
 					<td colspan="3">
-						<textarea cols="70" rows="5"  name="sur_plan_cn" id="sur_plan_cn" maxlength="500" style="resize: none;">${opptyDetail.sur_plan_cn}</textarea>
+						<c:if test="${ opptyNoIndex.oppty_no != null }">	<!-- 신규 -->
+							<textarea cols="70" rows="5"  name="sur_plan_cn" id="sur_plan_cn" maxlength="500" style="resize: none;">${opptyDetail.sur_plan_cn}</textarea>
+						</c:if>
+						<c:if test="${ opptyNoIndex.oppty_no == null }">	<!-- 상세 -->
+							<textarea cols="70" rows="5"  name="sur_plan_cn" id="sur_plan_cn" maxlength="500" style="resize: none;" readonly="readonly">${opptyDetail.sur_plan_cn}</textarea>
+						</c:if>
 					</td>
 				</tr>
 				<tr>
 					<th style="text-align:right;">특이사항</th>
 					<td colspan="3">
-						<textarea cols="70" rows="5"  name="description" id="description" maxlength="500" id="description" style="resize: none;">${opptyDetail.remark_cn}</textarea>
+						<c:if test="${ opptyNoIndex.oppty_no != null }">	<!-- 신규 -->
+							<textarea cols="70" rows="5"  name="description" id="description" maxlength="500" id="description" style="resize: none;">${opptyDetail.remark_cn}</textarea>
+						</c:if>
+						<c:if test="${ opptyNoIndex.oppty_no == null }">	<!-- 상세 -->
+							<textarea cols="70" rows="5"  name="description" id="description" maxlength="500" id="description" style="resize: none;" readonly="readonly">${opptyDetail.remark_cn}</textarea>
+						</c:if>
 					</td>
 				</tr>
 			</table>
@@ -264,13 +303,13 @@ $(document).ready(function(){
 		<div class="listFootDiv" style="float: none;">
 			<div id="coupon_detail_btn_div">
 				<c:if test="${ opptyDetail.oppty_no == null }">
-					<input type="button" class="func_btn" id="oppty_list" onclick="opptyList();" value="조회">
  		 			<input type="button" class="tr_btn" id="oppty_single_add" onclick="opptySingleAdd();" value="저장">
+					<input type="button" class="func_btn" id="oppty_list" onclick="opptyList();" value="취소">
 				</c:if>
 				<c:if test="${ opptyDetail.oppty_no != null }">
-					<input type="button" class="func_btn" id="oppty_list" onclick="opptyList();" value="조회">
  		 			<input type="button" class="func_btn" id="oppty_detail_mdfy" onclick="opptyMody();" value="편집">
  		 			<input type="button" class="tr_btn" id="oppty_detail_del" onclick="opptyDel();" value="삭제">
+					<input type="button" class="func_btn" id="oppty_list" onclick="opptyList();" value="취소">
 				</c:if>
  			</div>
 		 	<div id="coupon_mdfy_btn_div">

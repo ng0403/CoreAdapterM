@@ -8,6 +8,20 @@
 
 var ctx = $("#ctx").val();
 
+// 검색 조건 초기화
+function opptySchReset()
+{
+	$("#oppty_no_srch").val("");
+	$("#oppty_name_srch").val("");
+	$("#cust_name_srch").val("");
+	$("#emp_name_srch").val("");
+	$("#oppty_status_cd_srch option:eq(0)").prop("selected", "selected");
+	$("#oppty_stage_cd_srch option:eq(0)").prop("selected", "selected");
+	$("#exp_close_dt_srch").val("");
+	$("#dtype_cd_srch option:eq(0)").prop("selected", "selected");
+	$("#purchase_type_srch option:eq(0)").prop("selected", "selected");
+}
+
 function opptyDetail(oppty_no)
 {
 	location.href = ctx + "/oppty_detail?oppty_no=" + oppty_no;
@@ -195,17 +209,18 @@ function opptyCheckFileType(filePath)
 }
 
 //엑셀 출력 적용 함수
-function download_list_Excel(formID) {
+function download_list_Excel(formID, flg) {
 	
-	var flg = $("#flg").val();
+	var t = flg;
 	var ctx = $("#ctx").val();
 	var form = $("#"+formID);
 	var excel = $('<input type="hidden" value="true" name="excel">');
+	var flg = $("<input type='hidden' value='"+ flg +"' name='flg'>");
 	
-	if(confirm("리스트를 출력하시겠습니까? 대량의 경우 대기시간이 필요합니다.")) 
+	if(confirm("엑셀로 출력하시겠습니까? 대량의 경우 대기시간이 필요합니다.")) 
 	{
-		
 		form.append(excel);
+		form.append(flg);
 		
 		if(flg == 0) 
 		{
@@ -215,9 +230,13 @@ function download_list_Excel(formID) {
 		} 
 		else(flg == 1) 
 		{
+			form.attr("action", "/toOpptyExcel");
+			form.submit();
 //			form.attr("action", "/task_sch");
 //			form.submit();
 		}
 	} 
 	$("input[name=excel]").val("");
 }
+
+
