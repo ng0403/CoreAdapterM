@@ -46,7 +46,9 @@
 						 </td>
 					  
  		                 <td style="width: 12%;">
-		                 	<input type="button" value="조회" id="task_list_srch" onclick="taskSchList(); " class="tr_btn" >
+		                 	<input type="button" value="조회" id="task_list_srch" onclick="taskSchList(); "    class="tr_btn" >
+		                 	<input type="button" value="취소" id="task_cancel_srch" onclick="taskCancelList(); " class="func_btn" >
+		                 	
 		                 </td>
 					</tr>
 					
@@ -122,7 +124,8 @@
 		<div class="listFootDiv">
  		 	 <input type="button" class="func_btn" id="task_add"       value="단건등록" onclick="task_add();">
 		 	 <input type="button" class="func_btn" id="task_add_multi" value="다건등록" onclick="taskExcelImportOpen();">
-		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('taskListForm');" >	
+		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('taskListForm','0');" >
+		 	 <input type="button" class="func_btn" id="excel_form_down" value="엑셀Form 출력"  onclick="download_list_Excel('taskListForm','1');" >	
 <!-- 		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="exportToExcel();" >	 -->
 		</div>
 		
@@ -139,7 +142,7 @@
 				<c:when test="${taskPageNum == page.startPageNum}">
 					 ◀ <input type="text" id="pageInput" value="${page.startPageNum}" onkeypress="taskPageNumInputEnter(event);"/>  
 					<a style="cursor: pointer;" onclick="taskSchList('${page.endPageNum}');" id="pNum" > / ${page.endPageNum}</a>
-					<a style="cursor: pointer;" onclick="taskSchList('${opptyPageNum+1}');" id="pNum"> ▶ </a>
+					<a style="cursor: pointer;" onclick="taskSchList('${taskPageNum+1}');" id="pNum"> ▶ </a>
 				</c:when>
 				<c:when test="${taskPageNum == page.endPageNum}">
 					<a style="cursor: pointer;" onclick="taskSchList('${taskPageNum-1}');" id="pNum"> ◀ </a>

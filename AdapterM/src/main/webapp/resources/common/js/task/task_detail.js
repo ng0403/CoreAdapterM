@@ -1,8 +1,9 @@
 /**
 * task_add_save()						: 상담 저장
+* task_modify_btn() 					: 상담 편집버튼 클릭 시 disabled  해제
 * task_modify_save()					: 상담 수정 
 * task_del_save()						: 상담 삭제
-* task_cancel()							: 상담 조회버튼(리스트로 이동)
+* task_cancel()							: 상담 취소버튼(리스트로 이동)
 */
 
 var ctx = $("#ctx").val();
@@ -11,6 +12,23 @@ var ctx = $("#ctx").val();
 function task_add_save() {
 	
 	$(document).ready(function() {
+		
+//		$("#css_tabs").attr({
+//			style : "display:none"
+//		});
+		
+		//focus, css, readonly, disabled false 상태로 변경
+		//값 초기화
+		$("#subject").focus();
+		$("#task_form_tbl input[type='text'], textarea, input[type='date']").attr({
+			readonly:false,
+			style:'background-color:white'
+		}).val('');
+		$("#task_form_tbl select").attr({
+			display:false,
+			style:'background-color:white'
+		});
+
 		
 	 	var task_no   = $("#task_no").val();
 	 	var subject   = $("#subject").val();
@@ -27,6 +45,10 @@ function task_add_save() {
 	 	if($("#subject").val() == 0 || $("#subject").val() == null || $("#subject").val() == "") {
 			alert("제목을 입력하세요.");
 			$("#subject").focus();
+			return false;
+		} else if ($("#cust_no").val() == 0 || $("#cust_no").val() == null || $("#cust_no").val() == "") {
+			alert("고객을 입력하세요.");
+			$("#cust_no").focus();
 			return false;
 		} else if ($("#emp_no").val() == 0 || $("#emp_no").val() == null || $("#emp_no").val() == "") {
 			alert("담당자를 입력하세요.");
@@ -90,7 +112,33 @@ function task_add_save() {
 	});
 }
 
-//상담 수정
+//상담 편집버튼 클릭 시 disabled  해제
+function task_modify_btn() {
+	
+	if($("#task_single_modify").val() == "편집") {
+		$("#task_single_modify").val("저장");
+		$("#task_single_modify").removeClass("func_btn");
+		$("#task_single_modify").addClass("tr_btn");
+		
+		$('#subject').removeAttr("disabled");
+		$('#emp_no').removeAttr("disabled");
+		$('#cust_no').removeAttr("disabled");
+		$('#next_day').removeAttr("disabled");
+		$('#dtype_cd').removeAttr("disabled");
+		$('#lead_no').removeAttr("disabled");
+		$('#score_cd').removeAttr("disabled");
+		$('#oppty_no').removeAttr("disabled");
+		$('#location').removeAttr("disabled");
+		$('#remark_cn').removeAttr("disabled");
+			
+		return false;
+		
+	} if($("#task_single_modify").val() == "저장") {
+		task_modify_save();
+	}
+}
+
+//상담 수정 
 function task_modify_save() {
 	
 	 $(document).ready(function() {
@@ -110,6 +158,10 @@ function task_modify_save() {
 	 	if($("#subject").val() == 0 || $("#subject").val() == null || $("#subject").val() == "") {
 			alert("제목을 입력하세요.");
 			$("#subject").focus();
+			return false;
+		} else if ($("#cust_no").val() == 0 || $("#cust_no").val() == null || $("#cust_no").val() == "") {
+			alert("고객을 입력하세요.");
+			$("#cust_no").focus();
 			return false;
 		} else if ($("#emp_no").val() == 0 || $("#emp_no").val() == null || $("#emp_no").val() == "") {
 			alert("담당자를 입력하세요.");
@@ -211,7 +263,12 @@ function task_del_save() {
 	});
 }
 
-// 조회버튼
+// 취소버튼
 function task_cancel() {
+	location.href="/task";
+}
+
+//리스트 이동 클릭함수
+function taskList() {
 	location.href="/task";
 }

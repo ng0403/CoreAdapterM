@@ -1,12 +1,14 @@
 /**
 * 함수 목록
 * taskSchList(taskPageNum)              : 상담 조회
+* taskCancelList()						: 검색 input text 값 삭제(빈칸)
 * task_add_save()                   	: 상담 단건 추가
 * taskDetail(a)                     	: 상담 상세정보
 * enterSearch(event)                	: 엔터키 기능
 * taskPageNumInputEnter(event)          : 페이징 엔터키 기능
 * taskPaging(pageNum)              	 	: 페이징 함수
 * download_list_Excel(formID)			: 엑셀 출력 함수
+* download_Excel_form(a)				: 엑셀 양식 출력
 * taskExcelImportOpen() 				: 엑셀 Import 팝업
 * taskExcelCheck()						: 엑셀 Insert
 * taskCheckFileType(filePath) 			: 엑셀 파일 추가
@@ -16,7 +18,7 @@ var ctx = $("#ctx").val();
 var flg = $("#flg").val();
 
 //상담조회
-function taskSchList(taskPageNum) {
+function taskSchList(pageNum) {
    
    var task_no_srch    = $("#task_no_srch").val();
    var subject_srch    = $("#subject_srch").val();
@@ -33,72 +35,99 @@ function taskSchList(taskPageNum) {
       url:ctx + '/task_sch',
       type: 'POST',
       data: {
-         taskPageNum       : taskPageNum,
-         task_no_srch     : task_no_srch,
+         taskPageNum       : pageNum,
+         task_no_srch      : task_no_srch,
          subject_srch      : subject_srch,
          cust_name_srch    : cust_name_srch,
-         emp_name_srch    : emp_name_srch,
+         emp_name_srch     : emp_name_srch,
          next_day_srch     : next_day_srch,
-         dtype_cd_srch    : dtype_cd_srch
-         
+         dtype_cd_srch     : dtype_cd_srch
       },
       dataType:'json',
       success: function(data){
-         tbody.children().remove();
-         
-         var size = data.srcList.length;
-         for(var i=0; i<size; i++)
-         {
-            tbodyContent = "<tr>" +
-             "<td style='text-align: left;' >" +data.srcList[i].task_no +"</td>" +
-             "<td style='text-align: left;'>" +
-                "<a onclick=taskDetail('"+data.srcList[i].task_no+"'); id='"+data.srcList[i].task_no+"'>" + data.srcList[i].subject+"</a></td>" +
-             "<td style='text-align: left;'>" + data.srcList[i].cust_no +"</td>" +
-             "<td style='text-align: left;'>" + data.srcList[i].cust_name +"</td>" +
-             "<td style='text-align: left;'>" + data.srcList[i].phone_no + "</td>" +
-             "<td style='text-align: left;'>" + data.srcList[i].emp_no + "</td>" +
-             "<td style='text-align: left;'>" + data.srcList[i].next_day + "</td>" +
-             "<td style='text-align: left;'>" + data.srcList[i].dtype_cd + "</td>" +
-             "<td style='text-align: left;'>" + data.srcList[i].create_date + "</td>" +
-             "</tr>"
+    	  tbody.children().remove();
+    	  if(data.srcList == 0){
+    		  tbodyContent = "<tr style='height: 75px;'><td colspan='9' style='width: 1320px; text-align: center;  vertical-align: middle;'>검색 결과가 없습니다.</td></tr>";
+    		  tbody.append(tbodyContent);
+			}else{
+				
+		         var size = data.srcList.length;
+		         for(var i=0; i<size; i++)
+		         {
+		            tbodyContent = "<tr>" +
+		             "<td style='text-align: left;' >" +data.srcList[i].task_no +"</td>" +
+		             "<td style='text-align: left;'>" +
+		                "<a onclick=taskDetail('"+data.srcList[i].task_no+"'); id='"+data.srcList[i].task_no+"'>" + data.srcList[i].subject+"</a></td>" +
+		             "<td style='text-align: left;'>" + data.srcList[i].cust_no +"</td>" +
+		             "<td style='text-align: left;'>" + data.srcList[i].cust_name +"</td>" +
+		             "<td style='text-align: left;'>" + data.srcList[i].phone_no + "</td>" +
+		             "<td style='text-align: left;'>" + data.srcList[i].emp_no + "</td>" +
+		             "<td style='text-align: left;'>" + data.srcList[i].next_day + "</td>" +
+		             "<td style='text-align: left;'>" + data.srcList[i].dtype_cd + "</td>" +
+		             "<td style='text-align: left;'>" + data.srcList[i].create_date + "</td>" +
+		             "</tr>"
 
-            tbody.append(tbodyContent);
-         }
-         
-         // 페이징
-         $(".pagingDiv").empty();
-         var pageContent = "";
+		            tbody.append(tbodyContent);
+		         }
+			}
 
-         if(data.page.endPageNum == 0 || data.page.endPageNum == 1){
-            pageContent = "◀ <input type='text' id='pageInput' readonly='readonly' value='1' style='width: 25px; text-align: center;'/> / 1 ▶";
-         } else if(data.opptyPageNum == data.page.startPageNum){
-            pageContent = "<input type='hidden' id='taskPageNum' value='"+data.taskPageNum+"'/><input type='hidden' id='taskEndPageNum' value='"+data.page.endPageNum+"'/>"
-            +"◀ <input type='text' id='pageInput' value='"+data.page.startPageNum+"' onkeypress=\"taskPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>" 
-            +"<a onclick=\"taskSchList("+data.page.endPageNum+");\" id='pNum' style='cursor: pointer;'> / "+data.page.endPageNum+"</a>"
-            +"<a onclick=\"taskSchList("+(data.pageNum+1)+");\" id='pNum' style='cursor: pointer;'> ▶ </a>";
-         } else if(data.taskPageNum == data.page.endPageNum){
-            pageContent = "<input type='hidden' id='taskPageNum' value='"+data.opptyPageNum+"'/><input type='hidden' id='taskEndPageNum' value='"+data.page.endPageNum+"'/>"
-            +"<a onclick=\"taskSchList("+(data.taskPageNum-1)+");\" id='pNum' style='cursor: pointer;'> ◀ </a>"
-            +"<input type='text' id='pageInput' value='"+data.page.endPageNum+"' onkeypress=\"taskPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
-            +"<a> / "+data.page.endPageNum+"</a> ▶";
-         } else {
-            pageContent = "<input type='hidden' id='taskPageNum' value='"+data.opptyPageNum+"'/><input type='hidden' id='taskEndPageNum' value='"+data.page.endPageNum+"'/>"
-            +"<a onclick=\"taskSchList("+(data.taskPageNum-1)+",2);\" id='pNum' style='cursor: pointer;'> ◀ </a>"
-            +"<input type='text' id='pageInput' value='"+data.taskPageNum+"' onkeypress=\"taskPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
-            +"<a onclick=\"taskSchList("+data.page.taskPageNum+");\" id='pNum' style='cursor: pointer;'> / "+data.page.endPageNum+"</a>"
-            +"<a onclick=\"taskSchList("+(data.taskPageNum+1)+");\" id='pNum' style='cursor: pointer;'> ▶ </a>";
-         }
-         $(".pagingDiv").append(pageContent);
-      },
-      error: function(){
-         alert("error");
-      }
-   });
+    	  	// 페이징
+	         $(".pagingDiv").empty();
+	         var pageContent = "";
+	
+	         if(data.page.endPageNum == 0 || data.page.endPageNum == 1){
+	            pageContent = "◀ <input type='text' id='taskPageNum' readonly='readonly' value='1' style='width: 25px; text-align: center;'/> / 1 ▶";
+	         } else if(data.taskPageNum == data.page.startPageNum){
+	            pageContent = "<input type='hidden' id='taskPageNum' value='"+data.taskPageNum+"'/><input type='hidden' id='taskEndPageNum' value='"+data.page.endPageNum+"'/>"
+	            +"◀ <input type='text' id='pageInput' value='"+data.page.startPageNum+"' onkeypress=\"taskPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>" 
+	            +"<a onclick=\"taskSchList("+data.page.endPageNum+");\" id='pNum' style='cursor: pointer;'> / "+data.page.endPageNum+"</a>"
+	            +"<a onclick=\"taskSchList("+(data.taskPageNum+1)+");\" id='pNum' style='cursor: pointer;'> ▶ </a>";
+	         } else if(data.taskPageNum == data.page.endPageNum){
+	            pageContent = "<input type='hidden' id='taskPageNum' value='"+data.taskPageNum+"'/><input type='hidden' id='taskEndPageNum' value='"+data.page.endPageNum+"'/>"
+	            +"<a onclick=\"taskSchList("+(data.taskPageNum-1)+");\" id='pNum' style='cursor: pointer;'> ◀ </a>"
+	            +"<input type='text' id='pageInput' value='"+data.page.endPageNum+"' onkeypress=\"taskPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
+	            +"<a> / "+data.page.endPageNum+"</a> ▶";
+	         } else {
+	            pageContent = "<input type='hidden' id='taskPageNum' value='"+data.taskPageNum+"'/><input type='hidden' id='taskEndPageNum' value='"+data.page.endPageNum+"'/>"
+	            +"<a onclick=\"taskSchList("+(data.taskPageNum-1)+",2);\" id='pNum' style='cursor: pointer;'> ◀ </a>"
+	            +"<input type='text' id='pageInput' value='"+data.taskPageNum+"' onkeypress=\"taskPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
+	            +"<a onclick=\"taskSchList("+data.page.taskPageNum+");\" id='pNum' style='cursor: pointer;'> / "+data.page.endPageNum+"</a>"
+	            +"<a onclick=\"taskSchList("+(data.taskPageNum+1)+");\" id='pNum' style='cursor: pointer;'> ▶ </a>";
+	         }
+	         $(".pagingDiv").append(pageContent);
+	      },
+	      error: function(){
+	         alert("error");
+	      }
+	   });
+}
+
+
+//검색 취소버튼
+function taskCancelList() {
+	$('#task_no_srch').val('');
+	$('#subject_srch').val('');
+	$('#cust_name_srch').val('');
+	$('#emp_name_srch').val('');
+	$('#next_day_srch').val('');
+	$('#dtype_cd_srch').val('');
 }
 
 //상담 단건 추가
 function task_add(){
-    location.href="/task_detail?task_no="
+	//focus, css, readonly, disabled false 상태로 변경
+	//값 초기화
+	$("#subject").focus();
+	$("#task_form_tbl input[type='text'], textarea, input[type='date']").attr({
+		readonly:false,
+		style:'background-color:white'
+	}).val('');
+	$("#task_form_tbl select").attr({
+		display:false,
+		style:'background-color:white'
+	});
+	
+	location.href="/task_detail?task_no="
 }
 
 //상담 상세정보
@@ -158,33 +187,47 @@ function taskPaging(pageNum) {
 
 
 //엑셀 출력 적용 함수
-function download_list_Excel(formID) {
+function download_list_Excel(formID, flg) {
    
-   var flg = $("#flg").val();
+	var t = flg;
    var ctx = $("#ctx").val();
    var form = $("#"+formID);
    var excel = $('<input type="hidden" value="true" name="excel">');
+   var flg = $('<input type="hidden" value="'+flg+'" name="flg">');
    
    if(confirm("리스트를 출력하시겠습니까? 대량의 경우 대기시간이 필요합니다.")) 
    {
+	   form.append(excel);
+	   form.append(flg);
       
-      form.append(excel);
-      
-      if(flg == 0) 
-      {
-         form.attr("action", "/toExcel");
-         form.submit();
+       form.attr("action", "/toExcel");
+       form.submit();
          
-      } 
-      else(flg == 1) 
-      {
-//         form.attr("action", "/task_sch");
-//         form.submit();
-      }
    } 
    $("input[name=excel]").val("");
 }
 
+//엑셀 양식 다운로드 
+function download_Excel_form(a) { 
+	var ctx = $("#ctx").val();
+	var form = $("#"+formID);
+    var flg = a;
+	var excel = $('<input type="hidden" value="true" name="excel">');
+	
+	if(confirm("엑셀 양식을 다운로드 받으시겠습니까?")) 
+	{
+			
+			form.append(flg);
+			form.append(excel); 
+			if(flg == 1) 
+			{
+				form.attr("action", "/toLeadExcel");
+				form.submit(); 
+			}  
+ 
+	} 
+	$("input[name=excel]").val("");
+}
 
 function exportToExcel(){
    document.taskExcelForm.action="/toExcel";

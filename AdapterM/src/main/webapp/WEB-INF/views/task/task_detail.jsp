@@ -65,86 +65,165 @@
 	 			</td>
 				<th id="impTh" style="text-align:right;">* 제목</th>
 				<td>
-	 			 <input type="text" id="subject" name="subject" value="${taskDetail.subject }" >
+					<c:if test="${flg == 1 }">
+	 			 		<input type="text" id="subject" name="subject" value="${taskDetail.subject }" >
+	 			 	</c:if>	
+	 			 	<c:if test="${flg == 2 }">
+	 			 		<input type="text" id="subject" name="subject" value="${taskDetail.subject }"  disabled="disabled">
+	 			 	</c:if>	
 	  			</td>
 			</tr>
 			
 			<tr>
-				<th style="text-align:right;">고객</th>
+				<th id="impTh" style="text-align:right;">* 고객</th>
 				<td>
-					<input type="hidden" id="cust_no" name="cust_no" value="${taskDetail.cust_no}" >
-					<input type="text" name="cust_name" id="cust_name" maxlength="50" value="${taskDetail.cust_name}" style="width: 60%; background-color: white;" disabled="disabled">
-					<input type="button" class="back_btn" id="custSchBtn" value="고객" onclick="custSchPopupOpen();">
+					<c:if test="${flg == 1 }">
+						<input type="hidden" id="cust_no" name="cust_no" value="${taskDetail.cust_no}" >
+						<input type="text" name="cust_name" id="cust_name" maxlength="50" value="${taskDetail.cust_name}" style="width: 60%; background-color: white;">
+						<input type="button" class="back_btn" id="custSchBtn" value="고객" onclick="custSchPopupOpen();">
+	 				</c:if>
+	 				<c:if test="${flg == 2 }">
+						<input type="hidden" id="cust_no" name="cust_no" value="${taskDetail.cust_no}" >
+						<input type="text" name="cust_name" id="cust_name" maxlength="50" value="${taskDetail.cust_name}" style="width: 60%; background-color: white;" disabled="disabled">
+						<input type="button" class="back_btn" id="custSchBtn" value="고객" onclick="custSchPopupOpen();">
+	 				</c:if>
 	 			</td>
 				<th id="impTh" style="text-align:right;">* 담당자</th>
 				<td> 
-		       		<input type="hidden" name="emp_no" id="emp_no" value="${taskDetail.emp_no}"> 
-					<input name="emp_name" id="emp_name" type="text" maxlength="50" value="${taskDetail.emp_name}" style="width: 60%; background-color: white;" disabled="disabled">
-					<input type="button" class="back_btn" id="empSchBtn" value="담담자" onclick="empSchPopupOpen();">
+					<c:if test="${flg == 1 }">
+			       		<input type="hidden" name="emp_no" id="emp_no" value="${taskDetail.emp_no}"> 
+						<input name="emp_name" id="emp_name" type="text" maxlength="50" value="${taskDetail.emp_name}" style="width: 60%; background-color: white;" >
+						<input type="button" class="back_btn" id="empSchBtn" value="담담자" onclick="empSchPopupOpen();">
+	 				</c:if>
+	 				<c:if test="${flg == 2 }">
+			       		<input type="hidden" name="emp_no" id="emp_no" value="${taskDetail.emp_no}"> 
+						<input name="emp_name" id="emp_name" type="text" maxlength="50" value="${taskDetail.emp_name}" style="width: 60%; background-color: white;" disabled="disabled">
+						<input type="button" class="back_btn" id="empSchBtn" value="담담자" onclick="empSchPopupOpen();">
+	 				</c:if>
 	 			</td>
 			</tr>
 			
 			<tr>
 				<th id="impTh" class="discount_cost" style="text-align:right;">* 다음일자</th>
 				<td id="td_disc_type">	
-					<input type="text" name="next_day" id="next_day" value="${taskDetail.next_day}" maxlength="10" style="width: 30%; text-align: center; cursor:pointer;"  >
+					<c:if test="${flg == 1 }">
+						<input type="text" name="next_day" id="next_day" value="${taskDetail.next_day}" maxlength="10" style="width: 30%; text-align: center; cursor:pointer;" >
+					</c:if>
+					<c:if test="${flg == 2 }">
+						<input type="text" name="next_day" id="next_day" value="${taskDetail.next_day}" maxlength="10" style="width: 30%; text-align: center; cursor:pointer;"  disabled="disabled" >
+					</c:if>
 				</td>
 				<th id="impTh" style="text-align:right;">* 분류</th>
 				<td>
-			 		 <select id="dtype_cd" name="dtype_cd" 
-								style="margin-left: 0; width: 62%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
-						<option value="">선택해 주십시오</option>
-						<c:forEach var="dtypeCd" items="${ dtypeCd }">
-							<c:if test= "${ dtypeCd.code == taskDetail.dtype_cd }">
-								<option value="${ dtypeCd.code }" selected="selected">${ dtypeCd.code_name }</option>
-							</c:if>
-							<c:if test= "${ dtypeCd.code != taskDetail.dtype_cd }">
-								<option value="${ dtypeCd.code }">${ dtypeCd.code_name }</option>
-							</c:if>
-						</c:forEach>
-					</select>
+					<c:if test="${flg == 1 }">
+				 		 <select id="dtype_cd" name="dtype_cd" 
+									style="margin-left: 0; width: 62%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;" >
+							<option value="">선택해 주십시오</option>
+							<c:forEach var="dtypeCd" items="${ dtypeCd }">
+								<c:if test= "${ dtypeCd.code == taskDetail.dtype_cd }">
+									<option value="${ dtypeCd.code }" selected="selected">${ dtypeCd.code_name }</option>
+								</c:if>
+								<c:if test= "${ dtypeCd.code != taskDetail.dtype_cd }">
+									<option value="${ dtypeCd.code }">${ dtypeCd.code_name }</option>
+								</c:if>
+							</c:forEach>
+						</select>
+					</c:if>
+					<c:if test="${flg == 2 }">
+				 		 <select id="dtype_cd" name="dtype_cd" 
+									style="margin-left: 0; width: 62%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;" disabled="disabled">
+							<option value="">선택해 주십시오</option>
+							<c:forEach var="dtypeCd" items="${ dtypeCd }">
+								<c:if test= "${ dtypeCd.code == taskDetail.dtype_cd }">
+									<option value="${ dtypeCd.code }" selected="selected">${ dtypeCd.code_name }</option>
+								</c:if>
+								<c:if test= "${ dtypeCd.code != taskDetail.dtype_cd }">
+									<option value="${ dtypeCd.code }">${ dtypeCd.code_name }</option>
+								</c:if>
+							</c:forEach>
+						</select>
+					</c:if>
 	 			</td>
 			</tr>
 			<tr>
 				<th style="text-align:right;">가망고객</th>
 				<td >	
-					<input type="hidden" id="lead_no" name="lead_no" value="${taskDetail.lead_no}" >
-					<input type="text" name="lead_name" id="lead_name" maxlength="50" value="${taskDetail.lead_name}" style="width: 60%; background-color: white;" disabled="disabled">
-					<input type="button" class="back_btn" id="leadSchBtn" value="가망고객" onclick="leadSchPopupOpen();">
+					<c:if test="${flg == 1 }">
+						<input type="hidden" id="lead_no" name="lead_no" value="${taskDetail.lead_no}" >
+						<input type="text" name="lead_name" id="lead_name" maxlength="50" value="${taskDetail.lead_name}" style="width: 60%; background-color: white;" >
+						<input type="button" class="back_btn" id="leadSchBtn" value="가망고객" onclick="leadSchPopupOpen();">
+					</c:if>
+					<c:if test="${flg == 2 }">
+						<input type="hidden" id="lead_no" name="lead_no" value="${taskDetail.lead_no}" >
+						<input type="text" name="lead_name" id="lead_name" maxlength="50" value="${taskDetail.lead_name}" style="width: 60%; background-color: white;" disabled="disabled">
+						<input type="button" class="back_btn" id="leadSchBtn" value="가망고객" onclick="leadSchPopupOpen();">
+					</c:if>
 				</td>
 				<th  style="text-align:right;">영업기회</th>
 				<td>
-					<input type="hidden" name="oppty_no" id="oppty_no" value="${taskDetail.oppty_no}"> 
-					<input name="oppty_name" id="oppty_name" type="text" maxlength="50" value="${taskDetail.oppty_name}" style="width: 60%; background-color: white;" disabled="disabled">
-					<input type="button" class="back_btn" id="opptySchBtn" value="영업기회" onclick="opptySchPopupOpen(); ">
+					<c:if test="${flg == 1 }">
+						<input type="hidden" name="oppty_no" id="oppty_no" value="${taskDetail.oppty_no}"> 
+						<input name="oppty_name" id="oppty_name" type="text" maxlength="50" value="${taskDetail.oppty_name}" style="width: 60%; background-color: white;" >
+						<input type="button" class="back_btn" id="opptySchBtn" value="영업기회" onclick="opptySchPopupOpen(); ">
+	 				</c:if>
+	 				<c:if test="${flg == 2 }">
+						<input type="hidden" name="oppty_no" id="oppty_no" value="${taskDetail.oppty_no}"> 
+						<input name="oppty_name" id="oppty_name" type="text" maxlength="50" value="${taskDetail.oppty_name}" style="width: 60%; background-color: white;" disabled="disabled">
+						<input type="button" class="back_btn" id="opptySchBtn" value="영업기회" onclick="opptySchPopupOpen(); ">
+	 				</c:if>
 	 			</td>
 	 		</tr>
 	 		<tr>
 				<th id="impTh" class="discount_cost" style="text-align:right;">* 상대가치점수</th>
 				<td id="td_disc_type">	
-					<select id="score_cd" name="score_cd" 
-								style="margin-left: 0; width: 62%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;">
-						<option value="">선택해 주십시오</option>
-						<c:forEach var="scoreCd" items="${ scoreCd }">
-							<c:if test= "${ scoreCd.code eq taskDetail.score_cd }">
-								<option value="${ scoreCd.code }" selected="selected">${ scoreCd.code_name }</option>
-							</c:if>
-							<c:if test= "${ scoreCd.code ne taskDetail.score_cd }">
-								<option value="${ scoreCd.code }">${ scoreCd.code_name }</option>
-							</c:if>
-						</c:forEach>
-					</select>
-					
+					<c:if test="${flg == 1 }">
+						<select id="score_cd" name="score_cd" 
+									style="margin-left: 0; width: 62%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;" >
+							<option value="">선택해 주십시오</option>
+							<c:forEach var="scoreCd" items="${ scoreCd }">
+								<c:if test= "${ scoreCd.code eq taskDetail.score_cd }">
+									<option value="${ scoreCd.code }" selected="selected">${ scoreCd.code_name }</option>
+								</c:if>
+								<c:if test= "${ scoreCd.code ne taskDetail.score_cd }">
+									<option value="${ scoreCd.code }">${ scoreCd.code_name }</option>
+								</c:if>
+							</c:forEach>
+						</select>
+					</c:if>
+					<c:if test="${flg == 2 }">
+						<select id="score_cd" name="score_cd" 
+									style="margin-left: 0; width: 62%; text-align: center; font-size: 10.5px; padding: 0.3em 0.3em;" disabled="disabled">
+							<option value="">선택해 주십시오</option>
+							<c:forEach var="scoreCd" items="${ scoreCd }">
+								<c:if test= "${ scoreCd.code eq taskDetail.score_cd }">
+									<option value="${ scoreCd.code }" selected="selected">${ scoreCd.code_name }</option>
+								</c:if>
+								<c:if test= "${ scoreCd.code ne taskDetail.score_cd }">
+									<option value="${ scoreCd.code }">${ scoreCd.code_name }</option>
+								</c:if>
+							</c:forEach>
+						</select>
+					</c:if>
 				</td>
 				<th id="impTh" style="text-align:right;">* 진행장소</th>
 				<td>
-			 		<input type="text" id="location" name="location" value="${taskDetail.location}">
+					<c:if test="${flg == 1 }">
+			 			<input type="text" id="location" name="location" value="${taskDetail.location}" >
+			 		</c:if>
+			 		<c:if test="${flg == 2 }">
+			 			<input type="text" id="location" name="location" value="${taskDetail.location}" disabled="disabled">
+			 		</c:if>
 	 			</td>
 			</tr>
 	 		<tr>
 				<th id="impTh" style="text-align:right;">* 특이사항</th>
 				<td>
-			 		<input type="text" id="remark_cn" name="remark_cn" value="${taskDetail.remark_cn}">
+					<c:if test="${flg == 1 }">
+			 			<input type="text" id="remark_cn" name="remark_cn" value="${taskDetail.remark_cn}" >
+			 		</c:if>
+			 		<c:if test="${flg == 2 }">
+			 			<input type="text" id="remark_cn" name="remark_cn" value="${taskDetail.remark_cn}" disabled="disabled">
+			 		</c:if>	
 	 			</td>
 			</tr>
 	 		
@@ -160,15 +239,15 @@
 			
 			<c:if test="${flg == 1 }">
 			 	 <div id="cust_single_add_div">
-			 	 	<input type="button" class="func_btn" id="task_single_cancel" value="조회" onclick="task_cancel();">
+			 	 	<input type="button" class="func_btn" id="task_single_cancel" value="취소" onclick="task_cancel();">
 			 	 	<input type="button" class="tr_btn" id="task_single_add" value="저장" onclick= "task_add_save();">
 			 	 	<input type="button" class="tr_btn" id="task_single_del" value="삭제" onclick= "task_del_save();">
 			 	 </div> 
 			 </c:if>
 			 <c:if test="${flg == 2 }">	 
 			 	  <div id="cust_update_div">
-			 	 	<input type="button" class="func_btn" id="task_single_cancel" value="조회" onclick="task_cancel();">
-			 	 	<input type="button" class="tr_btn" id="task_single_modify" value="편집" onclick="task_modify_save();">
+			 	 	<input type="button" class="func_btn" id="task_single_cancel" value="취소" onclick="task_cancel();">
+			 	 	<input type="button" class="func_btn" id="task_single_modify" value="편집" onclick="task_modify_btn();">
 			 	 	<input type="button" class="tr_btn" id="task_single_del" value="삭제" onclick= "task_del_save();">
 			 	 </div> 
 			 </c:if>
