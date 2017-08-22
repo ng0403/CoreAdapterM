@@ -573,26 +573,39 @@ function dcPrice()
 {
 	var offerPrice = selDC.parent().parent().children().eq(8).children().eq(0).val();
 	var dcTotalPrice = 0;
+	var reset = 0;
 	
-	console.log(totalPrice);
+	totalPrice = parseInt(totalPrice);
+	offerPrice = parseInt(offerPrice);
+	reset = parseInt(reset);
+
+	console.log(offerPrice);
+	console.log(isNaN(offerPrice));
+	if(isNaN(offerPrice))
+	{
+		offerPrice = 0;
+	}
 	
 	if(totalPrice < offerPrice)
 	{
+		console.log(offerPrice);
 		alert("총금액보다 제안금액이 큽니다.");
 		return false;
 	}
-	else if(totalPrice > offerPrice)
+	if(totalPrice > offerPrice)
 	{
 		dcTotalPrice = totalPrice - offerPrice;
+		
+		if(dcTotalPrice > 0)
+		{
+			selDC.parent().parent().children().eq(7).children().eq(0).val(dcTotalPrice);
+		}
+		if(offerPrice == NaN || offerPrice == 0)
+		{
+			selDC.parent().parent().children().eq(7).children().eq(0).val(reset);
+		}
 	}
-	else if(dcTotalPrice > 0)
-	{
-		selDC.parent().parent().children().eq(7).children().eq(0).val(dcTotalPrice);
-	}
-	else if(offerPrice == 0 || offerPrice == "")
-	{
-		selDC.parent().parent().children().eq(7).children().eq(0).val(0);
-	}
+	
 	
 }
 
