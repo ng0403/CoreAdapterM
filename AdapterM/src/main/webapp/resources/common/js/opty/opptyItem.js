@@ -161,14 +161,14 @@ function opptyItemDelte()
 	console.log(delTr);
 	console.log(delQty);
 	
-	if(delQty == 1)
-		delTr.remove();
-	else if(delQty > 1)		// 수량이 1 이상일 경우 수량을 깍는다.
-	{
-		var qty = delQty - 1;
-		
-		checkbox.parent().parent().children().eq(4).children().val(qty);
-	}
+	delTr.remove();
+//	if(delQty == 1)
+//	else if(delQty > 1)		// 수량이 1 이상일 경우 수량을 깍는다.
+//	{
+//		var qty = delQty - 1;
+//		
+//		checkbox.parent().parent().children().eq(4).children().val(qty);
+//	}
 	
 }
 
@@ -482,11 +482,15 @@ function viewSmallCateList(smallCatePopupPageNum)
 					var trElement = $("#smallCateListTableHeader").clone().removeClass().empty();
 					var small_cate_cd = this.small_cate_cd;
 					var small_cate_name = this.small_cate_name;
+					var list_price = this.list_price;
 
 					trElement.bind("click", function(e) {
 						setTimeout($.unblockUI, 0);
 						tmp.parent().children().eq(0).val(small_cate_cd);
 						tmp.val(small_cate_name);
+						console.log(tmp.parent().children().eq(1));
+						console.log(tmp.parent().parent().children().eq(4));
+						console.log(tmp.parent().parent().children().eq(5));
 					});
 					
 					addMouseEvent(trElement);

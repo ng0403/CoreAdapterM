@@ -5,7 +5,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <script type="text/javascript" src="${ctx}/resources/common/js/cust/cust.js"></script> 
-<script type="text/javascript" src="${ctx}/resources/common/js/common/search.min.js"></script>
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+<%-- <script type="text/javascript" src="${ctx}/resources/common/js/common/search.min.js"></script> --%>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script src="http://malsup.github.com/jquery.form.js"></script>
 
 <script type="text/javascript">
@@ -164,8 +166,8 @@ $(document).ready(function(){
     
     <div id="cust_phone_div" style="float: right; margin-top: 25px; margin-bottom: 7px;">
  	 	<input type="button" class="func_btn" id="cust_update" value="추가" onclick="cust_phone_add();">
- 	 	<input type="button" class="tr_btn" id="cust_delete" value="삭제" onclick="cust_remove();">
  	 	<input type="button" class="tr_btn" id="cust_detail_cancel" value="저장" onclick="cust_phone_save();">
+ 	 	<input type="button" class="tr_btn" id="cust_delete" value="삭제" onclick="cust_remove();">
 	</div>
 
 	 
@@ -249,8 +251,8 @@ $(document).ready(function(){
         
     <div id="cust_address_div" style="float: right; margin-top: 25px; margin-bottom: 7px;">
  	 	<input type="button" class="func_btn" id="cust_update" value="추가" onclick="cust_address_add();">
- 	 	<input type="button" class="tr_btn" id="cust_delete" value="삭제" onclick="custAddr_remove();">
  	 	<input type="button" class="tr_btn" id="cust_detail_cancel" value="저장" onclick="cust_addr_save();">
+ 	 	<input type="button" class="tr_btn" id="cust_delete" value="삭제" onclick="custAddr_remove();">
 	</div>
 	
 	<div style="height:25px;"></div>

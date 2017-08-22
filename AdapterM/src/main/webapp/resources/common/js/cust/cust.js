@@ -346,12 +346,19 @@ function cust_phone_add() {
 }
 
 // 테이블 행 삭제
-function cust_remove() {
+function cust_remove()
+{
+	var checkbox=$('#custP_form_tbl tbody').find('input[type=checkbox]:checked');	// 체크된 체크박스를 담는다.
+	var delTr = checkbox.parent().parent();											// 체크된 체크박스의 tr을 담는다.
+	
+	console.log(delTr);
+	
+	delTr.remove();
 	
 	var table_tbody = document.getElementById('table_tbody');
-    if (table_tbody.rows.length < 1) return;
-    // my_tbody.deleteRow(0); // 상단부터 삭제
-    table_tbody.deleteRow( table_tbody.rows.length-1 ); // 하단부터 삭제
+//    if (table_tbody.rows.length < 1) return;
+//     my_tbody.deleteRow(0); // 상단부터 삭제
+//    table_tbody.deleteRow( table_tbody.rows.length-1 ); // 하단부터 삭제
 	
 }
 
@@ -501,7 +508,7 @@ function cust_address_add()
 								"</select>"+
 							"</td>"+
 							"<td>"+
-								"<input type='text' id='postcodify_search' class='postcodify postcodify_postcode5' onclick='postPop();' name='zip_no' style='width: 90%;'> " +
+								"<input type='text' id='postcodify_search' class='postcodify postcodify_postcode5 postcodify_search_button' onclick='postPop();' name='zip_no' style='width: 90%;'> " +
 							"</td>" +
 							"<td>"+
 								"<input type='text' id='main_address' class='postcodify postcodify_address' name='main_address' style='width: 90%;'> " + 
@@ -517,23 +524,24 @@ function cust_address_add()
 	// 새로 그려준다.
 	tbody.append(tbodyContent);
 	
-//	$(document).on( 'click','.postcodify_search',function(event) {
-//		// 팝업창 표시
-//		$(".postcodify_search").postcodifyPopUp();
-//	});
-}
-function postPop()
-{
-	$(".postcodify postcodify_postcode5").postcodifyPopUp();
+	$(".postcodify_search_button").postcodifyPopUp();
 }
 
 //테이블 행 삭제
 function custAddr_remove() {
 	
+	var checkbox=$('#custA_form_tbl tbody').find('input[type=checkbox]:checked');	// 체크된 체크박스를 담는다.
+	var delTr = checkbox.parent().parent();											// 체크된 체크박스의 tr을 담는다.
+//	var delQty = checkbox.parent().parent().children().eq(4).children().val();		// 체크된 체크박스의 item의 수량을 담는다.
+	
+	console.log(delTr);
+	
+	delTr.remove();
+	
 	var table_tbody = document.getElementById('tableAddr_tbody');
-    if (table_tbody.rows.length < 1) return;
-    // my_tbody.deleteRow(0); // 상단부터 삭제
-    table_tbody.deleteRow( table_tbody.rows.length-1 ); // 하단부터 삭제
+//    if (table_tbody.rows.length < 1) return;
+//     my_tbody.deleteRow(0); // 상단부터 삭제
+//    table_tbody.deleteRow( table_tbody.rows.length-1 ); // 하단부터 삭제
 	
 }
 
