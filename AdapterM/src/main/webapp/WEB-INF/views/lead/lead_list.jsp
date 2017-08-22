@@ -27,6 +27,7 @@
 	<div class="commonList">
  
 	    <form name="leadListForm" id="leadListForm" method="post" action="${ctx}/couponManager" >
+		 	
 		 	<div id="searchDiv">
 	        	<table id="cupnSearchTable" class="commonTable">
 					<tr style="background-color: white; cursor:default; border:0;">
@@ -38,20 +39,21 @@
 						 <td style="width:15%;">
 						    <input type="text" id="lead_name_srch" name="lead_name_srch" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td>
-						 <th style="width:5%;">고객번호</th>
+						 <th style="width:5%;">고객명</th>
 						 <td style="width:15%;">
-						    <input type="text" id="cust_no" name="cust_no" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="cust_name" name="cust_name" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td> 
 					  
  		                 <td style="width: 12%;">
 		                 	<input type="button" value="조회" id="lead_list_srch" onclick="searchKeyword();" class="tr_btn" style="margin-left: 0;">
+		                    <input type="button" value="검색 초기화" id="lead_srch_reset" onclick="srch_reset();" class="tr_btn" style="margin-left: 0;"> 
 		                 </td>
 					</tr>
 					<tr>
 					 			 
-						 <th style="width:5%;">담당자번호</th>
+						 <th style="width:5%;">담당자명</th>
 						 <td style="width:15%;">
-						    <input type="text" id="emp_no" name="emp_no" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
+						    <input type="text" id="emp_name" name="emp_name" value="" style="width:80%" onkeypress="cupnEnterSearch(event);">
 						 </td>
 					
 						 <th style="width:5%;">접촉할 일자</th>
@@ -108,7 +110,8 @@
 		<div class="listFootDiv">
  		 	 <input type="button" class="func_btn" id="lead_add" value="단건등록" onclick="lead_add();">
 		 	 <input type="button" class="func_btn" id="lead_add_multi" value="다건등록" onclick="leadExcelImportOpen();">
-		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('leadListForm');" >	
+		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('leadListForm','0');" >	
+			 <input type="button" class="func_btn" id="excel_form_down" value="엑셀 양식 다운로드"  onclick="download_list_Excel('leadListForm','1');" >
 		</div>
 	 	<div class="pagingDiv">
 			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>
@@ -122,20 +125,20 @@
 				</c:when>
 				<c:when test="${pageNum == page.startPageNum}">
 					 ◀ <input type="text" id="pageInput" value="${page.startPageNum}"  onkeypress="leadPageNumInputEnter(event);"/>  
-					<a style="cursor: pointer;" onclick="leadPaging('${page.endPageNum}');" id="pNum" > / ${page.endPageNum}</a>
-					<a style="cursor: pointer;" onclick="leadPaging('${pageNum+1}');" id="pNum"> ▶ </a>
+					<a style="cursor: pointer;" onclick="searchKeyword('${page.endPageNum}');" id="pNum" > / ${page.endPageNum}</a>
+					<a style="cursor: pointer;" onclick="searchKeyword('${pageNum+1}');" id="pNum"> ▶ </a>
 				</c:when>
 				<c:when test="${pageNum == page.endPageNum}">
-					<a style="cursor: pointer;" onclick="leadPaging('${pageNum-1}');" id="pNum"> ◀ </a>
+					<a style="cursor: pointer;" onclick="searchKeyword('${pageNum-1}');" id="pNum"> ◀ </a>
 					<input type="text" id="pageInput"  value="${page.endPageNum}" onkeypress="cupnPageNumInputEnter(event);"/> 
-					<a style="cursor: pointer;" onclick="leadPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
+					<a style="cursor: pointer;" onclick="searchKeyword('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
 					<a style="color: black; text-decoration: none;"> ▶ </a>
 				</c:when>
 				<c:otherwise>
-					<a style="cursor: pointer;" onclick="leadPaging('${pageNum-1}');" id="pNum" > ◀ </a>
+					<a style="cursor: pointer;" onclick="searchKeyword('${pageNum-1}');" id="pNum" > ◀ </a>
 					<input type="text" id="pageInput"  value="${pageNum}" onkeypress="cupnPageNumInputEnter(event);"/>  
-					<a style="cursor: pointer;" onclick="leadPaging('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
-					<a style="cursor: pointer;" onclick="leadPaging('${pageNum+1}');" id="pNum"> ▶ </a>
+					<a style="cursor: pointer;" onclick="searchKeyword('${page.endPageNum}');" id="pNum"> / ${page.endPageNum}</a>
+					<a style="cursor: pointer;" onclick="searchKeyword('${pageNum+1}');" id="pNum"> ▶ </a>
 				</c:otherwise>
 			</c:choose>
 		</div>

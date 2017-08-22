@@ -76,6 +76,7 @@ public class LeadController {
 		
 		ModelAndView mov = new ModelAndView("lead_list");
 		mov.addObject("page", page);
+		mov.addObject("pageNum", PageNum);
 		mov.addObject("lead_list", vo);
 		
 		menuImport(mov, "lead");
@@ -176,9 +177,9 @@ public class LeadController {
 	public @ResponseBody Map<String, Object> searchKeyword(
 			@RequestParam(value = "PageNum", defaultValue = "1") int PageNum,
 			String lead_no_srch,
-			String lead_name_srch, String cust_no, String emp_no, String contact_day_srch, String rank_cd) {
+			String lead_name_srch, String cust_name, String emp_name, String contact_day_srch, String rank_cd) {
 	
-		System.out.println("contact_day_srch ? " + contact_day_srch);
+		System.out.println("PageNum ? " + PageNum);
 		
 		String contact_day;
 		
@@ -190,8 +191,8 @@ public class LeadController {
  		kwMap.put("PageNum", PageNum);
 		kwMap.put("lead_no_srch", lead_no_srch);
 		kwMap.put("lead_name_srch", lead_name_srch);
-		kwMap.put("cust_no", cust_no);
-		kwMap.put("emp_no", emp_no);
+		kwMap.put("cust_name", cust_name);
+		kwMap.put("emp_name", emp_name);
 		kwMap.put("contact_day", contact_day);
 		kwMap.put("rank_cd", rank_cd);
 		
@@ -283,14 +284,15 @@ public class LeadController {
 	//엑셀 출력 
 	@RequestMapping(value = "/toLeadExcel",  method=RequestMethod.POST)
 	public ModelAndView toExcel(HttpServletRequest req, HttpSession session, String lead_no_srch,
-			String lead_name_srch, String cust_no, String emp_no, String contact_day_srch, String rank_cd) {
+			String lead_name_srch, String cust_no, String emp_no, String contact_day_srch, String rank_cd, String flg) {
 		
 		String contact_day;
 		
 		contact_day = contact_day_srch.replace("-", "");
 		 
- 
-		System.out.println("lead_name_srch ? " + lead_name_srch);
+		char temp = flg.charAt(flg.length()-1);
+ 		
+		System.out.println("flg ? " + flg);
 		ModelAndView result = new ModelAndView();
 		Map<String, Object> leadMap = new HashMap<String, Object> ();
 		leadMap.put("lead_no_srch", lead_no_srch);
@@ -301,13 +303,21 @@ public class LeadController {
 		leadMap.put("rank_cd", rank_cd);
 		
 		//taskMap.put("some",req.getParameter("some"));    			// where에 들어갈 조건??
-		 
-		List<LeadVO> list = leadService.leadExcelExport(leadMap);	// 쿼리
+		if(temp == '0'){
+		System.out.println("enter 0");
+			List<LeadVO> list = leadService.leadExcelExport(leadMap);	// 쿼리
+	  
+		
 		System.out.println("excel list  ? " + list.toString());
 		System.out.println("size? " + list.size());
 		result.addObject("leadExcelExport", list); 					// 쿼리 결과를 model에 담아줌
 		result.setViewName("/lead/leadList_excel");					// 엑셀로 출력하기 위한 jsp 페이지
-		 
+		}
+		else{
+			System.out.println("enter 1");
+			result.setViewName("/lead/leadList_excel");
+		}
+		
 		return result;
 	}
 	

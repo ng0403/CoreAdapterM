@@ -10,7 +10,7 @@
    </select>
 
 
-
+<!-- 리드 리스트  -->
    <select id="leadList" resultType="com.core.plus.lead.vo.LeadVO" parameterType="java.util.Map">
    select P.*
    from (
@@ -41,13 +41,13 @@
             </when> 
          </choose> 
           <choose>
-             <when test="cust_no !=null and cust_no !=''">
-               and(l.cust_no like concat('%', #{cust_no}, '%') )
+             <when test="cust_name !=null and cust_name !=''">
+               and(c.cust_name like concat('%', #{cust_name}, '%') )
             </when> 
          </choose>
           <choose>
-            <when test="emp_no !=null and emp_no !=''">
-               and(em.emp_no like concat('%', #{emp_no}, '%') )
+            <when test="emp_name !=null and emp_name !=''">
+               and(em.emp_name like concat('%', #{emp_name}, '%') )
             </when> 
           </choose>
            <choose>
@@ -65,6 +65,7 @@
      limit #{page.limitStartNum}, #{page.pageSize}
    </select>
    
+   <!-- 리드 단일 추가  -->
    <insert id="lead_single_add" parameterType="com.core.plus.lead.vo.LeadVO">
    
    <selectKey keyProperty="lead_no" resultType="String" order="BEFORE">
@@ -79,6 +80,7 @@
    
    </insert>
    
+   <!-- 리드 수정  -->
    <update id="lead_update" parameterType="com.core.plus.lead.vo.LeadVO">
    
    update tb_lead
@@ -97,6 +99,7 @@
    
    </update>
    
+   <!-- 리드 상세정보  -->
    <select id="lead_detail" resultType="com.core.plus.lead.vo.LeadVO" parameterType="String">
    
    select
@@ -109,10 +112,10 @@
     e.emp_name,
     l.contact_day, 
     l.rank_cd, 
-      l.reason_cd, 
+    l.reason_cd, 
     l.remark_cn
-   from tb_lead l, tb_cust c, tb_emp e
-   where lead_no= #{lead_no} and l.cust_no = c.cust_no and l.emp_no = e.emp_no
+   from tb_lead l left join tb_cust c on l.cust_no = c.cust_no left join tb_emp e on l.emp_no = e.emp_no
+   where lead_no= #{lead_no}
    </select>
    
    
@@ -176,13 +179,13 @@
             </when> 
          </choose> 
           <choose>
-             <when test="cust_no !=null and cust_no !=''">
-               and(l.cust_no like concat('%', #{cust_no}, '%') )
+             <when test="cust_name !=null and cust_name !=''">
+               and(c.cust_name like concat('%', #{cust_name}, '%') )
             </when> 
          </choose>
           <choose>
-            <when test="emp_no !=null and emp_no !=''">
-               and(em.emp_no like concat('%', #{emp_no}, '%') )
+            <when test="emp_name !=null and emp_name !=''">
+               and(em.emp_name like concat('%', #{emp_name}, '%') )
             </when> 
           </choose>
            <choose>

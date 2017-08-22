@@ -14,6 +14,7 @@ $(function(){
 			$("#remark_cn").attr("readonly", true);  
 			$("#emp_list_pop").attr("disabled", true);
 			$("#cust_list_pop").attr("disabled", true);
+			$("#contact_day").attr("disabled", true);
 	  }
 	  
 	
@@ -24,26 +25,7 @@ $(function(){
 	  //lead update title div hide
 	  $("#lead_update_title").css("display", "none");
 });
-
-
-//페이징 함수
-function leadPaging(pageNum) {
-	$(document).ready(function() {
-		// 컨트롤러로 전송
-		var ctx = $("#ctx").val();
-		var leadListForm = $("#leadListPagingForm");
-	     
-	    var pageNumInput = $('<input type="hidden" value="'+pageNum+'" name="pageNum">');
-	 
-	    leadListForm.append(pageNumInput);
-	    viewLoadingShow();
-	    leadListForm.submit();
-	});
-}
-
-
-
-
+ 
 
 
 //검색 엔터키 기능
@@ -51,7 +33,7 @@ function leadSearchEnter(event) {
 	var keycode = (event.keyCode ? event.keyCode : event.which);
 	
  	if (keycode == '13') {
-		if ($("#lead_no_srch").val() == '' && $("#lead_name_srch").val() == '' && $("#cust_no").val() == '' && $("#emp_no").val() == ''  && $("#rank_cd").val() == '' ) {
+		if ($("#lead_no_srch").val() == '' && $("#lead_name_srch").val() == '' && $("#cust_name").val() == '' && $("#emp_name").val() == ''  && $("#rank_cd").val() == '' ) {
 			alert("검색어를 입력하세요.")
 			$("#lead_no_srch").focus();
 		} else {
@@ -352,25 +334,55 @@ function lead_remove() {
    
 }
 
-
-
-//조회
-function searchKeyword(a){
+//가망 고객 검색 초기화
+function srch_reset() {
 	
+	if(confirm("초기화 하시겠습니까?")){
+		
+		$("#lead_no_srch").val("");
+		$("#lead_name_srch").val("");
+		$("#cust_name").val("");
+		$("#emp_name").val("");
+		$("#contact_day_srch").val("");
+		$("#rank_cd").val(""); 
+	}
+	
+}
+
+
+//가망 고객 상세 초기화 버튼
+function lead_reset() {
+	if(confirm("초기화 하시겠습니까")){
+	$("#lead_name").val("");
+	$("#cust_name").val("");
+	$("#emp_name").val("");
+	$("#contact_day").val("");
+	$("#rank_cd").val("");
+	$("#reason_cd").val("");
+	$("#remark_cn").val(""); 
+	}
+	
+}
+
+
+
+//검색 조건
+function searchKeyword(a){
+ 
  	var lead_no_srch = $("#lead_no_srch").val();
 	var lead_name_srch = $("#lead_name_srch").val();
-	var cust_no = $("#cust_no").val();
-	var emp_no = $("#emp_no").val();
+	var cust_name = $("#cust_name").val();
+	var emp_name = $("#emp_name").val();
 	var contact_day_srch = $("#contact_day_srch").val();
 	var rank_cd = $("#rank_cd").val();
 	
 	
 	var leadData = { "lead_no_srch": lead_no_srch, 
 				"lead_name_srch": lead_name_srch,
-		        "cust_no": cust_no, 
-		        "emp_no":emp_no, 
+		        "cust_name": cust_name, 
+		        "emp_name":emp_name, 
 		        "contact_day_srch":contact_day_srch,
-		        "rank_cd" : rank_cd , "pageNum" : a};
+		        "rank_cd" : rank_cd , "PageNum" : a};
 		
  
 			var tbody = $('#lead_list_tbody');
@@ -411,22 +423,22 @@ function searchKeyword(a){
  					
  					if(data.page.endPageNum == 0 || data.page.endPageNum == 1){
  						pageContent = "◀ <input type='text' id='pageInput' readonly='readonly' value='1' style='width: 25px; text-align: center;'/> / 1 ▶";
- 					} else if(data.opptyPageNum == data.page.startPageNum){
- 						pageContent = "<input type='hidden' id='opptyPageNum' value='"+data.opptyPageNum+"'/><input type='hidden' id='opptyEndPageNum' value='"+data.page.endPageNum+"'/>"
+ 					} else if(data.PageNum == data.page.startPageNum){
+ 						pageContent = "<input type='hidden' id='PageNum' value='"+data.PageNum+"'/><input type='hidden' id='opptyEndPageNum' value='"+data.page.endPageNum+"'/>"
  						+"◀ <input type='text' id='pageInput' value='"+data.page.startPageNum+"' onkeypress=\"opptyPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>" 
  						+"<a onclick=\"searchKeyword("+data.page.endPageNum+");\" id='pNum' style='cursor: pointer;'> / "+data.page.endPageNum+"</a>"
  						+"<a onclick=\"searchKeyword("+(data.pageNum+1)+");\" id='pNum' style='cursor: pointer;'> ▶ </a>";
- 					} else if(data.opptyPageNum == data.page.endPageNum){
- 						pageContent = "<input type='hidden' id='opptyPageNum' value='"+data.opptyPageNum+"'/><input type='hidden' id='opptyEndPageNum' value='"+data.page.endPageNum+"'/>"
- 						+"<a onclick=\"searchKeyword("+(data.opptyPageNum-1)+");\" id='pNum' style='cursor: pointer;'> ◀ </a>"
+ 					} else if(data.PageNum == data.page.endPageNum){
+ 						pageContent = "<input type='hidden' id='PageNum' value='"+data.PageNum+"'/><input type='hidden' id='opptyEndPageNum' value='"+data.page.endPageNum+"'/>"
+ 						+"<a onclick=\"searchKeyword("+(data.PageNum-1)+");\" id='pNum' style='cursor: pointer;'> ◀ </a>"
  						+"<input type='text' id='pageInput' value='"+data.page.endPageNum+"' onkeypress=\"custPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
  						+"<a> / "+data.page.endPageNum+"</a> ▶";
  					} else {
- 						pageContent = "<input type='hidden' id='opptyPageNum' value='"+data.opptyPageNum+"'/><input type='hidden' id='opptyEndPageNum' value='"+data.page.endPageNum+"'/>"
- 						+"<a onclick=\"searchKeyword("+(data.opptyPageNum-1)+",2);\" id='pNum' style='cursor: pointer;'> ◀ </a>"
- 						+"<input type='text' id='pageInput' value='"+data.opptyPageNum+"' onkeypress=\"opptyPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
- 						+"<a onclick=\"searchKeyword("+data.page.opptyPageNum+");\" id='pNum' style='cursor: pointer;'> / "+data.page.endPageNum+"</a>"
- 						+"<a onclick=\"searchKeyword("+(data.opptyPageNum+1)+");\" id='pNum' style='cursor: pointer;'> ▶ </a>";
+ 						pageContent = "<input type='hidden' id='PageNum' value='"+data.PageNum+"'/><input type='hidden' id='opptyEndPageNum' value='"+data.page.endPageNum+"'/>"
+ 						+"<a onclick=\"searchKeyword("+(data.PageNum-1)+",2);\" id='pNum' style='cursor: pointer;'> ◀ </a>"
+ 						+"<input type='text' id='pageInput' value='"+data.PageNum+"' onkeypress=\"opptyPageNumInputEnter(event);\" style='width: 25px; text-align: center;'/>"
+ 						+"<a onclick=\"searchKeyword("+data.page.PageNum+");\" id='pNum' style='cursor: pointer;'> / "+data.page.endPageNum+"</a>"
+ 						+"<a onclick=\"searchKeyword("+(data.PageNum+1)+");\" id='pNum' style='cursor: pointer;'> ▶ </a>";
  					}
  					$(".pagingDiv").append(pageContent);
  					
@@ -442,32 +454,62 @@ function searchKeyword(a){
 
 
 //엑셀 출력 
-function download_list_Excel(formID) {
-	
-	var flg = $("#flg").val();
+function download_list_Excel(formID, flgNum) {
+ 
 	var ctx = $("#ctx").val();
 	var form = $("#"+formID);
 	var excel = $('<input type="hidden" value="true" name="excel">');
-	
+	var flg = $('<input type="hidden" value="'+flgNum+'" name="flg">');
 	if(confirm("리스트를 출력하시겠습니까? 대량의 경우 대기시간이 필요합니다.")) 
 	{
 		
 		form.append(excel);
+		form.append(flg);
+	 
 		
-		if(flg == 0) 
+		form.attr("action", "/toLeadExcel?flg=" + flgNum);
+		form.submit();
+		
+/*		if(flg == 0) 
 		{
-			form.attr("action", "/toLeadExcel");
-			form.submit();
-			
+		
 		} 
 		else(flg == 1) 
 		{
-//			form.attr("action", "/task_sch");
-//			form.submit();
-		}
+			form.attr("action", "/task_sch");
+			form.submit();
+		}*/
+	} 
+/*	$("input[name=excel]").val("");
+	$("input[name=flg]").val("");*/
+	alert("hi");
+	form[0].reset();
+}
+
+
+
+//엑셀 양식 다운로드 
+function download_Excel_form(a) { 
+	var ctx = $("#ctx").val();
+	var form = $("#"+formID);
+    var flg = a;
+	var excel = $('<input type="hidden" value="true" name="excel">');
+	
+	if(confirm("엑셀 양식을 다운로드 받으시겠습니까?")) 
+	{
+			
+			form.append(flg);
+			form.append(excel); 
+			if(flg == 1) 
+			{
+				form.attr("action", "/toLeadExcel");
+				form.submit(); 
+			}  
+ 
 	} 
 	$("input[name=excel]").val("");
 }
+
 
 //엑셀 Import 팝업	
 function leadExcelImportOpen() 
