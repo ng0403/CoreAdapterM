@@ -97,7 +97,6 @@ public class TaskController {
 		mov.addObject("taskList", taskList);
 		mov.addObject("dtypeCd", dtypeCd);
 		mov.addObject("scoreCd", scoreCd);
-		System.out.println("pageNum"+taskPageNum);
 		menuImport(mov, "task");
 		
 		return mov;

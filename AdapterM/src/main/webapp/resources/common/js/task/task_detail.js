@@ -1,4 +1,5 @@
 /**
+* wordch(thisword)						: 특수문자 입력방지 함수
 * task_add_save()						: 상담 저장
 * task_modify_btn() 					: 상담 편집버튼 클릭 시 disabled  해제
 * task_modify_save()					: 상담 수정 
@@ -8,27 +9,32 @@
 
 var ctx = $("#ctx").val();
 
+// 특수문자 입력방지
+function wordch(thisword)
+{
+	var flag = true;
+	var specialChars="~`!@#$%^&*-=+\|[](){};:'<.,>/?_";
+
+	wordadded = thisword;
+
+	for(i=0; i<wordadded.length; i++) 
+	{
+		for (j = 0; j < specialChars.length; j++) 
+		{         
+			if (wordadded.charAt(i) == specialChars.charAt(j))
+			{
+				flag = false;
+				break;
+	         }
+	     }
+	  }
+	return flag;
+}
+
 //상담 저장
 function task_add_save() {
 	
 	$(document).ready(function() {
-		
-//		$("#css_tabs").attr({
-//			style : "display:none"
-//		});
-		
-		//focus, css, readonly, disabled false 상태로 변경
-		//값 초기화
-		$("#subject").focus();
-		$("#task_form_tbl input[type='text'], textarea, input[type='date']").attr({
-			readonly:false,
-			style:'background-color:white'
-		}).val('');
-		$("#task_form_tbl select").attr({
-			display:false,
-			style:'background-color:white'
-		});
-
 		
 	 	var task_no   = $("#task_no").val();
 	 	var subject   = $("#subject").val();
@@ -70,9 +76,15 @@ function task_add_save() {
 			alert("진행장소를 입력하세요.");
 			$("#location").focus();
 			return false;
+		} else if (wordch($("#location").val()) == false) {
+			alert("진행장소에 특수문자는 입력 불가능합니다.");
+			return false;
 		} else if ($("#remark_cn").val() == 0 || $("#remark_cn").val() == null || $("#remark_cn").val() == "") {
 			alert("특이사항을 입력하세요.");
 			$("#remark_cn").focus();
+			return false;
+		} else if (wordch($("#remark_cn").val()) == false) {
+			alert("특이사항에 특수문자는 입력 불가능합니다.");
 			return false;
 		}
 	 	
@@ -183,9 +195,15 @@ function task_modify_save() {
 			alert("진행장소를 입력하세요.");
 			$("#location").focus();
 			return false;
+		} else if (wordch($("#location").val()) == false) {
+			alert("진행장소에 특수문자는 입력 불가능합니다.");
+			return false;
 		} else if ($("#remark_cn").val() == 0 || $("#remark_cn").val() == null || $("#remark_cn").val() == "") {
 			alert("특이사항을 입력하세요.");
 			$("#remark_cn").focus();
+			return false;
+		} else if (wordch($("#remark_cn").val()) == false) {
+			alert("특이사항에 특수문자는 입력 불가능합니다.");
 			return false;
 		}
 	 
@@ -224,8 +242,6 @@ function task_modify_save() {
 		} else {
 			alert("취소되었습니다.");
 		}
-		
-		
 	});
 }
 
@@ -247,7 +263,6 @@ function task_del_save() {
 					alert("상담이 삭제되었습니다.");
 					alert("상담 리스트로 이동합니다.");
 					
-//					location.href = ctx + '/task';
 					task_cancel();
 					
 				},
