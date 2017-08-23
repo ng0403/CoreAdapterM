@@ -376,7 +376,7 @@ function opptySingleAdd()
 		}
 		if(wordch($("#sur_plan_cn").val()) == false)
 		{
-			alert("시/수술계획 특수문자는 입력불가능합니다.");
+			alert("시/수술계획는 특수문자 입력불가능합니다.");
 			return false;
 		}
 		if(wordch($("#description").val()) == false)

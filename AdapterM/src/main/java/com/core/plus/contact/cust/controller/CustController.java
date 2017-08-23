@@ -125,26 +125,35 @@ public class CustController {
 	//엑셀 출력 
 	@RequestMapping(value = "/toCustExcel",  method=RequestMethod.POST)
 	public ModelAndView toExcel(HttpServletRequest req, HttpSession session
-			,String cust_no, String cust_name, String chart_no, String visit_cd, String rec_per, String phone_no) {
+			,String cust_no, String cust_name, String chart_no, String visit_cd, String rec_per, String phone_no, String flg) {
 		
-		int flg =1;
+		char temp = flg.charAt(flg.length()-1);
+		
 		ModelAndView result = new ModelAndView();
 		Map<String, Object> custkMap = new HashMap<String, Object> ();
-		custkMap.put("cust_no", cust_no);
-		custkMap.put("cust_name", cust_name);
-		custkMap.put("chart_no", chart_no);
-		custkMap.put("visit_cd", visit_cd);
-		custkMap.put("rec_per", rec_per);
-		custkMap.put("phone_no", phone_no);
-		//taskMap.put("some",req.getParameter("some"));    			// where에 들어갈 조건??
-		
-		System.out.println("custkMap??? "  + custkMap.toString());
-		
-		List<CustVO> list = custService.custExcelExport(custkMap);	// 쿼리
-		result.addObject("custExcelExport", list); 					// 쿼리 결과를 model에 담아줌
-		result.setViewName("/cust/custList_excel");					// 엑셀로 출력하기 위한 jsp 페이지
-		 
-		return result;
+		if(temp == '0')
+		{
+			custkMap.put("cust_no", cust_no);
+			custkMap.put("cust_name", cust_name);
+			custkMap.put("chart_no", chart_no);
+			custkMap.put("visit_cd", visit_cd);
+			custkMap.put("rec_per", rec_per);
+			custkMap.put("phone_no", phone_no);
+			//taskMap.put("some",req.getParameter("some"));    			// where에 들어갈 조건??
+			
+			System.out.println("custkMap??? "  + custkMap.toString());
+			
+			List<CustVO> list = custService.custExcelExport(custkMap);	// 쿼리
+			result.addObject("custExcelExport", list); 					// 쿼리 결과를 model에 담아줌
+			result.setViewName("/cust/custList_excel");					// 엑셀로 출력하기 위한 jsp 페이지
+			
+			return result;
+		}
+		else
+		{
+			result.setViewName("/cust/custList_excel");					// 엑셀로 출력하기 위한 jsp 페이지
+			return result;
+		}
 	}
 
 	@RequestMapping(value="/custForm")

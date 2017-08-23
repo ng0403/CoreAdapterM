@@ -64,6 +64,7 @@ var vititDtlCdList = new Array();
 					  
  		                 <td style="width: 12%;">
 		                 	<input type="button" value="조회" id="lead_list_srch" onclick="searchKeyword(1);" class="tr_btn" style="margin-left: 0;">
+		                 	<input type="button" value="검색 초기화" id="cust_list_sch_reset"  onclick="custSchReset();"	class="tr_btn" style="margin-left: 0;"> <!-- pageing 시 매개변수 1을 전달한다. -->
 		                 </td>
 					</tr>
 					
@@ -171,7 +172,8 @@ var vititDtlCdList = new Array();
 		<div class="listFootDiv">
  		 	 <input type="button" class="func_btn" id="cust_add" value="단건등록" onclick="cust_add();">
 		 	 <input type="button" class="func_btn" id="lead_add_multi" value="다건등록" onclick="excelImportOpen();">
-		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('custListForm');" >
+		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀출력"  onclick="download_list_Excel('custListForm', 0);" >
+		 	 <input type="button" class="func_btn" id="exportBtn"      value="엑셀Form 출력"  onclick="download_list_Excel('custListForm', 1);" >
 		</div>
 	 	<div class="pagingDiv">
 			<input type="hidden" id="endPageNum" value="${page.endPageNum}"/>

@@ -32,9 +32,40 @@ $(document).ready(function(){
 //		$(this).postcodifyPopUp();
 //	});
 	
-	
-	
 });
+
+function wordch(thisword)
+{
+	console.log(thisword);
+	
+	var flag = true;
+	var specialChars="~`!@#$%^&*-=+\|[](){};:'<.,>/?_";
+
+	wordadded = thisword;
+
+	for(i=0; i<wordadded.length; i++) 
+	{
+		for (j = 0; j < specialChars.length; j++) 
+		{         
+			if (wordadded.charAt(i) == specialChars.charAt(j))
+			{
+				flag = false;
+				break;
+	         }
+	     }
+	  }
+	return flag;
+}
+
+function custSchReset()
+{
+	$("#cust_no").val("");
+	$("#cust_name").val("");
+	$("#chart_no").val("");
+	$("#visit_cd option:eq(0)").prop("selected", "selected");
+	$("#rec_per").val("");
+	$("#phone_no").val("");
+}
 
 function custList()
 {
@@ -189,19 +220,48 @@ function searchKeyword(pageNum){
 
 
  // 고객 단건 추가
- function cust_add(){
-	 location.href="/custForm?cust_no="
- }
+function cust_add(){
+	location.href="/custForm?cust_no=";
+}
  
 // 고객 상세정보
  function custDetail(a) {
    var no = a; 
-   location.href=ctx + "/custForm?cust_no=" + no; 
+   location.href=ctx + "/custForm?cust_no=" + no;
+   
+   $("#cust_phone").css("display", "block");
  }
  
- // 고객 저장
- function cust_add_save() {
-	 $(document).ready(function() {
+// 고객 저장
+function cust_add_save() 
+{
+	if($("#cust_name").val() == null || $("#cust_name").val() == "")
+	{
+		alert("고객명을 입력하세요.");
+		return false;
+	}
+	if($("#visit_cd").val() == null || $("#visit_cd").val() == "")
+	{
+		alert("내원경로를 선택해주세요.");
+		return false;
+	}
+	if($("#visit_dtl_cd").val() == null || $("#visit_dtl_cd").val() == "")
+	{
+		alert("내원경로상세를 선택해주세요.");
+		return false;
+	}
+	if(wordch($("#visit_cn").val()) == false)
+	{
+		alert("내원경로세부는 특수문자 입력불가능합니다.");
+		return false;
+	}
+	if(wordch($("#remark_cn").val()) == false)
+	{
+		alert("특이사항에는 특수문자 입력불가능합니다.");
+		return false;
+	}
+	 
+	$(document).ready(function() {
 		var cust_no = $("#cust_no").val();
 		var ynChk = confirm("해당 고객을 저장하시겠습니까?");
 		if(ynChk){
@@ -243,7 +303,17 @@ function searchKeyword(pageNum){
 		$("#cust_single_modify").val("저장");
 		$("#cust_single_modify").removeClass("func_btn");
 		$("#cust_single_modify").addClass("tr_btn");
-			
+
+		$("#cust_name").prop("readonly", false);
+		$("#resident_no").prop("readonly", false);
+		$("#chart_no").prop("readonly", false);
+		$("#cust_id").prop("readonly", false);
+		$("#reason_cd").prop("readonly", false);
+		$("#remark_cn").prop("readonly", false);
+
+		$("#visit_cd").prop("disabled", false);
+		$("#visit_dtl_cd").prop("disabled", false);
+		
 		return false;
 	}
 	if($("#cust_single_modify").val() == "저장")
@@ -254,7 +324,34 @@ function searchKeyword(pageNum){
  }
  
 // 고객 수정
- function cust_modify_save() {
+function cust_modify_save() 
+{
+	if($("#cust_name").val() == null || $("#cust_name").val() == "")
+	{
+		alert("고객명을 입력하세요.");
+		return false;
+	}
+	if($("#visit_cd").val() == null || $("#visit_cd").val() == "")
+	{
+		alert("내원경로를 선택해주세요.");
+		return false;
+	}
+	if($("#visit_dtl_cd").val() == null || $("#visit_dtl_cd").val() == "")
+	{
+		alert("내원경로상세를 선택해주세요.");
+		return false;
+	}
+	if(wordch($("#visit_cn").val()) == false)
+	{
+		alert("내원경로세부는 특수문자 입력불가능합니다.");
+		return false;
+	}
+	if(wordch($("#remark_cn").val()) == false)
+	{
+		alert("특이사항에는 특수문자 입력불가능합니다.");
+		return false;
+	}
+	
 	$(document).ready(function() {
 		var cust_no = $("#cust_no").val();
 		var ynChk = confirm("해당 고객을 수정하시겠습니까?");
@@ -717,17 +814,19 @@ function checkFileType(filePath)
 
 
 //엑셀 출력 적용 함수
-function download_list_Excel(formID) {
+function download_list_Excel(formID, flg) {
 	
-	var flg = $("#flg").val();
+	var t = flg;
 	var ctx = $("#ctx").val();
 	var form = $("#"+formID);
 	var excel = $('<input type="hidden" value="true" name="excel">');
+	var flg = $("<input type='hidden' value='"+ flg +"' name='flg'>");
 	
-	if(confirm("리스트를 출력하시겠습니까? 대량의 경우 대기시간이 필요합니다.")) 
+	if(confirm("엑셀로 출력하시겠습니까? 대량의 경우 대기시간이 필요합니다.")) 
 	{
 		
 		form.append(excel);
+		form.append(flg);
 		
 		if(flg == 0) 
 		{
@@ -737,6 +836,8 @@ function download_list_Excel(formID) {
 		} 
 		else(flg == 1) 
 		{
+			form.attr("action", "/toCustExcel");
+			form.submit();
 //			form.attr("action", "/task_sch");
 //			form.submit();
 		}
