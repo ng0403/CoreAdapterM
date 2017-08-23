@@ -22,7 +22,7 @@
 				and(a.rec_per like concat('%', #{rec_per}, '%') )
 			</if> 
 			<if test="phone_no !=null and phone_no !=''">
-				and( (concat(p.phone_area_no, p.phone_no) like concat('%', #{phone_no}, '%') )
+				and( (concat(p.phone_area_no, p.phone_no) like concat('%', #{phone_no}, '%') ))
 			</if>
 	   		
 	</select>
