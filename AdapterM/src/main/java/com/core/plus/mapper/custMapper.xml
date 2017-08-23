@@ -4,49 +4,57 @@
 <mapper namespace="cust">
 	<select id="custListTotalRow" resultType="int">
 		SELECT count(*)
-		FROM tb_cust
-		where del_yn = 'N'
+		FROM  tb_cust a left outer join tb_cust_phone p on a.cust_no = p.cust_no and p.primary_yn='Y'
+		WHERE a.del_yn = 'N'
 			<if test="cust_no !=null and cust_no !=''">
-				and(cust_no like concat('%', #{cust_no}, '%') )
+				and(a.cust_no like concat('%', #{cust_no}, '%') )
 			</if> 
 	   		<if test="cust_name !=null and cust_name !=''">
-				and(cust_name like concat('%', #{cust_name}, '%') )
+				and(a.cust_name like concat('%', #{cust_name}, '%') )
 			</if> 
 	   		<if test="visit_cd !=null and visit_cd !=''">
-				and(visit_cd like concat('%', #{visit_cd}, '%') )
+				and(a.visit_cd like concat('%', #{visit_cd}, '%') )
 			</if> 
 	   		<if test="visit_dtl_cd !=null and visit_dtl_cd !=''">
-				and(visit_dtl_cd like concat('%', #{visit_dtl_cd}, '%') )
+				and(a.visit_dtl_cd like concat('%', #{visit_dtl_cd}, '%') )
 			</if> 
 	   		<if test="rec_per !=null and rec_per !=''">
-				and(rec_per like concat('%', #{rec_per}, '%') )
+				and(a.rec_per like concat('%', #{rec_per}, '%') )
 			</if> 
-	   		<if test="phone_no !=null and phone_no !=''">
-				and(c.phone_no like concat('%', #{phone_no}, '%') )
+			<if test="phone_no !=null and phone_no !=''">
+				and( (concat(p.phone_area_no, p.phone_no) like concat('%', #{phone_no}, '%') )
 			</if>
+	   		
+	</select>
+	
+	<select id="custPhoneTotalRow" resultType="int">
+		SELECT count(*) 
+		FROM tb_cust_phone
+		WHERE primary_yn = 'Y'
+			
 	</select>
 
 	<select id="custList" resultType="com.core.plus.contact.cust.vo.CustVO" parameterType="java.util.Map">
 		SELECT P.*
 		FROM (
 			select
-	         a.cust_no
-	            , date_format(a.create_date, '%Y-%m-%d %H:%i') as create_date
-	         ,a.cust_name
-	         ,case when(a.chart_no) is null then '' else (a.chart_no) end as chart_no
-	         ,a.cust_id
-	         ,a.visit_cd
-	         ,a.visit_dtl_cd
-	         ,a.visit_cn
-	         ,case when(rec_per) is null then '' else (rec_per) end as rec_per
-	         ,case when (select phone_area_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) is null then ''
-	          else (select phone_area_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) end as phone_area_no
-	         ,case when (select phone_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) is null then ''
-	          else (select phone_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) end as phone_no
-	         ,(select zip_no from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) as zip_no
-	         ,case when (select main_address from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) is null then ''
-	          else (select main_address from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) end as main_address
-	      	from tb_cust a
+		         a.cust_no
+		         , date_format(a.create_date, '%Y-%m-%d %H:%i') as create_date
+		         ,a.cust_name
+		         ,case when(a.chart_no) is null then '' else (a.chart_no) end as chart_no
+		         ,a.cust_id
+		         ,a.visit_cd
+		         ,a.visit_dtl_cd
+		         ,a.visit_cn
+		         ,case when(rec_per) is null then '' else (rec_per) end as rec_per
+		         ,case when (select phone_area_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) is null then ''
+		          else (select phone_area_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) end as phone_area_no
+		         ,case when (select phone_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) is null then ''
+		          else (select phone_no from tb_cust_phone where primary_yn = 'Y' and cust_no = a.cust_no) end as phone_no
+		         ,(select zip_no from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) as zip_no
+		         ,case when (select main_address from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) is null then ''
+		          else (select main_address from tb_cust_addr where primary_yn = 'Y' and cust_no = a.cust_no) end as main_address
+	      	from tb_cust a left outer join tb_cust_phone p on a.cust_no = p.cust_no and p.primary_yn ='Y'
 	     	where a.del_yn = 'N'
 	   		<if test="cust_no !=null and cust_no !=''">
 				and(a.cust_no like concat('%', #{cust_no}, '%') )
@@ -67,7 +75,7 @@
 				and(a.rec_per like concat('%', #{rec_per}, '%') )
 			</if> 
 	   		<if test="phone_no !=null and phone_no !=''">
-				and(c.phone_no like concat('%', #{phone_no}, '%') )
+				and (concat(p.phone_area_no, p.phone_no) like concat('%', #{phone_no}, '%') )
 			</if> 
 		order by a.update_date desc
 		) P

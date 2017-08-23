@@ -84,26 +84,28 @@ public class CustController {
 		return mav; 
 	}
 	
-	@RequestMapping(value="/custAjax")
+	@RequestMapping(value="/custAjax", method={RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
 	public Map<String, Object> custListAjax(@RequestParam(value = "custPageNum", defaultValue = "1") int custPageNum,
 											String cust_no, String cust_name, String chart_no, String visit_cd, String rec_per, String phone_no)
 	{
 		Map<String, Object> result = new HashMap<String, Object>(0);
 		Map<String, Object> custMap = new HashMap<String, Object>();
-		custMap.put("custPageNum", custPageNum);
 
-		// paging
-		PagerVO page = custService.getCustListRow(custMap);
-		custMap.put("page", page);
+		custMap.put("custPageNum", custPageNum);
 		custMap.put("cust_no", cust_no);
 		custMap.put("cust_name", cust_name);
 		custMap.put("chart_no", chart_no);
 		custMap.put("visit_cd", visit_cd);
 		custMap.put("rec_per", rec_per);
 		custMap.put("phone_no", phone_no);
+
+		// paging
+		PagerVO page = custService.getCustListRow(custMap);
+		custMap.put("page", page);
 		
 		System.out.println("custMap? " + custMap.toString());
+		System.out.println("page? " + page);
 		
 		List<CustVO> custList = custService.custList(custMap);
 		

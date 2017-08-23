@@ -61,6 +61,10 @@ public class CustDAOImpl implements CustDAO{
 		// TODO Auto-generated method stub
 		int totalCount = 0;
 		
+		String phone = (String) custMap.get("phone_no");
+		
+		System.out.println("DAO : " + phone);
+		
 		try {
 			totalCount = sqlSession.selectOne("cust.custListTotalRow", custMap);
 			
